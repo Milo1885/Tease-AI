@@ -3542,61 +3542,79 @@ NullSkip:
 		line = ssh.StrokeTauntVal
 
 		Dim TempLineVal As Integer
-		Do
-			line += 1
-		Loop Until InStr(UCase(lines(line)), UCase("@AcceptAnswer")) <> 0 Or InStr(UCase(lines(line)), UCase("@DifferentAnswer")) <> 0
 
+		'if we already populated the answer list we do not need to do it again
+		If ssh.checkAnswers.answerNumber = 0 Then
+			Do
+				line += 1
+				Debug.Print("YESNO Line = " & lines(line))
+				If Not UCase(lines(line)).Contains("@DIFFERENTANSWER") And Not UCase(lines(line)).Contains("@ACCEPTANSWER") Then
+					Dim getWords As String = GetParentheses(lines(line), "[")
+					ssh.checkAnswers.addToAnswerList(getWords)
+				End If
 
-		TempLineVal = line
-		line = ssh.StrokeTauntVal
+			Loop Until InStr(UCase(lines(line)), UCase("@AcceptAnswer")) <> 0 Or InStr(UCase(lines(line)), UCase("@DifferentAnswer")) <> 0
+			TempLineVal = line
+			line = ssh.StrokeTauntVal
+		End If
 
 		Dim CheckLines As String
 		Dim ChatReplace As String
 
-		Do
-			line += 1
-			CheckLines = lines(line)
-			Dim checkResult As Integer = -1
+		'we get the trigger word that is present in the chat (if there is a word that matches one of the answers)
+		Dim triggerWord As String = ssh.checkAnswers.triggerWord(ssh.ChatString)
 
-			Dim Splits As String() = CheckLines.Split(New Char() {"]"c})
-			Splits(0) = Splits(0).Replace("[", "")
-			ChatReplace = CheckLines.Replace("[" & Splits(0) & "]", "")
+		'we check to see what answer to trigger only if there was a trigger word, otherwise we move directly to the noanswer found part
+		If triggerWord <> "" Then
 
-			'we check to see if what the user wrote contains one of the keywords for the different yes/no/etc responses
-			'this is useful if the script contains something like [yes,maybe] as an answer option
-			'if the user write maybe then it will not need to use the honorific but if he writes yes, instead, it will check the honorific
-			If Not ssh.checkAnswers.containListedWords(ssh.ChatString) Then
-				checkResult = checkSubAnswer(Splits(0))
-			Else
-				If UCase(CheckLines).Contains(UCase("[yes")) Or UCase(CheckLines).Contains(UCase("yes]")) Then
-					checkResult = checkSubAnswer("yes")
-				ElseIf UCase(CheckLines).Contains(UCase("[no")) Or UCase(CheckLines).Contains(UCase("no]")) Then
-					checkResult = checkSubAnswer("no")
-				ElseIf UCase(CheckLines).Contains(UCase("[hi")) Or UCase(CheckLines).Contains(UCase("hi]")) Or UCase(CheckLines).Contains(UCase("[hello")) Or UCase(CheckLines).Contains(UCase("hello]")) Then
-					checkResult = checkSubAnswer("hi")
-				ElseIf UCase(CheckLines).Contains(UCase("[sorry")) Or UCase(CheckLines).Contains(UCase("sorry]")) Then
-					checkResult = checkSubAnswer("sorry")
-				ElseIf UCase(CheckLines).Contains(UCase("[thank")) Or UCase(CheckLines).Contains(UCase("thank ")) Then
-					checkResult = checkSubAnswer("thanks")
-				ElseIf UCase(CheckLines).Contains(UCase("[please")) Or UCase(CheckLines).Contains(UCase("please]")) Then
-					checkResult = checkSubAnswer("please")
+			Do
+				line += 1
+				CheckLines = lines(line)
+				Dim checkResult As Integer = -1
+
+				Dim Splits As String() = CheckLines.Split(New Char() {"]"c})
+				Splits(0) = Splits(0).Replace("[", "")
+				ChatReplace = CheckLines.Replace("[" & Splits(0) & "]", "")
+
+				'we check to see if what the user wrote contains one of the keywords for the different yes/no/etc responses
+				'this is useful if the script contains something like [yes,maybe] as an answer option
+				'if the user write maybe then it will not need to use the honorific but if he writes yes, instead, it will check the honorific
+				If Not ssh.checkAnswers.isSystemWord(triggerWord) And Splits(0).Contains(triggerWord) Then
+					checkResult = checkSubAnswer(Splits(0))
+				Else
+					If UCase(CheckLines).Contains(UCase("[yes")) Or UCase(CheckLines).Contains(UCase("yes]")) Then
+						checkResult = checkSubAnswer("yes")
+					ElseIf UCase(CheckLines).Contains(UCase("[no")) Or UCase(CheckLines).Contains(UCase("no]")) Then
+						checkResult = checkSubAnswer("no")
+					ElseIf UCase(CheckLines).Contains(UCase("[hi")) Or UCase(CheckLines).Contains(UCase("hi]")) Or UCase(CheckLines).Contains(UCase("[hello")) Or UCase(CheckLines).Contains(UCase("hello]")) Then
+						checkResult = checkSubAnswer("hi")
+					ElseIf UCase(CheckLines).Contains(UCase("[sorry")) Or UCase(CheckLines).Contains(UCase("sorry]")) Then
+						checkResult = checkSubAnswer("sorry")
+					ElseIf UCase(CheckLines).Contains(UCase("[thank")) Or UCase(CheckLines).Contains(UCase("thank ")) Then
+						checkResult = checkSubAnswer("thanks")
+					ElseIf UCase(CheckLines).Contains(UCase("[please")) Or UCase(CheckLines).Contains(UCase("please]")) Then
+						checkResult = checkSubAnswer("please")
+					End If
 				End If
-			End If
 
-			If checkResult = 1 Then
-				GoTo FoundAnswer
-			ElseIf checkResult = 0 Then
-				checkForPunish()
-				Return
-			End If
+				If checkResult = 1 Then
+					GoTo FoundAnswer
+				ElseIf checkResult = 0 Then
+					checkForPunish()
+					Return
+				End If
 
-		Loop Until InStr(UCase(lines(line)), UCase("@DifferentAnswer")) <> 0 Or InStr(UCase(lines(line)), UCase("@AcceptAnswer")) <> 0
+			Loop Until InStr(UCase(lines(line)), UCase("@DifferentAnswer")) <> 0 Or InStr(UCase(lines(line)), UCase("@AcceptAnswer")) <> 0
+
+		End If
 
 		GoTo NothingFound
 
 FoundAnswer:
 		updateDommeName(ChatReplace)
 		ssh.DomChat = ChatReplace
+		'we clear the answer list 
+		ssh.checkAnswers.clearAnswers()
 		If ssh.DomChat.Contains("@NullResponse") Then ssh.NullResponse = True
 		If ssh.DomChat.Contains("@LoopAnswer") Then GoTo LoopAnswer
 
@@ -3616,10 +3634,10 @@ NothingFound:
 			checkForPunish()
 			Return
 		End If
-		If InStr(UCase(lines(line)), UCase("DifferentAnswer")) <> 0 Then
+		If InStr(UCase(lines(TempLineVal)), UCase("DifferentAnswer")) <> 0 Then
 
 DifferentAnswer:
-			ssh.DomChat = lines(line)
+			ssh.DomChat = lines(TempLineVal)
 			ssh.DomChat = ssh.DomChat.Replace("@DifferentAnswer ", "")
 
 LoopAnswer:
@@ -3630,13 +3648,15 @@ LoopAnswer:
 		End If
 
 
-		If InStr(UCase(lines(line)), UCase("AcceptAnswer")) <> 0 Then
+		If InStr(UCase(lines(TempLineVal)), UCase("AcceptAnswer")) <> 0 Then
 
 AcceptAnswer:
-			ssh.DomChat = lines(line)
-			'ssh.DomChat = lines(TempLineVal)
+			'ssh.DomChat = lines(line)
+			ssh.DomChat = lines(TempLineVal)
 			' TimedAnswerTimer.Stop()
 
+			'we clear the answer list 
+			ssh.checkAnswers.clearAnswers()
 			ssh.DomChat = ssh.DomChat.Replace("@AcceptAnswer ", "")
 			ScriptTimer.Start()
 			ssh.YesOrNo = False
@@ -8234,7 +8254,7 @@ StatusUpdateEnd:
 
 	Public Function PoundClean(ByVal StringClean As String) As String
 #If TRACE Then
-		Dim wrongVocabs As List(Of String) = New List(Of String)
+		Dim alreadyChecked As List(Of String) = New List(Of String)
 		Dim TS As New TraceSwitch("PoundClean", "")
 
 		If TS.TraceVerbose Then
@@ -8287,18 +8307,18 @@ StatusUpdateEnd:
 			If StringClean.Contains("@CustomMode(") Then
 				controlCustom = GetParentheses(StringClean, "@CustomMode(")
 			End If
-			' Try to get content from file but avoid changing twice the same vocab if it is present in more than one istance in the regex
-			Dim lastKey As String = "emptyString"
+		
 			For Each keyword As Match In mc
 				Dim doNotContinue As Boolean = False
-				For i As Integer = 0 To wrongVocabs.Count - 1
-					If wrongVocabs(i) = keyword.Value Then
+				'if we already checked for this vocab we avoid checking again
+				For i As Integer = 0 To alreadyChecked.Count - 1
+					If alreadyChecked(i) = keyword.Value Then
 						doNotContinue = True
 						Exit For
 					End If
 				Next
 
-				If Not lastKey.Equals(keyword.Value) Then
+				If Not doNotContinue Then
 #If TRACE Then
 					If TS.TraceVerbose Then Trace.WriteLine(String.Format("Applying vocabulary: ""{0}""", keyword.Value))
 #End If
@@ -8320,7 +8340,6 @@ StatusUpdateEnd:
 						Else
 
 							'StringClean = StringClean.Replace(keyword.Value, "<font color=""DarkOrange"">" & keyword.Value & "</font>")
-							wrongVocabs.Add(keyword.Value)
 							Dim wrong As String = keyword.Value
 							wrong = wrong.Remove(0, 1)
 							wrong = "Vocab Error: " & wrong
@@ -8344,7 +8363,7 @@ StatusUpdateEnd:
 
 					Else
 						'StringClean = StringClean.Replace(keyword.Value, "<font color=""red"">" & keyword.Value & "</font>")
-						wrongVocabs.Add(keyword.Value)
+
 						Dim wrong As String = keyword.Value
 
 						If UCase(wrong) = "#NULL" Then
@@ -8364,12 +8383,13 @@ StatusUpdateEnd:
 							End If
 
 
-							
+
 						End If
 
 					End If
+					alreadyChecked.Add(keyword.Value)
 				End If
-				lastKey = keyword.Value
+
 			Next
 
 #If TRACE Then
@@ -8417,9 +8437,10 @@ StatusUpdateEnd:
 		End If
 
 		If StringClean.Contains("@FollowUp(") And ssh.FollowUp = "" Then
+			StringClean = StringClean.Trim
 			ssh.FollowUp = GetParentheses(StringClean, "@FollowUp(", StringClean.Split(")").Count - 1)
 			'if there is a leftover ) (might happen in very complex followUp) we remove it
-			If ssh.FollowUp.EndsWith(")") Then ssh.FollowUp = ssh.FollowUp.Remove(ssh.FollowUp.Length - 1, 1)
+			If ssh.FollowUp.Trim.EndsWith(")") Then ssh.FollowUp = ssh.FollowUp.Remove(ssh.FollowUp.LastIndexOf(")"c), 1)
 			StringClean = StringClean.Replace("@FollowUp(" & ssh.FollowUp & ")", "")
 		End If
 
@@ -8442,9 +8463,10 @@ StatusUpdateEnd:
 			ssh.TempVal = ssh.randomizer.Next(1, 101)
 
 			Dim FollowLineTemp As String
+			StringClean = StringClean.Trim
 			FollowLineTemp = GetParentheses(StringClean, "@FollowUp" & FollowTemp & "(", StringClean.Split(")").Count - 1)
 			'if there is a leftover ) (might happen in very complex followUp) we remove it
-			If FollowLineTemp.EndsWith(")") Then FollowLineTemp = FollowLineTemp.Remove(FollowLineTemp.Length - 1, 1)
+			If FollowLineTemp.Trim.EndsWith(")") Then FollowLineTemp = FollowLineTemp.Remove(FollowLineTemp.LastIndexOf(")"c), 1)
 
 			If ssh.TempVal <= FollowVal Then ssh.FollowUp = FollowLineTemp
 
@@ -20959,9 +20981,10 @@ playLoop:
 		'remove eventual @ContactX present in a @FollowUp() inside the line
 		If stringToCheck.Contains("@FollowUp") Then
 			Dim remove As String
+			stringToCheck = stringToCheck.Trim
 			remove = GetParentheses(stringToCheck, "@FollowUp(", stringToCheck.Split(")").Count - 1)
 			'if there is a leftover ) (might happen in very complex followUp) we remove it
-			If remove.EndsWith(")") Then remove = remove.Remove(remove.Length - 1, 1)
+			If remove.Trim.EndsWith(")") Then remove = remove.Remove(remove.LastIndexOf(")"c), 1)
 			stringToCheck = stringToCheck.Replace("@FollowUp(" & remove & ")", "")
 		End If
 
@@ -21328,12 +21351,6 @@ ShowedBlogImage:
 		LBLWritingTaskText.Text = LBLWritingTaskText.Text.Replace("  ", " ")
 		LBLWritingTaskText.Text = LBLWritingTaskText.Text.Trim
 	End Sub
-
-	Private Function goingTo(ByVal commandToCheck As String) As String
-		If commandToCheck.Contains("followUp(") Then Return "followUp"
-		If commandToCheck.Contains("followUp") Then Return "followUpXX"
-		Return ""
-	End Function
 
 End Class
 

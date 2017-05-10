@@ -41,9 +41,13 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 * Bugfixes:
 
     * Create URL Files was not working
+	* Multiple Choice Branch parsing issues fixed (dariobrun)
+	* Multiple Choice Branches were parsing @DifferentAnswer\@AcceptAnswer lines for keywords
+	* The program tried to process LikedImageURLs.txt and DislikedImageURLs.txt without first making sure they existed (dariobrun)	
     * Keyword Error messages were causing the program to get temporarily stuck in a loop (dariobrun)
+	* Possible issues caused by duplicate #Keywords in a single line (dariobrun) 
     * TTS was speaking the html color codes for Keyword Error messages
-    * The program tried to process LikedImageURLs.txt and DislikedImageURLs.txt without first making sure they existed (dariobrun)	
+    * Fixed problems that would occur when @FollowUp() contained spaces at the end of a line (dariobrun)
 	
 * Miscellaneous:
 
