@@ -15,7 +15,7 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 
     @PlayVideo(Lesbian) - Plays a lesbian video
     @PlayVideo(Blowjob, 30) - Plays 30 seconds of a blowjob video
-    @PlayVideo(10, Softcore) - Plays 10 seconds of as softcore video
+    @PlayVideo(10, Softcore) - Plays 10 seconds of a softcore video
 
     The following genres may be specified: (Case doesn't matter, but @PlayVideo() only supports 1 genre to be specified)
 

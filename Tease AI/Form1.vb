@@ -8104,6 +8104,76 @@ StatusUpdateEnd:
 
 		StringClean = StringClean.Replace("#CurrentImage", ssh.ImageLocation)
 
+		Dim int As Integer
+
+		If StringClean.Contains("#TaskEdges") Then
+			int = ssh.randomizer.Next(FrmSettings.NBTaskEdgesMin.Value, FrmSettings.NBTaskEdgesMax.Value + 1)
+			If int > 5 Then int = 5 * Math.Round(int / 5)
+			StringClean = StringClean.Replace("#TaskEdges", int)
+		End If
+
+		If StringClean.Contains("#TaskStrokes") Then
+			int = ssh.randomizer.Next(FrmSettings.NBTaskStrokesMin.Value, FrmSettings.NBTaskStrokesMax.Value + 1)
+			If int > 10 Then int = 10 * Math.Round(int / 10)
+			StringClean = StringClean.Replace("#TaskStrokes", int)
+		End If
+
+		If StringClean.Contains("#TaskHours") Then
+			int = ssh.randomizer.Next(1, FrmSettings.domlevelNumBox.Value + 1) + FrmSettings.domlevelNumBox.Value
+			StringClean = StringClean.Replace("#TaskHours", int)
+		End If
+
+		If StringClean.Contains("#TaskMinutes") Then
+			int = ssh.randomizer.Next(5, 13) * FrmSettings.domlevelNumBox.Value
+			StringClean = StringClean.Replace("#TaskMinutes", int)
+		End If
+
+		If StringClean.Contains("#TaskSeconds") Then
+			int = ssh.randomizer.Next(10, 30) * FrmSettings.domlevelNumBox.Value * ssh.randomizer.Next(1, FrmSettings.domlevelNumBox.Value + 1)
+			StringClean = StringClean.Replace("#TaskSeconds", int)
+		End If
+
+		If StringClean.Contains("#TaskAmountLarge") Then
+			int = (ssh.randomizer.Next(15, 26) * FrmSettings.domlevelNumBox.Value) * 2
+			If int > 5 Then int = 5 * Math.Round(int / 5)
+			StringClean = StringClean.Replace("#TaskAmountLarge", int)
+		End If
+
+		If StringClean.Contains("#TaskAmountSmall") Then
+			int = (ssh.randomizer.Next(5, 11) * FrmSettings.domlevelNumBox.Value) / 2
+			If int > 5 Then int = 5 * Math.Round(int / 5)
+			StringClean = StringClean.Replace("#TaskAmountSmall", int)
+		End If
+
+		If StringClean.Contains("#TaskAmount") Then
+			int = ssh.randomizer.Next(15, 26) * FrmSettings.domlevelNumBox.Value
+			If int > 5 Then int = 5 * Math.Round(int / 5)
+			StringClean = StringClean.Replace("#TaskAmount", int)
+		End If
+
+		If StringClean.Contains("#TaskStrokingTime") Then
+			int = ssh.randomizer.Next(FrmSettings.NBTaskStrokingTimeMin.Value, FrmSettings.NBTaskStrokingTimeMax.Value + 1)
+			int *= 60
+			Dim TConvert As String = ConvertSeconds(int)
+			StringClean = StringClean.Replace("#TaskStrokingTime", TConvert)
+		End If
+
+		If StringClean.Contains("#TaskHoldTheEdgeTime") Then
+			int = ssh.randomizer.Next(FrmSettings.NBTaskEdgeHoldTimeMin.Value, FrmSettings.NBTaskEdgeHoldTimeMax.Value + 1)
+			int *= 60
+			Dim TConvert As String = ConvertSeconds(int)
+			StringClean = StringClean.Replace("#TaskHoldTheEdgeTime", TConvert)
+		End If
+
+		If StringClean.Contains("#TaskCBTTime") Then
+			int = ssh.randomizer.Next(FrmSettings.NBTaskCBTTimeMin.Value, FrmSettings.NBTaskCBTTimeMax.Value + 1)
+			int *= 60
+			Dim TConvert As String = ConvertSeconds(int)
+			StringClean = StringClean.Replace("#TaskCBTTime", TConvert)
+		End If
+
+
+
 		Return StringClean
 
 
@@ -8280,12 +8350,21 @@ StatusUpdateEnd:
 						If UCase(wrong) = "#NULL" Then
 							StringClean = StringClean.Replace(keyword.Value, "")
 						Else
-							wrong = wrong.Remove(0, 1)
-							wrong = "Missing Vocab: " & wrong
-							StringClean = StringClean.Replace(keyword.Value, "<font color=""red"">" & wrong & "</font>")
-							ssh.KeywordError = "<font color=""red"">" & wrong & "</font>"
-							Dim lazytext As String = "Unable to locate vocabulary file: """ & keyword.Value & """"
-							Log.WriteError(lazytext, New Exception(lazytext), "PoundClean(String)")
+							wrong = SysKeywordClean(wrong)
+
+							If wrong.Contains("#") Then
+								wrong = wrong.Remove(0, 1)
+								wrong = "Missing Vocab: " & wrong
+								StringClean = StringClean.Replace(keyword.Value, "<font color=""red"">" & wrong & "</font>")
+								ssh.KeywordError = "<font color=""red"">" & wrong & "</font>"
+								Dim lazytext As String = "Unable to locate vocabulary file: """ & keyword.Value & """"
+								Log.WriteError(lazytext, New Exception(lazytext), "PoundClean(String)")
+							Else
+								StringClean = StringClean.Replace(keyword.Value, wrong)
+							End If
+
+
+							
 						End If
 
 					End If
@@ -15894,6 +15973,7 @@ Night:
 
 
 			Dim LoopBuffer As Integer
+			Dim int As Integer
 
 			TaskArray = TaskEntry.Split(" ")
 			For i As Integer = 0 To TaskArray.Count - 1
@@ -15910,7 +15990,7 @@ PoundLoop:
 					TaskList(i) = TaskList(i).Replace(". #Emote", " #Emote")
 					TaskList(i) = TaskList(i).Replace(". #Grin", " #Grin")
 					TaskList(i) = TaskList(i).Replace(". #Lol", " #Lol.")
-
+					TaskList(i) = SysKeywordClean(TaskList(i))
 					TaskList(i) = PoundClean(TaskList(i))
 					If TaskEntry.Contains("#") And LoopBuffer < 6 Then GoTo PoundLoop
 
@@ -15919,7 +15999,6 @@ PoundLoop:
 				End Try
 			Next
 
-			Dim int As Integer
 
 			If TaskEntry.Contains("#TaskEdges") Then
 				Do
@@ -16008,6 +16087,7 @@ PoundLoop:
 					TaskEntry = TaskEntry.Replace("#TaskCBTTime", TConvert)
 				Loop Until Not TaskEntry.Contains("#TaskCBTTime")
 			End If
+		
 
 			TaskEntry = TaskEntry.Replace("<font color=""red"">", "")
 			TaskEntry = TaskEntry.Replace("</font>", "")
@@ -16018,6 +16098,7 @@ PoundLoop:
 			Do
 				LoopBuffer += 1
 				If LoopBuffer > 4 Then Exit Do
+				TaskEntry = SysKeywordClean(TaskEntry)
 				TaskEntry = PoundClean(TaskEntry)
 			Loop Until Not TaskEntry.Contains("#") And Not TaskEntry.Contains("@RT(") And Not TaskEntry.Contains("@RandomText(")
 
