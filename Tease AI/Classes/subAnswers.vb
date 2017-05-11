@@ -68,7 +68,7 @@ Public Class subAnswers
 		'we then check only the answers with more than 1 word to see if the chat strings contain any of them
 
 		For i As Integer = 0 To sorted.Count - 1
-			If InStr(sorted(i), " ") > 0 Then If chatstring.Contains(sorted(i)) Then Return sorted(i)
+			If InStr(sorted(i), " ") > 0 Then If chatstring.Contains(sorted(i).Trim) Then Return sorted(i).Trim
 		Next
 
 		'if all multiple words answers didn't return an answer, we check for the single words in the chat to see if any of them matches
