@@ -6102,6 +6102,7 @@ DommeSlideshowFallback:
 
 		Try
 			Dim GetFolder As String = ""
+			Dim ManuallyEntered As Boolean = False
 			browsefolderButton.Enabled = False
 			nextButton.Enabled = False
 			previousButton.Enabled = False
@@ -6142,6 +6143,7 @@ DommeSlideshowFallback:
 
 				If _e.KeyCode = Keys.Enter Then
 					_e.Handled = True
+					ManuallyEntered = True
 					GoTo chooseComboboxText
 				Else
 					Exit Sub
@@ -6152,8 +6154,15 @@ DommeSlideshowFallback:
 				'===============================================================================
 chooseComboboxText:
 				'ImageFolderComboBox.Text = ImageFolderComboBox.SelectedItem
-				If Directory.Exists(ImageFolderComboBox.SelectedItem) Or isURL(ImageFolderComboBox.SelectedItem) Then
-					GetFolder = ImageFolderComboBox.SelectedItem
+				Dim StringToCheck As String
+				If ManuallyEntered = True Then
+					StringToCheck = ImageFolderComboBox.Text
+				Else
+					StringToCheck = ImageFolderComboBox.SelectedItem
+				End If
+
+				If Directory.Exists(StringToCheck) Or isURL(StringToCheck) Then
+					GetFolder = StringToCheck
 
 					My.Settings.RecentSlideshows.Add(GetFolder)
 
