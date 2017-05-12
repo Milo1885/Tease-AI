@@ -404,9 +404,16 @@ retryStart:
 			FrmSplash.LBLSplash.Text = "Checking recent slideshows..."
 			FrmSplash.Refresh()
 
-			For Each path As String In My.Settings.RecentSlideshows
-				If Directory.Exists(path) Then ImageFolderComboBox.Items.Add(path)
+
+			Dim uniqueNames = From u In My.Settings.RecentSlideshows Distinct
+
+			For Each n In uniqueNames
+				If Directory.Exists(n) Then ImageFolderComboBox.Items.Add(n)
 			Next
+
+			'For Each path As String In My.Settings.RecentSlideshows
+			'If Directory.Exists(Path) Then ImageFolderComboBox.Items.Add(Path)
+			'Next
 			' because Specialized.StringCollections are crap, 
 			' we have to clear And refill it using For-Each...
 			My.Settings.RecentSlideshows.Clear()
@@ -451,8 +458,8 @@ retryStart:
 				' If it would be true, this branch is unreachable
 				My.Settings.CBGlitterFeedScripts = False
 			ElseIf My.Settings.CBGlitterFeed = False _
-		   AndAlso My.Settings.CBGlitterFeedOff = False _
-		   AndAlso My.Settings.CBGlitterFeedScripts = False Then
+			  AndAlso My.Settings.CBGlitterFeedOff = False _
+			  AndAlso My.Settings.CBGlitterFeedScripts = False Then
 				My.Settings.CBGlitterFeedOff = True
 			End If
 
@@ -1125,11 +1132,11 @@ retryStart:
 
 			Dim b As MsgBoxResult =
 			  MessageBox.Show("An exception occurred on startup. Tease-AI is unable to work correctly until this error is fixed." &
-				  vbCrLf & vbCrLf &
-				  ex.Message &
-				  vbCrLf & vbCrLf &
-				  "Further details were written to the error log.", "Startup failed",
-				  btn, MessageBoxIcon.Hand)
+			   vbCrLf & vbCrLf &
+			   ex.Message &
+			   vbCrLf & vbCrLf &
+			   "Further details were written to the error log.", "Startup failed",
+			   btn, MessageBoxIcon.Hand)
 
 			If b = MsgBoxResult.Abort Or b = MsgBoxResult.Cancel Then
 				Process.GetCurrentProcess().Kill()
@@ -6086,12 +6093,13 @@ DommeSlideshowFallback:
 
 #Region "------------------------------------------ Images ----------------------------------------------"
 
-	Private Sub LoadCustomizedSlideshow(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles browsefolderButton.Click, ImageFolderComboBox.KeyDown, ImageFolderComboBox.SelectedIndexChanged
+	Private Sub LoadCustomizedSlideshow(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles browsefolderButton.Click, ImageFolderComboBox.KeyDown, ImageFolderComboBox.SelectionChangeCommitted
 		'TODO-Next-Stefaf: Implement enhanced RecentSlideshows.Item handling
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then
 			MsgBox("Please close the settings menu or disable ""Pause Program When Settings Menu is Visible"" option first!", , "Warning!")
 			Return
 		End If
+
 		Try
 			Dim GetFolder As String = ""
 			browsefolderButton.Enabled = False
@@ -6114,9 +6122,15 @@ DommeSlideshowFallback:
 
 					ImageFolderComboBox.Items.Clear()
 
-					For Each comboitem As String In My.Settings.RecentSlideshows
-						ImageFolderComboBox.Items.Add(comboitem)
+					Dim uniqueNames = From u In My.Settings.RecentSlideshows Distinct
+
+					For Each n In uniqueNames
+						ImageFolderComboBox.Items.Add(n)
 					Next
+
+					'For Each comboitem As String In My.Settings.RecentSlideshows
+					'ImageFolderComboBox.Items.Add(comboitem)
+					'Next
 
 					ImageFolderComboBox.Text = GetFolder
 				End If
@@ -6137,8 +6151,29 @@ DommeSlideshowFallback:
 				'								ImageFolderComboBox
 				'===============================================================================
 chooseComboboxText:
-				If Directory.Exists(ImageFolderComboBox.Text) Or isURL(ImageFolderComboBox.Text) Then
-					GetFolder = ImageFolderComboBox.Text
+				'ImageFolderComboBox.Text = ImageFolderComboBox.SelectedItem
+				If Directory.Exists(ImageFolderComboBox.SelectedItem) Or isURL(ImageFolderComboBox.SelectedItem) Then
+					GetFolder = ImageFolderComboBox.SelectedItem
+
+					My.Settings.RecentSlideshows.Add(GetFolder)
+
+					Do Until My.Settings.RecentSlideshows.Count < 11
+						My.Settings.RecentSlideshows.Remove(My.Settings.RecentSlideshows(0))
+					Loop
+
+					ImageFolderComboBox.Items.Clear()
+
+					Dim uniqueNames = From u In My.Settings.RecentSlideshows Distinct
+
+					For Each n In uniqueNames
+						ImageFolderComboBox.Items.Add(n)
+					Next
+
+					ImageFolderComboBox.Text = GetFolder
+
+					'For Each comboitem As String In My.Settings.RecentSlideshows
+					'ImageFolderComboBox.Items.Add(comboitem)
+					'Next
 				Else
 					Throw New DirectoryNotFoundException("The given directory """ & ImageFolderComboBox.Text & """ does not exist.")
 				End If
@@ -6219,7 +6254,7 @@ listLoaded:
 			If ssh.SlideshowMain.ImageList.Count <= 0 Then
 
 				MessageBox.Show(Me, "There are no images in the specified folder.", "Error!",
-					 MessageBoxButtons.OK, MessageBoxIcon.Hand)
+				  MessageBoxButtons.OK, MessageBoxIcon.Hand)
 				Exit Sub
 			Else
 				ssh.SlideshowLoaded = True
@@ -6241,8 +6276,8 @@ listLoaded:
 			'                                            All Errors
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			MessageBox.Show("Unable to load custom slideshow : " & vbCrLf & vbCrLf & ex.Message,
-				"Open CustomSlideshow failed",
-				MessageBoxButtons.OK, MessageBoxIcon.Error)
+			 "Open CustomSlideshow failed",
+			 MessageBoxButtons.OK, MessageBoxIcon.Error)
 		Finally
 			browsefolderButton.Enabled = True
 			nextButton.Enabled = True

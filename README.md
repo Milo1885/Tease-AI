@@ -46,6 +46,7 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 	* The program tried to process LikedImageURLs.txt and DislikedImageURLs.txt without first making sure they existed (dariobrun)	
     * Keyword Error messages were causing the program to get temporarily stuck in a loop (dariobrun)
 	* Possible issues caused by duplicate #Keywords in a single line (dariobrun) 
+	* Recent Slideshows weren't being saved in the drop-down box after being manually entered
     * TTS was speaking the html color codes for Keyword Error messages
     * Fixed problems that would occur when @FollowUp() contained spaces at the end of a line (dariobrun)
 	
