@@ -548,14 +548,16 @@ Partial Class Form1
 		'
 		'DomWMP
 		'
-		Me.DomWMP.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-			Or System.Windows.Forms.AnchorStyles.Left) _
-			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		'Me.DomWMP.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+		'	Or System.Windows.Forms.AnchorStyles.Left) _
+		'	Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.DomWMP.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.DomWMP.Enabled = True
 		Me.DomWMP.Location = New System.Drawing.Point(0, 0)
 		Me.DomWMP.Name = "DomWMP"
 		Me.DomWMP.OcxState = CType(resources.GetObject("DomWMP.OcxState"), System.Windows.Forms.AxHost.State)
-		Me.DomWMP.Size = New System.Drawing.Size(1398, 698)
+		'Me.DomWMP.Size = New System.Drawing.Size(1398, 698)
+		Me.DomWMP.Size = New System.Drawing.Size(1398, 536)
 		Me.DomWMP.TabIndex = 96
 		Me.DomWMP.Visible = False
 		'

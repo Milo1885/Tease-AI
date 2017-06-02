@@ -7,6 +7,34 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 	Testrun to sort Lists like Win-Explorer: initialized in v0.54.5.1
 	
 	
+# Changelog - Patch 55.0.0	
+
+* Command Filters:
+
+    * @ControlFlag() - If the Flag specified in @ControlFlag() exists, then ONLY those lines will be viable when filtering lines from scripts. Take this StrokeTaunts_1 script for example:
+	
+	Keep stroking
+	Keep going
+	I want you to suffer
+	@ControlFlag(Contact1Present) #Contact1 loves watching you stroke
+	@ControlFlag(ImageOnlyRound) @ShowBlogImage
+	
+	Compare to the following cases:
+	Only Contact1Present flag exists - The only viable line is "#Contact1 loves watching you stroke"
+	Only ImageOnlyRound flag exists - The only viable line is "@ShowBlogImage"
+    Contact1Present and ImageOnlyRound both exist - The only viable lines are "#Contact1 loves watching you stroke" and "@ShowBlogImage"
+    Neither Contact1Present or ImageOnlyRound exist - The only viable lines are "Keep stroking", "Keep going" and "I want you to suffer" 	
+	
+* Bugfixes:
+
+    * @DifferentAnswer lines were causing scripts to freeze\reset
+	* WakeUp time was not saved until manually set by the user, causing @Morning, @Afternoon and @Night Command Filters to not work correctly 
+	* #DomHairLength now outputs correctly
+	
+* Miscellaneous:
+
+    * Experimental: Changed WMP docking style to see if it would help those who reported the video displaying in a very small area on the side of the screen	
+	
 # Changelog - Patch 54.9.0
 
 * Added Features:

@@ -3551,19 +3551,20 @@ NullSkip:
 		Dim TempLineVal As Integer
 
 		'if we already populated the answer list we do not need to do it again
-		If ssh.checkAnswers.answerNumber = 0 Then
-			Do
-				line += 1
-				Debug.Print("YESNO Line = " & lines(line))
-				If Not UCase(lines(line)).Contains("@DIFFERENTANSWER") And Not UCase(lines(line)).Contains("@ACCEPTANSWER") Then
-					Dim getWords As String = GetParentheses(lines(line), "[")
-					ssh.checkAnswers.addToAnswerList(getWords)
-				End If
+		'If ssh.checkAnswers.answerNumber = 0 Then
+		Do
+			line += 1
+			Debug.Print("YESNO Line = " & lines(line))
+			If Not UCase(lines(line)).Contains("@DIFFERENTANSWER") And Not UCase(lines(line)).Contains("@ACCEPTANSWER") Then
+				Dim getWords As String = GetParentheses(lines(line), "[")
+				ssh.checkAnswers.addToAnswerList(getWords)
+			End If
 
-			Loop Until InStr(UCase(lines(line)), UCase("@AcceptAnswer")) <> 0 Or InStr(UCase(lines(line)), UCase("@DifferentAnswer")) <> 0
-			TempLineVal = line
-			line = ssh.StrokeTauntVal
-		End If
+		Loop Until InStr(UCase(lines(line)), UCase("@AcceptAnswer")) <> 0 Or InStr(UCase(lines(line)), UCase("@DifferentAnswer")) <> 0
+		'End If
+
+		TempLineVal = line
+		line = ssh.StrokeTauntVal
 
 		Dim CheckLines As String
 		Dim ChatReplace As String
@@ -7738,9 +7739,9 @@ StatusUpdateEnd:
 
 		StringClean = StringClean.Replace("#DomApathy", FrmSettings.NBEmpathy.Value)
 
-		StringClean = StringClean.Replace("#DomHair", FrmSettings.TBDomHairColor.Text)
+		StringClean = StringClean.Replace("#DomHairLength", LCase(FrmSettings.domhairlengthComboBox.Text))
 
-		StringClean = StringClean.Replace("#DomHairLength", FrmSettings.domhairlengthComboBox.Text)
+		StringClean = StringClean.Replace("#DomHair", FrmSettings.TBDomHairColor.Text)
 
 		StringClean = StringClean.Replace("#DomEyes", FrmSettings.TBDomEyeColor.Text)
 
@@ -13770,6 +13771,22 @@ VTSkip:
 		'		Grouped-Lines-Check-END 
 		'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 
+		Dim ControlList As New List(Of String)
+
+		For i As Integer = 0 To ListClean.Count - 1
+			If ListClean(i).Contains("@ControlFlag(") Then
+				If FlagExists(GetParentheses(ListClean(i), "@ControlFlag(")) = True Then
+					ControlList.Add(ListClean(i))
+				End If
+			End If
+		Next
+
+		If ControlList.Count > 0 Then
+			ListClean.Clear()
+			ListClean = ControlList
+		End If
+
+
 		'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 		' NEW FilterList TEST Begin
 		'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
@@ -14019,10 +14036,14 @@ VTSkip:
 			' with "glaring".
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 
-			If FilterString.Contains("@Flag(") Then
+			If FilterString.Contains("@Flag(") Or FilterString.Contains("@ControlFlag(") Then
 				Dim writeFlag As String
 				Dim splitFlag As String()
-				writeFlag = GetParentheses(FilterString, "@Flag(")
+				If FilterString.Contains("@Flag(") Then
+					writeFlag = GetParentheses(FilterString, "@Flag(")
+				Else
+					writeFlag = GetParentheses(FilterString, "@ControlFlag(")
+				End If
 				writeFlag = FixCommas(writeFlag)
 				splitFlag = writeFlag.Split({","}, StringSplitOptions.RemoveEmptyEntries)
 				For Each s In splitFlag
@@ -14469,7 +14490,7 @@ VTSkip:
 			'                                            All Errors
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			Log.WriteError(String.Format("Exception occured while checking line ""{0}"".", OrgFilterString),
-		   ex, "GetFilter(String, Boolean)")
+			  ex, "GetFilter(String, Boolean)")
 			If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">Error: " & ex.Message & "</font>", False)
 			Return False
 		End Try
@@ -17409,7 +17430,7 @@ saveImage:
 		For Each com As String In New List(Of String) From
 		  {"@Cup(", "@AllowsOrgasm(", "@RuinsOrgasm(", "@DommeLevel(",
 		  "@ApathyLevel(", "@Month(", "@Day(", "@Flag(", "@NotFlag(",
-		  "@DayOfWeek(", "@FlagOr("}
+		  "@DayOfWeek(", "@FlagOr(", "@CheckDate(", "@ControlFlag("}
 			If CFClean.Contains(com) Then CFClean = CFClean.Replace(com & GetParentheses(CFClean, com) & ")", "")
 		Next
 
@@ -18552,6 +18573,12 @@ restartInstantly:
 			If DDiff > -2 And DDiff < 5 Then ssh.GeneralTime = "Morning"
 			If DDiff > 4 And DDiff < 12 Then ssh.GeneralTime = "Afternoon"
 			If DDiff > -21 And DDiff < -11 Then ssh.GeneralTime = "Afternoon"
+
+		Else
+
+			Dim SetDate As Date = FormatDateTime(FrmSettings.TimeBoxWakeUp.Value, DateFormat.LongTime)
+			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_WakeUp", FormatDateTime(SetDate, DateFormat.LongTime), False)
+			My.Settings.WakeUp = FormatDateTime(Now, DateFormat.ShortDate) & " " & GetTime("SYS_WakeUp")
 
 		End If
 
