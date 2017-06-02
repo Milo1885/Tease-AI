@@ -28,6 +28,7 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 * Bugfixes:
 
     * @DifferentAnswer lines were causing scripts to freeze\reset
+	* #Var[] should now work correctly no matter how it is used or how many times per line it is used. For example, @SetVar[C]=[#Random(#Var[A], #Var[B])]
 	* WakeUp time was not saved until manually set by the user, causing @Morning, @Afternoon and @Night Command Filters to not work correctly 
 	* #DomHairLength now outputs correctly
 	

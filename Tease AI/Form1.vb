@@ -7678,6 +7678,15 @@ StatusUpdateEnd:
 
 	Public Function SysKeywordClean(ByVal StringClean As String) As String
 
+		If StringClean.Contains("#Var[") Then
+			Dim VarArray As String() = StringClean.Split("]")
+			For i As Integer = 0 To VarArray.Count - 1
+				If VarArray(i).Contains("#Var[") Then
+					StringClean = StringClean.Replace("#Var[" & GetParentheses(VarArray(i) & "]", "#Var[") & "]", GetVariable(GetParentheses(VarArray(i) & "]", "#Var[")))
+				End If
+			Next
+		End If
+
 		If StringClean.Contains("@RT(") Or StringClean.Contains("@RandomText(") Then
 			Dim replace As String() = {"@RT(", "@RandomText("}
 			Dim RandArray As String() = StringClean.Split("@")
@@ -7699,7 +7708,6 @@ StatusUpdateEnd:
 				Next
 			Next
 		End If
-
 
 		If FrmSettings.CBCockToClit.Checked = True Then
 			StringClean = StringClean.Replace("#Cock", "#CockToClit")
@@ -7996,27 +8004,6 @@ StatusUpdateEnd:
 		StringClean = StringClean.Replace("#CurrentYear", Format(Now, "yyyy"))
 		StringClean = StringClean.Replace("#CurrentDate", FormatDateTime(Date.Now, DateFormat.ShortDate))
 		' StringClean = StringClean.Replace("#CurrentDate", Format(Now, "MM/dd/yyyy"))
-
-		' 
-		If StringClean.Contains("#Var[") Then
-
-			'Dim VarSplit As String() = StringClean.Split("]")
-			'For i As Integer = 0 To VarSplit.Count - 1
-			'If VarSplit(i).Contains("#Var[") Then
-			'Dim VarString As String = VarSplit(i) & "]"
-			'Dim VarFlag As String = GetParentheses(VarString, "#Var[")
-			'Debug.Print("VarFlag = " & VarFlag)
-			'Dim VarFlag2 As String = GetVariable(VarFlag)
-			'Debug.Print("VarFlag2 = " & VarFlag2)
-			' StringClean = StringClean.Replace("#Var[" & VarFlag & "]", VarFlag2)
-			'Debug.Print("Try this shit       #Var[" & VarFlag & "]")
-			'StringClean = StringClean.Replace("#Var[" & VarFlag & "]", VarFlag2)
-			'End If
-			'    Next
-
-			StringClean = StringClean.Replace("#Var[", "@ShowVar[")
-
-		End If
 
 		If StringClean.Contains("#RandomSlideshowCategory") Then
 			Dim RanCat As New List(Of String)
