@@ -1889,8 +1889,10 @@ WritingTaskLine:
 			EdgeString = EdgeString.Replace(".", "")
 			EdgeString = EdgeString.Replace(",", "")
 			EdgeString = EdgeString.Replace("!", "")
-			Debug.Print("UCase(EdgeString)  = " & UCase(EdgeString))
-			Debug.Print("EdgeCheck  = " & UCase(EdgeCheck))
+			EdgeCheck = EdgeCheck.Replace("'", "")
+			EdgeCheck = EdgeCheck.Replace(".", "")
+			EdgeCheck = EdgeCheck.Replace(",", "")
+			EdgeCheck = EdgeCheck.Replace("!", "")
 			If UCase(EdgeCheck).Contains("DONT") Or UCase(EdgeCheck).Contains("NEVER") Or UCase(EdgeCheck).Contains("NOT") Then
 				If UCase(EdgeCheck).Contains(UCase(EdgeString)) Then
 					ssh.EdgeNOT = True

@@ -14687,9 +14687,9 @@ Me.Panel5.TabIndex = 92
 'Label130
 '
 Me.Label130.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-Me.Label130.Location = New System.Drawing.Point(361, 314)
+Me.Label130.Location = New System.Drawing.Point(522, 314)
 Me.Label130.Name = "Label130"
-Me.Label130.Size = New System.Drawing.Size(254, 54)
+Me.Label130.Size = New System.Drawing.Size(132, 54)
 Me.Label130.TabIndex = 176
 Me.Label130.Text = "q55x8x"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Stefaf"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"OxiKlein"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)
 Me.Label130.TextAlign = System.Drawing.ContentAlignment.TopCenter
@@ -14697,9 +14697,9 @@ Me.Label130.TextAlign = System.Drawing.ContentAlignment.TopCenter
 'Label123
 '
 Me.Label123.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-Me.Label123.Location = New System.Drawing.Point(81, 314)
+Me.Label123.Location = New System.Drawing.Point(62, 314)
 Me.Label123.Name = "Label123"
-Me.Label123.Size = New System.Drawing.Size(254, 54)
+Me.Label123.Size = New System.Drawing.Size(132, 54)
 Me.Label123.TabIndex = 175
 Me.Label123.Text = "pepsifreak"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Daragorn"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Ambossli"
 Me.Label123.TextAlign = System.Drawing.ContentAlignment.TopCenter
@@ -14707,11 +14707,11 @@ Me.Label123.TextAlign = System.Drawing.ContentAlignment.TopCenter
 'Label69
 '
 Me.Label69.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-Me.Label69.Location = New System.Drawing.Point(35, 295)
+Me.Label69.Location = New System.Drawing.Point(35, 314)
 Me.Label69.Name = "Label69"
-Me.Label69.Size = New System.Drawing.Size(638, 22)
+Me.Label69.Size = New System.Drawing.Size(638, 54)
 Me.Label69.TabIndex = 174
-Me.Label69.Text = "Triple Alfa"
+Me.Label69.Text = "Triple Alfa"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&" malaru"
 Me.Label69.TextAlign = System.Drawing.ContentAlignment.TopCenter
 '
 'Label113
