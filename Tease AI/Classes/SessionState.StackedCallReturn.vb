@@ -13,6 +13,9 @@
 		'when it reaches the end of a link/beforeScript)
 		Dim isALink As Boolean
 
+		'store the rapidcode status so we can resume it when coming back if the script was in this mode
+		Dim rapidText, rapidCode As Boolean
+
 		'store all the modes variables so we can reset them on coming back
 		Dim edgeMode, ruinMode, cameMode, yesMode, noMode As New Mode()
 		Dim customModes As New Dictionary(Of String, Mode)
@@ -28,6 +31,8 @@
 			customModes = session.Modes
 			showingModule = session.ShowModule
 			isALink = session.isLink
+			rapidCode = session.RapidCode
+			rapidText = session.RapidFire
 		End Sub
         Sub resumeState()
             Session.StrokeTauntVal = Line
@@ -44,6 +49,8 @@
 			Session.Modes = customModes
 			Session.ShowModule = showingModule
 			Session.isLink = isALink
+			Session.RapidCode = rapidCode
+			Session.RapidFire = rapidText
 		End Sub
     End Class
 End Class

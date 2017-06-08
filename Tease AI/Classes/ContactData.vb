@@ -261,7 +261,7 @@ checkFolder:
 	Dim currPath As String
 
 		If Contact = ContactType.Random And Not newFolder Then
-			currPath = myDirectory.GetDirectories(baseDirectory).ElementAt(New Random().Next(0, myDirectory.GetDirectories(baseDirectory).Count))
+			currPath = myDirectory.GetDirectories(baseDirectory).ElementAt(Form1.ssh.randomizer.Next(0, myDirectory.GetDirectories(baseDirectory).Count))
 			tempBaseFolder = currPath
 		Else
 			currPath = baseDirectory
@@ -282,7 +282,7 @@ nextSubDir:
 		End If
 
 		' Get a random folder in base directory.
-		Dim rndFolder As String = subDirs(New Random().Next(0, subDirs.Count))
+		Dim rndFolder As String = subDirs(Form1.ssh.randomizer.Next(0, subDirs.Count))
 
 		If RecentFolders.Contains(rndFolder) Then
 			exclude.Add(rndFolder)
@@ -411,8 +411,8 @@ nextSubDir:
 
 		If My.Settings.CBSlideshowRandom Then
 			' get Random Image
-			Index = New Random().Next(0, ImageList.Count)
-		ElseIf My.Settings.NextImageChance < New Random().Next(0, 101)
+			Index = Form1.ssh.randomizer.Next(0, ImageList.Count)
+		ElseIf My.Settings.NextImageChance < Form1.ssh.randomizer.Next(0, 101) Then
 			' Randomly backwards
 			Index -= 1
 			If Index < 0 Then Index = 0
@@ -530,7 +530,7 @@ SetForwardImage:
 			'End If
 			'Next
 			If ImagePaths.TagImageList.Count <> 0 Then
-				rtnPath = ImagePaths.TagImageList.ElementAt(New Random().Next(0, ImagePaths.TagImageList.Count))
+				rtnPath = ImagePaths.TagImageList.ElementAt(Form1.ssh.randomizer.Next(0, ImagePaths.TagImageList.Count))
 			Else
 				rtnPath = ImagePaths.LastPicked
 			End If

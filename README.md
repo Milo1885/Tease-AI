@@ -9,6 +9,26 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 	
 # Changelog - Patch 55.0.0	
 
+* Added Features:
+
+    * Keywords (such as Vocabulary files and System Keywords) are now usable options in Multiple Choice Branch brackets (dariobrun)
+	
+	* Added "Clear" modifier for @CallReturn(). @CallReturn(Clear) will cancel any remaining CallReturns. Once the script containing @CallReturn(Clear) ends, the program will exit back to the first script that launched the stack (dariobrun)
+	
+* Commands: 
+
+    * @SetMood() - Sets the domme's mood to the specified relative or absolute value. (dariobrun)
+
+        * @SetMood(Best) - Sets the domme's mood to the maximum value
+        * @SetMood(Good) - Sets the domme's mood to a random value in her "good mood" range
+        * @SetMood(Neutral) - Sets the domme's mood to a random value in her "neutral mood" range
+        * @SetMood(Bad) - Sets the domme's mood to a random value in her "bad mood" range
+        * @SetMood(Worst) - Sets the domme's mood to the minimum value
+
+    You can also set the domme's mood to a number if you would like to use your own absolute mood system for your Personality. For example, @SetMood(1), @SetMood(5), @SetMood(10), etc.
+
+	* @DommeTagAny() - Will choose a domme image having at least one of the specified tags (dariobrun)
+
 * Command Filters:
 
     * @ControlFlag() - If the Flag specified in @ControlFlag() exists, then ONLY those lines will be viable when filtering lines from scripts. Take this StrokeTaunts_1 script for example:
@@ -23,19 +43,42 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 	Only Contact1Present flag exists - The only viable line is "#Contact1 loves watching you stroke"
 	Only ImageOnlyRound flag exists - The only viable line is "@ShowBlogImage"
     Contact1Present and ImageOnlyRound both exist - The only viable lines are "#Contact1 loves watching you stroke" and "@ShowBlogImage"
-    Neither Contact1Present or ImageOnlyRound exist - The only viable lines are "Keep stroking", "Keep going" and "I want you to suffer" 	
+    Neither Contact1Present or ImageOnlyRound exist - The only viable lines are "Keep stroking", "Keep going" and "I want you to suffer"   
+
+    * @Mood() - Will only display the line if the domme's mood matches the specified value (dariobrun)
+	 
+	    * @Mood(Best) - Will only display the line if the domme's mood is at the maximum value
+        * @Mood(Good) - Will only display the line if the domme's mood is within her "good mood" range
+        * @Mood(Neutral) - Will only display the line if the domme's mood is within her "neutral mood" range
+        * @Mood(Bad) - Will only display the line if the domme's mood is within her "bad mood" range
+        * @Mood(Worst) - Will only display the line if the domme's mood is at the minimum value
+		
+		You can also use numbers to check the domme's mood to create your own absolute mood system for your Personality. For example, @Mood(1), @Mood(4), @Mood(10), etc
+	
 	
 * Bugfixes:
 
     * @DifferentAnswer lines were causing scripts to freeze\reset
 	* #Var[] should now work correctly no matter how it is used or how many times per line it is used. For example, @SetVar[C]=[#Random(#Var[A], #Var[B])]
-	* WakeUp time was not saved until manually set by the user, causing @Morning, @Afternoon and @Night Command Filters to not work correctly 
+	* The session would end if a CallReturn ended after being called from an End script (dariobrun)
+    * Response Files weren't being read correctly if there were spaces after the brackets of the various section blocks (dariobrun)	
+	* The process that @Goto() Commands used to find similar Goto Labels when an exact match wasn't found didn't account for differences in case  
+	* WakeUp time was not saved until manually set by the user, causing @Morning, @Afternoon and @Night Command Filters to not work correctly
+    * @Wait() Commands will now be processed correctly on a @NullResponse line while RapidCode is active	
 	* Edge phrases weren't being recognized if they contained apostrophes
+	* @ChangeVar[] didn't process negative numbers correctly. @ChangeVar[a]=[a]+[#random(-1,3)] for example, will now correctly substract 1 if -1 is rolled in the random (previously it was adding it) (dariobrun)
+	* Videos were not stretched to fit the window in certain situations (dariobrun)
 	* #DomHairLength now outputs correctly
 	
 * Miscellaneous:
 
-    * Experimental: Changed WMP docking style to see if it would help those who reported the video displaying in a very small area on the side of the screen	
+    * Improved the @Goto() safety net: If there are multiple CallReturns active and it doesn't find a valid goto line, instead of interrupting everything, the program will send you back to the previous CallReturn in the stack (dariobrun)
+    * Multiple #Random() and @Chance() instances can now be used in the same line (dariobrun)
+    * @PlayVideo[] can now use the length parameter too, as @PlayVideo(): @PlayVideo[location\*, 2 minutes) (dariobrun)
+	* Experimental: Changed WMP docking style to see if it would help those who reported the video displaying in a very small area on the side of the screen
+	* Removed Contact timers for entering and leaving the room to avoid issues when RapidCode is active (1885 & dariobrun)
+	* Returned Statistical information to the Sub Settings menu (dariobrun)
+   	
 	
 # Changelog - Patch 54.9.0
 

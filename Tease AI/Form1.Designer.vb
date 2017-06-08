@@ -399,12 +399,8 @@ Partial Class Form1
 		Me.RLGLTauntTimer = New Tease_AI.teaseAI_Timer()
 		Me.AvoidTheEdgeTaunts = New Tease_AI.teaseAI_Timer()
 		Me.CustomSlideshowTimer = New Tease_AI.teaseAI_Timer()
-		Me.Contact1Timer = New Tease_AI.teaseAI_Timer()
-		Me.Contact2Timer = New Tease_AI.teaseAI_Timer()
-		Me.Contact3Timer = New Tease_AI.teaseAI_Timer()
 		Me.UpdateStageTimer = New Tease_AI.teaseAI_Timer()
 		Me.WMPTimer = New Tease_AI.teaseAI_Timer()
-		Me.DommeTimer = New Tease_AI.teaseAI_Timer()
 		Me.TeaseAIClock = New Tease_AI.teaseAI_Timer()
 		Me.TimeoutTimer = New Tease_AI.teaseAI_Timer()
 		Me.VideoTimer = New Tease_AI.teaseAI_Timer()
@@ -4335,18 +4331,6 @@ Partial Class Form1
 		'
 		Me.CustomSlideshowTimer.Interval = 1000
 		'
-		'Contact1Timer
-		'
-		Me.Contact1Timer.Interval = 1000
-		'
-		'Contact2Timer
-		'
-		Me.Contact2Timer.Interval = 1000
-		'
-		'Contact3Timer
-		'
-		Me.Contact3Timer.Interval = 1000
-		'
 		'UpdateStageTimer
 		'
 		Me.UpdateStageTimer.Interval = 1000
@@ -4354,10 +4338,6 @@ Partial Class Form1
 		'WMPTimer
 		'
 		Me.WMPTimer.Interval = 1000
-		'
-		'DommeTimer
-		'
-		Me.DommeTimer.Interval = 1000
 		'
 		'TeaseAIClock
 		'
@@ -4525,9 +4505,6 @@ Partial Class Form1
 	Friend WithEvents StatusUpdates As System.Windows.Forms.WebBrowser
 	Friend WithEvents PicStripTSMIcopyImageLocation As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents CustomSlideshowTimer As Tease_AI.teaseAI_Timer
-	Friend WithEvents Contact1Timer As Tease_AI.teaseAI_Timer
-	Friend WithEvents Contact2Timer As Tease_AI.teaseAI_Timer
-	Friend WithEvents Contact3Timer As Tease_AI.teaseAI_Timer
 	Friend WithEvents UpdateStageTimer As Tease_AI.teaseAI_Timer
 	Friend WithEvents WMPTimer As Tease_AI.teaseAI_Timer
 	Friend WithEvents TeaseAINotify As System.Windows.Forms.NotifyIcon
@@ -4545,7 +4522,6 @@ Partial Class Form1
 	Friend WithEvents BugReportThreadToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents WebteasesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents AllAndEverythingToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents DommeTimer As Tease_AI.teaseAI_Timer
 	Friend WithEvents PNLMediaBar As System.Windows.Forms.Panel
 	Friend WithEvents TeaseAIClock As Tease_AI.teaseAI_Timer
 	Friend WithEvents LBLTime As System.Windows.Forms.Label

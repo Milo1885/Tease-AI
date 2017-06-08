@@ -1116,8 +1116,6 @@ Me.Label65 = New System.Windows.Forms.Label()
 Me.LBLAvgEdgeNoTouch = New System.Windows.Forms.Label()
 Me.LBLLastOrgasm = New System.Windows.Forms.Label()
 Me.Label14 = New System.Windows.Forms.Label()
-Me.Label13 = New System.Windows.Forms.Label()
-Me.Label1 = New System.Windows.Forms.Label()
 Me.GroupBox21 = New System.Windows.Forms.GroupBox()
 Me.Label153 = New System.Windows.Forms.Label()
 Me.LBLRangeSettingsDescription = New System.Windows.Forms.Label()
@@ -1144,6 +1142,7 @@ Me.Label135 = New System.Windows.Forms.Label()
 Me.TrackBar2 = New System.Windows.Forms.TrackBar()
 Me.TxbImgUrlHardcore = New System.Windows.Forms.TextBox()
 Me.TextBox2 = New System.Windows.Forms.TextBox()
+Me.Label171 = New System.Windows.Forms.Label()
 Me.BWURLFiles = New Tease_AI.URL_Files.URL_File_BGW()
 Me.SettingsPanel.SuspendLayout
 Me.SettingsTabs.SuspendLayout
@@ -3524,6 +3523,7 @@ Me.Panel2.BackColor = System.Drawing.Color.LightGray
 Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
 Me.Panel2.Controls.Add(Me.GroupBox22)
 Me.Panel2.Controls.Add(Me.GroupBox45)
+Me.Panel2.Controls.Add(Me.GroupBox6)
 Me.Panel2.Controls.Add(Me.GroupBox35)
 Me.Panel2.Controls.Add(Me.GroupBox13)
 Me.Panel2.Controls.Add(Me.GroupBox7)
@@ -4156,7 +4156,7 @@ Me.GroupBox32.Name = "GroupBox32"
 Me.GroupBox32.Size = New System.Drawing.Size(427, 165)
 Me.GroupBox32.TabIndex = 62
 Me.GroupBox32.TabStop = false
-Me.GroupBox32.Text = "Stats && Information"
+Me.GroupBox32.Text = "Personal Information"
 '
 'LBLSubBdayFormat
 '
@@ -14858,7 +14858,7 @@ Me.GroupBox40.Text = "Boobs"
 Me.GroupBox44.BackColor = System.Drawing.Color.LightGray
 Me.GroupBox44.Controls.Add(Me.Label100)
 Me.GroupBox44.ForeColor = System.Drawing.Color.Black
-Me.GroupBox44.Location = New System.Drawing.Point(1160, 181)
+Me.GroupBox44.Location = New System.Drawing.Point(1149, 332)
 Me.GroupBox44.Name = "GroupBox44"
 Me.GroupBox44.Size = New System.Drawing.Size(310, 92)
 Me.GroupBox44.TabIndex = 65
@@ -14879,6 +14879,7 @@ Me.Label100.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
 '
 'GroupBox6
 '
+Me.GroupBox6.Controls.Add(Me.Label171)
 Me.GroupBox6.Controls.Add(Me.Label4)
 Me.GroupBox6.Controls.Add(Me.LBLAvgEdgeStroking)
 Me.GroupBox6.Controls.Add(Me.LBLStrokeTimeTotal)
@@ -14888,30 +14889,29 @@ Me.GroupBox6.Controls.Add(Me.Label65)
 Me.GroupBox6.Controls.Add(Me.LBLAvgEdgeNoTouch)
 Me.GroupBox6.Controls.Add(Me.LBLLastOrgasm)
 Me.GroupBox6.Controls.Add(Me.Label14)
-Me.GroupBox6.Controls.Add(Me.Label13)
-Me.GroupBox6.Controls.Add(Me.Label1)
-Me.GroupBox6.Location = New System.Drawing.Point(27, 114)
+Me.GroupBox6.Location = New System.Drawing.Point(239, 201)
 Me.GroupBox6.Name = "GroupBox6"
-Me.GroupBox6.Size = New System.Drawing.Size(283, 102)
+Me.GroupBox6.Size = New System.Drawing.Size(195, 181)
 Me.GroupBox6.TabIndex = 156
 Me.GroupBox6.TabStop = false
-Me.GroupBox6.Text = "Performance"
+Me.GroupBox6.Text = "Stats"
 '
 'Label4
 '
-Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-Me.Label4.Location = New System.Drawing.Point(26, 16)
+Me.Label4.AutoSize = true
+Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+Me.Label4.Location = New System.Drawing.Point(6, 19)
 Me.Label4.Name = "Label4"
-Me.Label4.Size = New System.Drawing.Size(77, 17)
+Me.Label4.Size = New System.Drawing.Size(75, 13)
 Me.Label4.TabIndex = 147
-Me.Label4.Text = "Stroking Time"
+Me.Label4.Text = "Stroking Time:"
 Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
 '
 'LBLAvgEdgeStroking
 '
 Me.LBLAvgEdgeStroking.AutoSize = true
 Me.LBLAvgEdgeStroking.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-Me.LBLAvgEdgeStroking.Location = New System.Drawing.Point(113, 68)
+Me.LBLAvgEdgeStroking.Location = New System.Drawing.Point(142, 85)
 Me.LBLAvgEdgeStroking.Name = "LBLAvgEdgeStroking"
 Me.LBLAvgEdgeStroking.Size = New System.Drawing.Size(36, 15)
 Me.LBLAvgEdgeStroking.TabIndex = 144
@@ -14920,7 +14920,7 @@ Me.LBLAvgEdgeStroking.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
 '
 'LBLStrokeTimeTotal
 '
-Me.LBLStrokeTimeTotal.Location = New System.Drawing.Point(26, 33)
+Me.LBLStrokeTimeTotal.Location = New System.Drawing.Point(106, 17)
 Me.LBLStrokeTimeTotal.Name = "LBLStrokeTimeTotal"
 Me.LBLStrokeTimeTotal.Size = New System.Drawing.Size(77, 17)
 Me.LBLStrokeTimeTotal.TabIndex = 148
@@ -14929,19 +14929,20 @@ Me.LBLStrokeTimeTotal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
 '
 'Label94
 '
+Me.Label94.AutoSize = true
 Me.Label94.BackColor = System.Drawing.Color.Transparent
-Me.Label94.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+Me.Label94.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
 Me.Label94.ForeColor = System.Drawing.Color.Black
-Me.Label94.Location = New System.Drawing.Point(189, 16)
+Me.Label94.Location = New System.Drawing.Point(6, 63)
 Me.Label94.Name = "Label94"
-Me.Label94.Size = New System.Drawing.Size(65, 17)
+Me.Label94.Size = New System.Drawing.Size(64, 13)
 Me.Label94.TabIndex = 150
 Me.Label94.Text = "Last Ruined"
 Me.Label94.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
 '
 'LBLLastRuined
 '
-Me.LBLLastRuined.Location = New System.Drawing.Point(184, 31)
+Me.LBLLastRuined.Location = New System.Drawing.Point(111, 61)
 Me.LBLLastRuined.Name = "LBLLastRuined"
 Me.LBLLastRuined.Size = New System.Drawing.Size(75, 17)
 Me.LBLLastRuined.TabIndex = 152
@@ -14950,12 +14951,13 @@ Me.LBLLastRuined.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
 '
 'Label65
 '
+Me.Label65.AutoSize = true
 Me.Label65.BackColor = System.Drawing.Color.Transparent
-Me.Label65.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+Me.Label65.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
 Me.Label65.ForeColor = System.Drawing.Color.Black
-Me.Label65.Location = New System.Drawing.Point(103, 16)
+Me.Label65.Location = New System.Drawing.Point(6, 41)
 Me.Label65.Name = "Label65"
-Me.Label65.Size = New System.Drawing.Size(85, 17)
+Me.Label65.Size = New System.Drawing.Size(66, 13)
 Me.Label65.TabIndex = 149
 Me.Label65.Text = "Last Orgasm"
 Me.Label65.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -14964,7 +14966,7 @@ Me.Label65.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
 '
 Me.LBLAvgEdgeNoTouch.AutoSize = true
 Me.LBLAvgEdgeNoTouch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-Me.LBLAvgEdgeNoTouch.Location = New System.Drawing.Point(215, 68)
+Me.LBLAvgEdgeNoTouch.Location = New System.Drawing.Point(142, 107)
 Me.LBLAvgEdgeNoTouch.Name = "LBLAvgEdgeNoTouch"
 Me.LBLAvgEdgeNoTouch.Size = New System.Drawing.Size(36, 15)
 Me.LBLAvgEdgeNoTouch.TabIndex = 146
@@ -14973,7 +14975,7 @@ Me.LBLAvgEdgeNoTouch.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
 '
 'LBLLastOrgasm
 '
-Me.LBLLastOrgasm.Location = New System.Drawing.Point(107, 31)
+Me.LBLLastOrgasm.Location = New System.Drawing.Point(111, 39)
 Me.LBLLastOrgasm.Name = "LBLLastOrgasm"
 Me.LBLLastOrgasm.Size = New System.Drawing.Size(75, 17)
 Me.LBLLastOrgasm.TabIndex = 151
@@ -14982,47 +14984,27 @@ Me.LBLLastOrgasm.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
 '
 'Label14
 '
+Me.Label14.AutoSize = true
 Me.Label14.BackColor = System.Drawing.Color.Transparent
-Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
 Me.Label14.ForeColor = System.Drawing.Color.Black
-Me.Label14.Location = New System.Drawing.Point(25, 48)
+Me.Label14.Location = New System.Drawing.Point(6, 85)
 Me.Label14.Name = "Label14"
-Me.Label14.Size = New System.Drawing.Size(238, 17)
+Me.Label14.Size = New System.Drawing.Size(131, 13)
 Me.Label14.TabIndex = 138
-Me.Label14.Text = "Average Time to Edge"
+Me.Label14.Text = "Avg Edge Time (Stroking):"
 Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-'
-'Label13
-'
-Me.Label13.AutoSize = true
-Me.Label13.Location = New System.Drawing.Point(177, 68)
-Me.Label13.Name = "Label13"
-Me.Label13.Size = New System.Drawing.Size(32, 13)
-Me.Label13.TabIndex = 145
-Me.Label13.Text = "Rest:"
-Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-'
-'Label1
-'
-Me.Label1.AutoSize = true
-Me.Label1.Location = New System.Drawing.Point(28, 68)
-Me.Label1.Name = "Label1"
-Me.Label1.Size = New System.Drawing.Size(79, 13)
-Me.Label1.TabIndex = 143
-Me.Label1.Text = "While Stroking:"
-Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
 '
 'GroupBox21
 '
 Me.GroupBox21.BackColor = System.Drawing.Color.LightGray
 Me.GroupBox21.Controls.Add(Me.Label153)
 Me.GroupBox21.Controls.Add(Me.LBLRangeSettingsDescription)
-Me.GroupBox21.Controls.Add(Me.GroupBox6)
 Me.GroupBox21.Controls.Add(Me.Label156)
 Me.GroupBox21.ForeColor = System.Drawing.Color.Black
-Me.GroupBox21.Location = New System.Drawing.Point(797, 55)
+Me.GroupBox21.Location = New System.Drawing.Point(1143, 163)
 Me.GroupBox21.Name = "GroupBox21"
-Me.GroupBox21.Size = New System.Drawing.Size(316, 136)
+Me.GroupBox21.Size = New System.Drawing.Size(316, 216)
 Me.GroupBox21.TabIndex = 66
 Me.GroupBox21.TabStop = false
 Me.GroupBox21.Text = "Description"
@@ -15238,6 +15220,19 @@ Me.TextBox2.Name = "TextBox2"
 Me.TextBox2.ReadOnly = true
 Me.TextBox2.Size = New System.Drawing.Size(189, 20)
 Me.TextBox2.TabIndex = 145
+'
+'Label171
+'
+Me.Label171.AutoSize = true
+Me.Label171.BackColor = System.Drawing.Color.Transparent
+Me.Label171.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+Me.Label171.ForeColor = System.Drawing.Color.Black
+Me.Label171.Location = New System.Drawing.Point(6, 107)
+Me.Label171.Name = "Label171"
+Me.Label171.Size = New System.Drawing.Size(114, 13)
+Me.Label171.TabIndex = 153
+Me.Label171.Text = "Avg Edge Time (Rest):"
+Me.Label171.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
 '
 'BWURLFiles
 '
@@ -15732,9 +15727,7 @@ End Sub
 	Friend WithEvents LBLStrokeTimeTotal As System.Windows.Forms.Label
 	Friend WithEvents Label4 As System.Windows.Forms.Label
 	Friend WithEvents LBLAvgEdgeNoTouch As System.Windows.Forms.Label
-	Friend WithEvents Label13 As System.Windows.Forms.Label
 	Friend WithEvents LBLAvgEdgeStroking As System.Windows.Forms.Label
-	Friend WithEvents Label1 As System.Windows.Forms.Label
 	Friend WithEvents Label14 As System.Windows.Forms.Label
 	Friend WithEvents PictureBox12 As System.Windows.Forms.PictureBox
 	Friend WithEvents GroupBox12 As System.Windows.Forms.GroupBox
@@ -16732,4 +16725,5 @@ End Sub
 	Friend WithEvents GroupBox14 As GroupBox
 	Friend WithEvents alwaysNewSlideshow As System.Windows.Forms.CheckBox
 	Friend WithEvents Label169 As System.Windows.Forms.Label
+	Friend WithEvents Label171 As System.Windows.Forms.Label
 End Class

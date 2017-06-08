@@ -11,8 +11,8 @@ Public Class subAnswers
 		checkList.Add(My.Settings.SubYes)
 		checkList.Add(My.Settings.SubNo)
 		checkList.Add(My.Settings.SubSorry)
-		checkList.Add("please")
 		checkList.Add("thank,thanks")
+		checkList.Add("please")
 	End Sub
 
 	Public Function returnWords(s As String) As String
@@ -26,9 +26,9 @@ Public Class subAnswers
 			Case "sorry"
 				Return checkList.Item(3)
 			Case "thanks"
-				Return checkList.Item(5)
-			Case "please"
 				Return checkList.Item(4)
+			Case "please"
+				Return checkList.Item(5)
 			Case Else
 				Return checkList.Item(0)
 		End Select
@@ -38,20 +38,41 @@ Public Class subAnswers
 		Return checkList
 	End Function
 
-	Public Function isSystemWord(ByVal wordList As String) As Boolean
+	Public Function returnAnswerList() As List(Of String)
+		Return answerList
+	End Function
+
+	Public Function returnSystemWord(ByVal wordList As String) As String
 		For i As Integer = 0 To checkList.Count() - 1
 			Dim list As String() = ssh.obtainSplitParts(checkList(i), False)
 			For n As Integer = 0 To list.Count - 1
-				If UCase(wordList).Contains(UCase(list(n))) Then Return True
+				If Trim(UCase(wordList)) = Trim((UCase(list(n)))) Then
+	 Select i
+						Case 0
+							Return "hi"
+						Case 1
+							Return "yes"
+						Case 2
+							Return "no"
+						Case 3
+							Return "sorry"
+						Case 4
+							Return "thanks"
+						Case 5
+							Return "please"
+						Case Else
+							Return "hi"
+					End Select
+				End If
 			Next
 		Next
-		Return False
+		Return ""
 	End Function
 
 	Public Sub addToAnswerList(ByVal words As String)
 		Dim split() = words.Split(",")
 		For i As Integer = 0 To split.Count - 1
-			answerList.Add(split(i))
+			answerList.Add(Trim(split(i)))
 		Next
 	End Sub
 
@@ -68,7 +89,7 @@ Public Class subAnswers
 		'we then check only the answers with more than 1 word to see if the chat strings contain any of them
 
 		For i As Integer = 0 To sorted.Count - 1
-			If InStr(sorted(i), " ") > 0 Then If chatstring.Contains(sorted(i).Trim) Then Return sorted(i).Trim
+			If InStr(sorted(i), " ") > 0 Then If LCase(chatstring).Contains(LCase(sorted(i)).Trim) Then Return sorted(i).Trim
 		Next
 
 		'if all multiple words answers didn't return an answer, we check for the single words in the chat to see if any of them matches
@@ -76,7 +97,7 @@ Public Class subAnswers
 		Dim singleWords() = ssh.obtainSplitParts(chatstring, True)
 		For i As Integer = 0 To singleWords.Count - 1
 			For n As Integer = 0 To answerList.Count - 1
-				If UCase(answerList(n)) = UCase(singleWords(i)) Then Return singleWords(i)
+				If LCase(answerList(n)) = LCase(singleWords(i)) Then Return singleWords(i)
 			Next
 		Next
 		Return ""
