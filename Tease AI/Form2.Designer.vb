@@ -10036,8 +10036,8 @@ Me.LBLGlitterSlider.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
 'CBCustom2
 '
 Me.CBCustom2.AutoSize = true
-Me.CBCustom2.Checked = Global.Tease_AI.My.MySettings.Default.CB2Custom2
-Me.CBCustom2.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CB2Custom2", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+Me.CBCustom2.Checked = Global.Tease_AI.My.MySettings.Default.CBCustom2
+Me.CBCustom2.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBCustom2", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 Me.CBCustom2.ForeColor = System.Drawing.Color.Black
 Me.CBCustom2.Location = New System.Drawing.Point(149, 121)
 Me.CBCustom2.Name = "CBCustom2"
@@ -10062,8 +10062,8 @@ Me.GlitterSlider.Value = Global.Tease_AI.My.MySettings.Default.GlitterDSlider
 'CBCustom1
 '
 Me.CBCustom1.AutoSize = true
-Me.CBCustom1.Checked = Global.Tease_AI.My.MySettings.Default.CB2Custom1
-Me.CBCustom1.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CB2Custom1", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+Me.CBCustom1.Checked = Global.Tease_AI.My.MySettings.Default.CBCustom1
+Me.CBCustom1.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBCustom1", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 Me.CBCustom1.ForeColor = System.Drawing.Color.Black
 Me.CBCustom1.Location = New System.Drawing.Point(149, 98)
 Me.CBCustom1.Name = "CBCustom1"

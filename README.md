@@ -69,6 +69,7 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 	* @ChangeVar[] didn't process negative numbers correctly. @ChangeVar[a]=[a]+[#random(-1,3)] for example, will now correctly substract 1 if -1 is rolled in the random (previously it was adding it) (dariobrun)
 	* Videos were not stretched to fit the window in certain situations (dariobrun)
 	* #DomHairLength now outputs correctly
+	* Custom1 and Custom2 glitter settings now save correctly
 	
 * Miscellaneous:
 
