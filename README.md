@@ -4,10 +4,11 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 # Todo:
 
 Stefaf: Integration of Class myDirectory: Status ongoing.
-	Testrun to sort Lists like Win-Explorer: initialized in v0.54.5.1
 	
 	
-# Changelog - Patch 55.0.0	
+# Changelog - Patch 55.3.0
+
+	Not all Changes have been tracked.	
 
 * Added Features:
 
