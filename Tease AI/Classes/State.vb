@@ -420,7 +420,6 @@ Public Class SessionState
 	Public Property Contact1Edge As Boolean
 	Public Property Contact2Edge As Boolean
 	Public Property Contact3Edge As Boolean
-	Public Property ContactRoomUpdate As String = ""
 
 	Public Property Contact1Stroke As Boolean
 	Public Property Contact2Stroke As Boolean
@@ -711,7 +710,7 @@ Public Class SessionState
 
 	<NonSerialized> <OptionalField> Friend Files As New FileClass(Me)
 	<NonSerialized> <OptionalField> Friend Folders As New FoldersClass(Me)
-	<NonSerialized()> Dim ActivationForm As Form1
+	<NonSerialized> Dim ActivationForm As Form1
 
 #Region "------------------------------------- Constructors----------------------------------------------"
 

@@ -42,12 +42,12 @@ Public Class subAnswers
 		Return answerList
 	End Function
 
-	Public Function returnSystemWord(ByVal wordList As String) As String
+	Public Function returnSystemWord(wordList As String) As String
 		For i As Integer = 0 To checkList.Count() - 1
 			Dim list As String() = ssh.obtainSplitParts(checkList(i), False)
 			For n As Integer = 0 To list.Count - 1
 				If Trim(UCase(wordList)) = Trim((UCase(list(n)))) Then
-	 Select i
+					Select Case i
 						Case 0
 							Return "hi"
 						Case 1
@@ -80,7 +80,7 @@ Public Class subAnswers
 		answerList.Clear()
 	End Sub
 
-	Public Function triggerWord(ByVal chatstring As String) As String
+	Public Function triggerWord(chatstring As String) As String
 
 		'we first order the list based on lenght of the answer option (and if equal lenght, by the order in which they are in the answer list)
 

@@ -492,7 +492,7 @@ Partial Class Form1
 		Me.mainPictureBox.Image = CType(resources.GetObject("mainPictureBox.Image"), System.Drawing.Image)
 		Me.mainPictureBox.Location = New System.Drawing.Point(0, 0)
 		Me.mainPictureBox.Name = "mainPictureBox"
-		Me.mainPictureBox.Size = New System.Drawing.Size(1398, 536)
+		Me.mainPictureBox.Size = New System.Drawing.Size(1398, 488)
 		Me.mainPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
 		Me.mainPictureBox.TabIndex = 3
 		Me.mainPictureBox.TabStop = False
@@ -544,23 +544,19 @@ Partial Class Form1
 		'
 		'DomWMP
 		'
-		'Me.DomWMP.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-		'	Or System.Windows.Forms.AnchorStyles.Left) _
-		'	Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.DomWMP.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.DomWMP.Enabled = True
 		Me.DomWMP.Location = New System.Drawing.Point(0, 0)
 		Me.DomWMP.Name = "DomWMP"
 		Me.DomWMP.OcxState = CType(resources.GetObject("DomWMP.OcxState"), System.Windows.Forms.AxHost.State)
-		'Me.DomWMP.Size = New System.Drawing.Size(1398, 698)
-		Me.DomWMP.Size = New System.Drawing.Size(1398, 536)
+		Me.DomWMP.Size = New System.Drawing.Size(1398, 482)
 		Me.DomWMP.TabIndex = 96
 		Me.DomWMP.Visible = False
 		'
 		'ProgressBar_BGW_Images
 		'
 		Me.ProgressBar_BGW_Images.Dock = System.Windows.Forms.DockStyle.Bottom
-		Me.ProgressBar_BGW_Images.Location = New System.Drawing.Point(0, 530)
+		Me.ProgressBar_BGW_Images.Location = New System.Drawing.Point(0, 482)
 		Me.ProgressBar_BGW_Images.MarqueeAnimationSpeed = 10000
 		Me.ProgressBar_BGW_Images.Name = "ProgressBar_BGW_Images"
 		Me.ProgressBar_BGW_Images.Size = New System.Drawing.Size(1398, 6)
@@ -599,7 +595,7 @@ Partial Class Form1
 		Me.PnlChatTextLayout.Location = New System.Drawing.Point(0, 32)
 		Me.PnlChatTextLayout.Name = "PnlChatTextLayout"
 		Me.PnlChatTextLayout.Padding = New System.Windows.Forms.Padding(1)
-		Me.PnlChatTextLayout.Size = New System.Drawing.Size(1398, 361)
+		Me.PnlChatTextLayout.Size = New System.Drawing.Size(1398, 409)
 		Me.PnlChatTextLayout.TabIndex = 783
 		'
 		'ChatText
@@ -608,7 +604,7 @@ Partial Class Form1
 		Me.ChatText.Location = New System.Drawing.Point(1, 1)
 		Me.ChatText.MinimumSize = New System.Drawing.Size(2, 20)
 		Me.ChatText.Name = "ChatText"
-		Me.ChatText.Size = New System.Drawing.Size(1396, 359)
+		Me.ChatText.Size = New System.Drawing.Size(1396, 407)
 		Me.ChatText.TabIndex = 1
 		'
 		'PNLMediaBar
@@ -626,6 +622,7 @@ Partial Class Form1
 		Me.PNLMediaBar.Padding = New System.Windows.Forms.Padding(1, 1, 1, 10)
 		Me.PNLMediaBar.Size = New System.Drawing.Size(1398, 32)
 		Me.PNLMediaBar.TabIndex = 97
+		Me.PNLMediaBar.Visible = False
 		'
 		'ImageFolderComboBox
 		'
@@ -770,7 +767,7 @@ Partial Class Form1
 		Me.BtnToggleMediaPanel.Name = "BtnToggleMediaPanel"
 		Me.BtnToggleMediaPanel.Size = New System.Drawing.Size(111, 24)
 		Me.BtnToggleMediaPanel.TabIndex = 147
-		Me.BtnToggleMediaPanel.Text = "Hide Media Panel"
+		Me.BtnToggleMediaPanel.Text = "Show Media Panel"
 		Me.BtnToggleMediaPanel.UseVisualStyleBackColor = False
 		'
 		'BtnToggleImageVideo
