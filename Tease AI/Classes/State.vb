@@ -233,27 +233,48 @@ Public Class SessionState
 	<Category("Video - Red light green light")> Public Property RLGLTick As Integer
 	<Category("Video")> <Obsolete("Never set to TRUE")> Public Property NoVideo As Boolean
 
-	<Category("Glitter")> <Editor(EditorGenericStringList, GetType(UITypeEditor))>
+#Region "GlitterFeeds - APP"
+
+	<Category("Glitter")> <Description("File paths in this list are executed next. If empty a random script will appear.")>
+	<Editor(EditorGenericStringList, GetType(UITypeEditor))>
 	Public Property UpdateList As New List(Of String)
 
-	<Category("Glitter")> Public Property UpdatesTick As Integer = 120
-	<Category("Glitter")> Public Property UpdatingPost As Boolean
-	<Category("Glitter")> Public Property UpdateStage As Integer
-	<Category("Glitter")> Public Property UpdateStageTick As Integer
-	<Category("Glitter")> Public Property StatusText As String
-	<Category("Glitter")> Public Property ContactNumber As Integer
+	<Category("Glitter")> <Description("Time until the next glitter script is exceuted.")>
+	Public Property UpdatesTick As Integer = 120
+	<Category("Glitter")> <Description("Set to True while a glitter script is running.")>
+	Public Property UpdatingPost As Boolean
 
-	<Category("Glitter")> Public Property StatusText1 As String
-	<Category("Glitter")> Public Property StatusText2 As String
-	<Category("Glitter")> Public Property StatusText3 As String
+	<Category("Glitter")> <Description("Time until next status post.")>
+	Public Property UpdateStageTick As Integer
 
-	<Category("Glitter")> Public Property StatusChance1 As Integer
-	<Category("Glitter")> Public Property StatusChance2 As Integer
-	<Category("Glitter")> Public Property StatusChance3 As Integer
+	<Category("Glitter")> <Description("Domme's post text.")>
+	Public Property StatusText As String
+	<Category("Glitter")> <Description("Contact1 post text. If the line starts with "">"" it has been already sent or skipped.")>
+	Public Property StatusText1 As String
+	<Category("Glitter")> <Description("Contact2 post text. If the line starts with "">"" it has been already sent or skipped.")>
+	Public Property StatusText2 As String
+	<Category("Glitter")> <Description("Contact3 post text. If the line starts with "">"" it has been already sent or skipped.")>
+	Public Property StatusText3 As String
 
-	<Category("Glitter")> Public Property Update1 As Boolean
-	<Category("Glitter")> Public Property Update2 As Boolean
-	<Category("Glitter")> Public Property Update3 As Boolean
+	<Category("Glitter")> <Description("Chance of skipping Contact 1's post.")>
+	Public Property StatusChance1 As Integer
+	<Category("Glitter")> <Description("Chance of skipping Contact 2's post.")>
+	Public Property StatusChance2 As Integer
+	<Category("Glitter")> <Description("Chance of skipping Contact 3's post.")>
+	Public Property StatusChance3 As Integer
+
+	<Obsolete("Obsolete as of v0.54.4.0 Left for version tolerance.", True)>
+	<Category("Glitter")> <Browsable(False)> Public Property ContactNumber As Integer
+	<Obsolete("Obsolete as of v0.54.4.0 Left for version tolerance.", True)>
+	<Category("Glitter")> <Browsable(False)> Public Property UpdateStage As Integer
+	<Obsolete("Obsolete as of v0.54.4.0 Left for version tolerance.", True)>
+	<Category("Glitter")> <Browsable(False)> Public Property Update1 As Boolean
+	<Obsolete("Obsolete as of v0.54.4.0 Left for version tolerance.", True)>
+	<Category("Glitter")> <Browsable(False)> Public Property Update2 As Boolean
+	<Obsolete("Obsolete as of v0.54.4.0 Left for version tolerance.", True)>
+	<Category("Glitter")> <Browsable(False)> Public Property Update3 As Boolean
+
+#End Region ' GlitterFeeds - APP
 
 
 	<Editor(EditorGenericStringList, GetType(UITypeEditor))>

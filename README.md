@@ -4,7 +4,15 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 # Todo:
 
 Stefaf: Integration of Class myDirectory: Status ongoing.
+
+# Changelog - Patch 55.4.0
 	
+* Commands: 
+* Command Filters:
+* Bugfixes:
+* Miscellaneous:
+
+	* Reworked Glitter app to use proper html and CSS. It is now possible to reference relative imagepaths. If a feed is running a scriptfile given in @Glitter(ScriptName) is executed after the currently running script. The number of queued scripts is not limited. It is now possible to execute a specific script using the debug session window.
 	
 # Changelog - Patch 55.3.0
 

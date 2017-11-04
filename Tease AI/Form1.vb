@@ -1178,7 +1178,7 @@ retryStart:
 
 	End Sub
 
-	<Obsolete("Do not use anymore")>
+	<Obsolete("Do not use anymore", True)>
 	Public Sub ResetButton()
 
 		ScriptTimer.Stop()
@@ -7030,442 +7030,6 @@ CensorConstant:
 		My.Settings.SubName = subName.Text
 	End Sub
 
-
-	Public Sub StatusUpdatePost()
-
-
-		ssh.UpdatingPost = True
-
-
-		If ssh.UpdateStage > 0 Then GoTo StatusUpdateBegin
-
-		Dim StatusFile = ssh.UpdateList(ssh.randomizer.Next(0, ssh.UpdateList.Count))
-
-		For i As Integer = 0 To ssh.UpdateList.Count - 1
-			Debug.Print(i & ". " & ssh.UpdateList(i))
-		Next
-		Debug.Print("STatusText = " & StatusFile)
-		Debug.Print("Clear stage 1")
-
-		' Read all lines of the given File.
-		Dim lines As List(Of String) = Txt2List(StatusFile)
-
-
-		For i As Integer = lines.Count - 1 To 0 Step -1
-			If lines(i) = "" Or lines(i) Is Nothing Then
-				lines.Remove(lines(i))
-			End If
-		Next
-
-		ssh.StatusText = lines(0)
-		Debug.Print("HEre?")
-		' Github Patch  StatusText = PoundClean(StatusText)
-
-		Dim LoopBuffer As Integer = 0
-		Do
-			LoopBuffer += 1
-
-			ssh.StatusText = PoundClean(ssh.StatusText)
-
-			If LoopBuffer > 4 Then Exit Do
-
-		Loop Until Not ssh.DomTask.Contains("#")
-
-
-		Dim AtArray() As String = Split(ssh.StatusText)
-		For i As Integer = AtArray.Length - 1 To 0 Step -1
-			If AtArray(i).Contains("@") Then
-				AtArray(i) = AtArray(i).Replace(AtArray(i), "")
-			End If
-			If FrmSettings.CBHimHer.Checked = True Then
-				If AtArray(i) = "He" Then AtArray(i) = AtArray(i).Replace("He", "She")
-				If AtArray(i) = "he" Then AtArray(i) = AtArray(i).Replace("he", "she")
-				If AtArray(i) = "Him" Then AtArray(i) = AtArray(i).Replace("Him", "Her")
-				If AtArray(i) = "him" Then AtArray(i) = AtArray(i).Replace("him", "her")
-				If AtArray(i) = "His" Then AtArray(i) = AtArray(i).Replace("His", "Her")
-				If AtArray(i) = "his" Then AtArray(i) = AtArray(i).Replace("his", "her")
-			End If
-		Next
-		ssh.StatusText = Join(AtArray)
-
-		Dim DPic As String = My.Settings.GlitterAV
-		DPic = "file://" & DPic
-		DPic = DPic.Replace("\", "/")
-		Debug.Print(DPic)
-
-		Dim StatusName As String
-
-
-		Dim TextColor As String = Color2Html(My.Settings.ChatTextColor)
-
-		StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 48; height: 48; border: 0;"" src=""" & DPic & """> <font face=""Cambria"" size=""3"" color=""" & Color2Html(My.Settings.GlitterNCDommeColor) & """><b>" & ssh.tempDomName & "</b></font> <br><font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br><br>"
-		StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""" & TextColor & """>" & ssh.StatusText & "</font><br><br>"
-
-		'Debug.Print(GlitterImageAV)
-		Debug.Print("Clear Stage 2")
-
-
-		Dim LoopCounter As Integer = 0
-
-
-		Dim StatusLines1 As New List(Of String)
-		For i As Integer = 1 To lines.Count - 1
-			StatusLines1.Add(lines(i))
-		Next
-		ssh.ContactNumber = 1
-
-		' For i As Integer = StatusLines1.Count - 1 To 0 Step -1
-		'If StatusLines1(i) = "" Or StatusLines1(i) Is Nothing Then
-		'StatusLines1.Remove(StatusLines1(i))
-		'End If
-		'Next
-
-		StatusLines1 = StatusClean(StatusLines1)
-
-
-
-		ssh.StatusText1 = StatusLines1(ssh.randomizer.Next(0, StatusLines1.Count))
-
-		Dim StatusLines2 As New List(Of String)
-		For i As Integer = 1 To lines.Count - 1
-			StatusLines2.Add(lines(i))
-		Next
-		ssh.ContactNumber = 2
-
-		' For i As Integer = StatusLines2.Count - 1 To 0 Step -1
-		'If StatusLines2(i) = "" Or StatusLines2(i) Is Nothing Then
-		'StatusLines2.Remove(StatusLines2(i))
-		'End If
-		'Next
-
-		StatusLines2 = StatusClean(StatusLines2)
-
-
-
-
-		Do
-			ssh.StatusText2 = StatusLines2(ssh.randomizer.Next(0, StatusLines2.Count))
-			LoopCounter += 1
-		Loop Until ssh.StatusText2 <> ssh.StatusText1 Or LoopCounter = 10
-
-		If LoopCounter = 10 Then
-			ssh.StatusText2 = "ERROR: Tease AI could not return a unique comment"
-			Dim StatusError = "Tease AI could not return a unique comment for Contact2 in file: " & StatusFile
-			Trace.WriteLine(StatusError)
-			If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & StatusError & "</font>", False)
-		End If
-
-		Dim StatusLines3 As New List(Of String)
-		For i As Integer = 1 To lines.Count - 1
-			StatusLines3.Add(lines(i))
-		Next
-		ssh.ContactNumber = 3
-
-		'For i As Integer = StatusLines3.Count - 1 To 0 Step -1
-		'If StatusLines3(i) = "" Or StatusLines3(i) Is Nothing Then
-		'StatusLines3.Remove(StatusLines3(i))
-		'End If
-		'Next
-
-		StatusLines3 = StatusClean(StatusLines3)
-
-		LoopCounter = 0
-
-		Do
-			ssh.StatusText3 = StatusLines3(ssh.randomizer.Next(0, StatusLines3.Count))
-			LoopCounter += 1
-		Loop Until ssh.StatusText3 <> ssh.StatusText2 And ssh.StatusText3 <> ssh.StatusText1 Or LoopCounter = 10
-
-		If LoopCounter = 10 Then
-			ssh.StatusText3 = "ERROR: Tease AI could not return a unique comment"
-			Dim StatusError = "Tease AI could not return a unique comment for Contact3 in file: " & StatusFile
-			Trace.WriteLine(StatusError)
-			If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & StatusError & "</font>", False)
-		End If
-
-		''Debug.Print("StatusLine = " & StatusLine)
-
-
-
-
-		ssh.StatusText1 = ssh.StatusText1.Replace("#ShortName", My.Settings.GlitterSN)
-		ssh.StatusText2 = ssh.StatusText2.Replace("#ShortName", My.Settings.GlitterSN)
-		ssh.StatusText3 = ssh.StatusText3.Replace("#ShortName", My.Settings.GlitterSN)
-
-		ssh.StatusText1 = ssh.StatusText1.Replace("#SubName", subName.Text)
-		ssh.StatusText2 = ssh.StatusText2.Replace("#SubName", subName.Text)
-		ssh.StatusText3 = ssh.StatusText3.Replace("#SubName", subName.Text)
-
-		ssh.StatusText1 = PoundClean(ssh.StatusText1)
-		ssh.StatusText2 = PoundClean(ssh.StatusText2)
-		ssh.StatusText3 = PoundClean(ssh.StatusText3)
-
-		'GoTo TestSkip
-
-		Dim AtArray1() As String = Split(ssh.StatusText1)
-		For i As Integer = AtArray1.Length - 1 To 0 Step -1
-			If AtArray1(i).Contains("@") Then
-				AtArray1(i) = AtArray1(i).Replace(AtArray1(i), "")
-			End If
-			If FrmSettings.CBHimHer.Checked = True Then
-				If AtArray1(i) = "He" Then AtArray1(i) = AtArray1(i).Replace("He", "She")
-				If AtArray1(i) = "he" Then AtArray1(i) = AtArray1(i).Replace("he", "she")
-				If AtArray1(i) = "Him" Then AtArray1(i) = AtArray1(i).Replace("Him", "Her")
-				If AtArray1(i) = "him" Then AtArray1(i) = AtArray1(i).Replace("him", "her")
-				If AtArray1(i) = "His" Then AtArray1(i) = AtArray1(i).Replace("His", "Her")
-				If AtArray1(i) = "his" Then AtArray1(i) = AtArray1(i).Replace("his", "her")
-			End If
-		Next
-		ssh.StatusText1 = Join(AtArray1)
-
-		Dim AtArray2() As String = Split(ssh.StatusText2)
-		For i As Integer = AtArray2.Length - 1 To 0 Step -1
-			If AtArray2(i).Contains("@") Then
-				AtArray2(i) = AtArray2(i).Replace(AtArray2(i), "")
-			End If
-			If FrmSettings.CBHimHer.Checked = True Then
-				If AtArray2(i) = "He" Then AtArray2(i) = AtArray2(i).Replace("He", "She")
-				If AtArray2(i) = "he" Then AtArray2(i) = AtArray2(i).Replace("he", "she")
-				If AtArray2(i) = "Him" Then AtArray2(i) = AtArray2(i).Replace("Him", "Her")
-				If AtArray2(i) = "him" Then AtArray2(i) = AtArray2(i).Replace("him", "her")
-				If AtArray2(i) = "His" Then AtArray2(i) = AtArray2(i).Replace("His", "Her")
-				If AtArray2(i) = "his" Then AtArray2(i) = AtArray2(i).Replace("his", "her")
-			End If
-		Next
-		ssh.StatusText2 = Join(AtArray2)
-
-		Dim AtArray3() As String = Split(ssh.StatusText3)
-		For i As Integer = AtArray3.Length - 1 To 0 Step -1
-			If AtArray3(i).Contains("@") Then
-				AtArray3(i) = AtArray3(i).Replace(AtArray3(i), "")
-			End If
-			If FrmSettings.CBHimHer.Checked = True Then
-				If AtArray3(i) = "He" Then AtArray3(i) = AtArray(i).Replace("He", "She")
-				If AtArray3(i) = "he" Then AtArray3(i) = AtArray(i).Replace("he", "she")
-				If AtArray3(i) = "Him" Then AtArray3(i) = AtArray(i).Replace("Him", "Her")
-				If AtArray3(i) = "him" Then AtArray3(i) = AtArray(i).Replace("him", "her")
-				If AtArray3(i) = "His" Then AtArray3(i) = AtArray(i).Replace("His", "Her")
-				If AtArray3(i) = "his" Then AtArray3(i) = AtArray(i).Replace("his", "her")
-			End If
-		Next
-		ssh.StatusText3 = Join(AtArray3)
-
-		'TestSkip:
-
-		ssh.Update1 = False
-		ssh.Update2 = False
-		ssh.Update3 = False
-
-		ssh.StatusChance1 = ssh.randomizer.Next(1, 101)
-		ssh.StatusChance2 = ssh.randomizer.Next(1, 101)
-		ssh.StatusChance3 = ssh.randomizer.Next(1, 101)
-
-		ssh.UpdateStageTick = ssh.randomizer.Next(10, 21)
-		UpdateStageTimer.Start()
-		ssh.UpdateStage = 1
-		Return
-
-
-StatusUpdateBegin:
-
-		If ssh.Update1 = True And ssh.Update2 = True And ssh.Update3 = True Then GoTo StatusUpdateEnd
-
-		'ContactTick = randomizer.Next(10, 21)
-		'ContactFlag = True
-		'ContactTimer.Start()
-
-		'Do
-		'Application.DoEvents()
-		'Loop Until ContactFlag = False
-
-		'Delay(RandomDelay)
-
-ReRoll:
-
-		ssh.TempVal = ssh.randomizer.Next(1, 4)
-		'Debug.Print("TempVal = " & TempVal)
-
-		If ssh.TempVal = 1 Then
-			If ssh.Update1 = False Then
-				GoTo StatusUpdate1
-			Else
-				GoTo ReRoll
-			End If
-		End If
-
-		If ssh.TempVal = 2 Then
-			If ssh.Update2 = False Then
-				GoTo StatusUpdate2
-			Else
-				GoTo ReRoll
-			End If
-		End If
-
-		If ssh.TempVal = 3 Then
-			If ssh.Update3 = False Then
-				GoTo StatusUpdate3
-			Else
-				GoTo ReRoll
-			End If
-		End If
-
-		GoTo ReRoll
-
-StatusUpdate1:
-
-		Dim S1Pic As String = My.Settings.GlitterAV1
-		S1Pic = "file://" & S1Pic
-		S1Pic = S1Pic.Replace("\", "/")
-		Debug.Print(S1Pic)
-
-		TextColor = Color2Html(My.Settings.ChatTextColor)
-
-		If ssh.StatusChance1 < My.Settings.Glitter1Slider * 10 And My.Settings.CBGlitter1 = True Then
-			StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S1Pic & """> <font face=""Cambria"" size=""3"" color=""" & Color2Html(My.Settings.GlitterNC1Color) & """><b>" & My.Settings.Glitter1 & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
-			StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""" & TextColor & """>" & ssh.StatusText1 & "</font><br><br>"
-
-
-		End If
-
-		ssh.Update1 = True
-
-		ssh.UpdateStageTick = ssh.randomizer.Next(10, 21)
-		UpdateStageTimer.Start()
-		Return
-		'GoTo StatusUpdateBegin
-
-StatusUpdate2:
-
-		Dim S2Pic As String = My.Settings.GlitterAV2
-		S2Pic = "file://" & S2Pic
-		S2Pic = S2Pic.Replace("\", "/")
-		Debug.Print(S2Pic)
-
-		TextColor = Color2Html(My.Settings.ChatTextColor)
-
-		If ssh.StatusChance2 < My.Settings.Glitter2Slider * 10 And My.Settings.CBGlitter2 = True Then
-			StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S2Pic & """> <font face=""Cambria"" size=""3"" color=""" & Color2Html(My.Settings.GlitterNC2Color) & """><b>" & My.Settings.Glitter2 & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
-			StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""" & TextColor & """>" & ssh.StatusText2 & "</font><br><br>"
-
-
-		End If
-
-		ssh.Update2 = True
-		ssh.UpdateStageTick = ssh.randomizer.Next(10, 21)
-		UpdateStageTimer.Start()
-		Return
-
-		'GoTo StatusUpdateBegin
-
-StatusUpdate3:
-
-		Dim S3Pic As String = My.Settings.GlitterAV3
-		S3Pic = "file://" & S3Pic
-		S3Pic = S3Pic.Replace("\", "/")
-		Debug.Print(S3Pic)
-
-		TextColor = Color2Html(My.Settings.ChatTextColor)
-
-		If ssh.StatusChance3 < My.Settings.Glitter3Slider * 10 And My.Settings.CBGlitter3 = True Then
-			StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S3Pic & """> <font face=""Cambria"" size=""3"" color=""" & Color2Html(My.Settings.GlitterNC3Color) & """><b>" & My.Settings.Glitter3 & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
-			StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""" & TextColor & """>" & ssh.StatusText3 & "</font><br><br>"
-
-
-		End If
-
-		ssh.Update3 = True
-
-		ssh.UpdateStageTick = ssh.randomizer.Next(10, 21)
-		UpdateStageTimer.Start()
-		Return
-		'GoTo StatusUpdateBegin
-
-StatusUpdateEnd:
-
-		ssh.UpdateStage = 0
-
-		' Github Patch 'StatusText = "Null" & Environment.NewLine & "Null" & Environment.NewLine & "Null" & Environment.NewLine & "Null" & Environment.NewLine
-
-		ssh.UpdatingPost = False
-
-
-	End Sub
-
-	Public Function StatusClean(ByVal ListClean As List(Of String)) As List(Of String)
-
-
-
-		ListClean.Add("### BUFFER LINE ###")
-		Debug.Print("ListClean.Count = " & ListClean.Count)
-
-		If ssh.ContactNumber = 1 Then
-			For i As Integer = ListClean.Count - 1 To 0 Step -1
-				If ListClean(i).Contains("@Bratty") Then
-					ListClean(i) = ListClean(i).Replace("@Bratty ", "")
-				End If
-				If ListClean(i).Contains("@Contact2") Then
-					ListClean.Remove(ListClean(i))
-				End If
-				If ListClean(i).Contains("@Contact3") Then
-					ListClean.Remove(ListClean(i))
-				End If
-			Next
-		End If
-
-		If ssh.ContactNumber = 2 Then
-			For i As Integer = ListClean.Count - 1 To 0 Step -1
-				If ListClean(i).Contains("@Caring") Then
-					ListClean(i) = ListClean(i).Replace("@Caring ", "")
-				End If
-				If ListClean(i).Contains("@Contact1") Then
-					ListClean.Remove(ListClean(i))
-				End If
-				If ListClean(i).Contains("@Contact3") Then
-					ListClean.Remove(ListClean(i))
-				End If
-			Next
-		End If
-
-		If ssh.ContactNumber = 3 Then
-			For i As Integer = ListClean.Count - 1 To 0 Step -1
-				If ListClean(i).Contains("@Cruel") Then
-					ListClean(i) = ListClean(i).Replace("@Cruel ", "")
-				End If
-				If ListClean(i).Contains("@Contact1") Then
-					ListClean.Remove(ListClean(i))
-				End If
-				If ListClean(i).Contains("@Contact2") Then
-					ListClean.Remove(ListClean(i))
-				End If
-			Next
-		End If
-
-		For i As Integer = ListClean.Count - 1 To 0 Step -1
-			If ListClean(i).Contains("@Angry") Then
-				ListClean.Remove(ListClean(i))
-			End If
-			If ListClean(i).Contains("@Custom1") Then
-				ListClean.Remove(ListClean(i))
-			End If
-			If ListClean(i).Contains("@Custom2") Then
-				ListClean.Remove(ListClean(i))
-			End If
-		Next
-
-
-
-		Try
-			ListClean.Remove(ListClean(ListClean.Count - 1))
-		Catch
-			If ssh.ContactNumber = 1 Then ssh.DomTask = "ERROR: Tease AI did not return a valid Glitter line for Contact 1"
-			If ssh.ContactNumber = 2 Then ssh.DomTask = "ERROR: Tease AI did not return a valid Glitter line for Contact 2"
-			If ssh.ContactNumber = 3 Then ssh.DomTask = "ERROR: Tease AI did not return a valid Glitter line for Contact 3"
-		End Try
-
-		Return ListClean
-
-	End Function
-
 	Private Sub Delay(ByVal Milliseconds As Integer)
 		Dim Count As Integer
 		Milliseconds *= 1000
@@ -7493,76 +7057,6 @@ StatusUpdateEnd:
 		End If
 	End Sub
 
-	Private Sub UpdatesTimer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UpdatesTimer.Tick
-
-		'Debug.Print("updates tick = " & UpdatesTick)
-
-		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
-
-		If My.Settings.CBGlitterFeed = True And ssh.UpdatingPost = False Then
-
-			ssh.UpdatesTick -= 1
-
-			If ssh.UpdatesTick < 1 Then
-
-				ssh.UpdatesTick = 1080 / My.Settings.GlitterDSlider
-
-				ssh.UpdateList.Clear()
-
-				If My.Settings.CBTease = True Then
-					For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Tease\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-						ssh.UpdateList.Add(foundFile)
-					Next
-				End If
-
-				If My.Settings.CBEgotist = True Then
-					For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Egotist\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-						ssh.UpdateList.Add(foundFile)
-					Next
-				End If
-
-				If My.Settings.CBTrivia = True Then
-					For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Trivia\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-						ssh.UpdateList.Add(foundFile)
-					Next
-				End If
-
-				If My.Settings.CBDaily = True Then
-					For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Daily\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-						ssh.UpdateList.Add(foundFile)
-					Next
-				End If
-
-				If My.Settings.CBCustom1 = True Then
-					For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Custom 1\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-						ssh.UpdateList.Add(foundFile)
-					Next
-				End If
-
-				If My.Settings.CBCustom2 = True Then
-					For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Custom 2\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-						ssh.UpdateList.Add(foundFile)
-					Next
-				End If
-
-				If ssh.UpdateList.Count < 1 Then
-					My.Settings.CBGlitterFeed = False
-					'MessageBox.Show(Me, "Tease AI attempted to create a Glitter update, but no files were found! Please make sure at least one category containing Glitter txt files has been selected.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-					MessageBox.Show(Me, "Tease AI attempted to create a Glitter update, but no files were found! Please make sure at least one category containing Glitter txt files has been selected." & Environment.NewLine _
-					& Environment.NewLine & "Glitter feed has been automatically disabled.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-					Return
-				End If
-
-
-
-				StatusUpdatePost()
-
-
-
-			End If
-
-		End If
-	End Sub
 
 
 
@@ -10706,14 +10200,20 @@ OrgasmDecided:
 		' would run the Glitter script in Apps\Glitter\Script\About to Ruin.txt.
 
 		If StringClean.Contains("@Glitter(") Then
-			' GitHub Patch: Dim GlitterFlag As Integer = GetParentheses(StringClean, "@Glitter(")
 			Dim GlitterFlag As String = GetParentheses(StringClean, "@Glitter(")
 
-			If My.Settings.CBGlitterFeedOff = False And ssh.UpdatingPost = False Then
-				If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Script\" & GlitterFlag & ".txt") And ssh.UpdatingPost = False Then
-					ssh.UpdateList.Clear()
-					ssh.UpdateList.Add(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Script\" & GlitterFlag & ".txt")
-					StatusUpdatePost()
+			If My.Settings.CBGlitterFeedOff = False Then
+				Dim Folder As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Script"
+				Dim FilePath As String = Path.Combine(Folder, GlitterFlag & ".txt")
+
+				If Directory.Exists(Folder) AndAlso File.Exists(FilePath) Then
+					ssh.UpdateList.Add(FilePath)
+					If ssh.UpdatingPost = False Then
+						StatusUpdatePost()
+					Else
+						ssh.UpdatesTick = 10
+					End If
+
 				End If
 			End If
 
@@ -17265,13 +16765,6 @@ saveImage:
 
 
 
-	Private Sub StatusUpdates_DocumentCompleted(ByVal sender As Object, ByVal e As System.Windows.Forms.WebBrowserDocumentCompletedEventArgs) Handles StatusUpdates.DocumentCompleted
-		Try
-			StatusUpdates.Document.Window.ScrollTo(Int16.MaxValue, Int16.MaxValue)
-		Catch
-		End Try
-	End Sub
-
 
 
 	Public Function WordExists(ByVal searchString As String, ByVal findString As String) As Boolean
@@ -17474,14 +16967,6 @@ restartInstantly:
 		End If
 	End Sub
 
-	Private Sub UpdateStageTimer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UpdateStageTimer.Tick
-		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
-		ssh.UpdateStageTick -= 1
-		If ssh.UpdateStageTick < 1 Then
-			UpdateStageTimer.Stop()
-			StatusUpdatePost()
-		End If
-	End Sub
 
 
 
@@ -19372,6 +18857,286 @@ restartInstantly:
 
 
 #End Region  ' DommeTag APP
+
+#Region "------------------------------------------------- GlitterFeeds APP ---------------------------------------------------"
+
+	Sub GlitterSendPost(contactID As Integer, content As String)
+		'TODO: Add external CSS file support.
+
+		Dim ConName, ConImgPath As String
+		Dim _Text As String = If(StatusUpdates.Document Is Nothing, "", StatusUpdates.Document.Body.InnerHtml)
+
+		If contactID = 0 Then
+			ConName = My.Settings.DomName
+			ConImgPath = My.Settings.GlitterAV
+		ElseIf contactID = 1 Then
+			ConName = My.Settings.Glitter1
+			ConImgPath = My.Settings.GlitterAV1
+		ElseIf contactID = 2 Then
+			ConName = My.Settings.Glitter2
+			ConImgPath = My.Settings.GlitterAV2
+		ElseIf contactID = 3 Then
+			ConName = My.Settings.Glitter3
+			ConImgPath = My.Settings.GlitterAV3
+		Else
+			Throw New ArgumentOutOfRangeException
+		End If
+
+		ConImgPath = "file://" & ConImgPath.Replace("\", "/")
+
+
+		_Text &= "<div class=""post"">" & vbCrLf
+		_Text &= "  <img class=""avImg"""" src=""" & ConImgPath & """>" & vbCrLf
+		_Text &= "  <span class=""avName_" & contactID & """>" & ConName & "</span>" & vbCrLf
+		_Text &= "  <span class=""timestamp"">" & Now.ToLongTimeString & "</span>" & vbCrLf
+		_Text &= "  <p class=""content"">" & content & "</p>" & vbCrLf
+		_Text &= "</div>" & vbCrLf
+
+		Dim HtmlHead As String =
+"<html>
+<head>
+	<meta charset=""utf-8""/>
+	<title>GlitterApp</title>
+	<base href=""file://" & Application.StartupPath & "/images/"">
+	<style>
+		body {font: Cambria;  margin: 2;}
+		.post {
+			background: #FEFEFE;
+			display: block; 
+			width: 99%; 
+			padding:5,2,0,2; 
+			margin: 2,0;
+		}
+
+		.avImg {float: left;width: 48px; height: 48px;}
+
+		.avName_0, .avName_1, .avName_2, .avName_3, .timestamp { display: inline-block; width:100%; text-align: left;}
+		.timestamp {font-size: 0.8em; color: DarkGray;}
+
+		.avName_0, .avName_1, .avName_2, .avName_3 {font-size: 1.2em; font-weight: bold;}
+		.avName_0 {color: " & Color2Html(My.Settings.GlitterNCDommeColor) & ";}
+		.avName_1 {color: " & Color2Html(My.Settings.GlitterNC1Color) & ";}
+		.avName_2 {color: " & Color2Html(My.Settings.GlitterNC2Color) & ";}
+		.avName_3 {color: " & Color2Html(My.Settings.GlitterNC3Color) & ";}
+
+		.content {
+			color: " & Color2Html(My.Settings.ChatTextColor) & ";
+			font-size: 0.9em;
+			margin: 9, 1,3,1;
+			PADDING: 2;
+			border-top: 1px solid #DADADA;
+			display: block;  
+		}
+
+	</style>
+</head>
+<body> 
+" & _Text & "
+</body></html>"
+
+		StatusUpdates.DocumentText = HtmlHead
+	End Sub
+
+	Public Sub StatusUpdatePost()
+		' Lambda expression to clean a single glitter line. 
+		' Keywords and vocabulary files are processed as in regular scripts.
+		' No commands are processed.
+		Dim CleanString As New Func(Of String, String)(
+				Function(RawString As String) As String
+					RawString = PoundClean(RawString)
+
+					Dim SplitArray() As String = Split(RawString)
+					For i As Integer = SplitArray.Length - 1 To 0 Step -1
+						If SplitArray(i).Contains("@") Then
+							SplitArray(i) = SplitArray(i).Replace(SplitArray(i), "")
+						End If
+						If FrmSettings.CBHimHer.Checked = True Then
+							If SplitArray(i) = "He" Then SplitArray(i) = SplitArray(i).Replace("He", "She")
+							If SplitArray(i) = "he" Then SplitArray(i) = SplitArray(i).Replace("he", "she")
+							If SplitArray(i) = "Him" Then SplitArray(i) = SplitArray(i).Replace("Him", "Her")
+							If SplitArray(i) = "him" Then SplitArray(i) = SplitArray(i).Replace("him", "her")
+							If SplitArray(i) = "His" Then SplitArray(i) = SplitArray(i).Replace("His", "Her")
+							If SplitArray(i) = "his" Then SplitArray(i) = SplitArray(i).Replace("his", "her")
+						End If
+					Next
+					Return Join(SplitArray)
+				End Function)
+
+
+		' Read all lines of the given File.
+		Dim lines As List(Of String) = Txt2List(ssh.UpdateList(0))
+
+		ssh.UpdateList.RemoveAt(0)
+
+		If lines.Count < 1 Then Exit Sub
+
+		ssh.StatusText = CleanString(lines(0))
+		lines.RemoveAt(0)
+
+		GlitterSendPost(0, ssh.StatusText)
+
+		' ################## Get Contact1 update ######################
+		Dim StatusLines1 As List(Of String) = StatusClean(1, lines)
+
+		ssh.StatusText1 = StatusLines1(ssh.randomizer.Next(0, StatusLines1.Count))
+
+
+		' ################## Get Contact2 update ######################
+		Dim StatusLines2 As List(Of String) = StatusClean(2, lines)
+
+		Do
+			ssh.StatusText2 = StatusLines2(ssh.randomizer.Next(0, StatusLines2.Count))
+		Loop Until ssh.StatusText2 <> ssh.StatusText1
+
+
+		' ################## Get Contact3 update ######################
+		Dim StatusLines3 As List(Of String) = StatusClean(3, lines)
+
+		Do
+			ssh.StatusText3 = StatusLines3(ssh.randomizer.Next(0, StatusLines3.Count))
+		Loop Until ssh.StatusText3 <> ssh.StatusText2 And ssh.StatusText3 <> ssh.StatusText1
+
+
+		' ###################### Reset Data ###########################
+		ssh.StatusText1 = CleanString(ssh.StatusText1)
+		ssh.StatusText2 = CleanString(ssh.StatusText2)
+		ssh.StatusText3 = CleanString(ssh.StatusText3)
+
+		ssh.StatusChance1 = ssh.randomizer.Next(1, 101)
+		ssh.StatusChance2 = ssh.randomizer.Next(1, 101)
+		ssh.StatusChance3 = ssh.randomizer.Next(1, 101)
+
+		ssh.UpdateStageTick = ssh.randomizer.Next(10, 21)
+		ssh.UpdatingPost = True
+		UpdateStageTimer.Start()
+
+	End Sub
+
+	Public Function StatusClean(contactNumber As Integer, ByVal ListClean As List(Of String)) As List(Of String)
+		Dim Exclude, RtnList As New List(Of String)
+
+		' Create a copy of the initial list. 
+		RtnList = ListClean.ConvertAll(Function(x) x)
+
+		If contactNumber = 1 Then
+			Exclude.AddRange({"@Contact2", "@Contact3"})
+		ElseIf contactNumber = 2 Then
+			Exclude.AddRange({"@Contact1", "@Contact3"})
+		ElseIf contactNumber = 3 Then
+			Exclude.AddRange({"@Contact1", "@Contact2"})
+		End If
+
+		RtnList.RemoveAll(Function(x)
+							  For Each item In Exclude
+								  If x.Contains(item) Then Return True
+							  Next
+							  Return False
+						  End Function)
+		Return RtnList
+	End Function
+
+	Private Sub UpdatesTimer_Tick(sender As System.Object, e As System.EventArgs) Handles UpdatesTimer.Tick
+		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Exit Sub
+
+		If My.Settings.CBGlitterFeed = False Then Exit Sub
+		If ssh.UpdatingPost = True Then Exit Sub
+
+		ssh.UpdatesTick -= 1
+
+		If ssh.UpdatesTick > 0 Then Exit Sub
+
+		ssh.UpdatesTick = 1080 / My.Settings.GlitterDSlider
+
+		If ssh.UpdateList.Count < 1 Then
+			Dim Lazytext As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text
+
+			Dim FolderList, FileList As New List(Of String)
+
+			If My.Settings.CBTease Then FolderList.Add(Lazytext & "\Apps\Glitter\Tease\")
+			If My.Settings.CBEgotist Then FolderList.Add(Lazytext & "\Apps\Glitter\Egotist\")
+			If My.Settings.CBTrivia Then FolderList.Add(Lazytext & "\Apps\Glitter\Trivia\")
+			If My.Settings.CBDaily Then FolderList.Add(Lazytext & "\Apps\Glitter\Daily\")
+			If My.Settings.CBCustom1 Then FolderList.Add(Lazytext & "\Apps\Glitter\Custom 1\")
+			If My.Settings.CBCustom2 Then FolderList.Add(Lazytext & "\Apps\Glitter\Custom 2\")
+
+			For Each Folder As String In FolderList
+				For Each FoundFile As String In My.Computer.FileSystem.GetFiles(Folder, FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+					FileList.Add(FoundFile)
+				Next
+			Next
+
+			If FileList.Count < 1 Then
+				My.Settings.CBGlitterFeed = False
+				MessageBox.Show(Me, "Tease AI attempted to create a Glitter update, but no files were found! Please make sure at least one category containing Glitter txt files has been selected." & Environment.NewLine _
+					& Environment.NewLine & "Glitter feed has been automatically disabled.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+				Return
+			End If
+
+			For i As Integer = 0 To ssh.UpdateList.Count - 1
+				Debug.Print(i & ". " & ssh.UpdateList(i))
+			Next
+
+			ssh.UpdateList.Add(FileList(ssh.randomizer.Next(0, FileList.Count)))
+		End If
+		StatusUpdatePost()
+
+	End Sub
+
+	Private Sub UpdateStageTimer_Tick(sender As System.Object, e As System.EventArgs) Handles UpdateStageTimer.Tick
+		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
+		ssh.UpdateStageTick -= 1
+
+		If ssh.UpdateStageTick < 1 Then
+
+			UpdateStageTimer.Stop()
+
+ReRoll:
+			ssh.TempVal = ssh.randomizer.Next(1, 4)
+
+
+			If ssh.TempVal = 1 And ssh.StatusText1(0) <> ">" Then
+				' ##################### Contact1 Post #########################
+				If ssh.StatusChance1 < My.Settings.Glitter1Slider * 10 And My.Settings.CBGlitter1 = True Then
+					GlitterSendPost(1, ssh.StatusText1)
+				End If
+				ssh.StatusText1 = ">" & ssh.StatusText1
+
+			ElseIf ssh.TempVal = 2 And ssh.StatusText2(0) <> ">" Then
+				' ##################### Contact2 Post #########################
+				If ssh.StatusChance2 < My.Settings.Glitter2Slider * 10 And My.Settings.CBGlitter2 = True Then
+					GlitterSendPost(2, ssh.StatusText2)
+				End If
+				ssh.StatusText2 = ">" & ssh.StatusText2
+
+			ElseIf ssh.TempVal = 3 And ssh.StatusText3(0) <> ">" Then
+				' ##################### Contact3 Post #########################
+				If ssh.StatusChance3 < My.Settings.Glitter3Slider * 10 And My.Settings.CBGlitter3 = True Then
+					GlitterSendPost(3, ssh.StatusText3)
+				End If
+				ssh.StatusText3 = ">" & ssh.StatusText3
+
+			Else
+				GoTo ReRoll
+			End If
+
+
+			If ssh.StatusText1(0) = ">" And ssh.StatusText2(0) = ">" And ssh.StatusText3(0) = ">" Then
+				ssh.UpdatingPost = False
+			Else
+				ssh.UpdateStageTick = ssh.randomizer.Next(10, 21)
+				UpdateStageTimer.Start()
+			End If
+		End If
+	End Sub
+
+	Private Sub StatusUpdates_DocumentCompleted(ByVal sender As Object, ByVal e As System.Windows.Forms.WebBrowserDocumentCompletedEventArgs) Handles StatusUpdates.DocumentCompleted
+		Try
+			StatusUpdates.Document.Window.ScrollTo(Int16.MaxValue, Int16.MaxValue)
+		Catch
+		End Try
+	End Sub
+
+#End Region ' GlitterFeeds APP
 
 #Region "------------------------------------------------------ Lazy-Sub ------------------------------------------------------"
 
