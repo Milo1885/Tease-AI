@@ -6250,6 +6250,14 @@ checkFolder:
 		End If
 	End Sub
 
+	Private Sub CBNameInclude_LostFocus(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CBNameInclude.LostFocus
+		If CBNameInclude.Checked = True Then
+			My.Settings.CBUseName = True
+		Else
+			My.Settings.CBUseName = False
+		End If
+	End Sub
+
 	Private Sub CBHonorificCapitalized_LostFocus(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CBHonorificCapitalized.LostFocus
 		If CBHonorificCapitalized.Checked = True Then
 			My.Settings.CBCapHonor = True

@@ -2033,8 +2033,20 @@ Namespace My
                 Me("CBUseHonor") = value
             End Set
         End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+
+		<Global.System.Configuration.UserScopedSettingAttribute(),
+		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
+		Public Property CBUseName() As Boolean
+			Get
+				Return CType(Me("CBUseName"), Boolean)
+			End Get
+			Set
+				Me("CBUseName") = Value
+			End Set
+		End Property
+
+		<Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
         Public Property CBCapHonor() As Boolean
