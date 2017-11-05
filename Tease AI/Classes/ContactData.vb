@@ -248,11 +248,11 @@ checkFolder:
 
 	Friend Function GetRandom(tp As ContactType, newFolder As Boolean) As List(Of String)
 		'no need to check again since you already checked when creating the contact
-		'If Check_ImageDir(tp) Then
-		Return LoadRandom(getCurrentBaseFolder(tp), newFolder)
-		'Else
-		'	Return New List(Of String)
-		'End If
+		If Check_ImageDir(tp) Then
+			Return LoadRandom(getCurrentBaseFolder(tp), newFolder)
+		Else
+			Return New List(Of String)
+		End If
 	End Function
 
 	Function LoadRandom(ByVal baseDirectory As String, newFolder As Boolean) As List(Of String)

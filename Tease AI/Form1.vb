@@ -1088,17 +1088,6 @@ retryStart:
 
 
 
-			BTNLS1.Text = My.Settings.LS1
-
-			BTNLS2.Text = My.Settings.LS2
-
-			BTNLS3.Text = My.Settings.LS3
-
-			BTNLS4.Text = My.Settings.LS4
-
-			BTNLS5.Text = My.Settings.LS5
-
-
 
 
 			'ImageThread.Start()
@@ -1194,81 +1183,6 @@ retryStart:
 		CheckSpace = CheckSpace.Replace(" ", "")
 
 		If CheckSpace = "" Then Return
-
-		If LazyEdit1 = True Then
-			If chatBox.Text <> "" Then
-				BTNLS1.Text = chatBox.Text
-			Else
-				BTNLS1.Text = ChatBox2.Text
-			End If
-			BTNLS1.Visible = True
-			BTNLS1Edit.BackColor = My.Settings.ButtonColor
-			BTNLS1Edit.ForeColor = My.Settings.TextColor
-			My.Settings.LS1 = BTNLS1.Text
-			chatBox.Text = ""
-			ChatBox2.Text = ""
-			Return
-		End If
-
-		If LazyEdit2 = True Then
-			If chatBox.Text <> "" Then
-				BTNLS2.Text = chatBox.Text
-			Else
-				BTNLS2.Text = ChatBox2.Text
-			End If
-			BTNLS2.Visible = True
-			BTNLS2Edit.BackColor = My.Settings.ButtonColor
-			BTNLS2Edit.ForeColor = My.Settings.TextColor
-			My.Settings.LS2 = BTNLS2.Text
-			chatBox.Text = ""
-			ChatBox2.Text = ""
-			Return
-		End If
-
-		If LazyEdit3 = True Then
-			If chatBox.Text <> "" Then
-				BTNLS3.Text = chatBox.Text
-			Else
-				BTNLS3.Text = ChatBox2.Text
-			End If
-			BTNLS3.Visible = True
-			BTNLS3Edit.BackColor = My.Settings.ButtonColor
-			BTNLS3Edit.ForeColor = My.Settings.TextColor
-			My.Settings.LS3 = BTNLS3.Text
-			chatBox.Text = ""
-			ChatBox2.Text = ""
-			Return
-		End If
-
-		If LazyEdit4 = True Then
-			If chatBox.Text <> "" Then
-				BTNLS4.Text = chatBox.Text
-			Else
-				BTNLS4.Text = ChatBox2.Text
-			End If
-			BTNLS4.Visible = True
-			BTNLS4Edit.BackColor = My.Settings.ButtonColor
-			BTNLS4Edit.ForeColor = My.Settings.TextColor
-			My.Settings.LS4 = BTNLS4.Text
-			chatBox.Text = ""
-			ChatBox2.Text = ""
-			Return
-		End If
-
-		If LazyEdit5 = True Then
-			If chatBox.Text <> "" Then
-				BTNLS5.Text = chatBox.Text
-			Else
-				BTNLS5.Text = ChatBox2.Text
-			End If
-			BTNLS5.Visible = True
-			BTNLS5Edit.BackColor = My.Settings.ButtonColor
-			BTNLS5Edit.ForeColor = My.Settings.TextColor
-			My.Settings.LS5 = BTNLS5.Text
-			chatBox.Text = ""
-			ChatBox2.Text = ""
-			Return
-		End If
 
 
 		If TimeoutTimer.Enabled = True Then TimeoutTimer.Stop()
@@ -3024,329 +2938,84 @@ FoundResponse:
 	End Sub
 
 	Public Function ResponseClean(ByVal CleanResponse As String) As String
+		ResponseClean = "NULL"
 
-		'TODO: Add Errorhandling.
-		Dim DomResponse As New StreamReader(ssh.ResponseFile)
-		Dim DRLines As New List(Of String)
-		Dim DRLineTotal As Integer
-		Dim SubState As String
+		Dim FilteredLines As New List(Of String)
+		Dim Section As String
 
-		DRLineTotal = -1
-		DRLines.Clear()
 
-		Dim AddResponse As Boolean
-		AddResponse = False
+		Dim AddResponse As Boolean = False
 
 		If My.Settings.Chastity = True Then
 			If ssh.CBTCockFlag Then
-				SubState = "CBT Cock"
-				GoTo FoundState
+				Section = "CBT Cock"
 			ElseIf ssh.CBTBallsFlag = True Or ssh.CBTBothFlag = True Then
-				SubState = "CBT Balls"
-				GoTo FoundState
+				Section = "CBT Balls"
+			Else
+				Section = "Chastity"
 			End If
-			SubState = "Chastity"
-			GoTo FoundState
+		ElseIf ssh.BeforeTease = True Then
+			Section = "Before Tease"
+		ElseIf ssh.FirstRound = True Then
+			Section = "First Round"
+		ElseIf ssh.EndTease = True Then
+			Section = "After Tease"
+		ElseIf ssh.CBTCockFlag = True Then
+			Section = "CBT Cock"
+		ElseIf ssh.CBTBallsFlag = True Or ssh.CBTBothFlag = True Then
+			Section = "CBT Balls"
+		ElseIf ssh.SubHoldingEdge = True Then
+			Section = "Holding The Edge"
+		ElseIf ssh.SubEdging = True Then
+			Section = "Edging"
+		ElseIf ssh.SubStroking = True Then
+			Section = "Stroking"
+		Else
+			Section = "Not Stroking"
 		End If
 
-		If ssh.FirstRound = True Then
-			SubState = "First Round"
-			GoTo FoundState
-		End If
+		Dim RespLines As List(Of String) = Txt2List(ssh.ResponseFile)
 
-		If ssh.EndTease = True Then
-			SubState = "After Tease"
-			GoTo FoundState
-		End If
+		For Each line As String In RespLines
+			If Trim(line).ToUpper = String.Format("[{0}]", Section).ToUpper Then
+				AddResponse = True
+			ElseIf Trim(line).ToUpper = String.Format("[{0} End]", Section).ToUpper Then
+				AddResponse = False
+			ElseIf AddResponse = True
+				FilteredLines.Add(line)
+			End If
+		Next
 
-		If ssh.CBTCockFlag = True Then
-			SubState = "CBT Cock"
-			GoTo FoundState
-		End If
+		AddResponse = False
 
-		If ssh.CBTBallsFlag = True Or ssh.CBTBothFlag = True Then
-			SubState = "CBT Balls"
-			GoTo FoundState
-		End If
-
-		If ssh.SubHoldingEdge = True Then
-			SubState = "Sub Holding Edge"
-			GoTo FoundState
-		End If
-
-		If ssh.SubEdging = True Then
-			SubState = "Sub Edging"
-			GoTo FoundState
-		End If
-
-		If ssh.SubStroking = True Then
-			SubState = "Sub Stroking"
-			GoTo FoundState
-		End If
-
-		If ssh.BeforeTease = True Then
-			SubState = "Before Tease"
-			GoTo FoundState
-		End If
-
-		SubState = "Not Stroking"
-
-FoundState:
-
-
-		If SubState = "Before Tease" Then
-
-			While DomResponse.Peek <> -1
-				DRLineTotal += 1
-				DRLines.Add(DomResponse.ReadLine())
-				If Trim(DRLines(DRLineTotal)) = "[Before Tease]" Then
+		If Section <> "After Tease" And Section <> "Before Tease" Then
+			For Each line As String In RespLines
+				If Trim(line).ToUpper = "[All]".ToUpper Then
 					AddResponse = True
-				End If
-				If Trim(DRLines(DRLineTotal)) = "[Before Tease End]" Then
+				ElseIf Trim(line).ToUpper = "[All End]".ToUpper Then
 					AddResponse = False
+				ElseIf AddResponse = True
+					FilteredLines.Add(line)
 				End If
-				If AddResponse = False Or Trim(DRLines(DRLineTotal)) = "[Before Tease]" Then
-					DRLines.Remove(DRLines(DRLineTotal))
-					DRLineTotal -= 1
-				End If
-			End While
+			Next
 		End If
 
 
-		If SubState = "Chastity" Then
-
-			While DomResponse.Peek <> -1
-				DRLineTotal += 1
-				DRLines.Add(DomResponse.ReadLine())
-				If Trim(DRLines(DRLineTotal)) = "[Chastity]" Then
-					AddResponse = True
-				End If
-				If Trim(DRLines(DRLineTotal)) = "[Chastity End]" Then
-					AddResponse = False
-				End If
-				If AddResponse = False Or Trim(DRLines(DRLineTotal)) = "[Chastity]" Then
-					DRLines.Remove(DRLines(DRLineTotal))
-					DRLineTotal -= 1
-				End If
-			End While
+		If FilteredLines.Count < 1 Then
+			Exit Function
 		End If
-
-		If SubState = "First Round" Then
-
-			While DomResponse.Peek <> -1
-				DRLineTotal += 1
-				DRLines.Add(DomResponse.ReadLine())
-				If Trim(DRLines(DRLineTotal)) = "[First Round]" Then
-					AddResponse = True
-				End If
-				If Trim(DRLines(DRLineTotal)) = "[First Round End]" Then
-					AddResponse = False
-				End If
-				If AddResponse = False Or Trim(DRLines(DRLineTotal)) = "[First Round]" Then
-					DRLines.Remove(DRLines(DRLineTotal))
-					DRLineTotal -= 1
-				End If
-			End While
-		End If
-
-		If SubState = "Sub Stroking" Then
-
-			While DomResponse.Peek <> -1
-				DRLineTotal += 1
-				DRLines.Add(DomResponse.ReadLine())
-				If Trim(DRLines(DRLineTotal)) = "[Stroking]" Then
-					AddResponse = True
-				End If
-				If Trim(DRLines(DRLineTotal)) = "[Stroking End]" Then
-					AddResponse = False
-				End If
-				If AddResponse = False Or Trim(DRLines(DRLineTotal)) = "[Stroking]" Then
-					DRLines.Remove(DRLines(DRLineTotal))
-					DRLineTotal -= 1
-				End If
-			End While
-		End If
-
-		If SubState = "Not Stroking" Then
-
-			While DomResponse.Peek <> -1
-				DRLineTotal += 1
-				DRLines.Add(DomResponse.ReadLine())
-				If Trim(DRLines(DRLineTotal)) = "[Not Stroking]" Then
-					AddResponse = True
-				End If
-				If Trim(DRLines(DRLineTotal)) = "[Not Stroking End]" Then
-					AddResponse = False
-				End If
-				If AddResponse = False Or Trim(DRLines(DRLineTotal)) = "[Not Stroking]" Then
-					DRLines.Remove(DRLines(DRLineTotal))
-					DRLineTotal -= 1
-				End If
-			End While
-		End If
-
-		If SubState = "Sub Edging" Then
-
-			While DomResponse.Peek <> -1
-				DRLineTotal += 1
-				DRLines.Add(DomResponse.ReadLine())
-				If Trim(DRLines(DRLineTotal)) = "[Edging]" Then
-					AddResponse = True
-				End If
-				If Trim(DRLines(DRLineTotal)) = "[Edging End]" Then
-					AddResponse = False
-				End If
-				If AddResponse = False Or Trim(DRLines(DRLineTotal)) = "[Edging]" Then
-					DRLines.Remove(DRLines(DRLineTotal))
-					DRLineTotal -= 1
-				End If
-			End While
-		End If
-
-		If SubState = "Sub Holding Edge" Then
-
-			While DomResponse.Peek <> -1
-				DRLineTotal += 1
-				DRLines.Add(DomResponse.ReadLine())
-				If Trim(DRLines(DRLineTotal)) = "[Holding The Edge]" Then
-					AddResponse = True
-				End If
-				If Trim(DRLines(DRLineTotal)) = "[Holding The Edge End]" Then
-					AddResponse = False
-				End If
-				If AddResponse = False Or Trim(DRLines(DRLineTotal)) = "[Holding The Edge]" Then
-					DRLines.Remove(DRLines(DRLineTotal))
-					DRLineTotal -= 1
-				End If
-			End While
-		End If
-
-		If SubState = "CBT Cock" Then
-
-			While DomResponse.Peek <> -1
-				DRLineTotal += 1
-				DRLines.Add(DomResponse.ReadLine())
-				If Trim(DRLines(DRLineTotal)) = "[CBT Cock]" Then
-					AddResponse = True
-				End If
-				If Trim(DRLines(DRLineTotal)) = "[CBT Cock End]" Then
-					AddResponse = False
-				End If
-				If AddResponse = False Or Trim(DRLines(DRLineTotal)) = "[CBT Cock]" Then
-					DRLines.Remove(DRLines(DRLineTotal))
-					DRLineTotal -= 1
-				End If
-			End While
-		End If
-
-		If SubState = "CBT Balls" Then
-
-			While DomResponse.Peek <> -1
-				DRLineTotal += 1
-				DRLines.Add(DomResponse.ReadLine())
-				If Trim(DRLines(DRLineTotal)) = "[CBT Balls]" Then
-					AddResponse = True
-				End If
-				If Trim(DRLines(DRLineTotal)) = "[CBT Balls End]" Then
-					AddResponse = False
-				End If
-				If AddResponse = False Or Trim(DRLines(DRLineTotal)) = "[CBT Balls]" Then
-					DRLines.Remove(DRLines(DRLineTotal))
-					DRLineTotal -= 1
-				End If
-			End While
-		End If
-
-		If SubState = "After Tease" Then
-
-			While DomResponse.Peek <> -1
-				DRLineTotal += 1
-				DRLines.Add(DomResponse.ReadLine())
-				If Trim(DRLines(DRLineTotal)) = "[After Tease]" Then
-					AddResponse = True
-				End If
-				If Trim(DRLines(DRLineTotal)) = "[After Tease End]" Then
-					AddResponse = False
-				End If
-				If AddResponse = False Or Trim(DRLines(DRLineTotal)) = "[After Tease]" Then
-					DRLines.Remove(DRLines(DRLineTotal))
-					DRLineTotal -= 1
-				End If
-			End While
-		End If
-
-		If SubState <> "After Tease" And SubState <> "Before Tease" Then
-
-			While DomResponse.Peek <> -1
-				DRLineTotal += 1
-				DRLines.Add(DomResponse.ReadLine())
-				If Trim(DRLines(DRLineTotal)) = "[All]" Then
-					AddResponse = True
-				End If
-				If Trim(DRLines(DRLineTotal)) = "[All End]" Then
-					AddResponse = False
-				End If
-				If AddResponse = False Or Trim(DRLines(DRLineTotal)) = "[All]" Then
-					DRLines.Remove(DRLines(DRLineTotal))
-					DRLineTotal -= 1
-				End If
-			End While
-
-		End If
-
-
-
-		DomResponse.Close()
-		DomResponse.Dispose()
-
-
-		Using DomResponseAll As New StreamReader(ssh.ResponseFile)
-
-			While DomResponseAll.Peek <> -1
-				DRLineTotal += 1
-				DRLines.Add(DomResponseAll.ReadLine())
-				If Trim(DRLines(DRLineTotal)) = "[All]" Then
-					AddResponse = True
-				End If
-				If Trim(DRLines(DRLineTotal)) = "[All End]" Then
-					AddResponse = False
-				End If
-				If AddResponse = False Or Trim(DRLines(DRLineTotal)) = "[All]" Then
-					DRLines.Remove(DRLines(DRLineTotal))
-					DRLineTotal -= 1
-				End If
-			End While
-
-		End Using
-
-		' ###########
-
-		If DRLines.Count < 1 Then
-			CleanResponse = "NULL"
-			GoTo NullSkip
-		End If
-
-
 
 		Try
-			DRLines = FilterList(DRLines)
-			ssh.ResponseLine = ssh.randomizer.Next(0, DRLines.Count)
-			CleanResponse = DRLines(ssh.ResponseLine)
+			FilteredLines = FilterList(FilteredLines)
+			ssh.ResponseLine = ssh.randomizer.Next(0, FilteredLines.Count)
+			ResponseClean = FilteredLines(ssh.ResponseLine)
 		Catch ex As Exception
 			Log.WriteError("Tease AI did not return a valid Response line from file: " &
 				  ssh.ResponseFile, ex, "ReponseClean(String)")
-			CleanResponse = "ERROR: Tease AI did not return a valid Response line from file: " & ssh.ResponseFile
+			ResponseClean = "ERROR: Tease AI did not return a valid Response line from file: " & ssh.ResponseFile
 		End Try
 
-
 		ssh.Responding = True
-
-NullSkip:
-
-
-		Return CleanResponse
-
-
 	End Function
 
 
@@ -13490,7 +13159,13 @@ VTSkip:
 			End If
 
 			If FilterString.Contains("@DayOfWeek(") Then
-				If GetMatch(FilterString, "@DayOfWeek(", WeekdayName(Weekday(DateAndTime.Now))) = False Then Return False
+				Dim Para As String = GetParentheses(FilterString, "@DayOfWeek(")
+
+				If IsNumeric(Para) Then
+					If GetMatch(FilterString, "@DayOfWeek(", Weekday(DateAndTime.Now, FirstDayOfWeek.Monday)) = False Then Return False
+				Else
+					If GetMatch(FilterString, "@DayOfWeek(", WeekdayName(Weekday(DateAndTime.Now, FirstDayOfWeek.System),, FirstDayOfWeek.System)) = False Then Return False
+				End If
 			End If
 			If FilterString.Contains("@SetModule(") Then
 				If ssh.SetModule <> "" Or ssh.BookmarkModule = True Then Return False
@@ -13849,52 +13524,25 @@ VTSkip:
 		End Try
 	End Sub
 
-	Private Sub chatBox_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles chatBox.DragDrop
-		chatBox.Text = CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString
+	Private Sub chatBox_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles chatBox.DragDrop, ChatBox2.DragDrop
+		CType(sender, TextBox).Text = CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString
 		sendButton.PerformClick()
 	End Sub
 
-	Private Sub chatBox2_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles ChatBox2.DragDrop
-		chatBox.Text = ""
-		ChatBox2.Text = CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString
-		sendButton.PerformClick()
-	End Sub
-
-	Private Sub chatBox_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles chatBox.DragEnter
+	Private Sub chatBox_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles chatBox.DragEnter, ChatBox2.DragEnter
 		If (e.Data.GetDataPresent(DataFormats.FileDrop)) Then
 			e.Effect = DragDropEffects.Copy
 		End If
 	End Sub
 
-	Private Sub chatBox2_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles ChatBox2.DragEnter
-		If (e.Data.GetDataPresent(DataFormats.FileDrop)) Then
-			e.Effect = DragDropEffects.Copy
-		End If
-	End Sub
-
-	Private Sub chatbox_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles chatBox.KeyDown
+	Private Sub chatbox_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles chatBox.KeyDown, ChatBox2.KeyDown
 		If e.KeyCode = Keys.Return Then
 			sendButton.PerformClick()
 			e.SuppressKeyPress = True
 		End If
 	End Sub
 
-	Private Sub chatbox2_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles ChatBox2.KeyDown
-		If e.KeyCode = Keys.Return Then
-			sendButton.PerformClick()
-			e.SuppressKeyPress = True
-		End If
-	End Sub
-
-	Private Sub chatBox_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles chatBox.KeyPress
-		If e.KeyChar = Chr(13) Then
-			e.Handled = True
-			' sendButton.PerformClick()
-			e.KeyChar = Chr(0)
-		End If
-	End Sub
-
-	Private Sub chatBox2_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles ChatBox2.KeyPress
+	Private Sub chatBox_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles chatBox.KeyPress, ChatBox2.KeyPress
 		If e.KeyChar = Chr(13) Then
 			e.Handled = True
 			' sendButton.PerformClick()
@@ -14587,6 +14235,7 @@ NoPlaylistEndFile:
 		ssh.SubStroking = False
 		ssh.SubEdging = False
 		ssh.SubHoldingEdge = False
+		ssh.MultipleEdges = False
 		ssh.AskedToSpeedUp = False
 		ssh.AskedToSlowDown = False
 
@@ -18886,57 +18535,29 @@ ReRoll:
 
 	Public Sub GetShortcutChecked()
 
-		If CBHideShortcuts.Checked = True Then
-			TBShortYes.Visible = False
-			TBShortNo.Visible = False
-			TBShortEdge.Visible = False
-			TBShortSpeedUp.Visible = False
-			TBShortSlowDown.Visible = False
-			TBShortStop.Visible = False
-			TBShortStroke.Visible = False
-			TBShortCum.Visible = False
-			TBShortGreet.Visible = False
-			TBShortSafeword.Visible = False
+		TBShortYes.Visible = Not CBHideShortcuts.Checked
+			TBShortNo.Visible = Not CBHideShortcuts.Checked
+			TBShortEdge.Visible = Not CBHideShortcuts.Checked
+			TBShortSpeedUp.Visible = Not CBHideShortcuts.Checked
+			TBShortSlowDown.Visible = Not CBHideShortcuts.Checked
+			TBShortStop.Visible = Not CBHideShortcuts.Checked
+			TBShortStroke.Visible = Not CBHideShortcuts.Checked
+			TBShortCum.Visible = Not CBHideShortcuts.Checked
+			TBShortGreet.Visible = Not CBHideShortcuts.Checked
+			TBShortSafeword.Visible = Not CBHideShortcuts.Checked
 
 
-			BTNLS1.Width = 214
-			BTNLS2.Width = 214
-			BTNLS3.Width = 214
-			BTNLS4.Width = 214
-			BTNLS5.Width = 214
+			BTNLS1.Width = If(CBHideShortcuts.Checked, 214, 163)
+			BTNLS2.Width = If(CBHideShortcuts.Checked, 214, 163)
+			BTNLS3.Width = If(CBHideShortcuts.Checked, 214, 163)
+			BTNLS4.Width = If(CBHideShortcuts.Checked, 214, 163)
+			BTNLS5.Width = If(CBHideShortcuts.Checked, 214, 163)
 
-			BTNLS1Edit.Visible = False
-			BTNLS2Edit.Visible = False
-			BTNLS3Edit.Visible = False
-			BTNLS4Edit.Visible = False
-			BTNLS5Edit.Visible = False
-
-		Else
-
-			TBShortYes.Visible = True
-			TBShortNo.Visible = True
-			TBShortEdge.Visible = True
-			TBShortSpeedUp.Visible = True
-			TBShortSlowDown.Visible = True
-			TBShortStop.Visible = True
-			TBShortStroke.Visible = True
-			TBShortCum.Visible = True
-			TBShortGreet.Visible = True
-			TBShortSafeword.Visible = True
-
-			BTNLS1.Width = 163
-			BTNLS2.Width = 163
-			BTNLS3.Width = 163
-			BTNLS4.Width = 163
-			BTNLS5.Width = 163
-
-			BTNLS1Edit.Visible = True
-			BTNLS2Edit.Visible = True
-			BTNLS3Edit.Visible = True
-			BTNLS4Edit.Visible = True
-			BTNLS5Edit.Visible = True
-
-		End If
+			BTNLS1Edit.Visible = Not CBHideShortcuts.Checked
+			BTNLS2Edit.Visible = Not CBHideShortcuts.Checked
+			BTNLS3Edit.Visible = Not CBHideShortcuts.Checked
+			BTNLS4Edit.Visible = Not CBHideShortcuts.Checked
+			BTNLS5Edit.Visible = Not CBHideShortcuts.Checked
 
 	End Sub
 
@@ -19005,32 +18626,41 @@ ReRoll:
 
 	End Sub
 
-	Private Sub BTNLS1Edit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNLS1Edit.Click
+	Private Sub BtnLsEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNLS1Edit.Click, BTNLS2Edit.Click, BTNLS3Edit.Click, BTNLS4Edit.Click, BTNLS5Edit.Click
+		Dim TextToSet As String = ""
 
-
-		LazyEdit2 = False
-		LazyEdit3 = False
-		LazyEdit4 = False
-		LazyEdit5 = False
-
-		BTNLS2Edit.BackColor = My.Settings.ButtonColor
-		BTNLS2Edit.ForeColor = My.Settings.TextColor
-		BTNLS3Edit.BackColor = My.Settings.ButtonColor
-		BTNLS3Edit.ForeColor = My.Settings.TextColor
-		BTNLS4Edit.BackColor = My.Settings.ButtonColor
-		BTNLS4Edit.ForeColor = My.Settings.TextColor
-		BTNLS5Edit.BackColor = My.Settings.ButtonColor
-		BTNLS5Edit.ForeColor = My.Settings.TextColor
-
-
-		If LazyEdit1 = False Then
-			BTNLS1Edit.BackColor = Color.ForestGreen
-			BTNLS1Edit.ForeColor = Color.White
-			LazyEdit1 = True
+		If sender Is BTNLS1Edit Then
+			TextToSet = My.Settings.LS1
+		ElseIf sender Is BTNLS2Edit Then
+			TextToSet = My.Settings.LS2
+		ElseIf sender Is BTNLS3Edit Then
+			TextToSet = My.Settings.LS3
+		ElseIf sender Is BTNLS4Edit Then
+			TextToSet = My.Settings.LS4
+		ElseIf sender Is BTNLS5Edit Then
+			TextToSet = My.Settings.LS5
 		Else
-			BTNLS1Edit.BackColor = My.Settings.ButtonColor
-			BTNLS1Edit.ForeColor = My.Settings.TextColor
-			LazyEdit1 = False
+			Exit Sub
+		End If
+
+		TextToSet = InputBox("Enter a text to set.", "Set custom Lazy Sub Text", TextToSet)
+
+		If TextToSet.Trim = "" Then
+			MessageBox.Show("Setting new Lazy Sub text has been aborted.", "Abort", MessageBoxButtons.OK, MessageBoxIcon.Information)
+			Exit Sub
+		End If
+
+		If sender Is BTNLS1Edit Then
+			My.Settings.LS1 = TextToSet
+		ElseIf sender Is BTNLS2Edit Then
+			My.Settings.LS2 = TextToSet
+		ElseIf sender Is BTNLS3Edit Then
+			My.Settings.LS3 = TextToSet
+		ElseIf sender Is BTNLS4Edit Then
+			My.Settings.LS4 = TextToSet
+		ElseIf sender Is BTNLS5Edit Then
+			My.Settings.LS5 = TextToSet
+
 		End If
 
 	End Sub
@@ -19046,35 +18676,6 @@ ReRoll:
 
 	End Sub
 
-	Private Sub BTNLS2Edit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNLS2Edit.Click
-
-
-		LazyEdit1 = False
-		LazyEdit3 = False
-		LazyEdit4 = False
-		LazyEdit5 = False
-
-		BTNLS1Edit.BackColor = My.Settings.ButtonColor
-		BTNLS1Edit.ForeColor = My.Settings.TextColor
-		BTNLS3Edit.BackColor = My.Settings.ButtonColor
-		BTNLS3Edit.ForeColor = My.Settings.TextColor
-		BTNLS4Edit.BackColor = My.Settings.ButtonColor
-		BTNLS4Edit.ForeColor = My.Settings.TextColor
-		BTNLS5Edit.BackColor = My.Settings.ButtonColor
-		BTNLS5Edit.ForeColor = My.Settings.TextColor
-
-		If LazyEdit2 = False Then
-			BTNLS2Edit.BackColor = Color.ForestGreen
-			BTNLS2Edit.ForeColor = Color.White
-			LazyEdit2 = True
-		Else
-			BTNLS2Edit.BackColor = My.Settings.ButtonColor
-			BTNLS2Edit.ForeColor = My.Settings.TextColor
-			LazyEdit2 = False
-		End If
-
-	End Sub
-
 	Private Sub BTNLS3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNLS3.Click
 
 
@@ -19082,36 +18683,6 @@ ReRoll:
 			chatBox.Text = BTNLS3.Text
 			If ssh.WritingTaskFlag = True Then CheatCheck()
 			sendButton.PerformClick()
-		End If
-
-	End Sub
-
-	Private Sub BTNLS3Edit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNLS3Edit.Click
-
-
-		LazyEdit2 = False
-		LazyEdit1 = False
-		LazyEdit4 = False
-		LazyEdit5 = False
-
-		BTNLS2Edit.BackColor = My.Settings.ButtonColor
-		BTNLS2Edit.ForeColor = My.Settings.TextColor
-		BTNLS1Edit.BackColor = My.Settings.ButtonColor
-		BTNLS1Edit.ForeColor = My.Settings.TextColor
-		BTNLS4Edit.BackColor = My.Settings.ButtonColor
-		BTNLS4Edit.ForeColor = My.Settings.TextColor
-		BTNLS5Edit.BackColor = My.Settings.ButtonColor
-		BTNLS5Edit.ForeColor = My.Settings.TextColor
-
-
-		If LazyEdit3 = False Then
-			BTNLS3Edit.BackColor = Color.ForestGreen
-			BTNLS3Edit.ForeColor = Color.White
-			LazyEdit3 = True
-		Else
-			BTNLS3Edit.BackColor = My.Settings.ButtonColor
-			BTNLS3Edit.ForeColor = My.Settings.TextColor
-			LazyEdit3 = False
 		End If
 
 	End Sub
@@ -19127,36 +18698,6 @@ ReRoll:
 
 	End Sub
 
-	Private Sub BTNLS4Edit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNLS4Edit.Click
-
-
-		LazyEdit2 = False
-		LazyEdit3 = False
-		LazyEdit1 = False
-		LazyEdit5 = False
-
-		BTNLS2Edit.BackColor = My.Settings.ButtonColor
-		BTNLS2Edit.ForeColor = My.Settings.TextColor
-		BTNLS3Edit.BackColor = My.Settings.ButtonColor
-		BTNLS3Edit.ForeColor = My.Settings.TextColor
-		BTNLS1Edit.BackColor = My.Settings.ButtonColor
-		BTNLS1Edit.ForeColor = My.Settings.TextColor
-		BTNLS5Edit.BackColor = My.Settings.ButtonColor
-		BTNLS5Edit.ForeColor = My.Settings.TextColor
-
-
-		If LazyEdit4 = False Then
-			BTNLS4Edit.BackColor = Color.ForestGreen
-			BTNLS4Edit.ForeColor = Color.White
-			LazyEdit4 = True
-		Else
-			BTNLS4Edit.BackColor = My.Settings.ButtonColor
-			BTNLS4Edit.ForeColor = My.Settings.TextColor
-			LazyEdit4 = False
-		End If
-
-	End Sub
-
 	Private Sub BTNLS5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNLS5.Click
 
 
@@ -19168,34 +18709,6 @@ ReRoll:
 
 	End Sub
 
-	Private Sub BTNLS5Edit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNLS5Edit.Click
-
-
-		LazyEdit2 = False
-		LazyEdit3 = False
-		LazyEdit4 = False
-		LazyEdit1 = False
-
-		BTNLS2Edit.BackColor = My.Settings.ButtonColor
-		BTNLS2Edit.ForeColor = My.Settings.TextColor
-		BTNLS3Edit.BackColor = My.Settings.ButtonColor
-		BTNLS3Edit.ForeColor = My.Settings.TextColor
-		BTNLS4Edit.BackColor = My.Settings.ButtonColor
-		BTNLS4Edit.ForeColor = My.Settings.TextColor
-		BTNLS1Edit.BackColor = My.Settings.ButtonColor
-		BTNLS1Edit.ForeColor = My.Settings.TextColor
-
-		If LazyEdit5 = False Then
-			BTNLS5Edit.BackColor = Color.ForestGreen
-			BTNLS5Edit.ForeColor = Color.White
-			LazyEdit5 = True
-		Else
-			BTNLS5Edit.BackColor = My.Settings.ButtonColor
-			BTNLS5Edit.ForeColor = My.Settings.TextColor
-			LazyEdit5 = False
-		End If
-
-	End Sub
 
 #End Region  ' Lazy-Sub
 

@@ -1577,24 +1577,24 @@ Partial Class Form1
 		'PicStripTSMIdommeSlideshow_GoToFirst
 		'
 		Me.PicStripTSMIdommeSlideshow_GoToFirst.Name = "PicStripTSMIdommeSlideshow_GoToFirst"
-		Me.PicStripTSMIdommeSlideshow_GoToFirst.Size = New System.Drawing.Size(166, 22)
+		Me.PicStripTSMIdommeSlideshow_GoToFirst.Size = New System.Drawing.Size(167, 22)
 		Me.PicStripTSMIdommeSlideshow_GoToFirst.Text = "Go To First Image"
 		'
 		'PicStripTSMIdommeSlideshowGoToLast
 		'
 		Me.PicStripTSMIdommeSlideshowGoToLast.Name = "PicStripTSMIdommeSlideshowGoToLast"
-		Me.PicStripTSMIdommeSlideshowGoToLast.Size = New System.Drawing.Size(166, 22)
+		Me.PicStripTSMIdommeSlideshowGoToLast.Size = New System.Drawing.Size(167, 22)
 		Me.PicStripTSMIdommeSlideshowGoToLast.Text = "Go To Last Image"
 		'
 		'PicStripTSMIdommeSlideshowTSS1
 		'
 		Me.PicStripTSMIdommeSlideshowTSS1.Name = "PicStripTSMIdommeSlideshowTSS1"
-		Me.PicStripTSMIdommeSlideshowTSS1.Size = New System.Drawing.Size(163, 6)
+		Me.PicStripTSMIdommeSlideshowTSS1.Size = New System.Drawing.Size(164, 6)
 		'
 		'PicStripTSMIdommeSlideshowLoadNewSlideshow
 		'
 		Me.PicStripTSMIdommeSlideshowLoadNewSlideshow.Name = "PicStripTSMIdommeSlideshowLoadNewSlideshow"
-		Me.PicStripTSMIdommeSlideshowLoadNewSlideshow.Size = New System.Drawing.Size(166, 22)
+		Me.PicStripTSMIdommeSlideshowLoadNewSlideshow.Size = New System.Drawing.Size(167, 22)
 		Me.PicStripTSMIdommeSlideshowLoadNewSlideshow.Text = "New Slideshow"
 		'
 		'StatusUpdates
@@ -2092,25 +2092,25 @@ Partial Class Form1
 		'
 		Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AIBoxesToolStripMenuItem, Me.CommandGuideToolStripMenuItem, Me.OldDommeTagsToolStripMenuItem})
 		Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
-		Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(47, 20)
+		Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(48, 20)
 		Me.ToolsToolStripMenuItem.Text = "Tools"
 		'
 		'AIBoxesToolStripMenuItem
 		'
 		Me.AIBoxesToolStripMenuItem.Name = "AIBoxesToolStripMenuItem"
-		Me.AIBoxesToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
+		Me.AIBoxesToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
 		Me.AIBoxesToolStripMenuItem.Text = "AI Boxes"
 		'
 		'CommandGuideToolStripMenuItem
 		'
 		Me.CommandGuideToolStripMenuItem.Name = "CommandGuideToolStripMenuItem"
-		Me.CommandGuideToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
+		Me.CommandGuideToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
 		Me.CommandGuideToolStripMenuItem.Text = "Command Guide"
 		'
 		'OldDommeTagsToolStripMenuItem
 		'
 		Me.OldDommeTagsToolStripMenuItem.Name = "OldDommeTagsToolStripMenuItem"
-		Me.OldDommeTagsToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
+		Me.OldDommeTagsToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
 		Me.OldDommeTagsToolStripMenuItem.Text = "Domme Tag Creator"
 		'
 		'MilovanaToolStripMenuItem1
@@ -3325,6 +3325,7 @@ Partial Class Form1
 		'BTNLS1
 		'
 		Me.BTNLS1.BackColor = System.Drawing.Color.White
+		Me.BTNLS1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "LS1", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.BTNLS1.FlatAppearance.BorderColor = System.Drawing.Color.Black
 		Me.BTNLS1.FlatAppearance.BorderSize = 2
 		Me.BTNLS1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -3334,7 +3335,7 @@ Partial Class Form1
 		Me.BTNLS1.Name = "BTNLS1"
 		Me.BTNLS1.Size = New System.Drawing.Size(163, 31)
 		Me.BTNLS1.TabIndex = 108
-		Me.BTNLS1.Text = "Custom 1"
+		Me.BTNLS1.Text = Global.Tease_AI.My.MySettings.Default.LS1
 		Me.BTNLS1.UseVisualStyleBackColor = False
 		'
 		'BTNEdge
@@ -3415,6 +3416,7 @@ Partial Class Form1
 		'BTNLS2
 		'
 		Me.BTNLS2.BackColor = System.Drawing.Color.White
+		Me.BTNLS2.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "LS2", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.BTNLS2.FlatAppearance.BorderColor = System.Drawing.Color.Black
 		Me.BTNLS2.FlatAppearance.BorderSize = 2
 		Me.BTNLS2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -3424,7 +3426,7 @@ Partial Class Form1
 		Me.BTNLS2.Name = "BTNLS2"
 		Me.BTNLS2.Size = New System.Drawing.Size(163, 31)
 		Me.BTNLS2.TabIndex = 118
-		Me.BTNLS2.Text = "Custom 2"
+		Me.BTNLS2.Text = Global.Tease_AI.My.MySettings.Default.LS2
 		Me.BTNLS2.UseVisualStyleBackColor = False
 		'
 		'BTNLS2Edit
@@ -3460,6 +3462,7 @@ Partial Class Form1
 		'BTNLS3
 		'
 		Me.BTNLS3.BackColor = System.Drawing.Color.White
+		Me.BTNLS3.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "LS3", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.BTNLS3.FlatAppearance.BorderColor = System.Drawing.Color.Black
 		Me.BTNLS3.FlatAppearance.BorderSize = 2
 		Me.BTNLS3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -3469,12 +3472,13 @@ Partial Class Form1
 		Me.BTNLS3.Name = "BTNLS3"
 		Me.BTNLS3.Size = New System.Drawing.Size(163, 31)
 		Me.BTNLS3.TabIndex = 121
-		Me.BTNLS3.Text = "Custom 3"
+		Me.BTNLS3.Text = Global.Tease_AI.My.MySettings.Default.LS3
 		Me.BTNLS3.UseVisualStyleBackColor = False
 		'
 		'BTNLS4
 		'
 		Me.BTNLS4.BackColor = System.Drawing.Color.White
+		Me.BTNLS4.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "LS4", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.BTNLS4.FlatAppearance.BorderColor = System.Drawing.Color.Black
 		Me.BTNLS4.FlatAppearance.BorderSize = 2
 		Me.BTNLS4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -3484,12 +3488,13 @@ Partial Class Form1
 		Me.BTNLS4.Name = "BTNLS4"
 		Me.BTNLS4.Size = New System.Drawing.Size(163, 31)
 		Me.BTNLS4.TabIndex = 124
-		Me.BTNLS4.Text = "Custom 4"
+		Me.BTNLS4.Text = Global.Tease_AI.My.MySettings.Default.LS4
 		Me.BTNLS4.UseVisualStyleBackColor = False
 		'
 		'BTNLS5
 		'
 		Me.BTNLS5.BackColor = System.Drawing.Color.White
+		Me.BTNLS5.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "LS5", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.BTNLS5.FlatAppearance.BorderColor = System.Drawing.Color.Black
 		Me.BTNLS5.FlatAppearance.BorderSize = 2
 		Me.BTNLS5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -3499,7 +3504,7 @@ Partial Class Form1
 		Me.BTNLS5.Name = "BTNLS5"
 		Me.BTNLS5.Size = New System.Drawing.Size(163, 31)
 		Me.BTNLS5.TabIndex = 127
-		Me.BTNLS5.Text = "Custom 5"
+		Me.BTNLS5.Text = Global.Tease_AI.My.MySettings.Default.LS5
 		Me.BTNLS5.UseVisualStyleBackColor = False
 		'
 		'PnlGlitter
