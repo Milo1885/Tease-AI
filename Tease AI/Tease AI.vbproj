@@ -137,6 +137,9 @@
     <Compile Include="Form10.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form1\Chat.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form1\ImageFuctions.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -305,6 +308,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Button_Import_Big.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\CSS\GlitterFallbackStyle.css" />
+    <Content Include="Resources\CSS\ChatFallbackStyle.css" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

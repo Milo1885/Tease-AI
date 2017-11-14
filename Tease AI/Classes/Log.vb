@@ -6,7 +6,7 @@
 Public Class Log
 
 	Friend Shared Sub WriteError(ByVal msg As String,
-   ByVal Exception As Exception, ByVal title As String)
+   ByVal exception As Exception, ByVal title As String)
 		Try
 			Trace.Write("Exception occured: " & msg)
 			Dim TargetFilePath As String = Application.StartupPath &
@@ -34,11 +34,13 @@ Public Class Log
 					s1.Write("Version: " & My.Application.Info.Version.ToString & vbCrLf)
 					s1.Write("Title: " & title & vbCrLf)
 					s1.Write("Message: " & msg & vbCrLf)
-					s1.Write("Exceptions: " & Replace(ExceptonToString(Exception), vbCrLf, vbCrLf & vbTab) & vbCrLf)
+					s1.Write("Exceptions: " & Replace(ExceptonToString(exception), vbCrLf, vbCrLf & vbTab) & vbCrLf)
 					s1.Write(vbCrLf & vbCrLf)
 					s1.Write("~~~~~~~~~~~~~~~~~~~~Application.StackTrace~~~~~~~~~~~~~~~~~~~~~~~~~" & vbCrLf & StString & vbCrLf & vbCrLf)
 				End Using
 			End Using
+
+			My.Application.HandledException(msg, exception)
 		Catch ex As Exception
 			Trace.Write("Log-Error: " & ex.Message)
 		End Try
