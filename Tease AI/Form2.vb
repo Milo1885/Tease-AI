@@ -9807,24 +9807,14 @@ checkFolder:
 	Private Sub TimeBoxWakeUp_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TimeBoxWakeUp.ValueChanged
 		If Form1.FormLoading = False Then
 
+			Dim Sys_WakeUpPath As String = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\Variables\SYS_WakeUp"
 
 			Dim SetDate As Date = FormatDateTime(TimeBoxWakeUp.Value, DateFormat.LongTime)
+			My.Computer.FileSystem.WriteAllText(Sys_WakeUpPath, FormatDateTime(SetDate, DateFormat.LongTime), False)
+			My.Settings.WakeUp = FormatDateTime(Now, DateFormat.ShortDate) & " " & Form1.GetDate("SYS_WakeUp").ToLongTimeString
 
-			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\Variables\SYS_WakeUp", FormatDateTime(SetDate, DateFormat.LongTime), False)
-
-
-
-			'Debug.Print("Dates = " & Dates)
-
-			' Github Patch My.Settings.WakeUp = Form1.GetTime("SYS_WakeUp")
-			My.Settings.WakeUp = FormatDateTime(Now, DateFormat.ShortDate) & " " & Form1.GetTime("SYS_WakeUp")
-
-
-
-			Debug.Print(Form1.ssh.GeneralTime)
-
-
-
+			Debug.Assert(SetDate.ToLongTimeString = My.Settings.WakeUp.ToLongTimeString,
+						 "Value for SYS_WakeUp is different after saving.")
 
 		End If
 	End Sub

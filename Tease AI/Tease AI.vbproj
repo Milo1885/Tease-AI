@@ -143,6 +143,9 @@
     <Compile Include="Form1\ImageFuctions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form1\ScriptVariables.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form2.Designer.vb">
       <DependentUpon>Form2.vb</DependentUpon>
     </Compile>

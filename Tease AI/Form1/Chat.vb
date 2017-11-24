@@ -75,7 +75,7 @@ Partial Class Form1
 	<span>
 		" & messageText & "
 	</span>
-</div>", delayOutput)
+</div>", delayOutput, True)
 	End Sub
 
 	Public Sub ChatAddWritingTaskInfo(message As String, Optional delayOutput As Boolean = False)
@@ -83,17 +83,23 @@ Partial Class Form1
 	<span>
 		" & message & "
 	</span>
-</div>", delayOutput, True)
+</div>", delayOutput, False)
 	End Sub
 
 	Public Sub ChatAddScriptPosInfo(descr As String, Optional delayOutput As Boolean = False)
-		ChatAppend("<div class=""debugInfo"">
+		ChatAppend("<div class=""scriptPosInfo"">
 	<span>::: " & If(descr = "@", "TYPO", descr.Replace("@", "")) & " ::: <br>
 		::: FileText = " & ssh.FileText & " ::: LineVal = " & ssh.StrokeTauntVal & "<br>
 		::: TauntText = " & ssh.TauntText & " ::: LineVal = " & ssh.TauntTextCount & "<br>
 		::: ResponseFile = " & ssh.ResponseFile & " ::: LineVal = " & ssh.ResponseLine & "
 	</span>
 </div>", delayOutput, True)
+	End Sub
+
+	Public Sub ChatAddWarning(msg As String)
+		ChatAppend("<div class=""warning"">
+	<span class=""msg"">WARNING: " & msg & "</span>
+</div>", False, True)
 	End Sub
 
 	Public Sub ChatAddException(msg As String, ex As Exception)
