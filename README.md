@@ -4,7 +4,25 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 # Todo:
 
 Stefaf: Integration of Class myDirectory: Status ongoing.
+
+# Changelog - Patch 55.4.0
 	
+* Commands: 
+
+	* Fixed issue where @DayOfWeek was a day off. Added the possibility to use numbers as parameter, since localized day strings are useless for script exchange. The first day of week is Monday.
+	
+* Command Filters:
+
+
+* Bugfixes:
+
+
+* Miscellaneous:
+
+	* Reworked Glitter app to use proper html and CSS. It is now possible to reference relative imagepaths. If a feed is running a scriptfile given in @Glitter(ScriptName) is executed after the currently running script. The number of queued scripts is not limited. It is now possible to execute a specific script using the debug session window.
+	* Shrinked down ResponseClean(String) to avoid code redundancy. Response lines in the [All]-Section are now unavailable in start scripts and after the orgasm decision (!) if the last script is running. This feature was intended for Patch 48/49 but never worked.
+	* Added MultipleEdges to StopEverything() since it caused a script freeze when @InterruptLongEdge was called. It was unresolvable using the "CBT-Trick".
+	* Simplified code and usage of custom Lazy Sub buttons.
 	
 # Changelog - Patch 55.3.0
 

@@ -1,0 +1,22 @@
+/* Chat fallback style */
+/* This stylesheet is used, if there was no custom stylesheet found at: [Tease-AI-Root]\System\CSS\ChatWindow.css */
+
+body {font: 16px Cambria; color:/*ChatTextColor*/; background-color: /*ChatWindowColor*/;}
+
+.systemMessage {color: steelblue; font-weight: bold;}
+
+.exception {color: Red; background-color: #FFE6E6;}
+.exception .msg {Display:Block; font-weight: bold;}
+.exception .exMessage {Display: hidden;}
+
+.timestamp {color: DimGray;}
+.sub .name  {color: /*SubNameColor*/; font-family: /*SubFontName*/; font-size: /*SubFontSize*/;}
+.domme .name,    .emoteMessage .domme .text	   {color: /*DommeNameColor*/; font-family: /*DommeFontName*/; font-size: /*DommeFontSize*/;}
+.contact1 .name, .emoteMessage .contact1 .text {color: /*Contact1NameColor*/; font-family: /*DommeFontName*/; font-size: /*DommeFontSize*/;}
+.contact2 .name, .emoteMessage .contact2 .text {color: /*Contact2NameColor*/; font-family: /*DommeFontName*/; font-size: /*DommeFontSize*/;}
+.contact3 .name, .emoteMessage .contact3 .text {color: /*Contact3NameColor*/; font-family: /*DommeFontName*/; font-size: /*DommeFontSize*/;}
+
+.name {font-weight: bold;}
+.emoteMessage .text {font-style: italic; font-weight:bold;}
+
+#DommeIsTyping, #Contact1IsTyping, #Contact2IsTyping, #Contact3IsTyping {font-style: italic; color: DimGray;}

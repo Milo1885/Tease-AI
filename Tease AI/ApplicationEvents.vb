@@ -38,5 +38,25 @@ Namespace My
 			Session = New SessionState
 		End Sub
 
+		''' =========================================================================================================
+		''' <summary>
+		''' Prints an Exception entry in the chatwindow if Form1 is available. This function uses INVOKE on Form1.
+		''' </summary>
+		''' <param name="msg">Represents a clear text message to display.</param>
+		''' <param name="ex">The occurred exception.</param>
+		Public Sub HandledException(msg As String, ex As Exception)
+			If Form1 Is Nothing Then Exit Sub
+			If Form1.IsHandleCreated = False Then Exit Sub
+
+			If Form1.InvokeRequired Then
+				Form1.Invoke(Sub() HandledException(msg, ex))
+				Exit Sub
+			End If
+
+			Form1.ChatAddException(msg, ex)
+
+		End Sub
+
+
 	End Class
 End Namespace

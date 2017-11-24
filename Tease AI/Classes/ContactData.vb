@@ -248,11 +248,11 @@ checkFolder:
 
 	Friend Function GetRandom(tp As ContactType, newFolder As Boolean) As List(Of String)
 		'no need to check again since you already checked when creating the contact
-		'If Check_ImageDir(tp) Then
-		Return LoadRandom(getCurrentBaseFolder(tp), newFolder)
-		'Else
-		'	Return New List(Of String)
-		'End If
+		If Check_ImageDir(tp) Then
+			Return LoadRandom(getCurrentBaseFolder(tp), newFolder)
+		Else
+			Return New List(Of String)
+		End If
 	End Function
 
 	Function LoadRandom(ByVal baseDirectory As String, newFolder As Boolean) As List(Of String)
@@ -560,8 +560,7 @@ SetForwardImage:
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			'                                            All Errors
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-            Log.WriteError("Exception in GetDommeImage()", ex, "")
-            If My.Settings.CBOutputErrors = True Then Form1.ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " :::: Exception in GetDommeImage().</font>", False)
+			Log.WriteError("Exception in GetDommeImage()", ex, "")
 		Finally
 			'⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑ Finally ⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑
 #If TRACE Then
@@ -740,8 +739,7 @@ redo:
 			ApplyTextedTags = ApplyTextedTags.Replace("#Tag", "")
 
 		Catch ex As Exception
-            Log.WriteError(ex.Message, ex, "ApplyTextedTags(String)")
-            If My.Settings.CBOutputErrors = True Then Form1.ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " :::: ApplyTextedTags(String).</font>", False)
+			Log.WriteError("Exception on ApplyTextedTags(String)", ex, "ApplyTextedTags(String)")
 		End Try
 
 	End Function

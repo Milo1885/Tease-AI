@@ -204,7 +204,7 @@ Public Class Form1
 
 			End Try
 
-			SaveChatLog(False)
+			If ssh.SaidHello Then SaveChatLog(False)
 
 			Try
 				FrmSettings.Close()
@@ -232,23 +232,6 @@ Public Class Form1
 		Finally
 			My.Settings.Save()
 		End Try
-	End Sub
-
-	Private Sub SaveChatLog(ByVal IsAutosave As Boolean)
-		If ChatText.DocumentText.Length > 300 Then
-
-			If (Not System.IO.Directory.Exists(Application.StartupPath & "\Chatlogs\")) Then
-				System.IO.Directory.CreateDirectory(Application.StartupPath & "\Chatlogs\")
-			End If
-
-			If IsAutosave = True And FrmSettings.CBAutosaveChatlog.Checked = True Then
-				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Chatlogs\Autosave.html", ChatText.DocumentText, False)
-
-			ElseIf IsAutosave = False And FrmSettings.CBSaveChatlogExit.Checked = True Then
-				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Chatlogs\" & DateTime.Now.ToString("MM.dd.yyyy hhmm") & " chatlog.html", ChatText.DocumentText, False)
-			End If
-
-		End If
 	End Sub
 
 	Protected Overrides Sub OnClosing(ByVal e As System.ComponentModel.CancelEventArgs)
@@ -800,7 +783,7 @@ retryStart:
 			FrmSplash.PBSplash.Value += 1
 			FrmSplash.LBLSplash.Text = "Configuring media player..."
 			FrmSplash.Refresh()
-			
+
 			DomWMP.uiMode = "none"
 
 			If My.Settings.DomAVStretch = False Then domAvatar.SizeMode = PictureBoxSizeMode.Zoom
@@ -1088,17 +1071,6 @@ retryStart:
 
 
 
-			BTNLS1.Text = My.Settings.LS1
-
-			BTNLS2.Text = My.Settings.LS2
-
-			BTNLS3.Text = My.Settings.LS3
-
-			BTNLS4.Text = My.Settings.LS4
-
-			BTNLS5.Text = My.Settings.LS5
-
-
 
 
 			'ImageThread.Start()
@@ -1178,179 +1150,12 @@ retryStart:
 
 	End Sub
 
-	<Obsolete("Do not use anymore")>
-	Public Sub ResetButton()
-
-		ScriptTimer.Stop()
-
-		SaveChatLog(False)
-
-		ssh.DomTask = "@SystemMessage <b>Tease AI has been reset</b>"
-		ssh.DomChat = "@SystemMessage <b>Tease AI has been reset</b>"
-
-		StrokePace = 0
-
-		If Directory.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\") Then
-			My.Computer.FileSystem.DeleteDirectory(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\", FileIO.DeleteDirectoryOption.DeleteAllContents)
-		End If
-
-		System.IO.Directory.CreateDirectory(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\")
-
-		ssh.TauntEdging = False
-
-		ssh.CBTBallsFirst = True
-		ssh.CBTCockFirst = True
-		ssh.CBTBothFirst = True
-		ssh.CustomTaskFirst = True
-
-		ssh.VideoType = "General"
-
-		ssh.UpdatesTick = 120
-		UpdatesTimer.Start()
-
-		Me.ActiveControl = Me.chatBox
-
-		ssh.JustShowedBlogImage = False
-
-		ssh.SaidHello = False
-		ssh.SubWroteLast = False
-		ssh.WritingTaskFlag = False
-
-		ssh.OrgasmYesNo = False
-
-		FrmSettings.LockOrgasmChances(False)
-
-		ssh.ShowModule = False
-		ssh.BookmarkLink = False
-		ssh.BookmarkModule = False
-		ssh.YesOrNo = False
-
-		ssh.StartStrokingCount = 0
-
-
-		ssh.StrokeTauntVal = -1
-
-		ssh.EdgeToRuinSecret = True
-
-
-
-
-
-
-
-		ssh.dommePresent = True
-		ssh.contact1Present = False
-		ssh.contact2Present = False
-		ssh.contact3Present = False
-
-		TeaseTimer.Stop()
-
-		DeleteVariable("SYS_StrokeRound")
-
-		mainPictureBox.Image = Nothing
-		ssh.SlideshowLoaded = False
-
-		FrmSettings.domlevelNumBox.Value = My.Settings.DomLevel
-		FrmSettings.NBEmpathy.Value = My.Settings.DomEmpathy
-
-		' Github Patch
-		BTNPlaylist.Enabled = True
-
-		If PNLWritingTask.Visible Then CloseApp(PNLWritingTask)
-
-	End Sub
 
 
 
 	Private Sub sendButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sendButton.Click
-
-
-
-
-
-		Dim CheckSpace As String = chatBox.Text
-
-		If CheckSpace = "" Then CheckSpace = ChatBox2.Text
-
-		CheckSpace = CheckSpace.Replace(" ", "")
-
-		If CheckSpace = "" Then Return
-
-		If LazyEdit1 = True Then
-			If chatBox.Text <> "" Then
-				BTNLS1.Text = chatBox.Text
-			Else
-				BTNLS1.Text = ChatBox2.Text
-			End If
-			BTNLS1.Visible = True
-			BTNLS1Edit.BackColor = My.Settings.ButtonColor
-			BTNLS1Edit.ForeColor = My.Settings.TextColor
-			My.Settings.LS1 = BTNLS1.Text
-			chatBox.Text = ""
-			ChatBox2.Text = ""
-			Return
-		End If
-
-		If LazyEdit2 = True Then
-			If chatBox.Text <> "" Then
-				BTNLS2.Text = chatBox.Text
-			Else
-				BTNLS2.Text = ChatBox2.Text
-			End If
-			BTNLS2.Visible = True
-			BTNLS2Edit.BackColor = My.Settings.ButtonColor
-			BTNLS2Edit.ForeColor = My.Settings.TextColor
-			My.Settings.LS2 = BTNLS2.Text
-			chatBox.Text = ""
-			ChatBox2.Text = ""
-			Return
-		End If
-
-		If LazyEdit3 = True Then
-			If chatBox.Text <> "" Then
-				BTNLS3.Text = chatBox.Text
-			Else
-				BTNLS3.Text = ChatBox2.Text
-			End If
-			BTNLS3.Visible = True
-			BTNLS3Edit.BackColor = My.Settings.ButtonColor
-			BTNLS3Edit.ForeColor = My.Settings.TextColor
-			My.Settings.LS3 = BTNLS3.Text
-			chatBox.Text = ""
-			ChatBox2.Text = ""
-			Return
-		End If
-
-		If LazyEdit4 = True Then
-			If chatBox.Text <> "" Then
-				BTNLS4.Text = chatBox.Text
-			Else
-				BTNLS4.Text = ChatBox2.Text
-			End If
-			BTNLS4.Visible = True
-			BTNLS4Edit.BackColor = My.Settings.ButtonColor
-			BTNLS4Edit.ForeColor = My.Settings.TextColor
-			My.Settings.LS4 = BTNLS4.Text
-			chatBox.Text = ""
-			ChatBox2.Text = ""
-			Return
-		End If
-
-		If LazyEdit5 = True Then
-			If chatBox.Text <> "" Then
-				BTNLS5.Text = chatBox.Text
-			Else
-				BTNLS5.Text = ChatBox2.Text
-			End If
-			BTNLS5.Visible = True
-			BTNLS5Edit.BackColor = My.Settings.ButtonColor
-			BTNLS5Edit.ForeColor = My.Settings.TextColor
-			My.Settings.LS5 = BTNLS5.Text
-			chatBox.Text = ""
-			ChatBox2.Text = ""
-			Return
-		End If
-
+		' Check for empty or whitespaced input.
+		If String.IsNullOrWhiteSpace(chatBox.Text & ChatBox2.Text) Then Exit Sub
 
 		If TimeoutTimer.Enabled = True Then TimeoutTimer.Stop()
 
@@ -1359,9 +1164,10 @@ retryStart:
 			Return
 		End If
 
-		ssh.ChatString = chatBox.Text
+		ssh.ChatString = If(Trim(chatBox.Text) <> "", chatBox.Text, ChatBox2.Text)
 
-		If ssh.ChatString = "" Then ssh.ChatString = ChatBox2.Text
+		chatBox.Text = ""
+		ChatBox2.Text = ""
 
 		If CBShortcuts.Checked = True Then
 
@@ -1379,29 +1185,12 @@ retryStart:
 		End If
 
 
-		chatBox.Text = ""
-		ChatBox2.Text = ""
+
 
 		If ssh.ChatString.Substring(0, 1) = "@" Then
+			ChatAddScriptPosInfo(ssh.ChatString)
 
-			If ssh.ChatString = "@" Then
-
-				ssh.Chat = "<font face=""Cambria"" size=""2"" color=""Green"">" & ssh.Chat & ssh.ChatString.Replace("@", "") & "::: TYPO ::: <br>::: FileText = " & ssh.FileText & " ::: LineVal = " & ssh.StrokeTauntVal & "<br>::: TauntText = " & ssh.TauntText & " ::: LineVal = " & ssh.TauntTextCount & "<br>::: ResponseFile = " & ssh.ResponseFile & " ::: LineVal = " & ssh.ResponseLine & "<br></font>"
-			Else
-				ssh.Chat = "<font face=""Cambria"" size=""2"" color=""Green"">" & ssh.Chat & ssh.ChatString.Replace("@", "") & " :::  <br>::: FileText = " & ssh.FileText & " ::: LineVal = " & ssh.StrokeTauntVal & "<br>::: TauntText = " & ssh.TauntText & " ::: LineVal = " & ssh.TauntTextCount & "<br>::: ResponseFile = " & ssh.ResponseFile & " ::: LineVal = " & ssh.ResponseLine & "<br></font>"
-			End If
-
-			ssh.Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & ssh.Chat & "</body>"
-			ChatText.DocumentText = ssh.Chat
-			ChatText2.DocumentText = ssh.Chat
-			ChatReadyState()
-
-			chatBox.Text = ""
-			ChatBox2.Text = ""
-
-			SaveChatLog(True)
-
-			Return
+			Exit Sub
 		End If
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then
@@ -1411,47 +1200,13 @@ retryStart:
 
 
 
-		' Add timestamps to domme response if the option is checked in the menu
-		If FrmSettings.timestampCheckBox.Checked = True Then
-			ssh.Chat = ssh.Chat & "<font face=""Cambria"" size=""2"" color=""DimGray"">" & (Date.Now.ToString("hh:mm tt ")) & "</font>"
-		End If
+
 
 		If ssh.WritingTaskFlag = True Then GoTo WritingTaskLine
 
-		Dim TextColor As String = Color2Html(My.Settings.ChatTextColor)
-
-		If ssh.SubWroteLast = True And FrmSettings.shownamesCheckBox.Checked = False Then
-
-			ssh.Chat = "<body style=""word-wrap:break-word;"">" & ssh.Chat & "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""" & TextColor & """>" & ssh.ChatString & "<br></font></body>"
-			ssh.Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & ssh.Chat & "</body>"
-			ChatText.DocumentText = ssh.Chat
-			ChatText2.DocumentText = ssh.Chat
-			ChatReadyState()
+		ChatAddMessage(My.Settings.SubName, ssh.ChatString)
 
 
-		Else
-
-			ssh.Chat = "<body style=""word-wrap:break-word;"">" & ssh.Chat & "<font face=""Cambria"" size=""3"" font color=""" &
-			 My.Settings.SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""" & TextColor & """>" & ssh.ChatString & "<br></font></body>"
-			ssh.Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & ssh.Chat & "</body>"
-			ChatText.DocumentText = ssh.Chat
-			ChatText2.DocumentText = ssh.Chat
-			ChatReadyState()
-
-		End If
-
-
-
-		ScrollChatDown()
-
-		SaveChatLog(True)
-
-		If ssh.IsTyping = True Then
-
-			ChatText.DocumentText = ssh.Chat & "<font color=""DimGray""><i>" & ssh.tempDomName & " is typing...</i></font>"
-			ChatText2.DocumentText = ssh.Chat & "<font color=""DimGray""><i>" & ssh.tempDomName & " is typing...</i></font>"
-			ChatReadyState()
-		End If
 
 
 
@@ -1641,159 +1396,91 @@ NoPlaylistStartFile:
 WritingTaskLine:
 
 		If ssh.WritingTaskFlag = True Then
+			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+			'								Writing Task
+			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+
+			' ##################### Evaluate Input ########################
+			Dim InputWrong, TaskTimeout, TaskFailed, TaskSuccess As Boolean
 
 			If ssh.ChatString = LBLWritingTaskText.Text Then
 
 				ssh.WritingTaskLinesWritten += 1
 				ssh.WritingTaskLinesRemaining -= 1
-
 				LBLLinesWritten.Text = ssh.WritingTaskLinesWritten
 				LBLLinesRemaining.Text = ssh.WritingTaskLinesRemaining
 
-				If ssh.SubWroteLast = True And FrmSettings.shownamesCheckBox.Checked = False Then
-					ssh.Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & ssh.Chat & "</body>"
-					If CBWritingProgress.Checked = True Then
-						ssh.Chat = "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & ssh.Chat & ssh.ChatString & "<br></font> " _
-							& "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#006400"">" & "Correct: " & ssh.WritingTaskLinesRemaining & " lines remaining<br></font>"
-						If FrmSettings.TimedWriting.Checked = True And ssh.WritingTaskCurrentTime < 1 Then ssh.Chat = ssh.Chat.Replace("Correct: " & ssh.WritingTaskLinesRemaining & " lines remaining", "Time Expired")
-						ssh.Chat = ssh.Chat.Replace(" 1 lines", " 1 line")
-						ssh.Chat = ssh.Chat.Replace(" 0 lines remaining", " Task Completed")
-					Else
-						ssh.Chat = "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & ssh.Chat & ssh.ChatString & "<br></font>"
-					End If
-
-					ChatText.DocumentText = ssh.Chat
-					ChatText2.DocumentText = ssh.Chat
-					ChatReadyState()
-
-				Else
-					ssh.Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & ssh.Chat & "</body>"
-
-					If CBWritingProgress.Checked = True Then
-						ssh.Chat = ssh.Chat & "<font face=""Cambria"" size=""3"" font color=""" &
-						 My.Settings.SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & ssh.ChatString & "<br></font>" _
-						 & "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#006400"">" & "Correct: " & ssh.WritingTaskLinesRemaining & " lines remaining<br></font>"
-						If FrmSettings.TimedWriting.Checked = True And ssh.WritingTaskCurrentTime < 1 Then ssh.Chat = ssh.Chat.Replace("Correct: " & ssh.WritingTaskLinesRemaining & " lines remaining", "Time Expired")
-						ssh.Chat = ssh.Chat.Replace(" 1 lines", " 1 line")
-						ssh.Chat = ssh.Chat.Replace(" 0 lines remaining", " Task Completed")
-					Else
-						ssh.Chat = ssh.Chat & "<font face=""Cambria"" size=""3"" font color=""" &
-						 My.Settings.SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & ssh.ChatString & "<br></font>"
-					End If
-
-					ChatText.DocumentText = ssh.Chat
-					ChatText2.DocumentText = ssh.Chat
-					ChatReadyState()
-
-				End If
-
-				SaveChatLog(True)
-
-				If ssh.IsTyping = True Then
-
-					ChatText.DocumentText = ssh.Chat & "<font color=""DimGray""><i>" & ssh.tempDomName & " is typing...</i></font>"
-					ChatText2.DocumentText = ssh.Chat & "<font color=""DimGray""><i>" & ssh.tempDomName & " is typing...</i></font>"
-					ChatReadyState()
-				End If
-
-				chatBox.Text = ""
-				ChatBox2.Text = ""
-
-				ssh.SubWroteLast = True
-
-
-				If ssh.WritingTaskLinesRemaining = 0 Then
-					ClearWriteTask()
-					ssh.ScriptTick = 3
-					ScriptTimer.Start()
-				End If
-
-				If ssh.WritingTaskCurrentTime < 1 And My.Settings.TimedWriting = True And ssh.WritingTaskFlag = True Then
-					ClearWriteTask()
-					ssh.SkipGotoLine = True
-					ssh.FileGoto = "Failed Writing Task"
-					GetGoto()
-					ssh.ScriptTick = 4
-					ScriptTimer.Start()
-				End If
-
+				If ssh.WritingTaskLinesRemaining <= 0 Then TaskSuccess = True
 
 			Else
 
-				If ssh.SubWroteLast = True And FrmSettings.shownamesCheckBox.Checked = False Then
-
-					If CBWritingProgress.Checked = True Then
-						ssh.Chat = "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & ssh.Chat & "</font><font color=""#FF0000"">" & ssh.ChatString & "<br></font>" &
-						"<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#CD0000"">" & "Wrong: " & (ssh.WritingTaskMistakesAllowed - ssh.WritingTaskMistakesMade) - 1 &
-						" mistakes remaining<br></font>"
-						If FrmSettings.TimedWriting.Checked = True And ssh.WritingTaskCurrentTime < 1 Then ssh.Chat = ssh.Chat.Replace("Wrong: " & (ssh.WritingTaskMistakesAllowed - ssh.WritingTaskMistakesMade) - 1 & " mistakes remaining", "Time Expired")
-						ssh.Chat = ssh.Chat.Replace(" 1 mistakes", " 1 mistake")
-						ssh.Chat = ssh.Chat.Replace(" 0 mistakes remaining", " Task Failed")
-					Else
-						ssh.Chat = "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & ssh.Chat & "</font><font color=""#FF0000"">" & ssh.ChatString & "<br></font>"
-					End If
-
-					ssh.Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & ssh.Chat & "</body>"
-					ChatText.DocumentText = ssh.Chat
-					ChatText2.DocumentText = ssh.Chat
-					ChatReadyState()
-
-				Else
-
-					If CBWritingProgress.Checked = True Then
-						ssh.Chat = ssh.Chat & "<font face=""Cambria"" size=""3"" font color=""" &
-						   My.Settings.SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#FF0000"">" & ssh.ChatString & "<br></font>" &
-						  "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#CD0000"">" & "Wrong: " & (ssh.WritingTaskMistakesAllowed - ssh.WritingTaskMistakesMade) - 1 &
-						  " mistakes remaining<br></font>"
-						If FrmSettings.TimedWriting.Checked = True And ssh.WritingTaskCurrentTime < 1 Then ssh.Chat = ssh.Chat.Replace("Wrong: " & (ssh.WritingTaskMistakesAllowed - ssh.WritingTaskMistakesMade) - 1 & " mistakes remaining", "Time Expired")
-						ssh.Chat = ssh.Chat.Replace(" 1 mistakes", " 1 mistake")
-						ssh.Chat = ssh.Chat.Replace(" 0 mistakes remaining", " Task Failed")
-					Else
-						ssh.Chat = ssh.Chat & "<font face=""Cambria"" size=""3"" font color=""" &
-						 My.Settings.SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#FF0000"">" & ssh.ChatString & "<br></font>"
-					End If
-
-					ssh.Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & ssh.Chat & "</body>"
-					ChatText.DocumentText = ssh.Chat
-					ChatText2.DocumentText = ssh.Chat
-					ChatReadyState()
-
-				End If
-
-				SaveChatLog(True)
-
-				If ssh.IsTyping = True Then
-
-					ChatText.DocumentText = ssh.Chat & "<font color=""DimGray""><i>" & ssh.tempDomName & " is typing...</i></font>"
-					ChatText2.DocumentText = ssh.Chat & "<font color=""DimGray""><i>" & ssh.tempDomName & " is typing...</i></font>"
-					ChatReadyState()
-				End If
-
-				ssh.SubWroteLast = True
+				InputWrong = True
 
 				ssh.WritingTaskMistakesMade += 1
 				LBLMistakesMade.Text = ssh.WritingTaskMistakesMade
 
-				If ssh.WritingTaskMistakesMade = ssh.WritingTaskMistakesAllowed Then
-					ClearWriteTask()
-					ssh.SkipGotoLine = True
-					ssh.FileGoto = "Failed Writing Task"
-					GetGoto()
-					ssh.ScriptTick = 4
-					ScriptTimer.Start()
-				End If
-
-				If ssh.WritingTaskCurrentTime < 1 And My.Settings.TimedWriting = True And ssh.WritingTaskFlag = True Then
-					ClearWriteTask()
-					ssh.SkipGotoLine = True
-					ssh.FileGoto = "Failed Writing Task"
-					GetGoto()
-					ssh.ScriptTick = 4
-					ScriptTimer.Start()
-				End If
+				If ssh.WritingTaskMistakesAllowed - ssh.WritingTaskMistakesMade <= 0 Then TaskFailed = True
 
 			End If
+
+			If ssh.WritingTaskCurrentTime < 1 And My.Settings.TimedWriting = True And ssh.WritingTaskFlag = True Then
+				TaskTimeout = True
+			End If
+
+			' ################# Generate output text ######################
+			Dim ProgrText As String = ""
+			Dim OutColor As String = ""
+			Dim OutHtml As String = "<span style=""color:{0}"">{1}</span>"
+
+			If TaskTimeout Or TaskFailed Or InputWrong Then
+				If TaskTimeout Then
+					ProgrText = "Time Expired"
+				ElseIf TaskFailed Then
+					ProgrText = "Task Failed"
+				ElseIf InputWrong Then
+					ProgrText = String.Format("Wrong: {0} mistakes remaining", ssh.WritingTaskMistakesAllowed - ssh.WritingTaskMistakesMade)
+					If ssh.WritingTaskMistakesAllowed - ssh.WritingTaskMistakesMade = 1 Then ProgrText = ProgrText.Replace("mistakes", "mistake")
+				End If
+
+				OutColor = "red"
+			Else
+				If TaskSuccess Then
+					ProgrText = "Task completed successfully"
+				Else
+					ProgrText = String.Format("Correct: {0} lines remaining", ssh.WritingTaskLinesRemaining)
+					If ssh.WritingTaskLinesRemaining = 1 Then ProgrText = ProgrText.Replace("lines", "line")
+				End If
+
+				OutColor = "green"
+			End If
+
+			' ####################### Print output ########################
+			ChatAddMessage(My.Settings.SubName, String.Format(OutHtml, OutColor, ssh.ChatString), True)
+			ChatAddWritingTaskInfo(String.Format(OutHtml, OutColor, ProgrText))
+
+			' ##################### Continue script? ######################
+			If TaskTimeout Or TaskFailed Then
+
+				ClearWriteTask()
+				ssh.SkipGotoLine = True
+				ssh.FileGoto = "Failed Writing Task"
+				GetGoto()
+				ssh.ScriptTick = 4
+				ScriptTimer.Start()
+
+			ElseIf TaskSuccess Then
+
+				ClearWriteTask()
+				ssh.ScriptTick = 3
+				ScriptTimer.Start()
+
+			End If
+
+
 			If ssh.randomWriteTask Then setWriteTask()
+			'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+			' Writing Task - End
+			'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 		End If
 
 		If ssh.AFK And Not ssh.YesOrNo Then Return
@@ -3105,329 +2792,84 @@ FoundResponse:
 	End Sub
 
 	Public Function ResponseClean(ByVal CleanResponse As String) As String
+		ResponseClean = "NULL"
 
-		'TODO: Add Errorhandling.
-		Dim DomResponse As New StreamReader(ssh.ResponseFile)
-		Dim DRLines As New List(Of String)
-		Dim DRLineTotal As Integer
-		Dim SubState As String
+		Dim FilteredLines As New List(Of String)
+		Dim Section As String
 
-		DRLineTotal = -1
-		DRLines.Clear()
 
-		Dim AddResponse As Boolean
-		AddResponse = False
+		Dim AddResponse As Boolean = False
 
 		If My.Settings.Chastity = True Then
 			If ssh.CBTCockFlag Then
-				SubState = "CBT Cock"
-				GoTo FoundState
+				Section = "CBT Cock"
 			ElseIf ssh.CBTBallsFlag = True Or ssh.CBTBothFlag = True Then
-				SubState = "CBT Balls"
-				GoTo FoundState
+				Section = "CBT Balls"
+			Else
+				Section = "Chastity"
 			End If
-			SubState = "Chastity"
-			GoTo FoundState
+		ElseIf ssh.BeforeTease = True Then
+			Section = "Before Tease"
+		ElseIf ssh.FirstRound = True Then
+			Section = "First Round"
+		ElseIf ssh.EndTease = True Then
+			Section = "After Tease"
+		ElseIf ssh.CBTCockFlag = True Then
+			Section = "CBT Cock"
+		ElseIf ssh.CBTBallsFlag = True Or ssh.CBTBothFlag = True Then
+			Section = "CBT Balls"
+		ElseIf ssh.SubHoldingEdge = True Then
+			Section = "Holding The Edge"
+		ElseIf ssh.SubEdging = True Then
+			Section = "Edging"
+		ElseIf ssh.SubStroking = True Then
+			Section = "Stroking"
+		Else
+			Section = "Not Stroking"
 		End If
 
-		If ssh.FirstRound = True Then
-			SubState = "First Round"
-			GoTo FoundState
-		End If
+		Dim RespLines As List(Of String) = Txt2List(ssh.ResponseFile)
 
-		If ssh.EndTease = True Then
-			SubState = "After Tease"
-			GoTo FoundState
-		End If
+		For Each line As String In RespLines
+			If Trim(line).ToUpper = String.Format("[{0}]", Section).ToUpper Then
+				AddResponse = True
+			ElseIf Trim(line).ToUpper = String.Format("[{0} End]", Section).ToUpper Then
+				AddResponse = False
+			ElseIf AddResponse = True
+				FilteredLines.Add(line)
+			End If
+		Next
 
-		If ssh.CBTCockFlag = True Then
-			SubState = "CBT Cock"
-			GoTo FoundState
-		End If
+		AddResponse = False
 
-		If ssh.CBTBallsFlag = True Or ssh.CBTBothFlag = True Then
-			SubState = "CBT Balls"
-			GoTo FoundState
-		End If
-
-		If ssh.SubHoldingEdge = True Then
-			SubState = "Sub Holding Edge"
-			GoTo FoundState
-		End If
-
-		If ssh.SubEdging = True Then
-			SubState = "Sub Edging"
-			GoTo FoundState
-		End If
-
-		If ssh.SubStroking = True Then
-			SubState = "Sub Stroking"
-			GoTo FoundState
-		End If
-
-		If ssh.BeforeTease = True Then
-			SubState = "Before Tease"
-			GoTo FoundState
-		End If
-
-		SubState = "Not Stroking"
-
-FoundState:
-
-
-		If SubState = "Before Tease" Then
-
-			While DomResponse.Peek <> -1
-				DRLineTotal += 1
-				DRLines.Add(DomResponse.ReadLine())
-				If Trim(DRLines(DRLineTotal)) = "[Before Tease]" Then
+		If Section <> "After Tease" And Section <> "Before Tease" Then
+			For Each line As String In RespLines
+				If Trim(line).ToUpper = "[All]".ToUpper Then
 					AddResponse = True
-				End If
-				If Trim(DRLines(DRLineTotal)) = "[Before Tease End]" Then
+				ElseIf Trim(line).ToUpper = "[All End]".ToUpper Then
 					AddResponse = False
+				ElseIf AddResponse = True
+					FilteredLines.Add(line)
 				End If
-				If AddResponse = False Or Trim(DRLines(DRLineTotal)) = "[Before Tease]" Then
-					DRLines.Remove(DRLines(DRLineTotal))
-					DRLineTotal -= 1
-				End If
-			End While
+			Next
 		End If
 
 
-		If SubState = "Chastity" Then
-
-			While DomResponse.Peek <> -1
-				DRLineTotal += 1
-				DRLines.Add(DomResponse.ReadLine())
-				If Trim(DRLines(DRLineTotal)) = "[Chastity]" Then
-					AddResponse = True
-				End If
-				If Trim(DRLines(DRLineTotal)) = "[Chastity End]" Then
-					AddResponse = False
-				End If
-				If AddResponse = False Or Trim(DRLines(DRLineTotal)) = "[Chastity]" Then
-					DRLines.Remove(DRLines(DRLineTotal))
-					DRLineTotal -= 1
-				End If
-			End While
+		If FilteredLines.Count < 1 Then
+			Exit Function
 		End If
-
-		If SubState = "First Round" Then
-
-			While DomResponse.Peek <> -1
-				DRLineTotal += 1
-				DRLines.Add(DomResponse.ReadLine())
-				If Trim(DRLines(DRLineTotal)) = "[First Round]" Then
-					AddResponse = True
-				End If
-				If Trim(DRLines(DRLineTotal)) = "[First Round End]" Then
-					AddResponse = False
-				End If
-				If AddResponse = False Or Trim(DRLines(DRLineTotal)) = "[First Round]" Then
-					DRLines.Remove(DRLines(DRLineTotal))
-					DRLineTotal -= 1
-				End If
-			End While
-		End If
-
-		If SubState = "Sub Stroking" Then
-
-			While DomResponse.Peek <> -1
-				DRLineTotal += 1
-				DRLines.Add(DomResponse.ReadLine())
-				If Trim(DRLines(DRLineTotal)) = "[Stroking]" Then
-					AddResponse = True
-				End If
-				If Trim(DRLines(DRLineTotal)) = "[Stroking End]" Then
-					AddResponse = False
-				End If
-				If AddResponse = False Or Trim(DRLines(DRLineTotal)) = "[Stroking]" Then
-					DRLines.Remove(DRLines(DRLineTotal))
-					DRLineTotal -= 1
-				End If
-			End While
-		End If
-
-		If SubState = "Not Stroking" Then
-
-			While DomResponse.Peek <> -1
-				DRLineTotal += 1
-				DRLines.Add(DomResponse.ReadLine())
-				If Trim(DRLines(DRLineTotal)) = "[Not Stroking]" Then
-					AddResponse = True
-				End If
-				If Trim(DRLines(DRLineTotal)) = "[Not Stroking End]" Then
-					AddResponse = False
-				End If
-				If AddResponse = False Or Trim(DRLines(DRLineTotal)) = "[Not Stroking]" Then
-					DRLines.Remove(DRLines(DRLineTotal))
-					DRLineTotal -= 1
-				End If
-			End While
-		End If
-
-		If SubState = "Sub Edging" Then
-
-			While DomResponse.Peek <> -1
-				DRLineTotal += 1
-				DRLines.Add(DomResponse.ReadLine())
-				If Trim(DRLines(DRLineTotal)) = "[Edging]" Then
-					AddResponse = True
-				End If
-				If Trim(DRLines(DRLineTotal)) = "[Edging End]" Then
-					AddResponse = False
-				End If
-				If AddResponse = False Or Trim(DRLines(DRLineTotal)) = "[Edging]" Then
-					DRLines.Remove(DRLines(DRLineTotal))
-					DRLineTotal -= 1
-				End If
-			End While
-		End If
-
-		If SubState = "Sub Holding Edge" Then
-
-			While DomResponse.Peek <> -1
-				DRLineTotal += 1
-				DRLines.Add(DomResponse.ReadLine())
-				If Trim(DRLines(DRLineTotal)) = "[Holding The Edge]" Then
-					AddResponse = True
-				End If
-				If Trim(DRLines(DRLineTotal)) = "[Holding The Edge End]" Then
-					AddResponse = False
-				End If
-				If AddResponse = False Or Trim(DRLines(DRLineTotal)) = "[Holding The Edge]" Then
-					DRLines.Remove(DRLines(DRLineTotal))
-					DRLineTotal -= 1
-				End If
-			End While
-		End If
-
-		If SubState = "CBT Cock" Then
-
-			While DomResponse.Peek <> -1
-				DRLineTotal += 1
-				DRLines.Add(DomResponse.ReadLine())
-				If Trim(DRLines(DRLineTotal)) = "[CBT Cock]" Then
-					AddResponse = True
-				End If
-				If Trim(DRLines(DRLineTotal)) = "[CBT Cock End]" Then
-					AddResponse = False
-				End If
-				If AddResponse = False Or Trim(DRLines(DRLineTotal)) = "[CBT Cock]" Then
-					DRLines.Remove(DRLines(DRLineTotal))
-					DRLineTotal -= 1
-				End If
-			End While
-		End If
-
-		If SubState = "CBT Balls" Then
-
-			While DomResponse.Peek <> -1
-				DRLineTotal += 1
-				DRLines.Add(DomResponse.ReadLine())
-				If Trim(DRLines(DRLineTotal)) = "[CBT Balls]" Then
-					AddResponse = True
-				End If
-				If Trim(DRLines(DRLineTotal)) = "[CBT Balls End]" Then
-					AddResponse = False
-				End If
-				If AddResponse = False Or Trim(DRLines(DRLineTotal)) = "[CBT Balls]" Then
-					DRLines.Remove(DRLines(DRLineTotal))
-					DRLineTotal -= 1
-				End If
-			End While
-		End If
-
-		If SubState = "After Tease" Then
-
-			While DomResponse.Peek <> -1
-				DRLineTotal += 1
-				DRLines.Add(DomResponse.ReadLine())
-				If Trim(DRLines(DRLineTotal)) = "[After Tease]" Then
-					AddResponse = True
-				End If
-				If Trim(DRLines(DRLineTotal)) = "[After Tease End]" Then
-					AddResponse = False
-				End If
-				If AddResponse = False Or Trim(DRLines(DRLineTotal)) = "[After Tease]" Then
-					DRLines.Remove(DRLines(DRLineTotal))
-					DRLineTotal -= 1
-				End If
-			End While
-		End If
-
-		If SubState <> "After Tease" And SubState <> "Before Tease" Then
-
-			While DomResponse.Peek <> -1
-				DRLineTotal += 1
-				DRLines.Add(DomResponse.ReadLine())
-				If Trim(DRLines(DRLineTotal)) = "[All]" Then
-					AddResponse = True
-				End If
-				If Trim(DRLines(DRLineTotal)) = "[All End]" Then
-					AddResponse = False
-				End If
-				If AddResponse = False Or Trim(DRLines(DRLineTotal)) = "[All]" Then
-					DRLines.Remove(DRLines(DRLineTotal))
-					DRLineTotal -= 1
-				End If
-			End While
-
-		End If
-
-
-
-		DomResponse.Close()
-		DomResponse.Dispose()
-
-
-		Using DomResponseAll As New StreamReader(ssh.ResponseFile)
-
-			While DomResponseAll.Peek <> -1
-				DRLineTotal += 1
-				DRLines.Add(DomResponseAll.ReadLine())
-				If Trim(DRLines(DRLineTotal)) = "[All]" Then
-					AddResponse = True
-				End If
-				If Trim(DRLines(DRLineTotal)) = "[All End]" Then
-					AddResponse = False
-				End If
-				If AddResponse = False Or Trim(DRLines(DRLineTotal)) = "[All]" Then
-					DRLines.Remove(DRLines(DRLineTotal))
-					DRLineTotal -= 1
-				End If
-			End While
-
-		End Using
-
-		' ###########
-
-		If DRLines.Count < 1 Then
-			CleanResponse = "NULL"
-			GoTo NullSkip
-		End If
-
-
 
 		Try
-			DRLines = FilterList(DRLines)
-			ssh.ResponseLine = ssh.randomizer.Next(0, DRLines.Count)
-			CleanResponse = DRLines(ssh.ResponseLine)
+			FilteredLines = FilterList(FilteredLines)
+			ssh.ResponseLine = ssh.randomizer.Next(0, FilteredLines.Count)
+			ResponseClean = FilteredLines(ssh.ResponseLine)
 		Catch ex As Exception
 			Log.WriteError("Tease AI did not return a valid Response line from file: " &
 				  ssh.ResponseFile, ex, "ReponseClean(String)")
-			CleanResponse = "ERROR: Tease AI did not return a valid Response line from file: " & ssh.ResponseFile
+			ResponseClean = "ERROR: Tease AI did not return a valid Response line from file: " & ssh.ResponseFile
 		End Try
 
-
 		ssh.Responding = True
-
-NullSkip:
-
-
-		Return CleanResponse
-
-
 	End Function
 
 
@@ -3986,13 +3428,10 @@ NonModuleEnd:
 				If ssh.RiskyEdges = True Then ssh.RiskyEdges = False
 				If ssh.LastScript = True Then
 					ssh.LastScript = False
-					Dim SaveChat As String = ssh.Chat
 					SaveChatLog(False)
 					ssh.Reset()
 					FrmSettings.LockOrgasmChances(False)
 					mainPictureBox.Image = Nothing
-					ChatText.DocumentText = SaveChat
-					ChatText2.DocumentText = SaveChat
 					Exit Sub
 				End If
 				If ssh.HypnoGen = True Then
@@ -4397,7 +3836,7 @@ ResumeGotoSearch:
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			'                                            All Errors
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			Log.WriteError(ex.Message, ex, "Exception occured finding GotoLabel """ & ssh.FileGoto & """ in file """ & GotoText & """")
+			Log.WriteError("Exception occured finding GotoLabel """ & ssh.FileGoto & """ in file """ & GotoText & """", ex, "Exception occured in GetGoto()")
 
 			'      Dim GotoLikeList As New List(Of String)
 			'			GotoLikeList = Txt2List(GotoText)
@@ -4576,21 +4015,9 @@ CancelGoto:
 						GoTo SkipIsTyping
 					End If
 
-					' If FrmSettings.CBWebtease.Checked = True Then GoTo SkipIsTyping
+					' ###### display "is typing..." message.
+					ChatUpdate()
 
-					If FrmSettings.CBWebtease.Checked = True Then
-
-						ChatText.DocumentText = ssh.Chat & "<font color=""DimGray""><center><i>" & ssh.tempDomName & " is typing...</i><center></font>"
-						ChatText2.DocumentText = ssh.Chat & "<font color=""DimGray""><center><i>" & ssh.tempDomName & " is typing...</i><center></font>"
-						ChatReadyState()
-
-					Else
-
-						ChatText.DocumentText = ssh.Chat & "<font color=""DimGray""><i>" & ssh.tempDomName & " is typing...</i></font>"
-						ChatText2.DocumentText = ssh.Chat & "<font color=""DimGray""><i>" & ssh.tempDomName & " is typing...</i></font>"
-						ChatReadyState()
-
-					End If
 
 SkipIsTyping:
 
@@ -4663,7 +4090,7 @@ SkipIsTyping:
 				If FrmSettings.teaseRadio.Checked = True And ssh.JustShowedBlogImage = False And ssh.TeaseVideo = False And Not ssh.DomTask.Contains("@NewBlogImage") And ssh.NullResponse = False _
 				  And ssh.SlideshowLoaded = True And Not ssh.DomTask.Contains("@ShowButtImage") And Not ssh.DomTask.Contains("@ShowBoobsImage") And Not ssh.DomTask.Contains("@ShowButtsImage") _
 				  And Not ssh.DomTask.Contains("@ShowBoobsImage") And ssh.LockImage = False And ssh.CustomSlideEnabled = False And ssh.RapidFire = False _
-				  And UCase(ssh.DomTask) <> "<B>TEASE AI HAS BEEN RESET</B>" And ssh.JustShowedSlideshowImage = False And ssh.MultiTauntPictureHold = False Then
+				  And UCase(ssh.DomTask) <> "@SystemMessage Tease AI has been reset" And ssh.JustShowedSlideshowImage = False And ssh.MultiTauntPictureHold = False Then
 					' Begin Next Button
 					' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 TryNextWithTease:
@@ -4997,78 +4424,21 @@ NullResponse:
 
 				'SUGGESTION: (Stefaf) All Writing to the Chatbox and Wating for fetched Images shoud be in a separat Function. 
 
-				Dim TextColor As String = Color2Html(My.Settings.ChatTextColor)
-
 				If ssh.NullResponse = False And ssh.DomTask <> "" Then
-
-					If UCase(ssh.DomTask) = "<B>TEASE AI HAS BEEN RESET</B>" Then ssh.DomTask = "<b>Tease AI has been reset</b>"
-
-
 					If ssh.SysMes = True Then
+						' ##################### System Message ########################
 						ChatAddSystemMessage(ssh.DomTask, False)
 						ssh.SysMes = False
-						GoTo EndSysMes
-					End If
-
-					If ssh.EmoMes = True Then
-						ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""" &
-						ssh.contactToUse.TypeColorHtml & """><b><i>" & ssh.DomTask & "</i></b><br></font></body>"
+					ElseIf ssh.EmoMes = True Then
+						' ###################### Emote Message ########################
+						ChatAddEmoteMessage(ssh.contactToUse.TypeName, ssh.DomTask, True)
 						ssh.EmoMes = False
-						GoTo EndSysMes
-					End If
-
-					' Add timestamps to domme response if the option is checked in the menu
-					If FrmSettings.timestampCheckBox.Checked = True And FrmSettings.CBWebtease.Checked = False Then
-						ssh.Chat = ssh.Chat & "<font face=""Cambria"" size=""2"" color=""DimGray"">" & (Date.Now.ToString("hh:mm tt ")) & "</font>"
-					End If
-
-
-
-					If ssh.SubWroteLast = False And FrmSettings.shownamesCheckBox.Checked = False Then
-
-
-						If FrmSettings.CBWebtease.Checked = True Then
-							ssh.Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & "</body><body style=""word-wrap:break-word;"">" & "<font face=""" & FrmSettings.FontComboBoxD.Text & """ size=""" & FrmSettings.NBFontSizeD.Value & """ color=""" &
-							  TextColor & """><center>" & ssh.DomTask & "</center><br></font></body>"
-						Else
-							ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & FrmSettings.FontComboBoxD.Text & """ size=""" & FrmSettings.NBFontSizeD.Value & """ color=""" &
-							  TextColor & """>" & ssh.Chat & ssh.DomTask & "<br></font></body>"
-						End If
-
-
-
-						If ssh.RiskyDeal = True Then FrmCardList.WBRiskyChat.DocumentText = "<body style=""word-wrap:break-word;""><font face=""Cambria"" size=""3"" font color=""" &
-						ssh.contactToUse.TypeColorHtml & """><b>" & ssh.contactToUse.TypeName & ": </b></font><font face=""" & ssh.contactToUse.TypeFont & """ size=""" & ssh.contactToUse.TypeSize & """ color=""" & TextColor & """>" & ssh.DomTask & "<br></font></body>"
-
-
 					Else
-
-
-						If FrmSettings.CBWebtease.Checked = True Then
-							ssh.Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & "</body><body style=""word-wrap:break-word;"">" & "<font face=""" & FrmSettings.FontComboBoxD.Text & """ size=""" & FrmSettings.NBFontSizeD.Value & """ color=""" &
-							  TextColor & """><center>" & ssh.DomTask & "</center><br></font></body>"
-						Else
-							ssh.Chat = "<body style=""word-wrap:break-word;"">" & ssh.Chat & "<font face=""Cambria"" size=""3"" font color=""" &
-						   ssh.contactToUse.TypeColorHtml & """><b>" & ssh.contactToUse.TypeName & ": </b></font><font face=""" & ssh.contactToUse.TypeFont & """ size=""" & ssh.contactToUse.TypeSize & """ color=""" & TextColor & """>" & ssh.DomTask & "<br></font></body>"
-						End If
-
-
-
-
-
-						ssh.TypeToggle = 0
-
-						If ssh.RiskyDeal = True Then FrmCardList.WBRiskyChat.DocumentText = "<body style=""word-wrap:break-word;""><font face=""Cambria"" size=""3"" font color=""" &
-						ssh.contactToUse.TypeColorHtml & """><b>" & ssh.contactToUse.TypeName & ": </b></font><font face=""" & ssh.contactToUse.TypeFont & """ size=""" & ssh.contactToUse.TypeSize & """ color=""" & TextColor & """>" & ssh.DomTask & "<br></font></body>"
-
+						' ##################### Regular Message #######################
+						ChatAddMessage(ssh.contactToUse.TypeName, ssh.DomTask, True)
+						If ssh.SubWroteLast = True Then ssh.TypeToggle = 0
 					End If
-
-EndSysMes:
-
-
-
 					ssh.SubWroteLast = False
-
 				End If
 
 HypNoResponse:
@@ -5109,14 +4479,12 @@ DommeSlideshowFallback:
 					ssh.contactToUse = Nothing
 					Log.WriteError("Error occurred while displaying image. Performing Fallback.",
 					   ex, "Display Image")
-					If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & "</font>", False)
 					ChatAddSystemMessage(ex.ToString, False)
 					GoTo DommeSlideshowFallback
 				Catch ex As Exception
 					'@@@@@@@@@@@@@@@@@@@@@@@ Exception @@@@@@@@@@@@@@@@@@@@@@@@
 					Log.WriteError("Error occurred while displaying image. Fallback Failed.",
 					   ex, "Display Image")
-					If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & "</font>", False)
 					ClearMainPictureBox()
 				Finally
 					ssh.DommeImageSTR = ""
@@ -5128,12 +4496,7 @@ DommeSlideshowFallback:
 				' #################### Update ChatText ########################
 				' Since ssh.Chat is not modified on NullResponse etc. we can display it every time.
 				' --> This will disallow to scroll up in chat.
-				ChatText.DocumentText = ssh.Chat
-				ChatText2.DocumentText = ssh.Chat
-				ChatReadyState()
-				ScrollChatDown()
-
-				SaveChatLog(True)
+				ChatUpdate()
 
 				' ####################### TTS Output ##########################
 				If FrmSettings.TTSCheckBox.Checked = True _
@@ -5294,13 +4657,10 @@ DommeSlideshowFallback:
 
 				If ssh.EndSession = True Then
 					ssh.EndSession = False
-					Dim SaveChat As String = ssh.Chat
 					SaveChatLog(False)
 					ssh.Reset()
 					FrmSettings.LockOrgasmChances(False)
 					mainPictureBox.Image = Nothing
-					ChatText.DocumentText = SaveChat
-					ChatText2.DocumentText = SaveChat
 				End If
 
 				If ssh.SubGaveUp = True Then
@@ -5335,7 +4695,7 @@ DommeSlideshowFallback:
 						End If
 					End If
 
-					If ssh.giveUpReturn  Then
+					If ssh.giveUpReturn Then
 						ssh.ShowModule = True
 						ssh.AskedToGiveUpSection = False
 						ScriptTimer.Start()
@@ -5436,23 +4796,8 @@ DommeSlideshowFallback:
 					GoTo SkipIsTyping
 				End If
 
-				If FrmSettings.CBWebtease.Checked = True Then
-
-					ChatText.DocumentText = ssh.Chat & "<font color=""DimGray""><center><i>" & ssh.tempDomName & " is typing...</i><center></font>"
-					ChatText2.DocumentText = ssh.Chat & "<font color=""DimGray""><center><i>" & ssh.tempDomName & " is typing...</i><center></font>"
-					ChatReadyState()
-
-				Else
-
-					ChatText.DocumentText = ssh.Chat & "<font color=""DimGray""><i>" & ssh.tempDomName & " is typing...</i></font>"
-					ChatText2.DocumentText = ssh.Chat & "<font color=""DimGray""><i>" & ssh.tempDomName & " is typing...</i></font>"
-					ChatReadyState()
-
-				End If
-
-
-
-
+				' ###### display "is typing..." message.
+				ChatUpdate()
 
 SkipIsTyping:
 
@@ -5510,7 +4855,7 @@ NullResponseLine:
 				If FrmSettings.teaseRadio.Checked = True And ssh.JustShowedBlogImage = False And ssh.TeaseVideo = False And Not ssh.DomChat.Contains("@NewBlogImage") And ssh.NullResponse = False _
 				 And ssh.SlideshowLoaded = True And Not ssh.DomChat.Contains("@ShowButtImage") And Not ssh.DomChat.Contains("@ShowBoobsImage") And Not ssh.DomChat.Contains("@ShowButtsImage") _
 				 And Not ssh.DomChat.Contains("@ShowBoobImage") And ssh.LockImage = False And ssh.CustomSlideEnabled = False And ssh.RapidFire = False _
-				 And UCase(ssh.DomChat) <> "<B>TEASE AI HAS BEEN RESET</B>" And ssh.JustShowedSlideshowImage = False Then
+				 And UCase(ssh.DomChat) <> "@SystemMessage Tease AI has been reset" And ssh.JustShowedSlideshowImage = False Then
 					' Begin Next Button
 
 					' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -5701,64 +5046,22 @@ TryNextWithTease:
 
 				If ssh.NullResponse = True Or ssh.DomChat = "" Or ssh.DomChat Is Nothing Then GoTo NullResponseLine2
 
-				If UCase(ssh.DomChat) = "<B>TEASE AI HAS BEEN RESET</B>" Then ssh.DomChat = "<b>Tease AI has been reset</b>"
-
 				Dim TextColor As String = Color2Html(My.Settings.ChatTextColor)
 
+
 				If ssh.SysMes = True Then
+					' ##################### System Message ########################
 					ChatAddSystemMessage(ssh.DomChat, False)
 					ssh.SysMes = False
-					GoTo EndSysMes
-				End If
-
-				If ssh.EmoMes = True Then
-					ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""" &
-				  ssh.contactToUse.TypeColorHtml & """><b><i>" & ssh.DomChat & "</i></b><br></font></body>"
+				ElseIf ssh.EmoMes = True Then
+					' ###################### Emote Message ########################
+					ChatAddEmoteMessage(ssh.contactToUse.TypeName, ssh.DomTask, True)
 					ssh.EmoMes = False
-					GoTo EndSysMes
-				End If
-
-				' Add timestamps to domme response if the option is checked in the menu
-				If FrmSettings.timestampCheckBox.Checked = True And FrmSettings.CBWebtease.Checked = False Then
-					ssh.Chat = ssh.Chat & "<font face=""Cambria"" size=""2"" color=""DimGray"">" & (Date.Now.ToString("hh:mm tt ")) & "</font>"
-				End If
-
-				'Debug.Print("DomChat = " & DomChat)
-
-				If ssh.SubWroteLast = False And FrmSettings.shownamesCheckBox.Checked = False Then
-
-
-					If FrmSettings.CBWebtease.Checked = True Then
-						ssh.Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & "</body><body style=""word-wrap:break-word;"">" & "<font face=""" & FrmSettings.FontComboBoxD.Text & """ size=""" & FrmSettings.NBFontSizeD.Value & """ color=""" &
-						  TextColor & """><center>" & ssh.DomChat & "</center><br></font></body>"
-					Else
-						ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & FrmSettings.FontComboBoxD.Text & """ size=""" & FrmSettings.NBFontSizeD.Value & """ color=""" &
-						 TextColor & """>" & ssh.Chat & ssh.DomChat & "<br></font></body>"
-					End If
-
-
-
-					If ssh.RiskyDeal = True Then FrmCardList.WBRiskyChat.DocumentText = "<body style=""word-wrap:break-word;""><font face=""Cambria"" size=""3"" font color=""" &
-				  ssh.contactToUse.TypeColorHtml & """><b>" & ssh.contactToUse.TypeName & ": </b></font><font face=""" & ssh.contactToUse.TypeFont & """ size=""" & ssh.contactToUse.TypeSize & """ color=""" & TextColor & """>" & ssh.DomChat & "<br></font></body>"
-
 				Else
-
-					If FrmSettings.CBWebtease.Checked = True Then
-						ssh.Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & "</body><body style=""word-wrap:break-word;"">" & "<font face=""" & FrmSettings.FontComboBoxD.Text & """ size=""" & FrmSettings.NBFontSizeD.Value & """ color=""" &
-						 TextColor & """><center>" & ssh.DomChat & "</center><br></font></body>"
-					Else
-						ssh.Chat = "<body style=""word-wrap:break-word;"">" & ssh.Chat & "<font face=""Cambria"" size=""3"" font color=""" &
-					  ssh.contactToUse.TypeColorHtml & """><b>" & ssh.contactToUse.TypeName & ": </b></font><font face=""" & ssh.contactToUse.TypeFont & """ size=""" & ssh.contactToUse.TypeSize & """ color=""" & TextColor & """>" & ssh.DomChat & "<br></font></body>"
-					End If
-
-					ssh.TypeToggle = 0
-
-					If ssh.RiskyDeal = True Then FrmCardList.WBRiskyChat.DocumentText = "<body style=""word-wrap:break-word;""><font face=""Cambria"" size=""3"" font color=""" &
-				  ssh.contactToUse.TypeColorHtml & """><b>" & ssh.contactToUse.TypeName & ": </b></font><font face=""" & ssh.contactToUse.TypeFont & """ size=""" & ssh.contactToUse.TypeSize & """ color=""" & TextColor & """>" & ssh.DomChat & "<br></font></body>"
-
+					' ##################### Regular Message #######################
+					ChatAddMessage(ssh.contactToUse.TypeName, ssh.DomChat, True)
+					If ssh.SubWroteLast Then ssh.TypeToggle = 0
 				End If
-
-EndSysMes:
 
 
 				ssh.SubWroteLast = False
@@ -5800,13 +5103,11 @@ DommeSlideshowFallback:
 					ssh.contactToUse = Nothing
 					Log.WriteError("Error occurred while displaying image. Performing Fallback.",
 					 ex, "Display Image")
-					If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & "</font>", False)
 					GoTo DommeSlideshowFallback
 				Catch ex As Exception
 					'@@@@@@@@@@@@@@@@@@@@@@@ Exception @@@@@@@@@@@@@@@@@@@@@@@@
 					Log.WriteError("Error occurred while displaying image. Fallback Failed.",
 					 ex, "Display Image")
-					If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & "</font>", False)
 					ClearMainPictureBox()
 				Finally
 					ssh.DommeImageSTR = ""
@@ -5818,12 +5119,8 @@ DommeSlideshowFallback:
 				' #################### Update ChatText ########################
 				' Since ssh.Chat is not modified on NullResponse etc. we can display it every time.
 				' --> This will disallow to scroll up in chat.
-				ChatText.DocumentText = ssh.Chat
-				ChatText2.DocumentText = ssh.Chat
-				ChatReadyState()
-				ScrollChatDown()
+				ChatUpdate()
 
-				SaveChatLog(True)
 
 				' ####################### TTS Output ##########################
 				If FrmSettings.TTSCheckBox.Checked = True _
@@ -5929,13 +5226,10 @@ DommeSlideshowFallback:
 
 				If ssh.EndSession = True Then
 					ssh.EndSession = False
-					Dim SaveChat As String = ssh.Chat
 					SaveChatLog(False)
 					ssh.Reset()
 					FrmSettings.LockOrgasmChances(False)
 					mainPictureBox.Image = Nothing
-					ChatText.DocumentText = SaveChat
-					ChatText2.DocumentText = SaveChat
 				End If
 
 				If ssh.SubGaveUp = True Then
@@ -6264,7 +5558,6 @@ Retry:
 			'                                            All Errors
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			Log.WriteError(ex.Message, ex, "Move in slideshow Failed")
-			If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & "</font>", False)
 			MessageBox.Show(ex.Message, "Move in Slideshow failed", MessageBoxButtons.OK, MessageBoxIcon.Error)
 		End Try
 	End Sub
@@ -6450,7 +5743,7 @@ Retry:
 
 			Dim TauntFiles As New List(Of TauntProcessingObject)
 
-			For Each str As String In myDirectory.GetFiles(ssh.Folders.Personality & "\Stroke\", tauntFile & "_*.txt", SearchOption.TopDirectoryOnly)
+			For Each str As String In myDirectory.GetFiles(Path.Combine(ssh.Folders.Personality, "Stroke"), tauntFile & "_*.txt", SearchOption.TopDirectoryOnly)
 				Dim Taunt As New TauntProcessingObject(str, Me)
 				If Taunt.Avaialable Then TauntFiles.Add(Taunt)
 			Next
@@ -7030,442 +6323,6 @@ CensorConstant:
 		My.Settings.SubName = subName.Text
 	End Sub
 
-
-	Public Sub StatusUpdatePost()
-
-
-		ssh.UpdatingPost = True
-
-
-		If ssh.UpdateStage > 0 Then GoTo StatusUpdateBegin
-
-		Dim StatusFile = ssh.UpdateList(ssh.randomizer.Next(0, ssh.UpdateList.Count))
-
-		For i As Integer = 0 To ssh.UpdateList.Count - 1
-			Debug.Print(i & ". " & ssh.UpdateList(i))
-		Next
-		Debug.Print("STatusText = " & StatusFile)
-		Debug.Print("Clear stage 1")
-
-		' Read all lines of the given File.
-		Dim lines As List(Of String) = Txt2List(StatusFile)
-
-
-		For i As Integer = lines.Count - 1 To 0 Step -1
-			If lines(i) = "" Or lines(i) Is Nothing Then
-				lines.Remove(lines(i))
-			End If
-		Next
-
-		ssh.StatusText = lines(0)
-		Debug.Print("HEre?")
-		' Github Patch  StatusText = PoundClean(StatusText)
-
-		Dim LoopBuffer As Integer = 0
-		Do
-			LoopBuffer += 1
-
-			ssh.StatusText = PoundClean(ssh.StatusText)
-
-			If LoopBuffer > 4 Then Exit Do
-
-		Loop Until Not ssh.DomTask.Contains("#")
-
-
-		Dim AtArray() As String = Split(ssh.StatusText)
-		For i As Integer = AtArray.Length - 1 To 0 Step -1
-			If AtArray(i).Contains("@") Then
-				AtArray(i) = AtArray(i).Replace(AtArray(i), "")
-			End If
-			If FrmSettings.CBHimHer.Checked = True Then
-				If AtArray(i) = "He" Then AtArray(i) = AtArray(i).Replace("He", "She")
-				If AtArray(i) = "he" Then AtArray(i) = AtArray(i).Replace("he", "she")
-				If AtArray(i) = "Him" Then AtArray(i) = AtArray(i).Replace("Him", "Her")
-				If AtArray(i) = "him" Then AtArray(i) = AtArray(i).Replace("him", "her")
-				If AtArray(i) = "His" Then AtArray(i) = AtArray(i).Replace("His", "Her")
-				If AtArray(i) = "his" Then AtArray(i) = AtArray(i).Replace("his", "her")
-			End If
-		Next
-		ssh.StatusText = Join(AtArray)
-
-		Dim DPic As String = My.Settings.GlitterAV
-		DPic = "file://" & DPic
-		DPic = DPic.Replace("\", "/")
-		Debug.Print(DPic)
-
-		Dim StatusName As String
-
-
-		Dim TextColor As String = Color2Html(My.Settings.ChatTextColor)
-
-		StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 48; height: 48; border: 0;"" src=""" & DPic & """> <font face=""Cambria"" size=""3"" color=""" & Color2Html(My.Settings.GlitterNCDommeColor) & """><b>" & ssh.tempDomName & "</b></font> <br><font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br><br>"
-		StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""" & TextColor & """>" & ssh.StatusText & "</font><br><br>"
-
-		'Debug.Print(GlitterImageAV)
-		Debug.Print("Clear Stage 2")
-
-
-		Dim LoopCounter As Integer = 0
-
-
-		Dim StatusLines1 As New List(Of String)
-		For i As Integer = 1 To lines.Count - 1
-			StatusLines1.Add(lines(i))
-		Next
-		ssh.ContactNumber = 1
-
-		' For i As Integer = StatusLines1.Count - 1 To 0 Step -1
-		'If StatusLines1(i) = "" Or StatusLines1(i) Is Nothing Then
-		'StatusLines1.Remove(StatusLines1(i))
-		'End If
-		'Next
-
-		StatusLines1 = StatusClean(StatusLines1)
-
-
-
-		ssh.StatusText1 = StatusLines1(ssh.randomizer.Next(0, StatusLines1.Count))
-
-		Dim StatusLines2 As New List(Of String)
-		For i As Integer = 1 To lines.Count - 1
-			StatusLines2.Add(lines(i))
-		Next
-		ssh.ContactNumber = 2
-
-		' For i As Integer = StatusLines2.Count - 1 To 0 Step -1
-		'If StatusLines2(i) = "" Or StatusLines2(i) Is Nothing Then
-		'StatusLines2.Remove(StatusLines2(i))
-		'End If
-		'Next
-
-		StatusLines2 = StatusClean(StatusLines2)
-
-
-
-
-		Do
-			ssh.StatusText2 = StatusLines2(ssh.randomizer.Next(0, StatusLines2.Count))
-			LoopCounter += 1
-		Loop Until ssh.StatusText2 <> ssh.StatusText1 Or LoopCounter = 10
-
-		If LoopCounter = 10 Then
-			ssh.StatusText2 = "ERROR: Tease AI could not return a unique comment"
-			Dim StatusError = "Tease AI could not return a unique comment for Contact2 in file: " & StatusFile
-			Trace.WriteLine(StatusError)
-			If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & StatusError & "</font>", False)
-		End If
-
-		Dim StatusLines3 As New List(Of String)
-		For i As Integer = 1 To lines.Count - 1
-			StatusLines3.Add(lines(i))
-		Next
-		ssh.ContactNumber = 3
-
-		'For i As Integer = StatusLines3.Count - 1 To 0 Step -1
-		'If StatusLines3(i) = "" Or StatusLines3(i) Is Nothing Then
-		'StatusLines3.Remove(StatusLines3(i))
-		'End If
-		'Next
-
-		StatusLines3 = StatusClean(StatusLines3)
-
-		LoopCounter = 0
-
-		Do
-			ssh.StatusText3 = StatusLines3(ssh.randomizer.Next(0, StatusLines3.Count))
-			LoopCounter += 1
-		Loop Until ssh.StatusText3 <> ssh.StatusText2 And ssh.StatusText3 <> ssh.StatusText1 Or LoopCounter = 10
-
-		If LoopCounter = 10 Then
-			ssh.StatusText3 = "ERROR: Tease AI could not return a unique comment"
-			Dim StatusError = "Tease AI could not return a unique comment for Contact3 in file: " & StatusFile
-			Trace.WriteLine(StatusError)
-			If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & StatusError & "</font>", False)
-		End If
-
-		''Debug.Print("StatusLine = " & StatusLine)
-
-
-
-
-		ssh.StatusText1 = ssh.StatusText1.Replace("#ShortName", My.Settings.GlitterSN)
-		ssh.StatusText2 = ssh.StatusText2.Replace("#ShortName", My.Settings.GlitterSN)
-		ssh.StatusText3 = ssh.StatusText3.Replace("#ShortName", My.Settings.GlitterSN)
-
-		ssh.StatusText1 = ssh.StatusText1.Replace("#SubName", subName.Text)
-		ssh.StatusText2 = ssh.StatusText2.Replace("#SubName", subName.Text)
-		ssh.StatusText3 = ssh.StatusText3.Replace("#SubName", subName.Text)
-
-		ssh.StatusText1 = PoundClean(ssh.StatusText1)
-		ssh.StatusText2 = PoundClean(ssh.StatusText2)
-		ssh.StatusText3 = PoundClean(ssh.StatusText3)
-
-		'GoTo TestSkip
-
-		Dim AtArray1() As String = Split(ssh.StatusText1)
-		For i As Integer = AtArray1.Length - 1 To 0 Step -1
-			If AtArray1(i).Contains("@") Then
-				AtArray1(i) = AtArray1(i).Replace(AtArray1(i), "")
-			End If
-			If FrmSettings.CBHimHer.Checked = True Then
-				If AtArray1(i) = "He" Then AtArray1(i) = AtArray1(i).Replace("He", "She")
-				If AtArray1(i) = "he" Then AtArray1(i) = AtArray1(i).Replace("he", "she")
-				If AtArray1(i) = "Him" Then AtArray1(i) = AtArray1(i).Replace("Him", "Her")
-				If AtArray1(i) = "him" Then AtArray1(i) = AtArray1(i).Replace("him", "her")
-				If AtArray1(i) = "His" Then AtArray1(i) = AtArray1(i).Replace("His", "Her")
-				If AtArray1(i) = "his" Then AtArray1(i) = AtArray1(i).Replace("his", "her")
-			End If
-		Next
-		ssh.StatusText1 = Join(AtArray1)
-
-		Dim AtArray2() As String = Split(ssh.StatusText2)
-		For i As Integer = AtArray2.Length - 1 To 0 Step -1
-			If AtArray2(i).Contains("@") Then
-				AtArray2(i) = AtArray2(i).Replace(AtArray2(i), "")
-			End If
-			If FrmSettings.CBHimHer.Checked = True Then
-				If AtArray2(i) = "He" Then AtArray2(i) = AtArray2(i).Replace("He", "She")
-				If AtArray2(i) = "he" Then AtArray2(i) = AtArray2(i).Replace("he", "she")
-				If AtArray2(i) = "Him" Then AtArray2(i) = AtArray2(i).Replace("Him", "Her")
-				If AtArray2(i) = "him" Then AtArray2(i) = AtArray2(i).Replace("him", "her")
-				If AtArray2(i) = "His" Then AtArray2(i) = AtArray2(i).Replace("His", "Her")
-				If AtArray2(i) = "his" Then AtArray2(i) = AtArray2(i).Replace("his", "her")
-			End If
-		Next
-		ssh.StatusText2 = Join(AtArray2)
-
-		Dim AtArray3() As String = Split(ssh.StatusText3)
-		For i As Integer = AtArray3.Length - 1 To 0 Step -1
-			If AtArray3(i).Contains("@") Then
-				AtArray3(i) = AtArray3(i).Replace(AtArray3(i), "")
-			End If
-			If FrmSettings.CBHimHer.Checked = True Then
-				If AtArray3(i) = "He" Then AtArray3(i) = AtArray(i).Replace("He", "She")
-				If AtArray3(i) = "he" Then AtArray3(i) = AtArray(i).Replace("he", "she")
-				If AtArray3(i) = "Him" Then AtArray3(i) = AtArray(i).Replace("Him", "Her")
-				If AtArray3(i) = "him" Then AtArray3(i) = AtArray(i).Replace("him", "her")
-				If AtArray3(i) = "His" Then AtArray3(i) = AtArray(i).Replace("His", "Her")
-				If AtArray3(i) = "his" Then AtArray3(i) = AtArray(i).Replace("his", "her")
-			End If
-		Next
-		ssh.StatusText3 = Join(AtArray3)
-
-		'TestSkip:
-
-		ssh.Update1 = False
-		ssh.Update2 = False
-		ssh.Update3 = False
-
-		ssh.StatusChance1 = ssh.randomizer.Next(1, 101)
-		ssh.StatusChance2 = ssh.randomizer.Next(1, 101)
-		ssh.StatusChance3 = ssh.randomizer.Next(1, 101)
-
-		ssh.UpdateStageTick = ssh.randomizer.Next(10, 21)
-		UpdateStageTimer.Start()
-		ssh.UpdateStage = 1
-		Return
-
-
-StatusUpdateBegin:
-
-		If ssh.Update1 = True And ssh.Update2 = True And ssh.Update3 = True Then GoTo StatusUpdateEnd
-
-		'ContactTick = randomizer.Next(10, 21)
-		'ContactFlag = True
-		'ContactTimer.Start()
-
-		'Do
-		'Application.DoEvents()
-		'Loop Until ContactFlag = False
-
-		'Delay(RandomDelay)
-
-ReRoll:
-
-		ssh.TempVal = ssh.randomizer.Next(1, 4)
-		'Debug.Print("TempVal = " & TempVal)
-
-		If ssh.TempVal = 1 Then
-			If ssh.Update1 = False Then
-				GoTo StatusUpdate1
-			Else
-				GoTo ReRoll
-			End If
-		End If
-
-		If ssh.TempVal = 2 Then
-			If ssh.Update2 = False Then
-				GoTo StatusUpdate2
-			Else
-				GoTo ReRoll
-			End If
-		End If
-
-		If ssh.TempVal = 3 Then
-			If ssh.Update3 = False Then
-				GoTo StatusUpdate3
-			Else
-				GoTo ReRoll
-			End If
-		End If
-
-		GoTo ReRoll
-
-StatusUpdate1:
-
-		Dim S1Pic As String = My.Settings.GlitterAV1
-		S1Pic = "file://" & S1Pic
-		S1Pic = S1Pic.Replace("\", "/")
-		Debug.Print(S1Pic)
-
-		TextColor = Color2Html(My.Settings.ChatTextColor)
-
-		If ssh.StatusChance1 < My.Settings.Glitter1Slider * 10 And My.Settings.CBGlitter1 = True Then
-			StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S1Pic & """> <font face=""Cambria"" size=""3"" color=""" & Color2Html(My.Settings.GlitterNC1Color) & """><b>" & My.Settings.Glitter1 & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
-			StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""" & TextColor & """>" & ssh.StatusText1 & "</font><br><br>"
-
-
-		End If
-
-		ssh.Update1 = True
-
-		ssh.UpdateStageTick = ssh.randomizer.Next(10, 21)
-		UpdateStageTimer.Start()
-		Return
-		'GoTo StatusUpdateBegin
-
-StatusUpdate2:
-
-		Dim S2Pic As String = My.Settings.GlitterAV2
-		S2Pic = "file://" & S2Pic
-		S2Pic = S2Pic.Replace("\", "/")
-		Debug.Print(S2Pic)
-
-		TextColor = Color2Html(My.Settings.ChatTextColor)
-
-		If ssh.StatusChance2 < My.Settings.Glitter2Slider * 10 And My.Settings.CBGlitter2 = True Then
-			StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S2Pic & """> <font face=""Cambria"" size=""3"" color=""" & Color2Html(My.Settings.GlitterNC2Color) & """><b>" & My.Settings.Glitter2 & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
-			StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""" & TextColor & """>" & ssh.StatusText2 & "</font><br><br>"
-
-
-		End If
-
-		ssh.Update2 = True
-		ssh.UpdateStageTick = ssh.randomizer.Next(10, 21)
-		UpdateStageTimer.Start()
-		Return
-
-		'GoTo StatusUpdateBegin
-
-StatusUpdate3:
-
-		Dim S3Pic As String = My.Settings.GlitterAV3
-		S3Pic = "file://" & S3Pic
-		S3Pic = S3Pic.Replace("\", "/")
-		Debug.Print(S3Pic)
-
-		TextColor = Color2Html(My.Settings.ChatTextColor)
-
-		If ssh.StatusChance3 < My.Settings.Glitter3Slider * 10 And My.Settings.CBGlitter3 = True Then
-			StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S3Pic & """> <font face=""Cambria"" size=""3"" color=""" & Color2Html(My.Settings.GlitterNC3Color) & """><b>" & My.Settings.Glitter3 & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
-			StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""" & TextColor & """>" & ssh.StatusText3 & "</font><br><br>"
-
-
-		End If
-
-		ssh.Update3 = True
-
-		ssh.UpdateStageTick = ssh.randomizer.Next(10, 21)
-		UpdateStageTimer.Start()
-		Return
-		'GoTo StatusUpdateBegin
-
-StatusUpdateEnd:
-
-		ssh.UpdateStage = 0
-
-		' Github Patch 'StatusText = "Null" & Environment.NewLine & "Null" & Environment.NewLine & "Null" & Environment.NewLine & "Null" & Environment.NewLine
-
-		ssh.UpdatingPost = False
-
-
-	End Sub
-
-	Public Function StatusClean(ByVal ListClean As List(Of String)) As List(Of String)
-
-
-
-		ListClean.Add("### BUFFER LINE ###")
-		Debug.Print("ListClean.Count = " & ListClean.Count)
-
-		If ssh.ContactNumber = 1 Then
-			For i As Integer = ListClean.Count - 1 To 0 Step -1
-				If ListClean(i).Contains("@Bratty") Then
-					ListClean(i) = ListClean(i).Replace("@Bratty ", "")
-				End If
-				If ListClean(i).Contains("@Contact2") Then
-					ListClean.Remove(ListClean(i))
-				End If
-				If ListClean(i).Contains("@Contact3") Then
-					ListClean.Remove(ListClean(i))
-				End If
-			Next
-		End If
-
-		If ssh.ContactNumber = 2 Then
-			For i As Integer = ListClean.Count - 1 To 0 Step -1
-				If ListClean(i).Contains("@Caring") Then
-					ListClean(i) = ListClean(i).Replace("@Caring ", "")
-				End If
-				If ListClean(i).Contains("@Contact1") Then
-					ListClean.Remove(ListClean(i))
-				End If
-				If ListClean(i).Contains("@Contact3") Then
-					ListClean.Remove(ListClean(i))
-				End If
-			Next
-		End If
-
-		If ssh.ContactNumber = 3 Then
-			For i As Integer = ListClean.Count - 1 To 0 Step -1
-				If ListClean(i).Contains("@Cruel") Then
-					ListClean(i) = ListClean(i).Replace("@Cruel ", "")
-				End If
-				If ListClean(i).Contains("@Contact1") Then
-					ListClean.Remove(ListClean(i))
-				End If
-				If ListClean(i).Contains("@Contact2") Then
-					ListClean.Remove(ListClean(i))
-				End If
-			Next
-		End If
-
-		For i As Integer = ListClean.Count - 1 To 0 Step -1
-			If ListClean(i).Contains("@Angry") Then
-				ListClean.Remove(ListClean(i))
-			End If
-			If ListClean(i).Contains("@Custom1") Then
-				ListClean.Remove(ListClean(i))
-			End If
-			If ListClean(i).Contains("@Custom2") Then
-				ListClean.Remove(ListClean(i))
-			End If
-		Next
-
-
-
-		Try
-			ListClean.Remove(ListClean(ListClean.Count - 1))
-		Catch
-			If ssh.ContactNumber = 1 Then ssh.DomTask = "ERROR: Tease AI did not return a valid Glitter line for Contact 1"
-			If ssh.ContactNumber = 2 Then ssh.DomTask = "ERROR: Tease AI did not return a valid Glitter line for Contact 2"
-			If ssh.ContactNumber = 3 Then ssh.DomTask = "ERROR: Tease AI did not return a valid Glitter line for Contact 3"
-		End Try
-
-		Return ListClean
-
-	End Function
-
 	Private Sub Delay(ByVal Milliseconds As Integer)
 		Dim Count As Integer
 		Milliseconds *= 1000
@@ -7493,76 +6350,6 @@ StatusUpdateEnd:
 		End If
 	End Sub
 
-	Private Sub UpdatesTimer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UpdatesTimer.Tick
-
-		'Debug.Print("updates tick = " & UpdatesTick)
-
-		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
-
-		If My.Settings.CBGlitterFeed = True And ssh.UpdatingPost = False Then
-
-			ssh.UpdatesTick -= 1
-
-			If ssh.UpdatesTick < 1 Then
-
-				ssh.UpdatesTick = 1080 / My.Settings.GlitterDSlider
-
-				ssh.UpdateList.Clear()
-
-				If My.Settings.CBTease = True Then
-					For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Tease\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-						ssh.UpdateList.Add(foundFile)
-					Next
-				End If
-
-				If My.Settings.CBEgotist = True Then
-					For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Egotist\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-						ssh.UpdateList.Add(foundFile)
-					Next
-				End If
-
-				If My.Settings.CBTrivia = True Then
-					For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Trivia\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-						ssh.UpdateList.Add(foundFile)
-					Next
-				End If
-
-				If My.Settings.CBDaily = True Then
-					For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Daily\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-						ssh.UpdateList.Add(foundFile)
-					Next
-				End If
-
-				If My.Settings.CBCustom1 = True Then
-					For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Custom 1\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-						ssh.UpdateList.Add(foundFile)
-					Next
-				End If
-
-				If My.Settings.CBCustom2 = True Then
-					For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Custom 2\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-						ssh.UpdateList.Add(foundFile)
-					Next
-				End If
-
-				If ssh.UpdateList.Count < 1 Then
-					My.Settings.CBGlitterFeed = False
-					'MessageBox.Show(Me, "Tease AI attempted to create a Glitter update, but no files were found! Please make sure at least one category containing Glitter txt files has been selected.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-					MessageBox.Show(Me, "Tease AI attempted to create a Glitter update, but no files were found! Please make sure at least one category containing Glitter txt files has been selected." & Environment.NewLine _
-					& Environment.NewLine & "Glitter feed has been automatically disabled.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-					Return
-				End If
-
-
-
-				StatusUpdatePost()
-
-
-
-			End If
-
-		End If
-	End Sub
 
 
 
@@ -7825,7 +6612,7 @@ StatusUpdateEnd:
 
 
 
-				Dim PetNameVal As Integer = ssh.randomizer.Next(1, 5)
+		Dim PetNameVal As Integer = ssh.randomizer.Next(1, 5)
 
 		If PetNameVal = 1 Then ssh.PetName = FrmSettings.petnameBox3.Text
 		If PetNameVal = 2 Then ssh.PetName = FrmSettings.petnameBox4.Text
@@ -8207,8 +6994,8 @@ StatusUpdateEnd:
 	End Function
 
 	Public Function PoundClean(ByVal StringClean As String) As String
-#If TRACE Then
 		Dim alreadyChecked As List(Of String) = New List(Of String)
+#If TRACE Then
 		Dim TS As New TraceSwitch("PoundClean", "")
 
 		If TS.TraceVerbose Then
@@ -8455,7 +7242,6 @@ RinseLatherRepeat:
 					'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 					Log.WriteError("Command @DeleteLocalImage was unable to delete the image.",
 					   ex, "@DeleteLocalImage failed")
-					If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & "</font>", False)
 				End Try
 			End If
 			StringClean = StringClean.Replace("@DeleteLocalImage", "")
@@ -8474,7 +7260,6 @@ RinseLatherRepeat:
 					'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 					Log.WriteError("Command @DeleteImage was unable to delete the image.",
 					   ex, "@DeleteImage failed")
-					If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & "</font>", False)
 				End Try
 			End If
 			StringClean = StringClean.Replace("@DeleteImage", "")
@@ -8857,7 +7642,6 @@ RinseLatherRepeat:
 			Catch ex As Exception
 				Log.WriteError("Unable to start TnA Slideshow: " & vbCrLf &
 				   ex.Message, ex, "CommandClean()")
-				If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " :::: Unable to start TnA Slideshow</font>", False)
 			End Try
 
 			StringClean = StringClean.Replace("@TnAFastSlides", "")
@@ -9026,7 +7810,6 @@ RinseLatherRepeat:
 			Else
 				Dim lazytext As String = "@GotoSlideshow can't determine the current CustomSlideshow image. Please make sure to start it before using @GotoSlideshow."
 				Log.WriteError(lazytext, New NullReferenceException(lazytext), "@GotoSlideshow")
-				If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: @GotoSlideshow can't determine the current CustomSlideshow image. Please make sure to start it before using @GotoSlideshow</font>", False)
 			End If
 
 			StringClean = StringClean.Replace("@GotoSlideshow", "")
@@ -10706,14 +9489,20 @@ OrgasmDecided:
 		' would run the Glitter script in Apps\Glitter\Script\About to Ruin.txt.
 
 		If StringClean.Contains("@Glitter(") Then
-			' GitHub Patch: Dim GlitterFlag As Integer = GetParentheses(StringClean, "@Glitter(")
 			Dim GlitterFlag As String = GetParentheses(StringClean, "@Glitter(")
 
-			If My.Settings.CBGlitterFeedOff = False And ssh.UpdatingPost = False Then
-				If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Script\" & GlitterFlag & ".txt") And ssh.UpdatingPost = False Then
-					ssh.UpdateList.Clear()
-					ssh.UpdateList.Add(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Script\" & GlitterFlag & ".txt")
-					StatusUpdatePost()
+			If My.Settings.CBGlitterFeedOff = False Then
+				Dim Folder As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Script"
+				Dim FilePath As String = Path.Combine(Folder, GlitterFlag & ".txt")
+
+				If Directory.Exists(Folder) AndAlso File.Exists(FilePath) Then
+					ssh.UpdateList.Add(FilePath)
+					If ssh.UpdatingPost = False Then
+						StatusUpdatePost()
+					Else
+						ssh.UpdatesTick = 10
+					End If
+
 				End If
 			End If
 
@@ -12843,7 +11632,7 @@ VTSkip:
 		End If
 
 		If StringClean.Contains("@ClearChat") Then
-			ClearChat()
+			ChatClear()
 			StringClean = StringClean.Replace("@ClearChat", "")
 		End If
 
@@ -13676,7 +12465,6 @@ VTSkip:
 		If ListIncrement <= 0 Then
 			Dim lazyText As String = "FilterList Started With LineGroupingValue """ & ListIncrement & """. "
 			Log.WriteError(lazyText, New ArgumentOutOfRangeException(lazyText), "FilterList Cancelled")
-			If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & lazyText & "</font>", False)
 			Return ListClean
 		End If
 
@@ -13766,8 +12554,8 @@ VTSkip:
 		'Next
 
 #If TRACE Then
-				Trace.Unindent()
-				Trace.WriteLine("FilterList finished - Duration: " & sw.ElapsedMilliseconds & "ms")
+		Trace.Unindent()
+		Trace.WriteLine("FilterList finished - Duration: " & sw.ElapsedMilliseconds & "ms")
 #End If
 		'If ListClean.Count = 0 Then ListClean.Add("test")
 		Return ListClean
@@ -14071,7 +12859,13 @@ VTSkip:
 			End If
 
 			If FilterString.Contains("@DayOfWeek(") Then
-				If GetMatch(FilterString, "@DayOfWeek(", WeekdayName(Weekday(DateAndTime.Now))) = False Then Return False
+				Dim Para As String = GetParentheses(FilterString, "@DayOfWeek(")
+
+				If IsNumeric(Para) Then
+					If GetMatch(FilterString, "@DayOfWeek(", Weekday(DateAndTime.Now, FirstDayOfWeek.Monday)) = False Then Return False
+				Else
+					If GetMatch(FilterString, "@DayOfWeek(", WeekdayName(Weekday(DateAndTime.Now, FirstDayOfWeek.System),, FirstDayOfWeek.System)) = False Then Return False
+				End If
 			End If
 			If FilterString.Contains("@SetModule(") Then
 				If ssh.SetModule <> "" Or ssh.BookmarkModule = True Then Return False
@@ -14409,391 +13203,39 @@ VTSkip:
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			Log.WriteError(String.Format("Exception occured while checking line ""{0}"".", OrgFilterString),
 		   ex, "GetFilter(String, Boolean)")
-			If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">Error: " & ex.Message & "</font>", False)
 			Return False
 		End Try
 	End Function
 
 
-	Public Function GetFilter2(ByVal FilterString As String) As Boolean
-
-
-		Dim __ConditionDic As New Dictionary(Of String, Boolean)(System.StringComparer.OrdinalIgnoreCase)
-		Try
-			'===============================================================================
-			'							Dictionary Setup Description
-			' 1st Parameter: "Key" this is the Command as String preceded with @
-			' 2nd Parameter: "Value" These are the conditions that must be met to EXCLUDE a line.
-			'
-			'		 If "Value" is "True", all lines containing "Key" will be excuded.
-			'
-			'===============================================================================
-			With __ConditionDic
-				.Add("@Crazy", FrmSettings.crazyCheckBox.Checked = False)
-				.Add("@Vulgar", FrmSettings.vulgarCheckBox.Checked = False)
-				.Add("@Supremacist", FrmSettings.supremacistCheckBox.Checked = False)
-				.Add("@Sadistic", FrmSettings.sadisticCheckBox.Checked = False)
-				.Add("@Degrading", FrmSettings.degradingCheckBox.Checked = False)
-				.Add("@DommeLevel1", FrmSettings.domlevelNumBox.Value <> 1)
-				.Add("@DommeLevel2", FrmSettings.domlevelNumBox.Value <> 2)
-				.Add("@DommeLevel3", FrmSettings.domlevelNumBox.Value <> 3)
-				.Add("@DommeLevel4", FrmSettings.domlevelNumBox.Value <> 4)
-				.Add("@DommeLevel5", FrmSettings.domlevelNumBox.Value <> 5)
-				.Add("@SelfYoung", FrmSettings.domageNumBox.Value > FrmSettings.NBSelfAgeMin.Value - 1)
-				.Add("@SelfOld", FrmSettings.domageNumBox.Value < FrmSettings.NBSelfAgeMax.Value + 1)
-				.Add("@ACup", FrmSettings.boobComboBox.Text <> "A" Or ssh.JustShowedBlogImage = True)
-				.Add("@BCup", FrmSettings.boobComboBox.Text <> "B" Or ssh.JustShowedBlogImage = True)
-				.Add("@CCup", FrmSettings.boobComboBox.Text <> "C" Or ssh.JustShowedBlogImage = True)
-				.Add("@DCup", FrmSettings.boobComboBox.Text <> "D" Or ssh.JustShowedBlogImage = True)
-				.Add("@DDCup", FrmSettings.boobComboBox.Text <> "DD" Or ssh.JustShowedBlogImage = True)
-				.Add("@DDD+Cup", FrmSettings.boobComboBox.Text <> "DDD+" Or ssh.JustShowedBlogImage = True)
-				.Add("@CockSmall", FrmSettings.CockSizeNumBox.Value >= FrmSettings.NBAvgCockMin.Value)
-				.Add("@CockLarge", FrmSettings.CockSizeNumBox.Value <= FrmSettings.NBAvgCockMax.Value)
-				.Add("@CockAverage", FrmSettings.CockSizeNumBox.Value < FrmSettings.NBAvgCockMin.Value Or FrmSettings.CockSizeNumBox.Value > FrmSettings.NBAvgCockMax.Value)
-				.Add("@SubYoung", FrmSettings.subAgeNumBox.Value >= FrmSettings.NBSubAgeMin.Value)
-				.Add("@SubOld", FrmSettings.subAgeNumBox.Value <= FrmSettings.NBSubAgeMax.Value)
-				.Add("@SubBirthday", FrmSettings.NBBirthdayMonth.Value <> Month(Date.Now) And FrmSettings.NBBirthdayDay.Value <> DateAndTime.Day(Date.Now))
-				.Add("@ValentinesDay", Month(Date.Now) <> 2 And DateAndTime.Day(Date.Now) <> 14)
-				.Add("@ChristmasEve", Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 24)
-				.Add("@ChristmasDay", Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 25)
-				.Add("@NewYearsEve", Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 31)
-				.Add("@NewYearsDay", Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 25)
-
-				.Add("@FirstRound", ssh.FirstRound = False)
-				.Add("@NotFirstRound", ssh.FirstRound = True)
-				.Add("@StrokeSpeedMax", StrokePace < NBMaxPace.Value)
-				.Add("@StrokeSpeedMin", StrokePace > NBMinPace.Value)
-				.Add("@StrokeFaster", StrokePace = NBMaxPace.Value Or ssh.WorshipMode = True)
-				.Add("@StrokeFastest", StrokePace = NBMaxPace.Value Or ssh.WorshipMode = True)
-				.Add("@StrokeSlower", StrokePace = NBMinPace.Value Or ssh.WorshipMode = True)
-				.Add("@StrokeSlowest", StrokePace = NBMinPace.Value Or ssh.WorshipMode = True)
-				.Add("@AlwaysAllowsOrgasm", FrmSettings.alloworgasmComboBox.Text <> "Always Allows")
-				.Add("@OftenAllowsOrgasm", FrmSettings.alloworgasmComboBox.Text <> "Often Allows")
-				.Add("@SometimesAllowsOrgasm", FrmSettings.alloworgasmComboBox.Text <> "Sometimes Allows")
-				.Add("@RarelyAllowsOrgasm", FrmSettings.alloworgasmComboBox.Text <> "Rarely Allows")
-				.Add("@NeverAllowsOrgasm", FrmSettings.alloworgasmComboBox.Text <> "Never Allows")
-				.Add("@AlwaysRuinsOrgasm", FrmSettings.ruinorgasmComboBox.Text <> "Always Ruins")
-				.Add("@OftenRuinsOrgasm", FrmSettings.ruinorgasmComboBox.Text <> "Often Ruins")
-				.Add("@SometimesRuinsOrgasm", FrmSettings.ruinorgasmComboBox.Text <> "Sometimes Ruins")
-				.Add("@RarelyRuinsOrgasm", FrmSettings.ruinorgasmComboBox.Text <> "Rarely Ruins")
-				.Add("@NeverRuinsOrgasm", FrmSettings.ruinorgasmComboBox.Text <> "Never Ruins")
-				.Add("@NotAlwaysAllowsOrgasm", FrmSettings.alloworgasmComboBox.Text = "Always Allows")
-				.Add("@NotNeverAllowsOrgasm", FrmSettings.alloworgasmComboBox.Text = "Never Allows")
-				.Add("@NotAlwaysRuinsOrgasm", FrmSettings.ruinorgasmComboBox.Text = "Always Ruins")
-				.Add("@NotNeverRuinsOrgasm", FrmSettings.ruinorgasmComboBox.Text = "Never Allows")
-				.Add("@LongEdge", ssh.LongEdge = False Or FrmSettings.CBLongEdgeTaunts.Checked = False)
-				.Add("@InterruptLongEdge", ssh.LongEdge = False Or FrmSettings.CBLongEdgeInterrupts.Checked = False Or ssh.TeaseTick < 1 Or ssh.RiskyEdges = True)
-				.Add("@ShowHardcoreImage", Not Directory.Exists(My.Settings.IHardcore) Or My.Settings.CBIHardcore = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
-				.Add("@ShowSoftcoreImage", Not Directory.Exists(My.Settings.ISoftcore) Or My.Settings.CBISoftcore = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
-				.Add("@ShowLesbianImage", Not Directory.Exists(My.Settings.ILesbian) Or My.Settings.CBILesbian = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
-				.Add("@ShowBlowjobImage", Not Directory.Exists(My.Settings.IBlowjob) Or My.Settings.CBIBlowjob = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
-				.Add("@ShowFemdomImage", Not Directory.Exists(My.Settings.IFemdom) Or My.Settings.CBIFemdom = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
-				.Add("@ShowLezdomImage", Not Directory.Exists(My.Settings.ILezdom) Or My.Settings.CBILezdom = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
-				.Add("@ShowHentaiImage", Not Directory.Exists(My.Settings.IHentai) Or My.Settings.CBIHentai = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
-				.Add("@ShowGayImage", Not Directory.Exists(My.Settings.IGay) Or My.Settings.CBIGay = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
-				.Add("@ShowMaledomImage", Not Directory.Exists(My.Settings.IMaledom) Or My.Settings.CBIMaledom = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
-				.Add("@ShowCaptionsImage", Not Directory.Exists(My.Settings.ICaptions) Or My.Settings.CBICaptions = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
-				.Add("@ShowGeneralImage", Not Directory.Exists(My.Settings.IGeneral) Or My.Settings.CBIGeneral = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
-				.Add("@ShowBlogImage", FrmSettings.URLFileList.CheckedItems.Count = 0 Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
-				.Add("@NewBlogImage", __ConditionDic("@ShowBlogImage")) ' duplicate Command, lets get the Value af the other one.
-				.Add("@ShowLocalImage", FlagExists("SYS_NoPornAllowed") = True Or ssh.CustomSlideEnabled = True Or ssh.LockImage = True _
-	   Or (My.Settings.CBIHardcore = False And My.Settings.CBISoftcore = False And My.Settings.CBILesbian = False And My.Settings.CBIBlowjob = False _
-	 And My.Settings.CBIFemdom = False And My.Settings.CBILezdom = False And My.Settings.CBIHentai = False And My.Settings.CBIGay = False _
-	 And My.Settings.CBIMaledom = False And My.Settings.CBICaptions = False And My.Settings.CBIGeneral = False))
-				'.Add("@ShowButtImage", Not Directory.Exists(FrmSettings.LBLButtPath.Text) And Not File.Exists(FrmSettings.LBLButtURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or CustomSlideshow = True Or LockImage = True)
-				'.Add("@ShowButtsImage", __ConditionDic("@ShowButtImage")) ' duplicate Command, lets get the Value af the other one.
-				'.Add("@ShowBoobImage", Not Directory.Exists(FrmSettings.LBLBoobPath.Text) And Not File.Exists(FrmSettings.LBLBoobURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or CustomSlideshow = True Or LockImage = True)
-				'.Add("@ShowBoobsImage", __ConditionDic("@ShowBoobImage")) ' duplicate Command, lets get the Value af the other one.
-				.Add("@1MinuteHold", ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 60 Or ssh.HoldEdgeTime > 119)
-				.Add("@2MinuteHold", ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 120 Or ssh.HoldEdgeTime > 179)
-				.Add("@3MinuteHold", ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 180 Or ssh.HoldEdgeTime > 239)
-				.Add("@4MinuteHold", ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 240 Or ssh.HoldEdgeTime > 299)
-				.Add("@5MinuteHold", ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 300 Or ssh.HoldEdgeTime > 599)
-				.Add("@10MinuteHold", ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 600 Or ssh.HoldEdgeTime > 899)
-				.Add("@15MinuteHold", ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 900 Or ssh.HoldEdgeTime > 1799)
-				.Add("@30MinuteHold", ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 1800 Or ssh.HoldEdgeTime > 2699)
-				.Add("@45MinuteHold", ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 2700 Or ssh.HoldEdgeTime > 3599)
-				.Add("@60MinuteHold", ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 3600)
-				.Add("@CBTLevel1", FrmSettings.CBTSlider.Value <> 1)
-				.Add("@CBTLevel2", FrmSettings.CBTSlider.Value <> 2)
-				.Add("@CBTLevel3", FrmSettings.CBTSlider.Value <> 3)
-				.Add("@CBTLevel4", FrmSettings.CBTSlider.Value <> 4)
-				.Add("@CBTLevel5", FrmSettings.CBTSlider.Value <> 5)
-				.Add("@SubCircumcised", FrmSettings.CBSubCircumcised.Checked = False)
-				.Add("@SubNotCircumcised", FrmSettings.CBSubCircumcised.Checked = True)
-				.Add("@SubPierced", FrmSettings.CBSubPierced.Checked = False)
-				.Add("@SubNotPierced", FrmSettings.CBSubPierced.Checked = True)
-				'.Add("@ShowTaggedImage", ssh.LocalTagImageList.Count = 0) '=>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> For this Condition the tags have be loaded before.
-				.Add("@BeforeTease", ssh.BeforeTease = False)
-				.Add("@OrgasmDenied", ssh.OrgasmDenied = False)
-				.Add("@OrgasmAllowed", ssh.OrgasmAllowed = False)
-				.Add("@OrgasmRuined", ssh.OrgasmRuined = False)
-				.Add("@ApathyLevel1", FrmSettings.NBEmpathy.Value <> 1)
-				.Add("@ApathyLevel2", FrmSettings.NBEmpathy.Value <> 2)
-				.Add("@ApathyLevel3", FrmSettings.NBEmpathy.Value <> 3)
-				.Add("@ApathyLevel4", FrmSettings.NBEmpathy.Value <> 4)
-				.Add("@ApathyLevel5", FrmSettings.NBEmpathy.Value <> 5)
-				.Add("@InChastity", My.Settings.Chastity = False)
-				.Add("@NotInChastity", My.Settings.Chastity = True)
-				.Add("@HasChastity", FrmSettings.CBOwnChastity.Checked = False)
-				.Add("@DoesNotHaveChastity", FrmSettings.CBOwnChastity.Checked = True)
-				.Add("@ChastityPA", FrmSettings.CBChastityPA.Checked = False)
-				.Add("@ChastitySpikes", FrmSettings.CBChastitySpikes.Checked = False)
-				.Add("@VitalSub", CBVitalSub.Checked = False)
-				.Add("@VitalSubAssignment", CBVitalSub.Checked = False Or CBVitalSubDomTask.Checked = False)
-				.Add("@RuinTaunt", ssh.EdgeToRuin = False Or ssh.EdgeToRuinSecret = True)
-				.Add("@ShowLikedImage", Not File.Exists(Application.StartupPath & "\Images\System\LikedImageURLs.txt"))
-				.Add("@ShowDislikedImage", Not File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt"))
-				.Add("@VideoHardcore", ssh.VideoTease = False Or ssh.VideoType <> "Hardcore")
-				.Add("@VideoSoftcore", ssh.VideoTease = False Or ssh.VideoType <> "Softcore")
-				.Add("@VideoLesbian", ssh.VideoTease = False Or ssh.VideoType <> "Lesbian")
-				.Add("@VideoBlowjob", ssh.VideoTease = False Or ssh.VideoType <> "Blowjob")
-				.Add("@VideoFemdom", ssh.VideoTease = False Or ssh.VideoType <> "Femdom")
-				.Add("@VideoFemsub", ssh.VideoTease = False Or ssh.VideoType <> "Femsub")
-				.Add("@VideoGeneral", ssh.VideoTease = False Or ssh.VideoType <> "General")
-				.Add("@VideoHardcoreDomme", ssh.VideoTease = False Or ssh.VideoType <> "HardcoreD")
-				.Add("@VideoSoftcoreDomme", ssh.VideoTease = False Or ssh.VideoType <> "SoftcoreD")
-				.Add("@VideoLesbianDomme", ssh.VideoTease = False Or ssh.VideoType <> "LesbianD")
-				.Add("@VideoBlowjobDomme", ssh.VideoTease = False Or ssh.VideoType <> "BlowjobD")
-				.Add("@VideoFemdomDomme", ssh.VideoTease = False Or ssh.VideoType <> "FemdomD")
-				.Add("@VideoFemsubDomme", ssh.VideoTease = False Or ssh.VideoType <> "FemsubD")
-				.Add("@VideoGeneralDomme", ssh.VideoTease = False Or ssh.VideoType <> "GeneralD")
-				.Add("@CockTorture", FrmSettings.CBCBTCock.Checked = False)
-				.Add("@BallTorture", FrmSettings.CBCBTBalls.Checked = False)
-				.Add("@BallTorture0", ssh.CBTBallsCount <> 0)
-				.Add("@BallTorture1", ssh.CBTBallsCount <> 1)
-				.Add("@BallTorture2", ssh.CBTBallsCount <> 2)
-				.Add("@BallTorture3", ssh.CBTBallsCount <> 3)
-				.Add("@BallTorture4+", ssh.CBTBallsCount < 4)
-				.Add("@CockTorture0", ssh.CBTCockCount <> 0)
-				.Add("@CockTorture1", ssh.CBTCockCount <> 1)
-				.Add("@CockTorture2", ssh.CBTCockCount <> 2)
-				.Add("@CockTorture3", ssh.CBTCockCount <> 3)
-				.Add("@CockTorture4+", ssh.CBTCockCount < 4)
-				.Add("@Contact1", ssh.GlitterTease = False Or Not ssh.Group.Contains("1"))
-				.Add("@Contact2", ssh.GlitterTease = False Or Not ssh.Group.Contains("2"))
-				.Add("@Contact3", ssh.GlitterTease = False Or Not ssh.Group.Contains("3"))
-				.Add("@Stroking", ssh.SubStroking = False)
-				.Add("@SubStroking", ssh.SubStroking = False)
-				.Add("@NotStroking", ssh.SubStroking = True)
-				.Add("@SubNotStroking", ssh.SubStroking = True)
-				.Add("@Edging", ssh.SubEdging = False)
-				.Add("@SubEdging", ssh.SubEdging = False)
-				.Add("@NotEdging", ssh.SubEdging = True)
-				.Add("@SubNotEdging", ssh.SubEdging = True)
-				.Add("@HoldingTheEdge", ssh.SubHoldingEdge = False)
-				.Add("@SubHoldingTheEdge", ssh.SubHoldingEdge = False)
-				.Add("@NotHoldingTheEdge", ssh.SubHoldingEdge = True)
-				.Add("@SubNotHoldingTheEdge", ssh.SubHoldingEdge = True)
-				.Add("@Morning", ssh.GeneralTime <> "Morning")
-				.Add("@Afternoon", ssh.GeneralTime <> "Afternoon")
-				.Add("@Night", ssh.GeneralTime <> "Night")
-				.Add("@GoodMood", ssh.DommeMood <= FrmSettings.NBDomMoodMax.Value)
-				.Add("@BadMood", ssh.DommeMood >= FrmSettings.NBDomMoodMin.Value)
-				.Add("@NeutralMood", ssh.DommeMood > FrmSettings.NBDomMoodMax.Value Or ssh.DommeMood < FrmSettings.NBDomMoodMin.Value)
-				.Add("@SetModule(", ssh.SetModule <> "" Or ssh.BookmarkModule = True) ' I wonder if this will work.
-				.Add("@OrgasmRestricted", ssh.OrgasmRestricted = False)
-				.Add("@OrgasmNotRestricted", ssh.OrgasmRestricted = True)
-				.Add("@SubWorshipping", ssh.WorshipMode = False)
-				.Add("@SubNotWorshipping", ssh.WorshipMode = True)
-				.Add("@LongHold", ssh.LongHold = False Or ssh.SubHoldingEdge = False)
-				.Add("@ExtremeHold", ssh.ExtremeHold = False Or ssh.SubHoldingEdge = False)
-				.Add("@AssWorship", ssh.WorshipTarget <> "Ass" Or ssh.WorshipMode = False)
-				.Add("@BoobWorship", ssh.WorshipTarget <> "Boobs" Or ssh.WorshipMode = False)
-				.Add("@PussyWorship", ssh.WorshipTarget <> "Pussy" Or ssh.WorshipMode = False)
-			End With
-		Catch ex As ArgumentException
-			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			'	                ArgumentException => Will occur everytime until you fix Source Code!
-			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			Debug.Print("Error on initializing FilterList." & vbCrLf & ex.Message & vbCrLf & ex.StackTrace)
-			MsgBox("Error on initializing FilterList. This Error occurs, If you try to add a duplikace Key to the dictionary." &
-			 "This error is major issue in Code And will occur everytime until you fix this Error. For there is no point in " &
-			 "further executing the Code, the application will exit after closing this Message." & vbCrLf &
-			 ex.Message & vbCrLf & ex.StackTrace, MsgBoxStyle.Critical, "Source Code Error")
-			Application.Exit()
-		End Try
-
-
-		Try
-			' Declare a new regex Instance, for detecting the parameters in a line.
-			' Allowed chars for Commands are:		 A-Z a-z 0-9 @ 
-			' Allowed Brackets are :				( [
-			' Minimum length is 3 Chars, maximum Command length has no restriction.
-			Dim __re As Regex = New Regex("@[@\w\d+]{3,}[\(\[]*", RegexOptions.IgnoreCase)
-
-
-			' Execute regex on current line, to find all containing Commands
-			Dim mc As MatchCollection = __re.Matches(FilterString)
-
-			For Each m As Match In mc
-				If __ConditionDic.Keys.Contains(m.Value) AndAlso __ConditionDic(m.Value) Then
-					'===============================================================================
-					'					Known Command - DELETE Condition = TRUE
-					'===============================================================================
-					' The Command is known and his delete condition is True -> delete line
-					Return False
-
-				ElseIf __ConditionDic.Keys.Contains(m.Value) = False Then
-					'===============================================================================
-					'						Unknown Command / BracketCommand
-					'===============================================================================
-					Dim Condition As Boolean = False
-
-					Select Case m.Value.ToUpper
-						Case "@DommeLevel(".ToUpper : Condition = FilterCheck(GetParentheses(FilterString, "@DommeLevel("), FrmSettings.domlevelNumBox)
-						Case "@Cup(".ToUpper : Condition = FilterCheck(GetParentheses(FilterString, "@Cup("), FrmSettings.boobComboBox)
-						Case "@AllowsOrgasm(".ToUpper : Condition = FilterCheck(GetParentheses(FilterString, "@AllowsOrgasm("), FrmSettings.alloworgasmComboBox)
-						Case "@RuinsOrgasm(".ToUpper : Condition = FilterCheck(GetParentheses(FilterString, "@RuinsOrgasm("), FrmSettings.ruinorgasmComboBox)
-						Case "@ApathyLevel(".ToUpper : Condition = FilterCheck(GetParentheses(FilterString, "@ApathyLevel("), FrmSettings.NBEmpathy)
-						Case "@Variable[".ToUpper : Condition = CheckVariable(FilterString)
-						Case "@CheckDate(".ToUpper : Condition = CheckDateList(FilterString)
-							'QND-Implemented: ContactData.GetTaggedImage
-							'Case "@DommeTag(".ToUpper : Condition = GetDommeImage(GetParentheses(FilterString, "@DommeTag(")) = False Or ssh.LockImage = True
-						Case "@ImageTag(".ToUpper : Condition = GetLocalImage(FilterString)
-						Case "@ImageTagOr(".ToUpper : Condition = GetLocalImage(FilterString,, "Or")
-						Case "@ImageTagAny(".ToUpper : Condition = GetLocalImage(FilterString,, "Any")
-						Case Else
-							'<= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <=
-							'					Unknown Command => goto next Match
-							'<= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <=
-							Dim f As String = "" ' Debug line to add the ability to set a breakpoint.
-							Exit For
-					End Select
-					' The Command is known and his delete condition is True -> delete line
-					If Condition Then Return False
-				End If
-			Next ' of Regex matches (Commands)
-		Catch ex As Exception
-			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			'                                            All Errors
-			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			'TODO: Once implemented rethrow all exceptions.
-			'Throw
-		End Try
-
-		Return True
-
-
-
-
-	End Function
-
 
 #Region "---------------------------------------------------- Chatbox ---------------------------------------------------------"
 
-	Private Sub ChatText_DocumentCompleted(ByVal sender As Object, ByVal e As System.Windows.Forms.WebBrowserDocumentCompletedEventArgs) Handles ChatText.DocumentCompleted
-		ScrollChatDown()
-	End Sub
 
-
-	Private Sub ChatText2_DocumentCompleted(ByVal sender As Object, ByVal e As System.Windows.Forms.WebBrowserDocumentCompletedEventArgs) Handles ChatText2.DocumentCompleted
-		Try
-			ChatText2.Document.Window.ScrollTo(Int16.MaxValue, Int16.MaxValue)
-		Catch
-		End Try
-	End Sub
-
-	Private Sub chatBox_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles chatBox.DragDrop
-		chatBox.Text = CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString
+	Private Sub chatBox_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles chatBox.DragDrop, ChatBox2.DragDrop
+		CType(sender, TextBox).Text = CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString
 		sendButton.PerformClick()
 	End Sub
 
-	Private Sub chatBox2_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles ChatBox2.DragDrop
-		chatBox.Text = ""
-		ChatBox2.Text = CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString
-		sendButton.PerformClick()
-	End Sub
-
-	Private Sub chatBox_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles chatBox.DragEnter
+	Private Sub chatBox_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles chatBox.DragEnter, ChatBox2.DragEnter
 		If (e.Data.GetDataPresent(DataFormats.FileDrop)) Then
 			e.Effect = DragDropEffects.Copy
 		End If
 	End Sub
 
-	Private Sub chatBox2_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles ChatBox2.DragEnter
-		If (e.Data.GetDataPresent(DataFormats.FileDrop)) Then
-			e.Effect = DragDropEffects.Copy
-		End If
-	End Sub
-
-	Private Sub chatbox_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles chatBox.KeyDown
+	Private Sub chatbox_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles chatBox.KeyDown, ChatBox2.KeyDown
 		If e.KeyCode = Keys.Return Then
 			sendButton.PerformClick()
 			e.SuppressKeyPress = True
 		End If
 	End Sub
 
-	Private Sub chatbox2_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles ChatBox2.KeyDown
-		If e.KeyCode = Keys.Return Then
-			sendButton.PerformClick()
-			e.SuppressKeyPress = True
-		End If
-	End Sub
-
-	Private Sub chatBox_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles chatBox.KeyPress
+	Private Sub chatBox_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles chatBox.KeyPress, ChatBox2.KeyPress
 		If e.KeyChar = Chr(13) Then
 			e.Handled = True
 			' sendButton.PerformClick()
 			e.KeyChar = Chr(0)
 		End If
-	End Sub
-
-	Private Sub chatBox2_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles ChatBox2.KeyPress
-		If e.KeyChar = Chr(13) Then
-			e.Handled = True
-			' sendButton.PerformClick()
-			e.KeyChar = Chr(0)
-		End If
-	End Sub
-
-	''' <summary>Appends a system message to chat and prints it if desired. </summary>
-	''' <param name="messageText">Messagetext to append to chat.</param>
-	''' <param name="printChat">If true the chatwindow is refreshed and reprinted.</param>
-	Public Sub ChatAddSystemMessage(ByVal messageText As String, Optional ByVal printChat As Boolean = True)
-		ChatAppend("<span style=""color: steelblue; font-weight: bold; "">" & messageText & "</span>", printChat)
-		'ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""SteelBlue""><b>" & messageText & "</b>" & "<br></font></body>"
-	End Sub
-
-	Public Sub ChatAppend(ByVal elementText As String, Optional ByVal printChat As Boolean = True)
-		ssh.Chat &= elementText & "<br>" & vbCrLf
-		If printChat Then Me.PrintChat()
-	End Sub
-
-	Friend Sub PrintChat()
-		ChatText.DocumentText = ssh.Chat
-		ChatText2.DocumentText = ssh.Chat
-		ChatReadyState()
-	End Sub
-
-	Public Sub ScrollChatDown()
-
-		Try
-			ChatText.Document.Window.ScrollTo(Int16.MaxValue, Int16.MaxValue)
-		Catch
-		End Try
-
-		Try
-			ChatText2.Document.Window.ScrollTo(Int16.MaxValue, Int16.MaxValue)
-		Catch
-		End Try
-
-	End Sub
-
-	Public Sub ClearChat()
-
-		ssh.Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """></body>"
-		ChatText.DocumentText = ssh.Chat
-		ChatText2.DocumentText = ssh.Chat
-		ChatReadyState()
-
-	End Sub
-
-	Public Sub ChatReadyState()
-		While ChatText.ReadyState <> WebBrowserReadyState.Complete Or ChatText2.ReadyState <> WebBrowserReadyState.Complete
-			Application.DoEvents()
-		End While
-		ScrollChatDown()
 	End Sub
 
 #End Region  ' Chatbox
@@ -15432,6 +13874,7 @@ NoPlaylistEndFile:
 		ssh.SubStroking = False
 		ssh.SubEdging = False
 		ssh.SubHoldingEdge = False
+		ssh.MultipleEdges = False
 		ssh.AskedToSpeedUp = False
 		ssh.AskedToSlowDown = False
 
@@ -17265,13 +15708,6 @@ saveImage:
 
 
 
-	Private Sub StatusUpdates_DocumentCompleted(ByVal sender As Object, ByVal e As System.Windows.Forms.WebBrowserDocumentCompletedEventArgs) Handles StatusUpdates.DocumentCompleted
-		Try
-			StatusUpdates.Document.Window.ScrollTo(Int16.MaxValue, Int16.MaxValue)
-		Catch
-		End Try
-	End Sub
-
 
 
 	Public Function WordExists(ByVal searchString As String, ByVal findString As String) As Boolean
@@ -17369,7 +15805,7 @@ saveImage:
 			End Try
 		Next
 		CFClean = Join(AtArray)
-		Return CFClean
+		Return CFClean.Trim
 
 	End Function
 
@@ -17461,9 +15897,9 @@ restartInstantly:
 		If Not ssh.Group.Contains(contact) Then
 			ssh.Group = ssh.Group & contact
 			ssh.GlitterTease = True
-				ChatAddSystemMessage(name & " has joined the Chat room", False)
-			Else
-				ssh.Group = ssh.Group.Replace(contact, "")
+			ChatAddSystemMessage(name & " has joined the Chat room", False)
+		Else
+			ssh.Group = ssh.Group.Replace(contact, "")
 			ChatAddSystemMessage(name & " has left the Chat room", False)
 		End If
 
@@ -17474,14 +15910,6 @@ restartInstantly:
 		End If
 	End Sub
 
-	Private Sub UpdateStageTimer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UpdateStageTimer.Tick
-		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
-		ssh.UpdateStageTick -= 1
-		If ssh.UpdateStageTick < 1 Then
-			UpdateStageTimer.Stop()
-			StatusUpdatePost()
-		End If
-	End Sub
 
 
 
@@ -17556,7 +15984,7 @@ restartInstantly:
 				Dim fsd As New SaveFileDialog With {.Filter = "Saved Session|*" & Path.GetExtension(SavedSessionDefaultPath) & "",
 						 .InitialDirectory = Path.GetDirectoryName(SavedSessionDefaultPath),
 						 .Title = "Select a destination to safe the sessin to.",
-						 .filename = Now.ToString("yy-MM-dd_HH-mm-ss") & "_" & dompersonalitycombobox.Text,
+						 .FileName = Now.ToString("yy-MM-dd_HH-mm-ss") & "_" & dompersonalitycombobox.Text,
 						 .AddExtension = True,
 						 .CheckPathExists = True,
 						 .OverwritePrompt = True,
@@ -17653,7 +16081,7 @@ restartInstantly:
 		FrmSettings.LockOrgasmChances(False)
 
 		If ssh.DomTypeCheck = False Then
-			ssh.DomTask = "<b>Tease AI has been reset</b>"
+			ssh.DomTask = "@SystemMessage Tease AI has been reset"
 			TypingDelayGeneric()
 		End If
 		setStartName()
@@ -18390,6 +16818,8 @@ restartInstantly:
 					LBLWritingTask.Text = "Write the following line " & ssh.WritingTaskLinesAmount & " times" & vbCrLf & "YOUR TIME IS UP"
 					LBLTime.Text = "Time's Up"
 					'immediately ends the writing task if time is up without waiting for next user input
+					ChatAddWritingTaskInfo("<span style=""color: red;"">Time Expired</div>")
+
 					ClearWriteTask()
 					ssh.SkipGotoLine = True
 					ssh.FileGoto = "Failed Writing Task"
@@ -18448,7 +16878,7 @@ restartInstantly:
 			Dim SetDate As Date = FormatDateTime(FrmSettings.TimeBoxWakeUp.Value, DateFormat.LongTime)
 			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_WakeUp", FormatDateTime(SetDate, DateFormat.LongTime), False)
 			My.Settings.WakeUp = FormatDateTime(Now, DateFormat.ShortDate) & " " & GetTime("SYS_WakeUp")
-
+			'BUG: Ungültige Konvertierung von der Zeichenfolge 10.11.2017 10.11.2017 16:59:51 in Typ Date.
 		End If
 
 		If ssh.CountUpList.Count > 0 Then
@@ -19373,6 +17803,266 @@ restartInstantly:
 
 #End Region  ' DommeTag APP
 
+#Region "------------------------------------------------- GlitterFeeds APP ---------------------------------------------------"
+
+	Sub GlitterSendPost(contactID As Integer, content As String)
+		Dim ConName, ConImgPath As String
+		Dim BodyText As String = If(StatusUpdates.Document Is Nothing, "", StatusUpdates.Document.Body.InnerHtml)
+
+		If contactID = 0 Then
+			ConName = My.Settings.DomName
+			ConImgPath = My.Settings.GlitterAV
+		ElseIf contactID = 1 Then
+			ConName = My.Settings.Glitter1
+			ConImgPath = My.Settings.GlitterAV1
+		ElseIf contactID = 2 Then
+			ConName = My.Settings.Glitter2
+			ConImgPath = My.Settings.GlitterAV2
+		ElseIf contactID = 3 Then
+			ConName = My.Settings.Glitter3
+			ConImgPath = My.Settings.GlitterAV3
+		Else
+			Throw New ArgumentOutOfRangeException
+		End If
+
+		'===============================================================================
+		'							Generate stylesheet
+		'===============================================================================
+		Dim Style As String = CssTryGetFile(Application.StartupPath & "/System/CSS/GlitterApp.css", My.Resources.GlitterFallbackStyle)
+		Style = CssReplaceSettings(Style)
+
+		'===============================================================================
+		'							Generate body Text
+		'===============================================================================
+		ConImgPath = "file://" & ConImgPath.Replace("\", "/")
+
+		BodyText &= "<div class=""post"">" & vbCrLf
+		BodyText &= "  <img class=""avImg"" src=""" & ConImgPath & """>" & vbCrLf
+		BodyText &= "  <span class=""avName_" & contactID & """>" & ConName & "</span>" & vbCrLf
+		BodyText &= "  <span class=""timestamp"">" & Now.ToLongTimeString & "</span>" & vbCrLf
+		BodyText &= "  <p class=""content"">" & content & "</p>" & vbCrLf
+		BodyText &= "</div>" & vbCrLf
+
+		Dim TextToSet As String = HtmlBuildPage("Glitter-App", Style, BodyText)
+
+
+		'===============================================================================
+		'							Page Output
+		'===============================================================================
+		Try
+			StatusUpdates.DocumentText = TextToSet
+		Catch ex As COMException When ex.ErrorCode = -2147024726
+			MessageBox.Show("Unable to access the Webbrowser.",
+						"Update Glitter-App failed", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+
+		End Try
+	End Sub
+
+	Public Sub StatusUpdatePost()
+		' Read all lines of given file and remove filepath from stack.
+		Dim Lines As List(Of String) = Txt2List(ssh.UpdateList(0))
+		ssh.UpdateList.RemoveAt(0)
+
+		If Lines.Count < 1 Then Exit Sub
+
+		' Lambda expression to clean a single glitter line. 
+		' Keywords and vocabulary files are processed as in regular scripts.
+		' No commands are processed.
+		Dim CleanString = Function(RawString As String) As String
+							  RawString = PoundClean(RawString)
+
+							  Dim SplitArray() As String = Split(RawString)
+							  For i As Integer = SplitArray.Length - 1 To 0 Step -1
+								  If SplitArray(i).Contains("@") Then
+									  SplitArray(i) = SplitArray(i).Replace(SplitArray(i), "")
+								  End If
+								  If FrmSettings.CBHimHer.Checked = True Then
+									  If SplitArray(i) = "He" Then SplitArray(i) = SplitArray(i).Replace("He", "She")
+									  If SplitArray(i) = "he" Then SplitArray(i) = SplitArray(i).Replace("he", "she")
+									  If SplitArray(i) = "Him" Then SplitArray(i) = SplitArray(i).Replace("Him", "Her")
+									  If SplitArray(i) = "him" Then SplitArray(i) = SplitArray(i).Replace("him", "her")
+									  If SplitArray(i) = "His" Then SplitArray(i) = SplitArray(i).Replace("His", "Her")
+									  If SplitArray(i) = "his" Then SplitArray(i) = SplitArray(i).Replace("his", "her")
+								  End If
+							  Next
+							  Return Join(SplitArray)
+						  End Function
+
+
+		ssh.StatusText = CleanString(Lines(0))
+		Lines.RemoveAt(0)
+
+		' ################## Set Contact updates ######################
+
+		' Lambda expression to get a clean glitter line. 
+		Dim GetLine = Function(id As Integer) As String
+						  ' Get available lines for given contact
+						  Dim Pool As List(Of String) = StatusClean(id, Lines)
+TryAgain:
+						  Dim RtnVal As String = ">"
+
+						  If Pool.Count > 0 Then
+							  ' Get random line, and remove it from orignal list, to avoid duplicates.
+							  RtnVal = Pool(New Random().Next(0, Pool.Count))
+							  Lines.Remove(RtnVal)
+							  Pool.Remove(RtnVal)
+
+							  ' Replace Keywords and Vocabularies.
+							  RtnVal = CleanString(RtnVal)
+
+							  ' Check if the result is empty
+							  If String.IsNullOrWhiteSpace(RtnVal) Then GoTo TryAgain
+						  End If
+
+						  Return RtnVal
+					  End Function
+
+		ssh.StatusText1 = GetLine(1)
+		ssh.StatusText2 = GetLine(2)
+		ssh.StatusText3 = GetLine(3)
+
+		ssh.StatusChance1 = ssh.randomizer.Next(1, 101)
+		ssh.StatusChance2 = ssh.randomizer.Next(1, 101)
+		ssh.StatusChance3 = ssh.randomizer.Next(1, 101)
+
+		' ################## Begin status update ######################
+		GlitterSendPost(0, ssh.StatusText)
+
+		ssh.UpdateStageTick = ssh.randomizer.Next(10, 21)
+		ssh.UpdatingPost = True
+		UpdateStageTimer.Start()
+
+	End Sub
+
+	Public Function StatusClean(contactNumber As Integer, ByVal ListClean As List(Of String)) As List(Of String)
+		Dim Exclude, RtnList As New List(Of String)
+
+		' Create a copy of the initial list. 
+		RtnList = ListClean.ConvertAll(Function(x) x)
+
+		If contactNumber = 1 Then
+			Exclude.AddRange({"@Contact2", "@Contact3"})
+		ElseIf contactNumber = 2 Then
+			Exclude.AddRange({"@Contact1", "@Contact3"})
+		ElseIf contactNumber = 3 Then
+			Exclude.AddRange({"@Contact1", "@Contact2"})
+		End If
+
+		RtnList.RemoveAll(Function(x)
+							  For Each item In Exclude
+								  If x.Contains(item) Then Return True
+							  Next
+							  Return False
+						  End Function)
+		Return RtnList
+	End Function
+
+	Private Sub UpdatesTimer_Tick(sender As System.Object, e As System.EventArgs) Handles UpdatesTimer.Tick
+		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Exit Sub
+
+		'If ssh.UpdateStageTick > 5 Then ssh.UpdateStageTick = 3
+		'If ssh.UpdatesTick > 5 Then ssh.UpdatesTick = 3
+
+		If My.Settings.CBGlitterFeed = False Then Exit Sub
+		If ssh.UpdatingPost = True Then Exit Sub
+
+		ssh.UpdatesTick -= 1
+
+		If ssh.UpdatesTick > 0 Then Exit Sub
+
+		ssh.UpdatesTick = 1080 / My.Settings.GlitterDSlider
+
+		If ssh.UpdateList.Count < 1 Then
+			Dim Lazytext As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text
+
+			Dim FolderList, FileList As New List(Of String)
+
+			If My.Settings.CBTease Then FolderList.Add(Lazytext & "\Apps\Glitter\Tease\")
+			If My.Settings.CBEgotist Then FolderList.Add(Lazytext & "\Apps\Glitter\Egotist\")
+			If My.Settings.CBTrivia Then FolderList.Add(Lazytext & "\Apps\Glitter\Trivia\")
+			If My.Settings.CBDaily Then FolderList.Add(Lazytext & "\Apps\Glitter\Daily\")
+			If My.Settings.CBCustom1 Then FolderList.Add(Lazytext & "\Apps\Glitter\Custom 1\")
+			If My.Settings.CBCustom2 Then FolderList.Add(Lazytext & "\Apps\Glitter\Custom 2\")
+
+			For Each Folder As String In FolderList
+				For Each FoundFile As String In My.Computer.FileSystem.GetFiles(Folder, FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+					FileList.Add(FoundFile)
+				Next
+			Next
+
+			If FileList.Count < 1 Then
+				My.Settings.CBGlitterFeed = False
+				MessageBox.Show(Me, "Tease AI attempted to create a Glitter update, but no files were found! Please make sure at least one category containing Glitter txt files has been selected." & Environment.NewLine _
+					& Environment.NewLine & "Glitter feed has been automatically disabled.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+				Return
+			End If
+
+			For i As Integer = 0 To ssh.UpdateList.Count - 1
+				Debug.Print(i & ". " & ssh.UpdateList(i))
+			Next
+
+			ssh.UpdateList.Add(FileList(ssh.randomizer.Next(0, FileList.Count)))
+		End If
+		StatusUpdatePost()
+
+	End Sub
+
+	Private Sub UpdateStageTimer_Tick(sender As System.Object, e As System.EventArgs) Handles UpdateStageTimer.Tick
+		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
+		ssh.UpdateStageTick -= 1
+
+		If ssh.UpdateStageTick < 1 Then
+
+			UpdateStageTimer.Stop()
+
+ReRoll:
+			ssh.TempVal = ssh.randomizer.Next(1, 4)
+
+
+			If ssh.TempVal = 1 And ssh.StatusText1(0) <> ">" Then
+				' ##################### Contact1 Post #########################
+				If ssh.StatusChance1 < My.Settings.Glitter1Slider * 10 And My.Settings.CBGlitter1 = True Then
+					GlitterSendPost(1, ssh.StatusText1)
+				End If
+				ssh.StatusText1 = ">" & ssh.StatusText1
+
+			ElseIf ssh.TempVal = 2 And ssh.StatusText2(0) <> ">" Then
+				' ##################### Contact2 Post #########################
+				If ssh.StatusChance2 < My.Settings.Glitter2Slider * 10 And My.Settings.CBGlitter2 = True Then
+					GlitterSendPost(2, ssh.StatusText2)
+				End If
+				ssh.StatusText2 = ">" & ssh.StatusText2
+
+			ElseIf ssh.TempVal = 3 And ssh.StatusText3(0) <> ">" Then
+				' ##################### Contact3 Post #########################
+				If ssh.StatusChance3 < My.Settings.Glitter3Slider * 10 And My.Settings.CBGlitter3 = True Then
+					GlitterSendPost(3, ssh.StatusText3)
+				End If
+				ssh.StatusText3 = ">" & ssh.StatusText3
+
+			Else
+				GoTo ReRoll
+			End If
+
+
+			If ssh.StatusText1(0) = ">" And ssh.StatusText2(0) = ">" And ssh.StatusText3(0) = ">" Then
+				ssh.UpdatingPost = False
+			Else
+				ssh.UpdateStageTick = ssh.randomizer.Next(10, 21)
+				UpdateStageTimer.Start()
+			End If
+		End If
+	End Sub
+
+	Private Sub StatusUpdates_DocumentCompleted(ByVal sender As Object, ByVal e As System.Windows.Forms.WebBrowserDocumentCompletedEventArgs) Handles StatusUpdates.DocumentCompleted
+		Try
+			StatusUpdates.Document.Window.ScrollTo(Int16.MaxValue, Int16.MaxValue)
+		Catch
+		End Try
+	End Sub
+
+#End Region ' GlitterFeeds APP
+
 #Region "------------------------------------------------------ Lazy-Sub ------------------------------------------------------"
 
 	Private Sub Button25_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNStop.Click, Button7.Click
@@ -19466,57 +18156,29 @@ restartInstantly:
 
 	Public Sub GetShortcutChecked()
 
-		If CBHideShortcuts.Checked = True Then
-			TBShortYes.Visible = False
-			TBShortNo.Visible = False
-			TBShortEdge.Visible = False
-			TBShortSpeedUp.Visible = False
-			TBShortSlowDown.Visible = False
-			TBShortStop.Visible = False
-			TBShortStroke.Visible = False
-			TBShortCum.Visible = False
-			TBShortGreet.Visible = False
-			TBShortSafeword.Visible = False
+		TBShortYes.Visible = Not CBHideShortcuts.Checked
+		TBShortNo.Visible = Not CBHideShortcuts.Checked
+		TBShortEdge.Visible = Not CBHideShortcuts.Checked
+		TBShortSpeedUp.Visible = Not CBHideShortcuts.Checked
+		TBShortSlowDown.Visible = Not CBHideShortcuts.Checked
+		TBShortStop.Visible = Not CBHideShortcuts.Checked
+		TBShortStroke.Visible = Not CBHideShortcuts.Checked
+		TBShortCum.Visible = Not CBHideShortcuts.Checked
+		TBShortGreet.Visible = Not CBHideShortcuts.Checked
+		TBShortSafeword.Visible = Not CBHideShortcuts.Checked
 
 
-			BTNLS1.Width = 214
-			BTNLS2.Width = 214
-			BTNLS3.Width = 214
-			BTNLS4.Width = 214
-			BTNLS5.Width = 214
+		BTNLS1.Width = If(CBHideShortcuts.Checked, 214, 163)
+		BTNLS2.Width = If(CBHideShortcuts.Checked, 214, 163)
+		BTNLS3.Width = If(CBHideShortcuts.Checked, 214, 163)
+		BTNLS4.Width = If(CBHideShortcuts.Checked, 214, 163)
+		BTNLS5.Width = If(CBHideShortcuts.Checked, 214, 163)
 
-			BTNLS1Edit.Visible = False
-			BTNLS2Edit.Visible = False
-			BTNLS3Edit.Visible = False
-			BTNLS4Edit.Visible = False
-			BTNLS5Edit.Visible = False
-
-		Else
-
-			TBShortYes.Visible = True
-			TBShortNo.Visible = True
-			TBShortEdge.Visible = True
-			TBShortSpeedUp.Visible = True
-			TBShortSlowDown.Visible = True
-			TBShortStop.Visible = True
-			TBShortStroke.Visible = True
-			TBShortCum.Visible = True
-			TBShortGreet.Visible = True
-			TBShortSafeword.Visible = True
-
-			BTNLS1.Width = 163
-			BTNLS2.Width = 163
-			BTNLS3.Width = 163
-			BTNLS4.Width = 163
-			BTNLS5.Width = 163
-
-			BTNLS1Edit.Visible = True
-			BTNLS2Edit.Visible = True
-			BTNLS3Edit.Visible = True
-			BTNLS4Edit.Visible = True
-			BTNLS5Edit.Visible = True
-
-		End If
+		BTNLS1Edit.Visible = Not CBHideShortcuts.Checked
+		BTNLS2Edit.Visible = Not CBHideShortcuts.Checked
+		BTNLS3Edit.Visible = Not CBHideShortcuts.Checked
+		BTNLS4Edit.Visible = Not CBHideShortcuts.Checked
+		BTNLS5Edit.Visible = Not CBHideShortcuts.Checked
 
 	End Sub
 
@@ -19585,32 +18247,41 @@ restartInstantly:
 
 	End Sub
 
-	Private Sub BTNLS1Edit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNLS1Edit.Click
+	Private Sub BtnLsEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNLS1Edit.Click, BTNLS2Edit.Click, BTNLS3Edit.Click, BTNLS4Edit.Click, BTNLS5Edit.Click
+		Dim TextToSet As String = ""
 
-
-		LazyEdit2 = False
-		LazyEdit3 = False
-		LazyEdit4 = False
-		LazyEdit5 = False
-
-		BTNLS2Edit.BackColor = My.Settings.ButtonColor
-		BTNLS2Edit.ForeColor = My.Settings.TextColor
-		BTNLS3Edit.BackColor = My.Settings.ButtonColor
-		BTNLS3Edit.ForeColor = My.Settings.TextColor
-		BTNLS4Edit.BackColor = My.Settings.ButtonColor
-		BTNLS4Edit.ForeColor = My.Settings.TextColor
-		BTNLS5Edit.BackColor = My.Settings.ButtonColor
-		BTNLS5Edit.ForeColor = My.Settings.TextColor
-
-
-		If LazyEdit1 = False Then
-			BTNLS1Edit.BackColor = Color.ForestGreen
-			BTNLS1Edit.ForeColor = Color.White
-			LazyEdit1 = True
+		If sender Is BTNLS1Edit Then
+			TextToSet = My.Settings.LS1
+		ElseIf sender Is BTNLS2Edit Then
+			TextToSet = My.Settings.LS2
+		ElseIf sender Is BTNLS3Edit Then
+			TextToSet = My.Settings.LS3
+		ElseIf sender Is BTNLS4Edit Then
+			TextToSet = My.Settings.LS4
+		ElseIf sender Is BTNLS5Edit Then
+			TextToSet = My.Settings.LS5
 		Else
-			BTNLS1Edit.BackColor = My.Settings.ButtonColor
-			BTNLS1Edit.ForeColor = My.Settings.TextColor
-			LazyEdit1 = False
+			Exit Sub
+		End If
+
+		TextToSet = InputBox("Enter a text to set.", "Set custom Lazy Sub Text", TextToSet)
+
+		If TextToSet.Trim = "" Then
+			MessageBox.Show("Setting new Lazy Sub text has been aborted.", "Abort", MessageBoxButtons.OK, MessageBoxIcon.Information)
+			Exit Sub
+		End If
+
+		If sender Is BTNLS1Edit Then
+			My.Settings.LS1 = TextToSet
+		ElseIf sender Is BTNLS2Edit Then
+			My.Settings.LS2 = TextToSet
+		ElseIf sender Is BTNLS3Edit Then
+			My.Settings.LS3 = TextToSet
+		ElseIf sender Is BTNLS4Edit Then
+			My.Settings.LS4 = TextToSet
+		ElseIf sender Is BTNLS5Edit Then
+			My.Settings.LS5 = TextToSet
+
 		End If
 
 	End Sub
@@ -19626,35 +18297,6 @@ restartInstantly:
 
 	End Sub
 
-	Private Sub BTNLS2Edit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNLS2Edit.Click
-
-
-		LazyEdit1 = False
-		LazyEdit3 = False
-		LazyEdit4 = False
-		LazyEdit5 = False
-
-		BTNLS1Edit.BackColor = My.Settings.ButtonColor
-		BTNLS1Edit.ForeColor = My.Settings.TextColor
-		BTNLS3Edit.BackColor = My.Settings.ButtonColor
-		BTNLS3Edit.ForeColor = My.Settings.TextColor
-		BTNLS4Edit.BackColor = My.Settings.ButtonColor
-		BTNLS4Edit.ForeColor = My.Settings.TextColor
-		BTNLS5Edit.BackColor = My.Settings.ButtonColor
-		BTNLS5Edit.ForeColor = My.Settings.TextColor
-
-		If LazyEdit2 = False Then
-			BTNLS2Edit.BackColor = Color.ForestGreen
-			BTNLS2Edit.ForeColor = Color.White
-			LazyEdit2 = True
-		Else
-			BTNLS2Edit.BackColor = My.Settings.ButtonColor
-			BTNLS2Edit.ForeColor = My.Settings.TextColor
-			LazyEdit2 = False
-		End If
-
-	End Sub
-
 	Private Sub BTNLS3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNLS3.Click
 
 
@@ -19662,36 +18304,6 @@ restartInstantly:
 			chatBox.Text = BTNLS3.Text
 			If ssh.WritingTaskFlag = True Then CheatCheck()
 			sendButton.PerformClick()
-		End If
-
-	End Sub
-
-	Private Sub BTNLS3Edit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNLS3Edit.Click
-
-
-		LazyEdit2 = False
-		LazyEdit1 = False
-		LazyEdit4 = False
-		LazyEdit5 = False
-
-		BTNLS2Edit.BackColor = My.Settings.ButtonColor
-		BTNLS2Edit.ForeColor = My.Settings.TextColor
-		BTNLS1Edit.BackColor = My.Settings.ButtonColor
-		BTNLS1Edit.ForeColor = My.Settings.TextColor
-		BTNLS4Edit.BackColor = My.Settings.ButtonColor
-		BTNLS4Edit.ForeColor = My.Settings.TextColor
-		BTNLS5Edit.BackColor = My.Settings.ButtonColor
-		BTNLS5Edit.ForeColor = My.Settings.TextColor
-
-
-		If LazyEdit3 = False Then
-			BTNLS3Edit.BackColor = Color.ForestGreen
-			BTNLS3Edit.ForeColor = Color.White
-			LazyEdit3 = True
-		Else
-			BTNLS3Edit.BackColor = My.Settings.ButtonColor
-			BTNLS3Edit.ForeColor = My.Settings.TextColor
-			LazyEdit3 = False
 		End If
 
 	End Sub
@@ -19707,36 +18319,6 @@ restartInstantly:
 
 	End Sub
 
-	Private Sub BTNLS4Edit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNLS4Edit.Click
-
-
-		LazyEdit2 = False
-		LazyEdit3 = False
-		LazyEdit1 = False
-		LazyEdit5 = False
-
-		BTNLS2Edit.BackColor = My.Settings.ButtonColor
-		BTNLS2Edit.ForeColor = My.Settings.TextColor
-		BTNLS3Edit.BackColor = My.Settings.ButtonColor
-		BTNLS3Edit.ForeColor = My.Settings.TextColor
-		BTNLS1Edit.BackColor = My.Settings.ButtonColor
-		BTNLS1Edit.ForeColor = My.Settings.TextColor
-		BTNLS5Edit.BackColor = My.Settings.ButtonColor
-		BTNLS5Edit.ForeColor = My.Settings.TextColor
-
-
-		If LazyEdit4 = False Then
-			BTNLS4Edit.BackColor = Color.ForestGreen
-			BTNLS4Edit.ForeColor = Color.White
-			LazyEdit4 = True
-		Else
-			BTNLS4Edit.BackColor = My.Settings.ButtonColor
-			BTNLS4Edit.ForeColor = My.Settings.TextColor
-			LazyEdit4 = False
-		End If
-
-	End Sub
-
 	Private Sub BTNLS5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNLS5.Click
 
 
@@ -19748,34 +18330,6 @@ restartInstantly:
 
 	End Sub
 
-	Private Sub BTNLS5Edit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNLS5Edit.Click
-
-
-		LazyEdit2 = False
-		LazyEdit3 = False
-		LazyEdit4 = False
-		LazyEdit1 = False
-
-		BTNLS2Edit.BackColor = My.Settings.ButtonColor
-		BTNLS2Edit.ForeColor = My.Settings.TextColor
-		BTNLS3Edit.BackColor = My.Settings.ButtonColor
-		BTNLS3Edit.ForeColor = My.Settings.TextColor
-		BTNLS4Edit.BackColor = My.Settings.ButtonColor
-		BTNLS4Edit.ForeColor = My.Settings.TextColor
-		BTNLS1Edit.BackColor = My.Settings.ButtonColor
-		BTNLS1Edit.ForeColor = My.Settings.TextColor
-
-		If LazyEdit5 = False Then
-			BTNLS5Edit.BackColor = Color.ForestGreen
-			BTNLS5Edit.ForeColor = Color.White
-			LazyEdit5 = True
-		Else
-			BTNLS5Edit.BackColor = My.Settings.ButtonColor
-			BTNLS5Edit.ForeColor = My.Settings.TextColor
-			LazyEdit5 = False
-		End If
-
-	End Sub
 
 #End Region  ' Lazy-Sub
 
@@ -21252,8 +19806,6 @@ ShowedBlogImage:
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			If throwException Then Log.WriteError("Command @ShowImage[] was unable to display the image.",
 			ex, "Error at @ShowImage[]")
-			'MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error at @ShowImage[]")
-			If throwException And My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " :::: Error at @ShowImage[]</font>", False)
 		End Try
 		Return tmpImgLoc
 	End Function

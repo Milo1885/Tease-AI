@@ -250,7 +250,6 @@ Error_All:
                 '                                            All Errors
                 '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
                 Log.WriteError(ex.Message, ex, "Exception while duplicating user.config.")
-                If My.Settings.CBOutputErrors = True Then Form1.ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " :::: Exception while duplicating user.config.</font>", False)
 			End Try
 		End Sub
 
