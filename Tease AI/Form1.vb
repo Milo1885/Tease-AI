@@ -115,11 +115,6 @@ Public Class Form1
 	Public synth2 As New SpeechSynthesizer
 
 
-	Public LazyEdit1 As Boolean
-	Public LazyEdit2 As Boolean
-	Public LazyEdit3 As Boolean
-	Public LazyEdit4 As Boolean
-	Public LazyEdit5 As Boolean
 
 	Public ApplyingTheme As Boolean
 
@@ -164,10 +159,6 @@ Public Class Form1
 
 
 
-
-
-
-			'If BeforeTease = False And My.Settings.Sys_SubLeftEarly <> 0 Then My.Settings.Sys_SubLeftEarlyTotal += 1
 
 			If ssh.BeforeTease = False And Val(GetVariable("SYS_SubLeftEarly")) <> 0 Then SetVariable("SYS_SubLeftEarlyTotal", Val(GetVariable("SYS_SubLeftEarlyTotal")) + 1)
 
@@ -251,66 +242,38 @@ retryStart:
 
 			FormLoading = True
 
-			FrmSplash.Show()
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Checking orgasm limit..."     ' 1
-			FrmSplash.Refresh()
+			FrmSplash.UpdateText("Checking orgasm limit...")
 
 			If My.Settings.OrgasmLockDate = Nothing Then My.Settings.OrgasmLockDate = FormatDateTime(Now, DateFormat.ShortDate)
 			Debug.Print("OrgasmLockDate = " & My.Settings.OrgasmLockDate)
 
 
-
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Clearing Metronome settings..."
-			FrmSplash.Refresh()
-
+			' #############################################################
+			FrmSplash.UpdateText("Clearing Metronome settings...")
 
 			StrokePace = 0
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Checking terms and conditions..."
-			FrmSplash.Refresh()
-
-
-			' If My.Settings.TCAgreed = True Then
-			'frmApps.ClearAgree()
-			'End If
-
+			' #############################################################
+			FrmSplash.UpdateText("Checking terms and conditions...")
 
 			If My.Settings.TC2Agreed = False Then
-				Form7.Show()
-				Do
-					Application.DoEvents()
-				Loop Until My.Settings.TC2Agreed = True
+				If FrmTaC.ShowDialog() = DialogResult.Yes Then
+					My.Settings.TC2Agreed = True
+					My.Settings.Save()
+				Else
+					Process.GetCurrentProcess().Kill()
+				End If
 			End If
 
-
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Checking installed Personalities..."
-			FrmSplash.Refresh()
-
-			Dim PersonType As String
-
-			'dompersonalityComboBox.Items.Clear()
-
-			Debug.Print(My.Settings.DomPersonality)
-			'dompersonalityComboBox.Text = My.Settings.DomPersonality
-
-			'dompersonalityComboBox.Text = My.Settings.DomPersonality
-
+			' #############################################################
+			FrmSplash.UpdateText("Checking installed Personalities...")
 
 			For Each Dir As String In myDirectory.GetDirectories(Application.StartupPath & "\Scripts\")
-				PersonType = Dir
-
-				Dim DirSplit As String() = PersonType.Split("\")
-				PersonType = DirSplit(DirSplit.Length - 1)
-				Debug.Print("PersonType = " & PersonType)
-				'Do While PersonType.Contains("\")
-				'PersonType = PersonType.Remove(0, 1)
-				'Loop
 				Try
+					Dim DirSplit As String() = Dir.Split("\")
+					Dim PersonType As String = DirSplit(DirSplit.Length - 1)
+					Debug.Print("Adding Personality: " & PersonType)
 					dompersonalitycombobox.Items.Add(PersonType)
 				Catch
 				End Try
@@ -320,32 +283,29 @@ retryStart:
 				MessageBox.Show(Me, "No domme Personalities were found! Many aspects of this program will not work correctly until at least one Personality is installed.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 			Else
 				Try
+					Debug.Print("Set previous personality: " & My.Settings.DomPersonality)
 					dompersonalitycombobox.Text = My.Settings.DomPersonality
 				Catch ex As Exception
 					dompersonalitycombobox.Text = dompersonalitycombobox.Items(0)
 				End Try
 			End If
 
-
+			' #############################################################
 			FrmSettings.FrmSettingsLoading = True
-
 			FrmSettings.FrmSettingStartUp()
 
 			Do
 				Application.DoEvents()
 			Loop Until FrmSettings.FrmSettingsLoading = False
 
-
-			ssh.StrokeTimeTotal = My.Settings.StrokeTimeTotal
-			StrokeTimeTotalTimer.Start()
-
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Calculating total stroke time..."
-			FrmSplash.Refresh()
+			' #############################################################
+			FrmSplash.UpdateText("Calculating total stroke time...")
 
 			Dim STT As TimeSpan = TimeSpan.FromSeconds(ssh.StrokeTimeTotal)
 			FrmSettings.LBLStrokeTimeTotal.Text = String.Format("{0:0000}:{1:00}:{2:00}:{3:00}", STT.Days, STT.Hours, STT.Minutes, STT.Seconds)
 
+			ssh.StrokeTimeTotal = My.Settings.StrokeTimeTotal
+			StrokeTimeTotalTimer.Start()
 
 			ssh.DomTask = "Null"
 			ssh.DomChat = "Null"
@@ -360,17 +320,18 @@ retryStart:
 			ssh.Chat = ""
 			IsTypingTimer.Start()
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Loading Domme and Sub avatar images..."
-			FrmSplash.Refresh()
+			' #############################################################
+			FrmSplash.UpdateText("Loading avatar images...")
 
 			'If File.Exists(My.Settings.DomAvatarSave) Then domAvatar.Image = Image.FromFile(My.Settings.DomAvatarSave)
 			'If File.Exists(My.Settings.SubAvatarSave) Then subAvatar.Image = Image.FromFile(My.Settings.SubAvatarSave)
+			If File.Exists(My.Settings.GlitterAV) Then FrmSettings.GlitterAV.Image = Image.FromFile(My.Settings.GlitterAV)
+			If File.Exists(My.Settings.GlitterAV1) Then FrmSettings.GlitterAV1.Image = Image.FromFile(My.Settings.GlitterAV1)
+			If File.Exists(My.Settings.GlitterAV2) Then FrmSettings.GlitterAV2.Image = Image.FromFile(My.Settings.GlitterAV2)
+			If File.Exists(My.Settings.GlitterAV3) Then FrmSettings.GlitterAV3.Image = Image.FromFile(My.Settings.GlitterAV3)
 
-
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Checking recent slideshows..."
-			FrmSplash.Refresh()
+			' #############################################################
+			FrmSplash.UpdateText("Checking recent slideshows...")
 
 
 			Dim uniqueNames = From u In My.Settings.RecentSlideshows Distinct
@@ -379,9 +340,6 @@ retryStart:
 				If Directory.Exists(n) Then ImageFolderComboBox.Items.Add(n)
 			Next
 
-			'For Each path As String In My.Settings.RecentSlideshows
-			'If Directory.Exists(Path) Then ImageFolderComboBox.Items.Add(Path)
-			'Next
 			' because Specialized.StringCollections are crap, 
 			' we have to clear And refill it using For-Each...
 			My.Settings.RecentSlideshows.Clear()
@@ -390,27 +348,17 @@ retryStart:
 				My.Settings.RecentSlideshows.Add(comboitem)
 			Next
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Checking local videos..."
-			FrmSplash.Refresh()
+			' #############################################################
+			FrmSplash.UpdateText("Checking local videos...")
 
 			' Checks all folders and Sets the VideoCount as LabelText
 			FrmSettings.Video_CheckAllFolders()
 
 			ssh.VideoType = "General"
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Loading Glitter avatar images..."
-			FrmSplash.Refresh()
+			' #############################################################
+			FrmSplash.UpdateText("Starting Glitter APP...")
 
-			If File.Exists(My.Settings.GlitterAV) Then FrmSettings.GlitterAV.Image = Image.FromFile(My.Settings.GlitterAV)
-			If File.Exists(My.Settings.GlitterAV1) Then FrmSettings.GlitterAV1.Image = Image.FromFile(My.Settings.GlitterAV1)
-			If File.Exists(My.Settings.GlitterAV2) Then FrmSettings.GlitterAV2.Image = Image.FromFile(My.Settings.GlitterAV2)
-			If File.Exists(My.Settings.GlitterAV3) Then FrmSettings.GlitterAV3.Image = Image.FromFile(My.Settings.GlitterAV3)
-
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Loading Glitter settings..."
-			FrmSplash.Refresh()
 
 			ssh.UpdatesTick = 120
 			UpdatesTimer.Start()
@@ -432,9 +380,7 @@ retryStart:
 			End If
 
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Loading names..."
-			FrmSplash.Refresh()
+			FrmSplash.UpdateText("Loading names...")
 
 
 			FrmSettings.petnameBox1.Text = My.Settings.pnSetting1
@@ -446,9 +392,9 @@ retryStart:
 			FrmSettings.petnameBox7.Text = My.Settings.pnSetting7
 			FrmSettings.petnameBox8.Text = My.Settings.pnSetting8
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Loading General settings..."
-			FrmSplash.Refresh()
+			' #############################################################
+			FrmSplash.UpdateText("Loading General settings...")
+
 
 			If My.Settings.CBTimeStamps = True Then
 				FrmSettings.timestampCheckBox.Checked = True
@@ -525,9 +471,7 @@ retryStart:
 				FrmSettings.CBImageInfo.Checked = False
 			End If
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Loading Domme settings..."
-			FrmSplash.Refresh()
+			FrmSplash.UpdateText("Loading Domme settings...")
 
 			FrmSettings.domageNumBox.Value = My.Settings.DomAge
 
@@ -663,13 +607,7 @@ retryStart:
 			FrmSettings.NBSubAgeMax.Value = My.Settings.SubAgeMax
 
 
-			Debug.Print("Find Exception end")
-
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Checking Glitter scripts..."
-			FrmSplash.Refresh()
-
-			'FrmSettings.LblGlitterSettingsDescription.Text = "Hover the cursor over any setting in the menu for a more detailed description of its function."
+			FrmSplash.UpdateText("Checking Glitter scripts...")
 
 			Try
 				FrmSettings.LBLGlitModDomType.Text = dompersonalitycombobox.Text
@@ -694,14 +632,9 @@ retryStart:
 			FrmSettings.NBWritingTaskMin.Value = My.Settings.NBWritingTaskMin
 			FrmSettings.NBWritingTaskMax.Value = My.Settings.NBWritingTaskMax
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Loading Image settings..."
-			FrmSplash.Refresh()
+			FrmSplash.UpdateText("Loading Image settings...")
 
-
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Loading Sub settings..."
-			FrmSplash.Refresh()
+			FrmSplash.UpdateText("Loading Sub settings...")
 
 			FrmSettings.CockSizeNumBox.Value = My.Settings.SubCockSize
 			FrmSettings.subAgeNumBox.Value = My.Settings.SubAge
@@ -736,9 +669,7 @@ retryStart:
 				FrmSettings.CBHonorificCapitalized.Checked = False
 			End If
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Loading Range settings..."
-			FrmSplash.Refresh()
+			FrmSplash.UpdateText("Loading Range settings...")
 
 			FrmSettings.SliderSTF.Value = My.Settings.TimerSTF
 			If FrmSettings.SliderSTF.Value = 1 Then FrmSettings.LBLStf.Text = "Preoccupied"
@@ -765,9 +696,7 @@ retryStart:
 			FrmSettings.FontComboBox.Text = My.Settings.SubFont
 			FrmSettings.NBFontSize.Text = My.Settings.SubFontSize
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Configuring media player..."
-			FrmSplash.Refresh()
+			FrmSplash.UpdateText("Configuring media player...")
 
 			DomWMP.uiMode = "none"
 
@@ -779,9 +708,7 @@ retryStart:
 			BTNFileTransferOpen.Visible = False
 			BTNFIleTransferDismiss.Visible = False
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Initializing Games window..."
-			FrmSplash.Refresh()
+			FrmSplash.UpdateText("Initializing Games window...")
 
 
 			Try
@@ -812,11 +739,7 @@ retryStart:
 			End If
 
 
-
-
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Checking previous orgasms..."
-			FrmSplash.Refresh()
+			FrmSplash.UpdateText("Checking previous orgasms...")
 
 			If My.Settings.LastOrgasm = Nothing Then
 				My.Settings.LastOrgasm = FormatDateTime(Now, DateFormat.ShortDate)
@@ -830,9 +753,7 @@ retryStart:
 
 			FrmSettings.LBLLastRuined.Text = My.Settings.LastRuined.ToString()
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Checking current date..."
-			FrmSplash.Refresh()
+			FrmSplash.UpdateText("Checking current date...")
 
 			If CompareDates(My.Settings.DateStamp) <> 0 Then
 
@@ -865,9 +786,8 @@ retryStart:
 			End If
 			Debug.Print("Test?")
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Calculating average edge information..."
-			FrmSplash.Refresh()
+
+			FrmSplash.UpdateText("Calculating average edge information...")
 
 			ssh.AvgEdgeStroking = My.Settings.AvgEdgeStroking
 			ssh.AvgEdgeNoTouch = My.Settings.AvgEdgeNoTouch
@@ -891,15 +811,11 @@ retryStart:
 				FrmSettings.LBLAvgEdgeNoTouch.Text = "WAIT"
 			End If
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Loading Domme Personality..."
-			FrmSplash.Refresh()
+			FrmSplash.UpdateText("Loading Domme Personality...")
 
 			ssh.DomPersonality = dompersonalitycombobox.Text
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Clearing temporary flags..."
-			FrmSplash.Refresh()
+			FrmSplash.UpdateText("Clearing temporary flags...")
 
 			If Directory.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\") Then
 				My.Computer.FileSystem.DeleteDirectory(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\", FileIO.DeleteDirectoryOption.DeleteAllContents)
@@ -907,9 +823,7 @@ retryStart:
 
 			System.IO.Directory.CreateDirectory(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\")
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Loading Glitter Contact image slideshows..."
-			FrmSplash.Refresh()
+			FrmSplash.UpdateText("Loading Glitter Contact image slideshows...")
 
 
 			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Contact_Descriptions.txt") Then
@@ -934,9 +848,7 @@ retryStart:
 
 			WMPTimer.Start()
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Loading Shorthands..."
-			FrmSplash.Refresh()
+			FrmSplash.UpdateText("Loading Shorthands...")
 
 			CBShortcuts.Checked = My.Settings.Shortcuts
 			CBHideShortcuts.Checked = My.Settings.ShowShortcuts
@@ -953,9 +865,7 @@ retryStart:
 			TBShortGreet.Text = My.Settings.ShortGreet
 			TBShortSafeword.Text = My.Settings.ShortSafeword
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Checking saved dimensions..."
-			FrmSplash.Refresh()
+			FrmSplash.UpdateText("Checking saved dimensions...")
 			'===============================================================================
 			'								Restore View
 			'===============================================================================
@@ -985,9 +895,7 @@ retryStart:
 
 			TeaseAIClock.Start()
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Loading VitalSub..."
-			FrmSplash.Refresh()
+			FrmSplash.UpdateText("Loading VitalSub...")
 			'===============================================================================
 			'								Vital sub
 			'===============================================================================
@@ -1079,9 +987,7 @@ retryStart:
 
 			FormFinishedLoading = True
 
-			'TabControl1.ColorScheme.TabBackground = Color.Transparent
-			'TabControl1.ColorScheme.TabBackground2 = Color.Transparent
-			'TabControl1.BackColor = Color.Transparent
+
 			My.Settings.Save()
 			setStartName()
 			Trace.WriteLine("Startup has been completed")
@@ -7563,7 +7469,10 @@ RinseLatherRepeat:
 		'===============================================================================
 		'								@ShowTaggedImage
 		'===============================================================================
-		If StringClean.Contains("@ShowTaggedImage") Then
+		If StringClean.Contains("@ShowTaggedImage") OrElse StringClean.Contains("@Tag") Then
+
+			ChatAddWarning("@ShowTaggedImage and all @Tag- instructions are marked as obsolete. Use @ImageTag() instead.")
+
 			Dim Tags As List(Of String) = StringClean.Split() _
 				  .Select(Function(s) s.Trim()) _
 				  .Where(Function(w) CType(w, String).StartsWith("@Tag")).ToList
@@ -12341,7 +12250,7 @@ VTSkip:
 	  My.Settings.CBIBlowjob = False And My.Settings.CBIFemdom = False And My.Settings.CBILezdom = False And My.Settings.CBIHentai = False And
 	  My.Settings.CBIGay = False And My.Settings.CBIMaledom = False And My.Settings.CBICaptions = False And My.Settings.CBIGeneral = False Then Return False
 
-				If FilterString.Contains("@ShowTaggedImage") Then
+				If FilterString.Contains("@ShowTaggedImage") OrElse FilterString.Contains("@Tag") Then
 					Dim Tags As List(Of String) = FilterString.Split() _
 					 .Select(Function(s) s.Trim()) _
 					 .Where(Function(w) CType(w, String).StartsWith("@Tag")).ToList

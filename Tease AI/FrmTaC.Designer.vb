@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class Form7
+Partial Class FrmTaC
 	Inherits System.Windows.Forms.Form
 
 	'Form overrides dispose to clean up the component list.
@@ -22,7 +22,7 @@ Partial Class Form7
 	'Do not modify it using the code editor.
 	<System.Diagnostics.DebuggerStepThrough()>
 	Private Sub InitializeComponent()
-		Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form7))
+		Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmTaC))
 		Me.Label85 = New System.Windows.Forms.Label()
 		Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
 		Me.Button1 = New System.Windows.Forms.Button()
@@ -52,6 +52,7 @@ Partial Class Form7
 		'
 		'Button1
 		'
+		Me.Button1.DialogResult = System.Windows.Forms.DialogResult.Yes
 		Me.Button1.Location = New System.Drawing.Point(66, 389)
 		Me.Button1.Name = "Button1"
 		Me.Button1.Size = New System.Drawing.Size(109, 23)
@@ -61,6 +62,7 @@ Partial Class Form7
 		'
 		'Button2
 		'
+		Me.Button2.DialogResult = System.Windows.Forms.DialogResult.Abort
 		Me.Button2.Location = New System.Drawing.Point(228, 389)
 		Me.Button2.Name = "Button2"
 		Me.Button2.Size = New System.Drawing.Size(109, 23)
@@ -68,7 +70,7 @@ Partial Class Form7
 		Me.Button2.Text = "Decline"
 		Me.Button2.UseVisualStyleBackColor = True
 		'
-		'Form7
+		'TermsAndConditions
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -81,7 +83,7 @@ Partial Class Form7
 		Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
 		Me.MaximizeBox = False
 		Me.MinimizeBox = False
-		Me.Name = "Form7"
+		Me.Name = "TermsAndConditions"
 		Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
 		Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
 		Me.Text = "Tease AI Terms & Conditions"
