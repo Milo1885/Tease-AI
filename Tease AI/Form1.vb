@@ -2146,25 +2146,15 @@ EdgeSkip:
 		End If
 
 
+		Dim CheckResponse As String = ssh.ChatString.ToUpper
+		CheckResponse = CheckResponse.Replace(ssh.tempDomName.ToUpper, "")
+		If ssh.tempHonorific <> "" Then CheckResponse = CheckResponse.Replace(ssh.tempHonorific.ToUpper, "")
 
-
-
-		'If BeforeTease = True And CBDebugAwareness.Checked = False Then Return
-
-		Dim CheckResponse As String = UCase(ssh.ChatString)
-		CheckResponse = CheckResponse.Replace(UCase(ssh.tempDomName), "")
-		If ssh.tempHonorific <> "" Then CheckResponse = CheckResponse.Replace(UCase(ssh.tempHonorific), "")
-		CheckResponse = CheckResponse.Replace("!", "")
-		CheckResponse = CheckResponse.Replace("?", "")
-		CheckResponse = CheckResponse.Replace(".", "")
-		CheckResponse = CheckResponse.Replace("*", "")
-		CheckResponse = CheckResponse.Replace("  ", " ")
-
-		'   If Not CheckResponse = UCase("please") Then CheckResponse = CheckResponse.Replace(UCase("please"), "")
-		'	If Not CheckResponse = UCase("fucking") Then CheckResponse = CheckResponse.Replace(UCase("fucking"), "")
-		'	If Not CheckResponse = UCase("fuckin") Then CheckResponse = CheckResponse.Replace(UCase("fuckin"), "")
-
+		' Reduce 'multiple space chars' to a single 
+		' Remove all ,'!?.* while converting all to upper.
+		CheckResponse = Regex.Replace(CheckResponse, "( )[ ]*|[,'!?\.*]", "$1").ToUpper
 		CheckResponse = Trim(CheckResponse)
+
 
 		If UCase(CheckResponse) = UCase("CAME") Or UCase(CheckResponse) = UCase("I CAME") Then
 			If ssh.cameMode.GotoMode = True Then
@@ -2399,193 +2389,103 @@ EdgeSkip:
 
 		CheckResponse = CheckResponse.Replace("  ", " ")
 
+		' ############ Load all system response Keyfiles ##############
+		' Dictionary to temporary store the system response keyphrases.
+		' This is used when there is no precise match, to search those phrases again.
+		Dim SysKeys As New Dictionary(Of String, List(Of String))
 
-		For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\", FileIO.SearchOption.SearchTopLevelOnly, "*KEY.txt")
-			If Not foundFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\EdgeKEY.txt" Then
+		For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\", FileIO.SearchOption.SearchTopLevelOnly, "*KEY.txt").AsParallel
+			If foundFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\EdgeKEY.txt" Then Continue For
 
-				Dim SysKeyList As New List(Of String)
-				SysKeyList = Txt2List(foundFile)
+			Dim SysKeyList As List(Of String) = Txt2List(foundFile)
 
-
-				For i As Integer = 0 To SysKeyList.Count - 1
-
-					SysKeyList(i) = SysKeyList(i).Replace(",", "")
-					SysKeyList(i) = SysKeyList(i).Replace("'", "")
-					SysKeyList(i) = SysKeyList(i).Replace("!", "")
-					SysKeyList(i) = SysKeyList(i).Replace("?", "")
-					SysKeyList(i) = SysKeyList(i).Replace(".", "")
-					SysKeyList(i) = SysKeyList(i).Replace("*", "")
-					SysKeyList(i) = SysKeyList(i).Replace("  ", " ")
-
-					If UCase(CheckResponse) = UCase(SysKeyList(i)) Then
-						ssh.ResponseFile = foundFile
-						ssh.ResponseFile = ssh.ResponseFile.Replace("KEY", "")
-						'QUESTION: (Stefaf) What does the following line?
-						If UCase(CheckResponse).Contains("DONT") Or UCase(CheckResponse).Contains("NEVER") Or UCase(CheckResponse).Contains("NOT") Then ssh.ResponseFile = ssh.ResponseFile.Replace(".txt", "NOT.txt")
-						GoTo FoundResponse
-						Exit For
-					End If
-				Next
-			End If
-
-		Next
-
-		' If frmApps.CBDebugAwareness.Checked = True Then GoTo DebugAwarenessStep2
-
-		For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-
-			' Read the first line of the given file.
-			Dim SplitText As String = TxtReadLine(foundFile)
-
-			Dim SplitResponse As String() = SplitText.Split(New Char() {"]"c})
-			SplitResponse(0) = SplitResponse(0).Replace("[", "")
-			If SplitResponse(0).Contains("#") Then
-				ssh.addResponseList = True
-				SplitResponse(0) = PoundClean(SplitResponse(0))
-				ssh.addResponseList = False
-			End If
-			Do
-				SplitResponse(0) = SplitResponse(0).Replace("  ", " ")
-				SplitResponse(0) = SplitResponse(0).Replace(" ,", ",")
-				SplitResponse(0) = SplitResponse(0).Replace(", ", ",")
-				SplitResponse(0) = SplitResponse(0).Replace("'", "")
-			Loop Until Not SplitResponse(0).Contains("  ") And Not SplitResponse(0).Contains(", ") And Not SplitResponse(0).Contains(" ,") And Not SplitResponse(0).Contains("'")
-
-			Dim SplitParts As String() = SplitResponse(0).Split(New Char() {","c})
-
-			For i As Integer = 0 To SplitParts.Length - 1
-				If UCase(CheckResponse) = UCase(SplitParts(i)) Then
-					ssh.ResponseFile = foundFile
-					GoTo FoundResponse
-					Exit For
-				End If
+			For i As Integer = 0 To SysKeyList.Count - 1
+				' Reduce 'multiple space chars' to a single 
+				' Remove all ,'!?.* while converting all to upper.
+				SysKeyList(i) = Regex.Replace(SysKeyList(i), "( )[ ]*|[,'!?\.*]", "$1").ToUpper
 			Next
 
-		Next
+			SysKeys.Add(foundFile, SysKeyList)
 
-DebugAwarenessStep2:
-
-		For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\", FileIO.SearchOption.SearchTopLevelOnly, "*KEY.txt")
-			If Not foundFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\EdgeKEY.txt" Then
-
-
-
-				Dim SysKeyList As New List(Of String)
-				SysKeyList = Txt2List(foundFile)
-
-
-				For i As Integer = 0 To SysKeyList.Count - 1
-
-					SysKeyList(i) = SysKeyList(i).Replace(",", "")
-					SysKeyList(i) = SysKeyList(i).Replace("'", "")
-					SysKeyList(i) = SysKeyList(i).Replace("!", "")
-					SysKeyList(i) = SysKeyList(i).Replace("?", "")
-					SysKeyList(i) = SysKeyList(i).Replace(".", "")
-					SysKeyList(i) = SysKeyList(i).Replace("*", "")
-					SysKeyList(i) = SysKeyList(i).Replace("  ", " ")
-
-					If UCase(CheckResponse).Contains(UCase(SysKeyList(i))) Then
-						ssh.ResponseFile = foundFile
-						ssh.ResponseFile = ssh.ResponseFile.Replace("KEY", "")
-						'QUESTION: (Stefaf) What does the following line?
-						If UCase(CheckResponse).Contains("DONT") Or UCase(CheckResponse).Contains("NEVER") Or UCase(CheckResponse).Contains("NOT") Then ssh.ResponseFile = ssh.ResponseFile.Replace(".txt", "NOT.txt")
-						GoTo FoundResponse
-						Exit For
-					End If
-				Next
+			' If there is a precise match, all work is done.
+			If SysKeyList.Contains(CheckResponse) Then
+				ssh.ResponseFile = foundFile.Replace("KEY", "")
+				If Regex.IsMatch(CheckResponse, "dont|never|not", RegexOptions.IgnoreCase) Then ssh.ResponseFile = ssh.ResponseFile.Replace(".txt", "NOT.txt")
+				GoTo FoundResponse
 			End If
 		Next
 
+		' ############## Load all response-files keyphrases ###########
+		' Dictionary to temporary store the response keyphrases. 
+		' This is used when there is no precise match, to search those phrases again.
+		Dim RespKeys As New Dictionary(Of String, List(Of String))
 
-		'If frmApps.CBDebugAwareness.Checked = True Then GoTo FoundResponse
+		For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt").AsParallel
+			Application.DoEvents()
+			Dim FirstLine As String = TxtReadLine(foundFile)
 
+			' Remove '[' and all text before as well as ']' and all text afterwards.
+			FirstLine = Regex.Replace(FirstLine, "^.*\[|\].*$", "", RegexOptions.Singleline)
+
+			If FirstLine.Contains("#") Then
+				FirstLine = PoundClean(FirstLine, PoundOptions.CommaSepList)
+			End If
+
+			' Remove 'multiple whitespaces', '[', '] and following text', apostrophe char and convert all to upper.
+			FirstLine = Regex.Replace(FirstLine, "(\s)\s*|\[|\].*|'", "$1", RegexOptions.Singleline).ToUpper
+
+			' Split the line using one or more commas, surrounded by zero or more whitechars.
+			Dim Keys As List(Of String) = Regex.Split(FirstLine, "\s*,+\s*", RegexOptions.None).ToList
+
+			RespKeys.Add(foundFile, Keys)
+
+			' If there is a precise match, all work is done.
+			If Keys.Contains(CheckResponse) Then
+				ssh.ResponseFile = foundFile
+				GoTo FoundResponse
+			End If
+		Next
+
+		' Check if a system repsonses keyphrase is within the text.
+		For Each Fp As String In SysKeys.Keys
+			If SysKeys(Fp).Exists(Function(x)
+									  Return CheckResponse.IndexOf(x, StringComparison.OrdinalIgnoreCase) <> -1
+								  End Function) Then
+
+				ssh.ResponseFile = Fp.Replace("KEY", "")
+				If Regex.IsMatch(CheckResponse, "dont|never|not", RegexOptions.IgnoreCase) Then ssh.ResponseFile = ssh.ResponseFile.Replace(".txt", "NOT.txt")
+
+				GoTo FoundResponse
+			End If
+
+		Next
+
+		' Check if a vocab keyphrase is within the entered text. Longer keyphrases are prioritized.
 		Dim AccuracyLoop As Integer = 6
 
-
-
-		For x As Integer = 0 To 5
-
-			AccuracyLoop -= 1
-
-
-			For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-
-				Application.DoEvents()
-
-				' Read the first line of the given file.
-				Dim SplitText As String = TxtReadLine(foundFile)
-
-				Dim SplitResponse As String() = SplitText.Split(New Char() {"]"c})
-				SplitResponse(0) = SplitResponse(0).Replace("[", "")
-				If SplitResponse(0).Contains("#") Then
-					ssh.addResponseList = True
-					SplitResponse(0) = PoundClean(SplitResponse(0))
-					ssh.addResponseList = False
+		Do While AccuracyLoop > 0
+			For Each Fp As String In RespKeys.Keys
+				If RespKeys(Fp).Exists(Function(x)
+										   Return CheckResponse.Contains(x) AndAlso CountWords(x) > AccuracyLoop
+									   End Function) Then
+					ssh.ResponseFile = Fp
+					GoTo FoundResponse
 				End If
-
-				Do
-					SplitResponse(0) = SplitResponse(0).Replace("  ", " ")
-					SplitResponse(0) = SplitResponse(0).Replace(" ,", ",")
-					SplitResponse(0) = SplitResponse(0).Replace(", ", ",")
-					SplitResponse(0) = SplitResponse(0).Replace("'", "")
-				Loop Until Not SplitResponse(0).Contains("  ") And Not SplitResponse(0).Contains(", ") And Not SplitResponse(0).Contains(" ,") And Not SplitResponse(0).Contains("'")
-
-				Dim SplitParts As String() = SplitResponse(0).Split(New Char() {","c})
-
-
-
-
-				For i As Integer = 0 To SplitParts.Length - 1
-					'Debug.Print("SplitParts(i) = " & SplitParts(i) & " SplitParts(i).Length = " & SplitParts(i).Length & "AccuracyLoop = " & AccuracyLoop)
-					If UCase(CheckResponse).Contains(UCase(SplitParts(i))) And CountWords(SplitParts(i)) > AccuracyLoop Then
-						ssh.ResponseFile = foundFile
-						GoTo FoundResponse
-						Exit For
-					End If
-				Next
-
 			Next
+			AccuracyLoop -= 1
+		Loop
 
-		Next
-
-		For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-
-			' Read the first line of the given file.
-			Dim SplitText As String = TxtReadLine(foundFile)
-
-			Dim SplitResponse As String() = SplitText.Split(New Char() {"]"c})
-			SplitResponse(0) = SplitResponse(0).Replace("[", "")
-			If SplitResponse(0).Contains("#") Then
-				ssh.addResponseList = True
-				SplitResponse(0) = PoundClean(SplitResponse(0))
-				ssh.addResponseList = False
+		' Check if all words from a response keyphrase are present in any order.
+		For Each FilePath As String In RespKeys.Keys.AsParallel
+			If RespKeys(FilePath).Exists(Function(phrase)
+											 For Each Word As String In phrase.Split
+												 If Not CheckResponse.Contains(Word) Then Return False
+											 Next
+											 Return True
+										 End Function) Then
+				ssh.ResponseFile = FilePath
+				GoTo FoundResponse
 			End If
-
-			Do
-				SplitResponse(0) = SplitResponse(0).Replace("  ", " ")
-				SplitResponse(0) = SplitResponse(0).Replace(" ,", ",")
-				SplitResponse(0) = SplitResponse(0).Replace(", ", ",")
-				SplitResponse(0) = SplitResponse(0).Replace("'", "")
-			Loop Until Not SplitResponse(0).Contains("  ") And Not SplitResponse(0).Contains(", ") And Not SplitResponse(0).Contains(" ,") And Not SplitResponse(0).Contains("'")
-
-			Dim SplitParts As String() = SplitResponse(0).Split(New Char() {","c})
-
-			For i As Integer = 0 To SplitParts.Length - 1
-
-				Dim CheckResponseArray() As String = Split(UCase(SplitParts(i)))
-
-				For j As Integer = 0 To CheckResponseArray.Length - 1
-					ssh.ResponseFile = foundFile
-					If Not UCase(CheckResponse).Contains(CheckResponseArray(j)) Then
-						ssh.ResponseFile = ""
-						Exit For
-					End If
-				Next
-
-				If ssh.ResponseFile <> "" Then GoTo FoundResponse
-
-			Next
-
 		Next
 
 
@@ -2611,23 +2511,12 @@ DebugAwarenessStep2:
 			End If
 		End If
 
-		If ssh.CBTCockFlag = True Then
-			CBTCock()
-		End If
+		If ssh.CBTCockFlag = True Then CBTCock()
+		If ssh.CBTBallsFlag = True Then CBTBalls()
+		If ssh.CBTBothFlag = True Then CBTBoth()
+		If ssh.CustomTask = True Then RunCustomTask()
 
-		If ssh.CBTBallsFlag = True Then
-			CBTBalls()
-		End If
-
-		If ssh.CBTBothFlag = True Then
-			CBTBoth()
-		End If
-
-		If ssh.CustomTask = True Then
-			RunCustomTask()
-		End If
-
-		Return
+		Exit Sub
 
 
 
@@ -2635,19 +2524,6 @@ DebugAwarenessStep2:
 
 
 FoundResponse:
-
-		' ResponseYes = ""
-		' ResponseNo = ""
-
-		'If frmApps.CBDebugAwareness.Checked = True Then
-		'If DebugAwarenessLine = "Domme does not recognize this statement" Then
-		'Chat = Chat & "<font color=""red"">" & DebugAwarenessLine & "<br>"
-		'Else
-		'Chat = Chat & "<font color=""green"">" & DebugAwarenessLine & "<br>"
-		'End If
-		'ChatText.DocumentText = Chat
-		'Return
-		'End If
 
 		If StrokeTauntTimer.Enabled = True Then
 			ssh.TempScriptCount = 0
@@ -2665,20 +2541,13 @@ FoundResponse:
 			Return
 		End If
 
-		'Debug.Print("DoNotDisturb = " & DoNotDisturb)
-		'Debug.Print("DomChat = " & DomChat)
-
 		If ssh.DoNotDisturb = True Then
 			If ssh.DomChat.Contains("@Interrupt") Or ssh.DomChat.Contains("@Call(") Or ssh.DomChat.Contains("@CallRandom(") Then
 				ssh.DomChat = "#SYS_InterruptsOff"
 			End If
 		End If
 
-
-
-
 		TypingDelay()
-
 
 	End Sub
 
@@ -2808,9 +2677,7 @@ FoundResponse:
 			line += 1
 			Debug.Print("YESNO Line = " & lines(line))
 			Dim getWords As String = GetParentheses(lines(line), "[")
-			ssh.addAnswerList = True
-			getWords = PoundClean(getWords)
-			ssh.addAnswerList = False
+			getWords = PoundClean(getWords, PoundOptions.CommaSepList)
 			ssh.checkAnswers.addToAnswerList(getWords)
 		Loop Until InStr(UCase(lines(line + 1)), UCase("@AcceptAnswer")) <> 0 Or InStr(UCase(lines(line + 1)), UCase("@DifferentAnswer")) <> 0
 		ssh.tempResponseLine = line + 1
@@ -2833,9 +2700,8 @@ FoundResponse:
 				Dim Splits As String() = CheckLines.Split(New Char() {"]"c})
 				Splits(0) = Splits(0).Replace("[", "")
 				ChatReplace = CheckLines.Replace("[" & Splits(0) & "]", "")
-				ssh.addResponseList = True
-				Splits(0) = PoundClean(Splits(0))
-				ssh.addResponseList = False
+
+				Splits(0) = PoundClean(Splits(0), PoundOptions.CommaSepList)
 
 				'we check to see if what the user wrote contains one of the keywords for the different yes/no/etc responses
 				'this is useful if the script contains something like [yes,maybe] as an answer option
@@ -3751,8 +3617,7 @@ ResumeGotoSearch:
 
 			Loop Until ReplaceX > 5
 
-			'If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & "::: Exception occured finding GotoLabel """ & ssh.FileGoto & """ in file """ & GotoText & """</font>", False)
-			'Throw
+
 		End Try
 
 		If ReplaceGoto <> "" Then
@@ -6882,27 +6747,35 @@ CensorConstant:
 
 	End Function
 
-	Public Function PoundClean(ByVal StringClean As String) As String
-		Dim alreadyChecked As List(Of String) = New List(Of String)
+
+	Public Enum PoundOptions
+		None = 0
+		CommaSepList = 1
+	End Enum
+
+	Public Function PoundClean(ByVal stringClean As String,
+							   Optional ByVal options As PoundOptions = PoundOptions.None,
+							   Optional ByVal startRecurrence As Integer = 0) As String
+
+		Dim AlreadyChecked As List(Of String) = New List(Of String)
 #If TRACE Then
 		Dim TS As New TraceSwitch("PoundClean", "")
 
 		If TS.TraceVerbose Then
 			Trace.WriteLine("============= PoundClean(String) =============")
 			Trace.Indent()
-			Trace.WriteLine(String.Format("StartValue: ""{0}""", StringClean))
+			Trace.WriteLine(String.Format("StartValue: ""{0}""", stringClean))
 		ElseIf TS.TraceInfo Then
-			Trace.WriteLine(String.Format("PoundClean(String) parsing: ""{0}""", StringClean))
+			Trace.WriteLine(String.Format("PoundClean(String) parsing: ""{0}""", stringClean))
 			Trace.Indent()
 		End If
 
-		Dim sw As New Stopwatch
+		Dim Sw As New Stopwatch
 		Dim StartTime As Date = Now
-		sw.Start()
+		Sw.Start()
 #End If
-
-		Dim OrgString As String = StringClean
-		Dim Recurrence As Integer = 0
+		Dim OrgString As String = stringClean
+		Dim ActRecurrence As Integer = startRecurrence
 
 		' Create Regex-Pattern to find #Keywords and exclude custom imagetags.
 		Dim ExcludeKeywords As String() = {"TagGarment", "TagUnderwear", "TagTattoo", "TagSexToy", "TagFurniture"}
@@ -6914,115 +6787,100 @@ CensorConstant:
 
 		Dim RegexKeyWords As New Regex(Pattern)
 
-		Do While Recurrence < 5 AndAlso RegexKeyWords.IsMatch(StringClean)
-			Recurrence += 1
+		Do While ActRecurrence < 6 AndAlso RegexKeyWords.IsMatch(stringClean)
+			ActRecurrence += 1
 
 #If TRACE Then
 			If TS.TraceVerbose Then
-				Trace.WriteLine(String.Format("Starting scan run {0} on ""{1}""", Recurrence, StringClean))
+				Trace.WriteLine(String.Format("Starting scan run {0} on ""{1}""", ActRecurrence, stringClean))
 				Trace.Indent()
 			End If
 #End If
 
-			StringClean = SysKeywordClean(StringClean)
+			stringClean = SysKeywordClean(stringClean)
 #If TRACE Then
-			If TS.TraceVerbose Then Trace.WriteLine(String.Format("System keywords cleaned: ""{0}""", StringClean))
+			If TS.TraceVerbose Then Trace.WriteLine(String.Format("System keywords cleaned: ""{0}""", stringClean))
 #End If
 
 			' Find all remaining #Keywords.
-			Dim re As New Regex(Pattern, RegexOptions.IgnoreCase)
-			Dim mc As MatchCollection = re.Matches(StringClean)
+			Dim Re As New Regex(Pattern, RegexOptions.IgnoreCase)
+			Dim Mc As MatchCollection = Re.Matches(stringClean)
 
-			Dim controlCustom As String = ""
-			If StringClean.Contains("@CustomMode(") Then
-				controlCustom = GetParentheses(StringClean, "@CustomMode(")
+			Dim ControlCustom As String = ""
+			If stringClean.Contains("@CustomMode(") Then
+				ControlCustom = GetParentheses(stringClean, "@CustomMode(")
 			End If
 
-			For Each keyword As Match In mc
-				Dim doNotContinue As Boolean = False
-				'if we already checked for this vocab we avoid checking again
-				For i As Integer = 0 To alreadyChecked.Count - 1
-					If alreadyChecked(i) = keyword.Value Then
-						doNotContinue = True
-						Exit For
-					End If
-				Next
+			For Each Keyword As Match In Mc
+				' Start next loop if we already checked this vocab.
+				If AlreadyChecked.Contains(Keyword.Value, StringComparer.OrdinalIgnoreCase) Then Continue For
 
-				If Not doNotContinue Then
 #If TRACE Then
-					If TS.TraceVerbose Then Trace.WriteLine(String.Format("Applying vocabulary: ""{0}""", keyword.Value))
+				If TS.TraceVerbose Then Trace.WriteLine(String.Format("Applying vocabulary: ""{0}""", Keyword.Value))
 #End If
+				AlreadyChecked.Add(Keyword.Value)
+				Dim Replacement As String = ""
 
-					Dim filepath As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\" & keyword.Value & ".txt"
+				Try
+					Dim Filepath As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\" & Keyword.Value & ".txt"
 
-					If Directory.Exists(Path.GetDirectoryName(filepath)) AndAlso File.Exists(filepath) Then
-						Dim lines As List(Of String) = Txt2List(filepath)
+					' ################ Check if vocab file exists #################
+					If Not Directory.Exists(Path.GetDirectoryName(Filepath)) _
+					OrElse Not File.Exists(Filepath) Then
 
-
-						lines = FilterList(lines)
-						If controlCustom.Contains(keyword.ToString) Then customVocabLines = lines
-						If ssh.addAnswerList Then
-							For Each s As String In lines
-								s = PoundClean(s)
-								ssh.checkAnswers.addToAnswerList(s)
-							Next
-						End If
-						If ssh.addResponseList Then
-							For Each s As String In lines
-								s = PoundClean(s)
-								StringClean &= "," & s
-							Next
-						End If
-						If lines.Count > 0 Then
-
-							Dim PoundVal As Integer = ssh.randomizer.Next(0, lines.Count)
-
-							StringClean = StringClean.Replace(keyword.Value, lines(PoundVal))
+						If UCase(Keyword.Value) = "#NULL" Then
+							' Replace predefined value 
+							stringClean = stringClean.Replace(Keyword.Value, "")
 
 						Else
-							'StringClean = StringClean.Replace(keyword.Value, "<font color=""DarkOrange"">" & keyword.Value & "</font>")
-							Dim wrong As String = keyword.Value
-							wrong = wrong.Remove(0, 1)
-							wrong = "Vocab Error: " & wrong
-							If My.Settings.CBOutputErrors = True Then
-								StringClean = StringClean.Replace(keyword.Value, "<font color=""DarkOrange"">" & wrong & "</font>")
-								ssh.KeywordError = "<font color=""DarkOrange"">" & wrong & "</font>"
-							Else
-								StringClean = StringClean.Replace(keyword.Value, "")
-							End If
+							' The vocab file is missing 
+
+							stringClean = stringClean.Replace(Keyword.Value, ChatGetInlineError(Keyword.Value.Substring(1)))
+							Dim Lazytext As String = "Unable to locate vocabulary file: """ & Keyword.Value & """"
+							Log.WriteError(Lazytext, New Exception(Lazytext), "PoundClean(String)")
+
 						End If
 
-						'Try
-						'lines = FilterList(lines)
-						'Dim PoundVal As Integer = ssh.randomizer.Next(0, lines.Count)
-						'StringClean = StringClean.Replace(keyword.Value, lines(PoundVal))
-						'Catch ex As Exception
-						'Log.WriteError("Error Processing vocabulary file:  " & filepath, ex,
-						' "Tease AI did not return a valid line while parsing vocabulary file.")
-						'StringClean = "ERROR: Tease AI did not return a valid line while parsing vocabulary file: " & keyword.Value
-						'End Try
+						Continue For ' Start next loop 
+					End If
+
+					' #################### Process vocab file #####################
+
+					Dim VocabLines As List(Of String) = Txt2List(Filepath)
+					VocabLines = FilterList(VocabLines)
+
+					If ControlCustom.Contains(Keyword.ToString) Then customVocabLines = VocabLines
+
+					If VocabLines.Count <= 0 Then
+						' ----------------- No Lines available ----------------
+						Replacement = ChatGetInlineWarning(Keyword.Value.Substring(1))
+						ChatAddWarning("No available lines in vocabulary file: """ & Keyword.Value & "")
+
+					ElseIf options.HasFlag(PoundOptions.CommaSepList) Then
+						' -------------- Get comma separated list --------------
+						Dim CleanLines As New List(Of String)
+
+						For Each Line As String In VocabLines
+							CleanLines.Add(PoundClean(Line, options, ActRecurrence))
+						Next
+
+						Replacement = String.Join(",", CleanLines)
 
 					Else
-						'StringClean = StringClean.Replace(keyword.Value, "<font color=""red"">" & keyword.Value & "</font>")
-
-						Dim wrong As String = keyword.Value
-
-						If UCase(wrong) = "#NULL" Then
-							StringClean = StringClean.Replace(keyword.Value, "")
-						Else
-							wrong = wrong.Remove(0, 1)
-							wrong = "Missing Vocab: " & wrong
-							StringClean = StringClean.Replace(keyword.Value, "<font color=""red"">" & wrong & "</font>")
-							ssh.KeywordError = "<font color=""red"">" & wrong & "</font>"
-							Dim lazytext As String = "Unable to locate vocabulary file: """ & keyword.Value & """"
-							Log.WriteError(lazytext, New Exception(lazytext), "PoundClean(String)")
-						End If
-
-
+						' -------------- Pick a single random line -------------
+						Replacement = VocabLines(ssh.randomizer.Next(0, VocabLines.Count))
 
 					End If
-				End If
-				alreadyChecked.Add(keyword.Value)
+
+				Catch ex As Exception
+					Log.WriteError("Error Processing vocabulary file:  " & Keyword.Value, ex,
+									"Tease AI did not return a valid line while parsing vocabulary file.")
+					Replacement = ChatGetInlineError(Keyword.Value.Substring(1))
+				Finally
+
+					stringClean = stringClean.Replace(Keyword.Value, Replacement)
+				End Try
+
 			Next
 
 #If TRACE Then
@@ -7030,23 +6888,23 @@ CensorConstant:
 #End If
 		Loop
 
-		If RegexKeyWords.IsMatch(StringClean) Then
+		If RegexKeyWords.IsMatch(stringClean) Then
 #If TRACE Then
 			If TS.TraceError Then
 				Trace.WriteLine("PoundClean(String): Stopping scan, maximum allowed scan depth reached.")
 				Trace.Indent()
 				Trace.WriteLine(String.Format("StartValue: ""{0}""", OrgString))
-				Trace.WriteLine(String.Format("EndValue:   ""{0}""", StringClean))
+				Trace.WriteLine(String.Format("EndValue:   ""{0}""", stringClean))
 				Trace.Unindent()
 			End If
 #End If
 			Log.WriteError("Maximum allowed Vocabulary depth reached for line:" & OrgString & vbCrLf &
-				  "Aborted Cleaning at: " & StringClean,
-				  New StackOverflowException("PoundClean infinite loop protection"), "PoundClean(String)")
+							  "Aborted Cleaning at: " & stringClean,
+							  New StackOverflowException("PoundClean infinite loop protection"), "PoundClean(String)")
 		Else
 #If TRACE Then
 			If TS.TraceVerbose Then
-				Trace.WriteLine(String.Format("EndValue: ""{0}""", StringClean))
+				Trace.WriteLine(String.Format("EndValue: ""{0}""", stringClean))
 				Trace.WriteLine(String.Format("Duration: {0}ms", (Now - StartTime).TotalMilliseconds.ToString))
 			End If
 #End If
@@ -7056,7 +6914,7 @@ CensorConstant:
 #If TRACE Then
 		Trace.Unindent()
 #End If
-		Return StringClean
+		Return stringClean
 	End Function
 
 	Public Function CommandClean(ByVal StringClean As String, Optional ByVal TaskClean As Boolean = False) As String
@@ -14338,7 +14196,6 @@ RestartFunction:
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			TnASlides.Stop()
 			Log.WriteError(ex.Message & vbCrLf & "TnA Slideshow will stop.", ex, "Exception in TnASlides.Tick occured")
-			If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " : Exception in TnASlides.Tick occured</font>", False)
 		End Try
 	End Sub
 
@@ -15363,21 +15220,11 @@ saveImage:
 
 	End Function
 
-	Public Function StripFormat(ByVal FormatClean As String) As String
-		FormatClean = FormatClean.Replace("<i>", "")
-		FormatClean = FormatClean.Replace("</i>", "")
-		FormatClean = FormatClean.Replace("<b>", "")
-		FormatClean = FormatClean.Replace("</b>", "")
-		FormatClean = FormatClean.Replace("<u>", "")
-		FormatClean = FormatClean.Replace("</u>", "")
-		FormatClean = FormatClean.Replace(FrmSettings.TBEmote.Text, "")
-		FormatClean = FormatClean.Replace(FrmSettings.TBEmoteEnd.Text, "")
-		If ssh.KeywordError <> "" Then
-			FormatClean = FormatClean.Replace(ssh.KeywordError, "")
-			ssh.KeywordError = ""
-		End If
+	Public Function StripFormat(ByVal formatClean As String) As String
 
-		Return FormatClean
+		formatClean = Regex.Replace(formatClean, "<(.|\n)*?>", "")
+		Return formatClean
+
 	End Function
 
 

@@ -5,11 +5,11 @@ body {font: 16px Cambria; color:/*ChatTextColor*/; background-color: /*ChatWindo
 
 .systemMessage {color: steelblue; font-weight: bold;}
 
-.exception {color: Red; background-color: #FFE6E6;}
+.exception, .inlineError {color: Red; background-color: #FFE6E6;}
 .exception .msg {Display:Block; font-weight: bold;}
 .exception .exMessage {Display: none;}
 .scriptPosInfo {color:green;}
-.warning {color:orange; font-weight:bold;}
+.warning, .inlineWarning {color:orange; font-weight:bold;}
 
 .timestamp {color: DimGray;}
 .sub .name  {color: /*SubNameColor*/; font-family: /*SubFontName*/; font-size: /*SubFontSize*/;}

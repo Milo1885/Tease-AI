@@ -96,11 +96,25 @@ Partial Class Form1
 </div>", delayOutput, True)
 	End Sub
 
+	''' <summary>Marks the given text as inline warning.</summary>
+	''' <param name="textToMark">The text to mark.</param>
+	''' <returns>Returns the given text and the necessary HTML-Tags.</returns>
+	Public Function ChatGetInlineWarning(textToMark As String)
+		Return "<span class=""inlineWarning"">" & textToMark & "</span>"
+	End Function
+
 	Public Sub ChatAddWarning(msg As String)
 		ChatAppend("<div class=""warning"">
 	<span class=""msg"">WARNING: " & msg & "</span>
 </div>", False, True)
 	End Sub
+
+	''' <summary>Marks the given text as inline error.</summary>
+	''' <param name="textToMark">The text to mark.</param>
+	''' <returns>Returns the given text and the necessary HTML-Tags.</returns>
+	Public Function ChatGetInlineError(textToMark As String)
+		Return "<span class=""inlineError"">" & textToMark & "</span>"
+	End Function
 
 	Public Sub ChatAddException(msg As String, ex As Exception)
 		ChatAppend("<div class=""exception"">
