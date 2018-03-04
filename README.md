@@ -1,10 +1,11 @@
 ﻿# Tease-AI
 Tease AI is adult-oriented software that aims to create an interactive tease and denial experience by emulating an online chat session with a domme. 
 
-# Changelog - Patch 55.4.0
+# Changelog - Patch 56.0.0
 	
 * Commands: 
 	* @SystemMessage: File and directory paths in SystemMessages are now links.
+	* @TagXXX Instructions are now executed if there is no @ShowTaggedImage present in the given Script Line. Since both are marked as obsolete, a warning will appear in the chat window.
 	
 * Command Filters:
 
@@ -17,6 +18,7 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 	* #DateDiffernce displays now the correct amount of weeks, if the interval is set to "Week".
 	* @ChangeVar will no longer throw an exception if you try to divide by zero. In that case it will divide by 1 and display a warning.
 	* If reading a date from a variable fails, it will no longer throw an exception.
+	* Fixes issue if TTS is activated and 2 or more vocab errors appeared within a single line. In that case TTS did ignore only the last error. Now all HTML-Tags within a line are ignored.
 	
 * Miscellaneous:
 
@@ -28,13 +30,27 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 		* It uses now valid html and CSS. 
 		* Every available information is written to the chat-window (timestamps, names, exceptions). To hide or show specific elements (i.e.:Domme is typing...) the page style sheet is generated according to the user settings on every change. This allows us to alter color, style and visibility of previous messages. The webtease mode and Risky Pick are handled different. Here we get the last element in id "Chat" and display it.
 		* It is now possible to customize the style of the chat using a customized CSS-file. Hint: there will be changes in the future to enhance the chat functionality! So don't rush things and wait some time before customizing. ;-)
-		* TAI is able to display Warnings as well. 
+		* TAI is able to display Warnings as well. The visibility of Warning and Error Messages can be turned off using the settings menu.
 		* All file paths in Exceptions, Warnings, SystemMessages and the "@" input messages are now links. If you click a link it will open it using your systems default program.
 	* Overhauled the fresh implemented "Write exceptions to chat"-feature. Now every exception written to log, is also written to the chat window. It is no longer depending on a running session and called without IllegalCrossThreadCalls. If an exception occurs it is written to the chat.
 	* All Variables related Code has been rewritten to use the same internal functions. 
 		* It includes a directory check, and the folder will be created if necessary. 
 		* If parsing a date failed it will no longer cause an exception. You will get a wrong result, but without an exception.
-		
+	* Directories are now sorted logically.
+	* The splash screen is now set as Splash screen and updated thread safe.
+	* Redundant Code for PetName TextBoxes merged together.
+	* The Terms and Conditions Form is now used as dialog instead of opening it and waiting for an action to happen.
+	* TxtReadLine(string) is now internally using Txt2List(string) in order to use the TextFileChache. This should improve response time.
+	* The Function DomResponse() was checking for system response keyfiles and the vocabulary keyphrases more often as necessary.  This way it took forever to process if there was a task or CBT running and you entered a simple "Yes". The same slow process was going on, if you entered text that didn't trigger something. 
+	* Reworked PoundClean(String):
+		* Changed Signature to PoundClean(String, Option, Integer)
+		* Added a nesting restriction when processing vocabulary keyphrases. The maximum allowed nesting depth when processing vocabularies is 5. 
+		* Removed variables in the session state to control processing. 
+		* Functional Code is now within a Try-Catch-Block.
+		* The function will print errors and warnings to the chat window.
+	* Clean up of Class Session State. Stored Sessions from previous versions are no longer compatible. Now it has a Version Check included, to prevent  opening a session from a previous version. 
+	* Added the possibility to print CSS compliant inline errors and warnings to the chat.
+			
 	
 # Changelog - Patch 55.3.0
 
