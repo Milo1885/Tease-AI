@@ -39,8 +39,7 @@ Partial Public Class Form1
 
 	Public Sub DeleteVariable(ByVal varName As String)
 
-		Dim filePath As String = Path.Combine(VariableFolder, varName)
-		If File.Exists(varName) Then File.Delete(filePath)
+		File.Delete(Path.Combine(VariableFolder, varName))
 
 	End Sub
 
