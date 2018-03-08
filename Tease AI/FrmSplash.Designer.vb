@@ -31,7 +31,7 @@ Partial Class FrmSplash
 		'
 		Me.PBSplash.BackColor = System.Drawing.Color.Black
 		Me.PBSplash.Location = New System.Drawing.Point(53, 244)
-		Me.PBSplash.Maximum = 45
+		Me.PBSplash.Maximum = 40
 		Me.PBSplash.Name = "PBSplash"
 		Me.PBSplash.Size = New System.Drawing.Size(466, 23)
 		Me.PBSplash.TabIndex = 0
@@ -61,6 +61,7 @@ Partial Class FrmSplash
 		Me.Name = "FrmSplash"
 		Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
 		Me.Text = "Form6"
+		Me.TopMost = True
 		Me.ResumeLayout(False)
 
 	End Sub

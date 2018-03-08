@@ -30,7 +30,7 @@ Public Class Common
 	Shared _synclockTxtCache As New Object
 
 	''' <summary>
-	''' A Dictionary containing all textfiles read by txt3List(string)
+	''' A Dictionary containing all textfiles read by Txt2List(string)
 	''' </summary>
 	Private Shared Property TxtCache As Dictionary(Of String, List(Of String))
 		Get
@@ -123,32 +123,32 @@ Public Class Common
 	''' <summary>
 	''' Reads a TextFile into a generic List(of String). EmptyLines are removed from the list.
 	''' </summary>
-	''' <param name="GetText">The Filepath to read.</param>
+	''' <param name="filepath">The Filepath to read.</param>
 	''' <returns>A List(of String) containing all Lines of the given File. Returns 
 	''' an empty List if the specified file doesn't exists, or an exception occurs.</returns>
 	''' <remarks>This Method will create the given DirectoryStructure for the given
 	''' Filepath if it doesn't exist.</remarks>
-	Friend Shared Function Txt2List(ByVal GetText As String) As List(Of String)
+	Friend Shared Function Txt2List(ByVal filepath As String) As List(Of String)
 #If TRACE Then
 		Dim TS As New TraceSwitch("TxtCache", "")
 #End If
 		Try
-			If GetText Is Nothing Then
+			If filepath Is Nothing Then
 				Throw New ArgumentNullException("The given filepath was NULL.")
 			End If
 
-			If GetText Is Nothing Or GetText = "" Then
-				Throw New ArgumentException("The given filepath was empty """ & GetText & """")
+			If filepath Is Nothing Or filepath = "" Then
+				Throw New ArgumentException("The given filepath was empty """ & filepath & """")
 			End If
 
 			Dim TextList As New List(Of String)
 
-			If TxtCache.Keys.Contains(GetText.ToLower) Then
+			If TxtCache.Keys.Contains(filepath.ToLower) Then
 #If TRACE Then
-				If TS.TraceInfo Then Trace.WriteLine("Loading cached Text-File: " & GetText, "TxtCache")
+				If TS.TraceInfo Then Trace.WriteLine("Loading cached Text-File: " & filepath, "TxtCache")
 #End If
 
-				Txt2List = TxtCache(GetText.ToLower).ToList
+				Txt2List = TxtCache(filepath.ToLower).ToList
 
 				Exit Function
 				'Return TxtCache(GetText.ToLower).ToList
@@ -159,13 +159,13 @@ Public Class Common
 
 			' Check if the given Directory exists. MyDirectory.Exists will 
 			' try to create the directory, if it's an App-sub-dir.
-			If myDirectory.Exists(Path.GetDirectoryName(Path.GetFullPath(GetText))) Then
+			If myDirectory.Exists(Path.GetDirectoryName(Path.GetFullPath(filepath))) Then
 #If TRACE Then
-				If TS.TraceInfo Then Trace.Write("Reading Text-File: " & GetText, "TxtCache")
+				If TS.TraceInfo Then Trace.Write("Reading Text-File: " & filepath, "TxtCache")
 #End If
-				If File.Exists(GetText) Then
+				If File.Exists(filepath) Then
 
-					Using TextReader As New StreamReader(GetText)
+					Using TextReader As New StreamReader(filepath)
 
 						While TextReader.Peek <> -1
 							TextList.Add(TextReader.ReadLine())
@@ -174,22 +174,22 @@ Public Class Common
 						' Remove all empty Lines from list.
 						TextList.RemoveAll(Function(x) x = "")
 
-						TxtCache.Add(GetText.ToLower, TextList.ToList)
+						TxtCache.Add(filepath.ToLower, TextList.ToList)
 
-						createFileSystemWatcher(GetText)
+						createFileSystemWatcher(filepath)
 						Return TextList
 					End Using
 				Else
-					Throw New FileNotFoundException("Can't locate the file: """ & GetText & """")
+					Throw New FileNotFoundException("Can't locate the file: """ & filepath & """")
 				End If
 			Else
-				Throw New DirectoryNotFoundException("Can't locate the directory """ & Path.GetDirectoryName(GetText) & """")
+				Throw New DirectoryNotFoundException("Can't locate the directory """ & Path.GetDirectoryName(filepath) & """")
 			End If
 		Catch ex As Exception
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			'						       All Errors
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			Log.WriteError(ex.Message, ex, "Error loading TextFile: """ & GetText & """")
+			Log.WriteError(ex.Message, ex, "Error loading TextFile: """ & filepath & """")
 		End Try
 		Return New List(Of String)
 	End Function
@@ -198,37 +198,40 @@ Public Class Common
 	''' <summary>
 	''' Reads the First line of the given textfile.
 	''' </summary>
-	''' <param name="GetText">On success the first line as string. Otherwise an
+	''' <param name="filePath">On success the first line as string. Otherwise an
 	''' empty String.</param>
 	''' <returns></returns>
-	Friend Shared Function TxtReadLine(ByVal GetText As String) As String
+	Friend Shared Function TxtReadLine(ByVal filePath As String) As String
 		Try
-			If GetText Is Nothing Then
+			Return Txt2List(filePath)(0)
+			Exit Function
+
+			If filePath Is Nothing Then
 				Throw New ArgumentNullException("The given filepath was NULL.")
 			End If
 
-			If GetText Is Nothing Or GetText = "" Then
-				Throw New ArgumentException("The given filepath was empty """ & GetText & """")
+			If filePath Is Nothing Or filePath = "" Then
+				Throw New ArgumentException("The given filepath was empty """ & filePath & """")
 			End If
 
 			' Check if the given Directory exists. MyDirectory.Exists will 
 			' try to create the directory, if it's an App-sub-dir.
-			If myDirectory.Exists(Path.GetDirectoryName(Path.GetFullPath(GetText))) Then
-				If File.Exists(GetText) Then
-					Using TextReader As New StreamReader(GetText)
+			If myDirectory.Exists(Path.GetDirectoryName(Path.GetFullPath(filePath))) Then
+				If File.Exists(filePath) Then
+					Using TextReader As New StreamReader(filePath)
 						Return TextReader.ReadLine
 					End Using
 				Else
-					Throw New FileNotFoundException("Can't locate the file: """ & GetText & """")
+					Throw New FileNotFoundException("Can't locate the file: """ & filePath & """")
 				End If
 			Else
-				Throw New DirectoryNotFoundException("Can't locate the directory """ & Path.GetDirectoryName(GetText) & """")
+				Throw New DirectoryNotFoundException("Can't locate the directory """ & Path.GetDirectoryName(filePath) & """")
 			End If
 		Catch ex As Exception
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			'						       All Errors
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			Log.WriteError(ex.Message, ex, "Error loading TextLine:  " & GetText)
+			Log.WriteError(ex.Message, ex, "Error loading TextLine:  " & filePath)
 		End Try
 		Return ""
 	End Function

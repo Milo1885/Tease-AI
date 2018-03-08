@@ -19,13 +19,11 @@ Public Class FrmSettings
 
 
 
-	Public URLFileIncludeList As New List(Of String)
 	Public FrmSettingsLoading As Boolean
 	Public AvailFail As Boolean
 	Public AvailList As New List(Of String)
 	Dim ScriptList As New List(Of String)
 	Dim ScriptFile As String
-	Dim LocalImageDir As New List(Of String)
 
 	Dim ImageTagDir As New List(Of String)
 	Dim LocalImageTagDir As New List(Of String)
@@ -45,17 +43,7 @@ Public Class FrmSettings
 
 	Dim CheckImgDir As New List(Of String)
 
-	'Dim Fringe As New SpeechSynthesizer
-
 	Dim TagImageFolder As String
-
-	' Protected Overrides ReadOnly Property CreateParams() As CreateParams
-	'    Get
-	' Dim param As CreateParams = MyBase.CreateParams
-	'        param.ClassStyle = param.ClassStyle Or &H200
-	'       Return param
-	'  End Get
-	'End Property
 
 	Private Sub frmProgramma_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
 
@@ -75,9 +63,7 @@ Public Class FrmSettings
 		FrmSettingsLoading = True
 
 
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Checking installed voices..."
-		FrmSplash.Refresh()
+		FrmSplash.UpdateText("Checking installed voices...")
 
 
 		Dim oSpeech As New System.Speech.Synthesis.SpeechSynthesizer()
@@ -96,9 +82,8 @@ Public Class FrmSettings
 
 
 
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Checking URL Files..."
-		FrmSplash.Refresh()
+
+		FrmSplash.UpdateText("Checking URL Files...")
 
 		If File.Exists(Application.StartupPath & "\Images\System\URLFileCheckList.cld") Then
 			URLFileList.Items.Clear()
@@ -134,9 +119,7 @@ Public Class FrmSettings
 		End If
 
 
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Checking Local Image settings..."
-		FrmSplash.Refresh()
+		FrmSplash.UpdateText("Checking Local Image settings...")
 
 		Debug.Print("Checking Local image Settings...")
 
@@ -161,16 +144,12 @@ Public Class FrmSettings
 		Debug.Print("FrmSettingsLoading = " & FrmSettingsLoading)
 
 
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Checking installed fonts..."
-		FrmSplash.Refresh()
+		FrmSplash.UpdateText("Checking installed fonts...")
 
 		BindCombo()
 		BindCombo2()
 
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Checking available scripts..."
-		FrmSplash.Refresh()
+		FrmSplash.UpdateText("Checking available scripts...")
 
 		Try
 
@@ -182,12 +161,10 @@ Public Class FrmSettings
 		Catch
 		End Try
 
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Populating available voices..."
-		FrmSplash.Refresh()
+		FrmSplash.UpdateText("Populating available voices...")
+
 
 		Dim voicecheck As Integer
-		'Dim voices = Fringe.GetInstalledVoices()
 		For Each v As InstalledVoice In installedVoices
 			Debug.Print("Voice " & v.ToString())
 			voicecheck += 1
@@ -204,9 +181,8 @@ Public Class FrmSettings
 		Debug.Print("Voicecheck = " & voicecheck)
 
 
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Loading Sub settings..."
-		FrmSplash.Refresh()
+		FrmSplash.UpdateText("Loading Sub settings...")
+
 
 
 		If My.Settings.CBTCock = True Then
@@ -273,9 +249,8 @@ Public Class FrmSettings
 			CBSubPierced.Checked = False
 		End If
 
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Loading Domme settings..."
-		FrmSplash.Refresh()
+		FrmSplash.UpdateText("Loading Domme settings...")
+
 
 		domlevelNumBox.Value = My.Settings.DomLevel
 
@@ -331,17 +306,13 @@ Public Class FrmSettings
 		'===============================================================================
 		'								Card images & names
 		'===============================================================================
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Loading card images..."
-		FrmSplash.Refresh()
+		FrmSplash.UpdateText("Loading card images...")
 
 		Form1.GamesToolStripMenuItem1.Enabled = CardGameCheck()
 		'===============================================================================
 		'								User settings
 		'===============================================================================
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Checking user settings..."
-		FrmSplash.Refresh()
+		FrmSplash.UpdateText("Checking user settings...")
 
 		NBNextImageChance.Value = My.Settings.NextImageChance
 
@@ -403,9 +374,7 @@ Public Class FrmSettings
 		'If My.Settings.SlideshowMode = "Manual" Then offRadio.Checked = True
 		'If My.Settings.SlideshowMode = "Timer" Then timedRadio.Checked = True
 
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Auditing scripts..."
-		FrmSplash.Refresh()
+		FrmSplash.UpdateText("Auditing scripts...")
 
 		CBAuditStartup.Checked = My.Settings.AuditStartup
 
@@ -426,16 +395,11 @@ Public Class FrmSettings
 		CBBallsToPussy.Checked = My.Settings.BallsToPussy
 
 
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Calculating space of saved session images..."
-		FrmSplash.Refresh()
-
+		FrmSplash.UpdateText("Calculating space of saved session images...")
 		CalculateSessionImages()
 
 
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Loading Settings Menu options..."
-		FrmSplash.Refresh()
+		FrmSplash.UpdateText("Loading Settings Menu options...")
 
 		SaveSettingsDialog.InitialDirectory = Application.StartupPath & "\System"
 		OpenSettingsDialog.InitialDirectory = Application.StartupPath & "\System"
@@ -1127,164 +1091,33 @@ Public Class FrmSettings
 		End If
 	End Sub
 
-#End Region	' General
+#End Region  ' General
 
 #Region "-------------------------------------- Domme Tab -----------------------------------------------"
 
 #Region "Save PetNames"
 
-	Private Sub petnameBox1_LostFocus(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles petnameBox1.LostFocus
+	Private Sub PetNameBoxes_Validating(sender As Object, e As CancelEventArgs) Handles petnameBox1.Validating, petnameBox2.Validating, petnameBox3.Validating,
+																						petnameBox4.Validating, petnameBox5.Validating, petnameBox6.Validating,
+																						petnameBox7.Validating, petnameBox8.Validating
+		With CType(sender, TextBox)
+			If String.IsNullOrWhiteSpace(.Text) Then
 
-		Dim BlankName As String
-		BlankName = "stroker"
-		Dim NameVal As Integer
-		NameVal = Form1.ssh.randomizer.Next(1, 6)
+				Dim BlankName As String = "stroker"
+				Dim NameVal As Integer = New Random().Next(1, 6)
 
-		If NameVal = 1 Then BlankName = "stroker"
-		If NameVal = 2 Then BlankName = "loser"
-		If NameVal = 3 Then BlankName = "slave"
-		If NameVal = 4 Then BlankName = "bitch boy"
-		If NameVal = 5 Then BlankName = "wanker"
+				If NameVal = 1 Then BlankName = "stroker"
+				If NameVal = 2 Then BlankName = "loser"
+				If NameVal = 3 Then BlankName = "slave"
+				If NameVal = 4 Then BlankName = "bitch boy"
+				If NameVal = 5 Then BlankName = "wanker"
 
-		If petnameBox1.Text = "" Then petnameBox1.Text = BlankName
-
-		SavePetNames()
-
+				.Text = BlankName
+			End If
+			SavePetNames()
+		End With
 	End Sub
 
-
-	Private Sub petnameBox2_LostFocus(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles petnameBox3.LostFocus
-
-		Dim BlankName As String
-		BlankName = "stroker"
-		Dim NameVal As Integer
-		NameVal = Form1.ssh.randomizer.Next(1, 6)
-
-		If NameVal = 1 Then BlankName = "stroker"
-		If NameVal = 2 Then BlankName = "loser"
-		If NameVal = 3 Then BlankName = "slave"
-		If NameVal = 4 Then BlankName = "bitch boy"
-		If NameVal = 5 Then BlankName = "wanker"
-
-		If petnameBox3.Text = "" Then petnameBox3.Text = BlankName
-
-		SavePetNames()
-
-	End Sub
-
-	Private Sub petnameBox3_LostFocus(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles petnameBox4.LostFocus
-
-		Dim BlankName As String
-		BlankName = "stroker"
-		Dim NameVal As Integer
-		NameVal = Form1.ssh.randomizer.Next(1, 6)
-
-		If NameVal = 1 Then BlankName = "stroker"
-		If NameVal = 2 Then BlankName = "loser"
-		If NameVal = 3 Then BlankName = "slave"
-		If NameVal = 4 Then BlankName = "bitch boy"
-		If NameVal = 5 Then BlankName = "wanker"
-
-		If petnameBox4.Text = "" Then petnameBox4.Text = BlankName
-
-		SavePetNames()
-
-	End Sub
-
-	Private Sub petnameBox4_LostFocus(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles petnameBox7.LostFocus
-
-		Dim BlankName As String
-		BlankName = "stroker"
-		Dim NameVal As Integer
-		NameVal = Form1.ssh.randomizer.Next(1, 6)
-
-		If NameVal = 1 Then BlankName = "stroker"
-		If NameVal = 2 Then BlankName = "loser"
-		If NameVal = 3 Then BlankName = "slave"
-		If NameVal = 4 Then BlankName = "bitch boy"
-		If NameVal = 5 Then BlankName = "wanker"
-
-		If petnameBox7.Text = "" Then petnameBox7.Text = BlankName
-
-		SavePetNames()
-
-	End Sub
-
-	Private Sub petnameBox5_LostFocus(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles petnameBox2.LostFocus
-
-		Dim BlankName As String
-		BlankName = "stroker"
-		Dim NameVal As Integer
-		NameVal = Form1.ssh.randomizer.Next(1, 6)
-
-		If NameVal = 1 Then BlankName = "stroker"
-		If NameVal = 2 Then BlankName = "loser"
-		If NameVal = 3 Then BlankName = "slave"
-		If NameVal = 4 Then BlankName = "bitch boy"
-		If NameVal = 5 Then BlankName = "wanker"
-
-		If petnameBox2.Text = "" Then petnameBox2.Text = BlankName
-
-		SavePetNames()
-
-	End Sub
-
-	Private Sub petnameBox6_LostFocus(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles petnameBox5.LostFocus
-
-		Dim BlankName As String
-		BlankName = "stroker"
-		Dim NameVal As Integer
-		NameVal = Form1.ssh.randomizer.Next(1, 6)
-
-		If NameVal = 1 Then BlankName = "stroker"
-		If NameVal = 2 Then BlankName = "loser"
-		If NameVal = 3 Then BlankName = "slave"
-		If NameVal = 4 Then BlankName = "bitch boy"
-		If NameVal = 5 Then BlankName = "wanker"
-
-		If petnameBox5.Text = "" Then petnameBox5.Text = BlankName
-
-		SavePetNames()
-
-	End Sub
-
-	Private Sub petnameBox7_LostFocus(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles petnameBox6.LostFocus
-
-		Dim BlankName As String
-		BlankName = "stroker"
-		Dim NameVal As Integer
-		NameVal = Form1.ssh.randomizer.Next(1, 6)
-
-		If NameVal = 1 Then BlankName = "stroker"
-		If NameVal = 2 Then BlankName = "slave"
-		If NameVal = 3 Then BlankName = "pet"
-		If NameVal = 4 Then BlankName = "bitch boy"
-		If NameVal = 5 Then BlankName = "wanker"
-
-		If petnameBox6.Text = "" Then petnameBox6.Text = BlankName
-
-		SavePetNames()
-
-	End Sub
-
-	Private Sub petnameBox8_LostFocus(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles petnameBox8.LostFocus
-
-		Dim BlankName As String
-		BlankName = "stroker"
-		Dim NameVal As Integer
-		NameVal = Form1.ssh.randomizer.Next(1, 6)
-
-		If NameVal = 1 Then BlankName = "stroker"
-		If NameVal = 2 Then BlankName = "slave"
-		If NameVal = 3 Then BlankName = "pet"
-		If NameVal = 4 Then BlankName = "bitch boy"
-		If NameVal = 5 Then BlankName = "wanker"
-
-		If petnameBox8.Text = "" Then petnameBox8.Text = BlankName
-
-		SavePetNames()
-
-	End Sub
 
 
 	Public Sub SavePetNames()
@@ -9807,24 +9640,14 @@ checkFolder:
 	Private Sub TimeBoxWakeUp_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TimeBoxWakeUp.ValueChanged
 		If Form1.FormLoading = False Then
 
+			Dim Sys_WakeUpPath As String = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\Variables\SYS_WakeUp"
 
 			Dim SetDate As Date = FormatDateTime(TimeBoxWakeUp.Value, DateFormat.LongTime)
+			My.Computer.FileSystem.WriteAllText(Sys_WakeUpPath, FormatDateTime(SetDate, DateFormat.LongTime), False)
+			My.Settings.WakeUp = FormatDateTime(Now, DateFormat.ShortDate) & " " & Form1.GetDate("SYS_WakeUp").ToLongTimeString
 
-			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\Variables\SYS_WakeUp", FormatDateTime(SetDate, DateFormat.LongTime), False)
-
-
-
-			'Debug.Print("Dates = " & Dates)
-
-			' Github Patch My.Settings.WakeUp = Form1.GetTime("SYS_WakeUp")
-			My.Settings.WakeUp = FormatDateTime(Now, DateFormat.ShortDate) & " " & Form1.GetTime("SYS_WakeUp")
-
-
-
-			Debug.Print(Form1.ssh.GeneralTime)
-
-
-
+			Debug.Assert(SetDate.ToLongTimeString = My.Settings.WakeUp.ToLongTimeString,
+						 "Value for SYS_WakeUp is different after saving.")
 
 		End If
 	End Sub

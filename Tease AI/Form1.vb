@@ -115,11 +115,6 @@ Public Class Form1
 	Public synth2 As New SpeechSynthesizer
 
 
-	Public LazyEdit1 As Boolean
-	Public LazyEdit2 As Boolean
-	Public LazyEdit3 As Boolean
-	Public LazyEdit4 As Boolean
-	Public LazyEdit5 As Boolean
 
 	Public ApplyingTheme As Boolean
 
@@ -165,17 +160,9 @@ Public Class Form1
 
 
 
-
-
-			'If BeforeTease = False And My.Settings.Sys_SubLeftEarly <> 0 Then My.Settings.Sys_SubLeftEarlyTotal += 1
-
 			If ssh.BeforeTease = False And Val(GetVariable("SYS_SubLeftEarly")) <> 0 Then SetVariable("SYS_SubLeftEarlyTotal", Val(GetVariable("SYS_SubLeftEarlyTotal")) + 1)
 
 
-
-			'TempGif.Dispose()
-			'original.Dispose()
-			'resized.Dispose()
 
 			Try
 				GC.Collect()
@@ -192,17 +179,6 @@ Public Class Form1
 			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Temp\Temp.gif") Then
 				My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Temp\Temp.gif")
 			End If
-
-			'TODO-Next: Remove Legacy-Code.
-			Try
-				For Each prog As Process In Process.GetProcesses
-					If prog.ProcessName = "Tease AI Metronome" Then
-						prog.Kill()
-					End If
-				Next
-			Catch ex As Exception
-
-			End Try
 
 			If ssh.SaidHello Then SaveChatLog(False)
 
@@ -266,66 +242,38 @@ retryStart:
 
 			FormLoading = True
 
-			FrmSplash.Show()
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Checking orgasm limit..."     ' 1
-			FrmSplash.Refresh()
+			FrmSplash.UpdateText("Checking orgasm limit...")
 
 			If My.Settings.OrgasmLockDate = Nothing Then My.Settings.OrgasmLockDate = FormatDateTime(Now, DateFormat.ShortDate)
 			Debug.Print("OrgasmLockDate = " & My.Settings.OrgasmLockDate)
 
 
-
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Clearing Metronome settings..."
-			FrmSplash.Refresh()
-
+			' #############################################################
+			FrmSplash.UpdateText("Clearing Metronome settings...")
 
 			StrokePace = 0
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Checking terms and conditions..."
-			FrmSplash.Refresh()
-
-
-			' If My.Settings.TCAgreed = True Then
-			'frmApps.ClearAgree()
-			'End If
-
+			' #############################################################
+			FrmSplash.UpdateText("Checking terms and conditions...")
 
 			If My.Settings.TC2Agreed = False Then
-				Form7.Show()
-				Do
-					Application.DoEvents()
-				Loop Until My.Settings.TC2Agreed = True
+				If FrmTaC.ShowDialog() = DialogResult.Yes Then
+					My.Settings.TC2Agreed = True
+					My.Settings.Save()
+				Else
+					Process.GetCurrentProcess().Kill()
+				End If
 			End If
 
-
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Checking installed Personalities..."
-			FrmSplash.Refresh()
-
-			Dim PersonType As String
-
-			'dompersonalityComboBox.Items.Clear()
-
-			Debug.Print(My.Settings.DomPersonality)
-			'dompersonalityComboBox.Text = My.Settings.DomPersonality
-
-			'dompersonalityComboBox.Text = My.Settings.DomPersonality
-
+			' #############################################################
+			FrmSplash.UpdateText("Checking installed Personalities...")
 
 			For Each Dir As String In myDirectory.GetDirectories(Application.StartupPath & "\Scripts\")
-				PersonType = Dir
-
-				Dim DirSplit As String() = PersonType.Split("\")
-				PersonType = DirSplit(DirSplit.Length - 1)
-				Debug.Print("PersonType = " & PersonType)
-				'Do While PersonType.Contains("\")
-				'PersonType = PersonType.Remove(0, 1)
-				'Loop
 				Try
+					Dim DirSplit As String() = Dir.Split("\")
+					Dim PersonType As String = DirSplit(DirSplit.Length - 1)
+					Debug.Print("Adding Personality: " & PersonType)
 					dompersonalitycombobox.Items.Add(PersonType)
 				Catch
 				End Try
@@ -335,32 +283,29 @@ retryStart:
 				MessageBox.Show(Me, "No domme Personalities were found! Many aspects of this program will not work correctly until at least one Personality is installed.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 			Else
 				Try
+					Debug.Print("Set previous personality: " & My.Settings.DomPersonality)
 					dompersonalitycombobox.Text = My.Settings.DomPersonality
 				Catch ex As Exception
 					dompersonalitycombobox.Text = dompersonalitycombobox.Items(0)
 				End Try
 			End If
 
-
+			' #############################################################
 			FrmSettings.FrmSettingsLoading = True
-
 			FrmSettings.FrmSettingStartUp()
 
 			Do
 				Application.DoEvents()
 			Loop Until FrmSettings.FrmSettingsLoading = False
 
-
-			ssh.StrokeTimeTotal = My.Settings.StrokeTimeTotal
-			StrokeTimeTotalTimer.Start()
-
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Calculating total stroke time..."
-			FrmSplash.Refresh()
+			' #############################################################
+			FrmSplash.UpdateText("Calculating total stroke time...")
 
 			Dim STT As TimeSpan = TimeSpan.FromSeconds(ssh.StrokeTimeTotal)
 			FrmSettings.LBLStrokeTimeTotal.Text = String.Format("{0:0000}:{1:00}:{2:00}:{3:00}", STT.Days, STT.Hours, STT.Minutes, STT.Seconds)
 
+			ssh.StrokeTimeTotal = My.Settings.StrokeTimeTotal
+			StrokeTimeTotalTimer.Start()
 
 			ssh.DomTask = "Null"
 			ssh.DomChat = "Null"
@@ -375,17 +320,18 @@ retryStart:
 			ssh.Chat = ""
 			IsTypingTimer.Start()
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Loading Domme and Sub avatar images..."
-			FrmSplash.Refresh()
+			' #############################################################
+			FrmSplash.UpdateText("Loading avatar images...")
 
 			'If File.Exists(My.Settings.DomAvatarSave) Then domAvatar.Image = Image.FromFile(My.Settings.DomAvatarSave)
 			'If File.Exists(My.Settings.SubAvatarSave) Then subAvatar.Image = Image.FromFile(My.Settings.SubAvatarSave)
+			If File.Exists(My.Settings.GlitterAV) Then FrmSettings.GlitterAV.Image = Image.FromFile(My.Settings.GlitterAV)
+			If File.Exists(My.Settings.GlitterAV1) Then FrmSettings.GlitterAV1.Image = Image.FromFile(My.Settings.GlitterAV1)
+			If File.Exists(My.Settings.GlitterAV2) Then FrmSettings.GlitterAV2.Image = Image.FromFile(My.Settings.GlitterAV2)
+			If File.Exists(My.Settings.GlitterAV3) Then FrmSettings.GlitterAV3.Image = Image.FromFile(My.Settings.GlitterAV3)
 
-
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Checking recent slideshows..."
-			FrmSplash.Refresh()
+			' #############################################################
+			FrmSplash.UpdateText("Checking recent slideshows...")
 
 
 			Dim uniqueNames = From u In My.Settings.RecentSlideshows Distinct
@@ -394,9 +340,6 @@ retryStart:
 				If Directory.Exists(n) Then ImageFolderComboBox.Items.Add(n)
 			Next
 
-			'For Each path As String In My.Settings.RecentSlideshows
-			'If Directory.Exists(Path) Then ImageFolderComboBox.Items.Add(Path)
-			'Next
 			' because Specialized.StringCollections are crap, 
 			' we have to clear And refill it using For-Each...
 			My.Settings.RecentSlideshows.Clear()
@@ -405,27 +348,17 @@ retryStart:
 				My.Settings.RecentSlideshows.Add(comboitem)
 			Next
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Checking local videos..."
-			FrmSplash.Refresh()
+			' #############################################################
+			FrmSplash.UpdateText("Checking local videos...")
 
 			' Checks all folders and Sets the VideoCount as LabelText
 			FrmSettings.Video_CheckAllFolders()
 
 			ssh.VideoType = "General"
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Loading Glitter avatar images..."
-			FrmSplash.Refresh()
+			' #############################################################
+			FrmSplash.UpdateText("Starting Glitter APP...")
 
-			If File.Exists(My.Settings.GlitterAV) Then FrmSettings.GlitterAV.Image = Image.FromFile(My.Settings.GlitterAV)
-			If File.Exists(My.Settings.GlitterAV1) Then FrmSettings.GlitterAV1.Image = Image.FromFile(My.Settings.GlitterAV1)
-			If File.Exists(My.Settings.GlitterAV2) Then FrmSettings.GlitterAV2.Image = Image.FromFile(My.Settings.GlitterAV2)
-			If File.Exists(My.Settings.GlitterAV3) Then FrmSettings.GlitterAV3.Image = Image.FromFile(My.Settings.GlitterAV3)
-
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Loading Glitter settings..."
-			FrmSplash.Refresh()
 
 			ssh.UpdatesTick = 120
 			UpdatesTimer.Start()
@@ -447,9 +380,7 @@ retryStart:
 			End If
 
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Loading names..."
-			FrmSplash.Refresh()
+			FrmSplash.UpdateText("Loading names...")
 
 
 			FrmSettings.petnameBox1.Text = My.Settings.pnSetting1
@@ -461,9 +392,9 @@ retryStart:
 			FrmSettings.petnameBox7.Text = My.Settings.pnSetting7
 			FrmSettings.petnameBox8.Text = My.Settings.pnSetting8
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Loading General settings..."
-			FrmSplash.Refresh()
+			' #############################################################
+			FrmSplash.UpdateText("Loading General settings...")
+
 
 			If My.Settings.CBTimeStamps = True Then
 				FrmSettings.timestampCheckBox.Checked = True
@@ -540,9 +471,7 @@ retryStart:
 				FrmSettings.CBImageInfo.Checked = False
 			End If
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Loading Domme settings..."
-			FrmSplash.Refresh()
+			FrmSplash.UpdateText("Loading Domme settings...")
 
 			FrmSettings.domageNumBox.Value = My.Settings.DomAge
 
@@ -678,13 +607,7 @@ retryStart:
 			FrmSettings.NBSubAgeMax.Value = My.Settings.SubAgeMax
 
 
-			Debug.Print("Find Exception end")
-
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Checking Glitter scripts..."
-			FrmSplash.Refresh()
-
-			'FrmSettings.LblGlitterSettingsDescription.Text = "Hover the cursor over any setting in the menu for a more detailed description of its function."
+			FrmSplash.UpdateText("Checking Glitter scripts...")
 
 			Try
 				FrmSettings.LBLGlitModDomType.Text = dompersonalitycombobox.Text
@@ -709,14 +632,9 @@ retryStart:
 			FrmSettings.NBWritingTaskMin.Value = My.Settings.NBWritingTaskMin
 			FrmSettings.NBWritingTaskMax.Value = My.Settings.NBWritingTaskMax
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Loading Image settings..."
-			FrmSplash.Refresh()
+			FrmSplash.UpdateText("Loading Image settings...")
 
-
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Loading Sub settings..."
-			FrmSplash.Refresh()
+			FrmSplash.UpdateText("Loading Sub settings...")
 
 			FrmSettings.CockSizeNumBox.Value = My.Settings.SubCockSize
 			FrmSettings.subAgeNumBox.Value = My.Settings.SubAge
@@ -751,9 +669,7 @@ retryStart:
 				FrmSettings.CBHonorificCapitalized.Checked = False
 			End If
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Loading Range settings..."
-			FrmSplash.Refresh()
+			FrmSplash.UpdateText("Loading Range settings...")
 
 			FrmSettings.SliderSTF.Value = My.Settings.TimerSTF
 			If FrmSettings.SliderSTF.Value = 1 Then FrmSettings.LBLStf.Text = "Preoccupied"
@@ -780,9 +696,7 @@ retryStart:
 			FrmSettings.FontComboBox.Text = My.Settings.SubFont
 			FrmSettings.NBFontSize.Text = My.Settings.SubFontSize
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Configuring media player..."
-			FrmSplash.Refresh()
+			FrmSplash.UpdateText("Configuring media player...")
 
 			DomWMP.uiMode = "none"
 
@@ -794,9 +708,7 @@ retryStart:
 			BTNFileTransferOpen.Visible = False
 			BTNFIleTransferDismiss.Visible = False
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Initializing Games window..."
-			FrmSplash.Refresh()
+			FrmSplash.UpdateText("Initializing Games window...")
 
 
 			Try
@@ -827,11 +739,7 @@ retryStart:
 			End If
 
 
-
-
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Checking previous orgasms..."
-			FrmSplash.Refresh()
+			FrmSplash.UpdateText("Checking previous orgasms...")
 
 			If My.Settings.LastOrgasm = Nothing Then
 				My.Settings.LastOrgasm = FormatDateTime(Now, DateFormat.ShortDate)
@@ -845,9 +753,7 @@ retryStart:
 
 			FrmSettings.LBLLastRuined.Text = My.Settings.LastRuined.ToString()
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Checking current date..."
-			FrmSplash.Refresh()
+			FrmSplash.UpdateText("Checking current date...")
 
 			If CompareDates(My.Settings.DateStamp) <> 0 Then
 
@@ -880,9 +786,8 @@ retryStart:
 			End If
 			Debug.Print("Test?")
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Calculating average edge information..."
-			FrmSplash.Refresh()
+
+			FrmSplash.UpdateText("Calculating average edge information...")
 
 			ssh.AvgEdgeStroking = My.Settings.AvgEdgeStroking
 			ssh.AvgEdgeNoTouch = My.Settings.AvgEdgeNoTouch
@@ -906,15 +811,11 @@ retryStart:
 				FrmSettings.LBLAvgEdgeNoTouch.Text = "WAIT"
 			End If
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Loading Domme Personality..."
-			FrmSplash.Refresh()
+			FrmSplash.UpdateText("Loading Domme Personality...")
 
 			ssh.DomPersonality = dompersonalitycombobox.Text
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Clearing temporary flags..."
-			FrmSplash.Refresh()
+			FrmSplash.UpdateText("Clearing temporary flags...")
 
 			If Directory.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\") Then
 				My.Computer.FileSystem.DeleteDirectory(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\", FileIO.DeleteDirectoryOption.DeleteAllContents)
@@ -922,9 +823,7 @@ retryStart:
 
 			System.IO.Directory.CreateDirectory(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\")
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Loading Glitter Contact image slideshows..."
-			FrmSplash.Refresh()
+			FrmSplash.UpdateText("Loading Glitter Contact image slideshows...")
 
 
 			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Contact_Descriptions.txt") Then
@@ -949,9 +848,7 @@ retryStart:
 
 			WMPTimer.Start()
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Loading Shorthands..."
-			FrmSplash.Refresh()
+			FrmSplash.UpdateText("Loading Shorthands...")
 
 			CBShortcuts.Checked = My.Settings.Shortcuts
 			CBHideShortcuts.Checked = My.Settings.ShowShortcuts
@@ -968,9 +865,7 @@ retryStart:
 			TBShortGreet.Text = My.Settings.ShortGreet
 			TBShortSafeword.Text = My.Settings.ShortSafeword
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Checking saved dimensions..."
-			FrmSplash.Refresh()
+			FrmSplash.UpdateText("Checking saved dimensions...")
 			'===============================================================================
 			'								Restore View
 			'===============================================================================
@@ -1000,9 +895,7 @@ retryStart:
 
 			TeaseAIClock.Start()
 
-			FrmSplash.PBSplash.Value += 1
-			FrmSplash.LBLSplash.Text = "Loading VitalSub..."
-			FrmSplash.Refresh()
+			FrmSplash.UpdateText("Loading VitalSub...")
 			'===============================================================================
 			'								Vital sub
 			'===============================================================================
@@ -1080,9 +973,9 @@ retryStart:
 
 
 
-			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_OrgasmRestricted") Then
+			If VariableExists("SYS_OrgasmRestricted") Then
 				If CompareDatesWithTime(GetDate("SYS_OrgasmRestricted")) <> 1 Then
-					My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_OrgasmRestricted")
+					DeleteVariable("SYS_OrgasmRestricted")
 					ssh.OrgasmRestricted = False
 				Else
 					ssh.OrgasmRestricted = True
@@ -1094,9 +987,7 @@ retryStart:
 
 			FormFinishedLoading = True
 
-			'TabControl1.ColorScheme.TabBackground = Color.Transparent
-			'TabControl1.ColorScheme.TabBackground2 = Color.Transparent
-			'TabControl1.BackColor = Color.Transparent
+
 			My.Settings.Save()
 			setStartName()
 			Trace.WriteLine("Startup has been completed")
@@ -2179,7 +2070,7 @@ DebugAwareness:
 
 
 		If ssh.InputFlag = True And ssh.DomTypeCheck = False Then
-			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ssh.InputString, ssh.ChatString, False)
+			SetVariable(ssh.InputString, ssh.ChatString)
 			'ssh.InputFlag = False
 		End If
 
@@ -2255,25 +2146,15 @@ EdgeSkip:
 		End If
 
 
+		Dim CheckResponse As String = ssh.ChatString.ToUpper
+		CheckResponse = CheckResponse.Replace(ssh.tempDomName.ToUpper, "")
+		If ssh.tempHonorific <> "" Then CheckResponse = CheckResponse.Replace(ssh.tempHonorific.ToUpper, "")
 
-
-
-		'If BeforeTease = True And CBDebugAwareness.Checked = False Then Return
-
-		Dim CheckResponse As String = UCase(ssh.ChatString)
-		CheckResponse = CheckResponse.Replace(UCase(ssh.tempDomName), "")
-		If ssh.tempHonorific <> "" Then CheckResponse = CheckResponse.Replace(UCase(ssh.tempHonorific), "")
-		CheckResponse = CheckResponse.Replace("!", "")
-		CheckResponse = CheckResponse.Replace("?", "")
-		CheckResponse = CheckResponse.Replace(".", "")
-		CheckResponse = CheckResponse.Replace("*", "")
-		CheckResponse = CheckResponse.Replace("  ", " ")
-
-		'   If Not CheckResponse = UCase("please") Then CheckResponse = CheckResponse.Replace(UCase("please"), "")
-		'	If Not CheckResponse = UCase("fucking") Then CheckResponse = CheckResponse.Replace(UCase("fucking"), "")
-		'	If Not CheckResponse = UCase("fuckin") Then CheckResponse = CheckResponse.Replace(UCase("fuckin"), "")
-
+		' Reduce 'multiple space chars' to a single 
+		' Remove all ,'!?.* while converting all to upper.
+		CheckResponse = Regex.Replace(CheckResponse, "( )[ ]*|[,'!?\.*]", "$1").ToUpper
 		CheckResponse = Trim(CheckResponse)
+
 
 		If UCase(CheckResponse) = UCase("CAME") Or UCase(CheckResponse) = UCase("I CAME") Then
 			If ssh.cameMode.GotoMode = True Then
@@ -2508,193 +2389,103 @@ EdgeSkip:
 
 		CheckResponse = CheckResponse.Replace("  ", " ")
 
+		' ############ Load all system response Keyfiles ##############
+		' Dictionary to temporary store the system response keyphrases.
+		' This is used when there is no precise match, to search those phrases again.
+		Dim SysKeys As New Dictionary(Of String, List(Of String))
 
-		For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\", FileIO.SearchOption.SearchTopLevelOnly, "*KEY.txt")
-			If Not foundFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\EdgeKEY.txt" Then
+		For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\", FileIO.SearchOption.SearchTopLevelOnly, "*KEY.txt").AsParallel
+			If foundFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\EdgeKEY.txt" Then Continue For
 
-				Dim SysKeyList As New List(Of String)
-				SysKeyList = Txt2List(foundFile)
+			Dim SysKeyList As List(Of String) = Txt2List(foundFile)
 
-
-				For i As Integer = 0 To SysKeyList.Count - 1
-
-					SysKeyList(i) = SysKeyList(i).Replace(",", "")
-					SysKeyList(i) = SysKeyList(i).Replace("'", "")
-					SysKeyList(i) = SysKeyList(i).Replace("!", "")
-					SysKeyList(i) = SysKeyList(i).Replace("?", "")
-					SysKeyList(i) = SysKeyList(i).Replace(".", "")
-					SysKeyList(i) = SysKeyList(i).Replace("*", "")
-					SysKeyList(i) = SysKeyList(i).Replace("  ", " ")
-
-					If UCase(CheckResponse) = UCase(SysKeyList(i)) Then
-						ssh.ResponseFile = foundFile
-						ssh.ResponseFile = ssh.ResponseFile.Replace("KEY", "")
-						'QUESTION: (Stefaf) What does the following line?
-						If UCase(CheckResponse).Contains("DONT") Or UCase(CheckResponse).Contains("NEVER") Or UCase(CheckResponse).Contains("NOT") Then ssh.ResponseFile = ssh.ResponseFile.Replace(".txt", "NOT.txt")
-						GoTo FoundResponse
-						Exit For
-					End If
-				Next
-			End If
-
-		Next
-
-		' If frmApps.CBDebugAwareness.Checked = True Then GoTo DebugAwarenessStep2
-
-		For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-
-			' Read the first line of the given file.
-			Dim SplitText As String = TxtReadLine(foundFile)
-
-			Dim SplitResponse As String() = SplitText.Split(New Char() {"]"c})
-			SplitResponse(0) = SplitResponse(0).Replace("[", "")
-			If SplitResponse(0).Contains("#") Then
-				ssh.addResponseList = True
-				SplitResponse(0) = PoundClean(SplitResponse(0))
-				ssh.addResponseList = False
-			End If
-			Do
-				SplitResponse(0) = SplitResponse(0).Replace("  ", " ")
-				SplitResponse(0) = SplitResponse(0).Replace(" ,", ",")
-				SplitResponse(0) = SplitResponse(0).Replace(", ", ",")
-				SplitResponse(0) = SplitResponse(0).Replace("'", "")
-			Loop Until Not SplitResponse(0).Contains("  ") And Not SplitResponse(0).Contains(", ") And Not SplitResponse(0).Contains(" ,") And Not SplitResponse(0).Contains("'")
-
-			Dim SplitParts As String() = SplitResponse(0).Split(New Char() {","c})
-
-			For i As Integer = 0 To SplitParts.Length - 1
-				If UCase(CheckResponse) = UCase(SplitParts(i)) Then
-					ssh.ResponseFile = foundFile
-					GoTo FoundResponse
-					Exit For
-				End If
+			For i As Integer = 0 To SysKeyList.Count - 1
+				' Reduce 'multiple space chars' to a single 
+				' Remove all ,'!?.* while converting all to upper.
+				SysKeyList(i) = Regex.Replace(SysKeyList(i), "( )[ ]*|[,'!?\.*]", "$1").ToUpper
 			Next
 
-		Next
+			SysKeys.Add(foundFile, SysKeyList)
 
-DebugAwarenessStep2:
-
-		For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\", FileIO.SearchOption.SearchTopLevelOnly, "*KEY.txt")
-			If Not foundFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\EdgeKEY.txt" Then
-
-
-
-				Dim SysKeyList As New List(Of String)
-				SysKeyList = Txt2List(foundFile)
-
-
-				For i As Integer = 0 To SysKeyList.Count - 1
-
-					SysKeyList(i) = SysKeyList(i).Replace(",", "")
-					SysKeyList(i) = SysKeyList(i).Replace("'", "")
-					SysKeyList(i) = SysKeyList(i).Replace("!", "")
-					SysKeyList(i) = SysKeyList(i).Replace("?", "")
-					SysKeyList(i) = SysKeyList(i).Replace(".", "")
-					SysKeyList(i) = SysKeyList(i).Replace("*", "")
-					SysKeyList(i) = SysKeyList(i).Replace("  ", " ")
-
-					If UCase(CheckResponse).Contains(UCase(SysKeyList(i))) Then
-						ssh.ResponseFile = foundFile
-						ssh.ResponseFile = ssh.ResponseFile.Replace("KEY", "")
-						'QUESTION: (Stefaf) What does the following line?
-						If UCase(CheckResponse).Contains("DONT") Or UCase(CheckResponse).Contains("NEVER") Or UCase(CheckResponse).Contains("NOT") Then ssh.ResponseFile = ssh.ResponseFile.Replace(".txt", "NOT.txt")
-						GoTo FoundResponse
-						Exit For
-					End If
-				Next
+			' If there is a precise match, all work is done.
+			If SysKeyList.Contains(CheckResponse) Then
+				ssh.ResponseFile = foundFile.Replace("KEY", "")
+				If Regex.IsMatch(CheckResponse, "dont|never|not", RegexOptions.IgnoreCase) Then ssh.ResponseFile = ssh.ResponseFile.Replace(".txt", "NOT.txt")
+				GoTo FoundResponse
 			End If
 		Next
 
+		' ############## Load all response-files keyphrases ###########
+		' Dictionary to temporary store the response keyphrases. 
+		' This is used when there is no precise match, to search those phrases again.
+		Dim RespKeys As New Dictionary(Of String, List(Of String))
 
-		'If frmApps.CBDebugAwareness.Checked = True Then GoTo FoundResponse
+		For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt").AsParallel
+			Application.DoEvents()
+			Dim FirstLine As String = TxtReadLine(foundFile)
 
+			' Remove '[' and all text before as well as ']' and all text afterwards.
+			FirstLine = Regex.Replace(FirstLine, "^.*\[|\].*$", "", RegexOptions.Singleline)
+
+			If FirstLine.Contains("#") Then
+				FirstLine = PoundClean(FirstLine, PoundOptions.CommaSepList)
+			End If
+
+			' Remove 'multiple whitespaces', '[', '] and following text', apostrophe char and convert all to upper.
+			FirstLine = Regex.Replace(FirstLine, "(\s)\s*|\[|\].*|'", "$1", RegexOptions.Singleline).ToUpper
+
+			' Split the line using one or more commas, surrounded by zero or more whitechars.
+			Dim Keys As List(Of String) = Regex.Split(FirstLine, "\s*,+\s*", RegexOptions.None).ToList
+
+			RespKeys.Add(foundFile, Keys)
+
+			' If there is a precise match, all work is done.
+			If Keys.Contains(CheckResponse) Then
+				ssh.ResponseFile = foundFile
+				GoTo FoundResponse
+			End If
+		Next
+
+		' Check if a system repsonses keyphrase is within the text.
+		For Each Fp As String In SysKeys.Keys
+			If SysKeys(Fp).Exists(Function(x)
+									  Return CheckResponse.IndexOf(x, StringComparison.OrdinalIgnoreCase) <> -1
+								  End Function) Then
+
+				ssh.ResponseFile = Fp.Replace("KEY", "")
+				If Regex.IsMatch(CheckResponse, "dont|never|not", RegexOptions.IgnoreCase) Then ssh.ResponseFile = ssh.ResponseFile.Replace(".txt", "NOT.txt")
+
+				GoTo FoundResponse
+			End If
+
+		Next
+
+		' Check if a vocab keyphrase is within the entered text. Longer keyphrases are prioritized.
 		Dim AccuracyLoop As Integer = 6
 
-
-
-		For x As Integer = 0 To 5
-
-			AccuracyLoop -= 1
-
-
-			For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-
-				Application.DoEvents()
-
-				' Read the first line of the given file.
-				Dim SplitText As String = TxtReadLine(foundFile)
-
-				Dim SplitResponse As String() = SplitText.Split(New Char() {"]"c})
-				SplitResponse(0) = SplitResponse(0).Replace("[", "")
-				If SplitResponse(0).Contains("#") Then
-					ssh.addResponseList = True
-					SplitResponse(0) = PoundClean(SplitResponse(0))
-					ssh.addResponseList = False
+		Do While AccuracyLoop > 0
+			For Each Fp As String In RespKeys.Keys
+				If RespKeys(Fp).Exists(Function(x)
+										   Return CheckResponse.Contains(x) AndAlso CountWords(x) > AccuracyLoop
+									   End Function) Then
+					ssh.ResponseFile = Fp
+					GoTo FoundResponse
 				End If
-
-				Do
-					SplitResponse(0) = SplitResponse(0).Replace("  ", " ")
-					SplitResponse(0) = SplitResponse(0).Replace(" ,", ",")
-					SplitResponse(0) = SplitResponse(0).Replace(", ", ",")
-					SplitResponse(0) = SplitResponse(0).Replace("'", "")
-				Loop Until Not SplitResponse(0).Contains("  ") And Not SplitResponse(0).Contains(", ") And Not SplitResponse(0).Contains(" ,") And Not SplitResponse(0).Contains("'")
-
-				Dim SplitParts As String() = SplitResponse(0).Split(New Char() {","c})
-
-
-
-
-				For i As Integer = 0 To SplitParts.Length - 1
-					'Debug.Print("SplitParts(i) = " & SplitParts(i) & " SplitParts(i).Length = " & SplitParts(i).Length & "AccuracyLoop = " & AccuracyLoop)
-					If UCase(CheckResponse).Contains(UCase(SplitParts(i))) And CountWords(SplitParts(i)) > AccuracyLoop Then
-						ssh.ResponseFile = foundFile
-						GoTo FoundResponse
-						Exit For
-					End If
-				Next
-
 			Next
+			AccuracyLoop -= 1
+		Loop
 
-		Next
-
-		For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-
-			' Read the first line of the given file.
-			Dim SplitText As String = TxtReadLine(foundFile)
-
-			Dim SplitResponse As String() = SplitText.Split(New Char() {"]"c})
-			SplitResponse(0) = SplitResponse(0).Replace("[", "")
-			If SplitResponse(0).Contains("#") Then
-				ssh.addResponseList = True
-				SplitResponse(0) = PoundClean(SplitResponse(0))
-				ssh.addResponseList = False
+		' Check if all words from a response keyphrase are present in any order.
+		For Each FilePath As String In RespKeys.Keys.AsParallel
+			If RespKeys(FilePath).Exists(Function(phrase)
+											 For Each Word As String In phrase.Split
+												 If Not CheckResponse.Contains(Word) Then Return False
+											 Next
+											 Return True
+										 End Function) Then
+				ssh.ResponseFile = FilePath
+				GoTo FoundResponse
 			End If
-
-			Do
-				SplitResponse(0) = SplitResponse(0).Replace("  ", " ")
-				SplitResponse(0) = SplitResponse(0).Replace(" ,", ",")
-				SplitResponse(0) = SplitResponse(0).Replace(", ", ",")
-				SplitResponse(0) = SplitResponse(0).Replace("'", "")
-			Loop Until Not SplitResponse(0).Contains("  ") And Not SplitResponse(0).Contains(", ") And Not SplitResponse(0).Contains(" ,") And Not SplitResponse(0).Contains("'")
-
-			Dim SplitParts As String() = SplitResponse(0).Split(New Char() {","c})
-
-			For i As Integer = 0 To SplitParts.Length - 1
-
-				Dim CheckResponseArray() As String = Split(UCase(SplitParts(i)))
-
-				For j As Integer = 0 To CheckResponseArray.Length - 1
-					ssh.ResponseFile = foundFile
-					If Not UCase(CheckResponse).Contains(CheckResponseArray(j)) Then
-						ssh.ResponseFile = ""
-						Exit For
-					End If
-				Next
-
-				If ssh.ResponseFile <> "" Then GoTo FoundResponse
-
-			Next
-
 		Next
 
 
@@ -2720,23 +2511,12 @@ DebugAwarenessStep2:
 			End If
 		End If
 
-		If ssh.CBTCockFlag = True Then
-			CBTCock()
-		End If
+		If ssh.CBTCockFlag = True Then CBTCock()
+		If ssh.CBTBallsFlag = True Then CBTBalls()
+		If ssh.CBTBothFlag = True Then CBTBoth()
+		If ssh.CustomTask = True Then RunCustomTask()
 
-		If ssh.CBTBallsFlag = True Then
-			CBTBalls()
-		End If
-
-		If ssh.CBTBothFlag = True Then
-			CBTBoth()
-		End If
-
-		If ssh.CustomTask = True Then
-			RunCustomTask()
-		End If
-
-		Return
+		Exit Sub
 
 
 
@@ -2744,19 +2524,6 @@ DebugAwarenessStep2:
 
 
 FoundResponse:
-
-		' ResponseYes = ""
-		' ResponseNo = ""
-
-		'If frmApps.CBDebugAwareness.Checked = True Then
-		'If DebugAwarenessLine = "Domme does not recognize this statement" Then
-		'Chat = Chat & "<font color=""red"">" & DebugAwarenessLine & "<br>"
-		'Else
-		'Chat = Chat & "<font color=""green"">" & DebugAwarenessLine & "<br>"
-		'End If
-		'ChatText.DocumentText = Chat
-		'Return
-		'End If
 
 		If StrokeTauntTimer.Enabled = True Then
 			ssh.TempScriptCount = 0
@@ -2774,20 +2541,13 @@ FoundResponse:
 			Return
 		End If
 
-		'Debug.Print("DoNotDisturb = " & DoNotDisturb)
-		'Debug.Print("DomChat = " & DomChat)
-
 		If ssh.DoNotDisturb = True Then
 			If ssh.DomChat.Contains("@Interrupt") Or ssh.DomChat.Contains("@Call(") Or ssh.DomChat.Contains("@CallRandom(") Then
 				ssh.DomChat = "#SYS_InterruptsOff"
 			End If
 		End If
 
-
-
-
 		TypingDelay()
-
 
 	End Sub
 
@@ -2917,9 +2677,7 @@ FoundResponse:
 			line += 1
 			Debug.Print("YESNO Line = " & lines(line))
 			Dim getWords As String = GetParentheses(lines(line), "[")
-			ssh.addAnswerList = True
-			getWords = PoundClean(getWords)
-			ssh.addAnswerList = False
+			getWords = PoundClean(getWords, PoundOptions.CommaSepList)
 			ssh.checkAnswers.addToAnswerList(getWords)
 		Loop Until InStr(UCase(lines(line + 1)), UCase("@AcceptAnswer")) <> 0 Or InStr(UCase(lines(line + 1)), UCase("@DifferentAnswer")) <> 0
 		ssh.tempResponseLine = line + 1
@@ -2942,9 +2700,8 @@ FoundResponse:
 				Dim Splits As String() = CheckLines.Split(New Char() {"]"c})
 				Splits(0) = Splits(0).Replace("[", "")
 				ChatReplace = CheckLines.Replace("[" & Splits(0) & "]", "")
-				ssh.addResponseList = True
-				Splits(0) = PoundClean(Splits(0))
-				ssh.addResponseList = False
+
+				Splits(0) = PoundClean(Splits(0), PoundOptions.CommaSepList)
 
 				'we check to see if what the user wrote contains one of the keywords for the different yes/no/etc responses
 				'this is useful if the script contains something like [yes,maybe] as an answer option
@@ -3860,8 +3617,7 @@ ResumeGotoSearch:
 
 			Loop Until ReplaceX > 5
 
-			'If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & "::: Exception occured finding GotoLabel """ & ssh.FileGoto & """ in file """ & GotoText & """</font>", False)
-			'Throw
+
 		End Try
 
 		If ReplaceGoto <> "" Then
@@ -3878,13 +3634,13 @@ CancelGoto:
 
 		If ReplaceX <> 0 Then
 			If ssh.CallReturns.Count() > 0 Then
-				ChatAddSystemMessage("Error: @Goto() could not find a valid Goto Label. Sending you to the previous callreturn, to avoid blocking the session")
+				ChatAddWarning("Error: @Goto() could not find a valid Goto Label. Sending you to the previous callreturn, to avoid blocking the session")
 				handleCallReturn()
 				If ssh.ShowModule Then Return
 			Else
 				StopEverything()
 				ssh.CallReturns.Clear()
-				ChatAddSystemMessage("Error: @Goto() could not find a valid Goto Label. Sending you to a link, to avoid blocking the session")
+				ChatAddWarning("Error: @Goto() could not find a valid Goto Label. Sending you to a link, to avoid blocking the session")
 				If ssh.LastScript = False Then
 					If ssh.BeforeTease = True Then
 						ssh.BeforeTease = False
@@ -3900,7 +3656,7 @@ CancelGoto:
 					End If
 					RunLinkScript()
 				Else
-					ChatAddSystemMessage("Error: @Goto() could not find a valid Goto Label. Since this is the final cycle, the session will now end.")
+					ChatAddWarning("Error: @Goto() could not find a valid Goto Label. Since this is the final cycle, the session will now end.")
 					SetVariable("SYS_SubLeftEarly", 0)
 					SaveChatLog(False)
 					ssh.Reset()
@@ -6095,7 +5851,6 @@ GetAnotherRandomVideo:
 		End If
 
 		If JOIVideos.Count < 1 Then
-			'ISSUE: This Message will occur during running Scripts!
 			MessageBox.Show(Me, "No JOI Videos found!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 			If ssh.TeaseVideo = True Then RunFileText()
 			ssh.TeaseVideo = False
@@ -6129,7 +5884,6 @@ GetAnotherRandomVideo:
 		End If
 
 		If CHVideos.Count < 1 Then
-			'ISSUE: This Message will occur during running Scripts!
 			MessageBox.Show(Me, "No CH Videos found!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 			If ssh.TeaseVideo = True Then RunFileText()
 			ssh.TeaseVideo = False
@@ -6601,7 +6355,7 @@ CensorConstant:
 					If UCase(DateArray(1)).Contains("MINUTE") Then DDiff = DateDiff(DateInterval.Minute, GetDate(DateArray(0)), Now)
 					If UCase(DateArray(1)).Contains("HOUR") Then DDiff = DateDiff(DateInterval.Hour, GetDate(DateArray(0)), Now)
 					If UCase(DateArray(1)).Contains("DAY") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now)
-					If UCase(DateArray(1)).Contains("WEEK") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now) * 7
+					If UCase(DateArray(1)).Contains("WEEK") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now) / 7
 					If UCase(DateArray(1)).Contains("MONTH") Then DDiff = DateDiff(DateInterval.Month, GetDate(DateArray(0)), Now)
 					If UCase(DateArray(1)).Contains("YEAR") Then DDiff = DateDiff(DateInterval.Year, GetDate(DateArray(0)), Now)
 
@@ -6993,27 +6747,35 @@ CensorConstant:
 
 	End Function
 
-	Public Function PoundClean(ByVal StringClean As String) As String
-		Dim alreadyChecked As List(Of String) = New List(Of String)
+
+	Public Enum PoundOptions
+		None = 0
+		CommaSepList = 1
+	End Enum
+
+	Public Function PoundClean(ByVal stringClean As String,
+							   Optional ByVal options As PoundOptions = PoundOptions.None,
+							   Optional ByVal startRecurrence As Integer = 0) As String
+
+		Dim AlreadyChecked As List(Of String) = New List(Of String)
 #If TRACE Then
 		Dim TS As New TraceSwitch("PoundClean", "")
 
 		If TS.TraceVerbose Then
 			Trace.WriteLine("============= PoundClean(String) =============")
 			Trace.Indent()
-			Trace.WriteLine(String.Format("StartValue: ""{0}""", StringClean))
+			Trace.WriteLine(String.Format("StartValue: ""{0}""", stringClean))
 		ElseIf TS.TraceInfo Then
-			Trace.WriteLine(String.Format("PoundClean(String) parsing: ""{0}""", StringClean))
+			Trace.WriteLine(String.Format("PoundClean(String) parsing: ""{0}""", stringClean))
 			Trace.Indent()
 		End If
 
-		Dim sw As New Stopwatch
+		Dim Sw As New Stopwatch
 		Dim StartTime As Date = Now
-		sw.Start()
+		Sw.Start()
 #End If
-
-		Dim OrgString As String = StringClean
-		Dim Recurrence As Integer = 0
+		Dim OrgString As String = stringClean
+		Dim ActRecurrence As Integer = startRecurrence
 
 		' Create Regex-Pattern to find #Keywords and exclude custom imagetags.
 		Dim ExcludeKeywords As String() = {"TagGarment", "TagUnderwear", "TagTattoo", "TagSexToy", "TagFurniture"}
@@ -7025,115 +6787,100 @@ CensorConstant:
 
 		Dim RegexKeyWords As New Regex(Pattern)
 
-		Do While Recurrence < 5 AndAlso RegexKeyWords.IsMatch(StringClean)
-			Recurrence += 1
+		Do While ActRecurrence < 6 AndAlso RegexKeyWords.IsMatch(stringClean)
+			ActRecurrence += 1
 
 #If TRACE Then
 			If TS.TraceVerbose Then
-				Trace.WriteLine(String.Format("Starting scan run {0} on ""{1}""", Recurrence, StringClean))
+				Trace.WriteLine(String.Format("Starting scan run {0} on ""{1}""", ActRecurrence, stringClean))
 				Trace.Indent()
 			End If
 #End If
 
-			StringClean = SysKeywordClean(StringClean)
+			stringClean = SysKeywordClean(stringClean)
 #If TRACE Then
-			If TS.TraceVerbose Then Trace.WriteLine(String.Format("System keywords cleaned: ""{0}""", StringClean))
+			If TS.TraceVerbose Then Trace.WriteLine(String.Format("System keywords cleaned: ""{0}""", stringClean))
 #End If
 
 			' Find all remaining #Keywords.
-			Dim re As New Regex(Pattern, RegexOptions.IgnoreCase)
-			Dim mc As MatchCollection = re.Matches(StringClean)
+			Dim Re As New Regex(Pattern, RegexOptions.IgnoreCase)
+			Dim Mc As MatchCollection = Re.Matches(stringClean)
 
-			Dim controlCustom As String = ""
-			If StringClean.Contains("@CustomMode(") Then
-				controlCustom = GetParentheses(StringClean, "@CustomMode(")
+			Dim ControlCustom As String = ""
+			If stringClean.Contains("@CustomMode(") Then
+				ControlCustom = GetParentheses(stringClean, "@CustomMode(")
 			End If
 
-			For Each keyword As Match In mc
-				Dim doNotContinue As Boolean = False
-				'if we already checked for this vocab we avoid checking again
-				For i As Integer = 0 To alreadyChecked.Count - 1
-					If alreadyChecked(i) = keyword.Value Then
-						doNotContinue = True
-						Exit For
-					End If
-				Next
+			For Each Keyword As Match In Mc
+				' Start next loop if we already checked this vocab.
+				If AlreadyChecked.Contains(Keyword.Value, StringComparer.OrdinalIgnoreCase) Then Continue For
 
-				If Not doNotContinue Then
 #If TRACE Then
-					If TS.TraceVerbose Then Trace.WriteLine(String.Format("Applying vocabulary: ""{0}""", keyword.Value))
+				If TS.TraceVerbose Then Trace.WriteLine(String.Format("Applying vocabulary: ""{0}""", Keyword.Value))
 #End If
+				AlreadyChecked.Add(Keyword.Value)
+				Dim Replacement As String = ""
 
-					Dim filepath As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\" & keyword.Value & ".txt"
+				Try
+					Dim Filepath As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\" & Keyword.Value & ".txt"
 
-					If Directory.Exists(Path.GetDirectoryName(filepath)) AndAlso File.Exists(filepath) Then
-						Dim lines As List(Of String) = Txt2List(filepath)
+					' ################ Check if vocab file exists #################
+					If Not Directory.Exists(Path.GetDirectoryName(Filepath)) _
+					OrElse Not File.Exists(Filepath) Then
 
-
-						lines = FilterList(lines)
-						If controlCustom.Contains(keyword.ToString) Then customVocabLines = lines
-						If ssh.addAnswerList Then
-							For Each s As String In lines
-								s = PoundClean(s)
-								ssh.checkAnswers.addToAnswerList(s)
-							Next
-						End If
-						If ssh.addResponseList Then
-							For Each s As String In lines
-								s = PoundClean(s)
-								StringClean &= "," & s
-							Next
-						End If
-						If lines.Count > 0 Then
-
-							Dim PoundVal As Integer = ssh.randomizer.Next(0, lines.Count)
-
-							StringClean = StringClean.Replace(keyword.Value, lines(PoundVal))
+						If UCase(Keyword.Value) = "#NULL" Then
+							' Replace predefined value 
+							stringClean = stringClean.Replace(Keyword.Value, "")
 
 						Else
-							'StringClean = StringClean.Replace(keyword.Value, "<font color=""DarkOrange"">" & keyword.Value & "</font>")
-							Dim wrong As String = keyword.Value
-							wrong = wrong.Remove(0, 1)
-							wrong = "Vocab Error: " & wrong
-							If My.Settings.CBOutputErrors = True Then
-								StringClean = StringClean.Replace(keyword.Value, "<font color=""DarkOrange"">" & wrong & "</font>")
-								ssh.KeywordError = "<font color=""DarkOrange"">" & wrong & "</font>"
-							Else
-								StringClean = StringClean.Replace(keyword.Value, "")
-							End If
+							' The vocab file is missing 
+
+							stringClean = stringClean.Replace(Keyword.Value, ChatGetInlineError(Keyword.Value.Substring(1)))
+							Dim Lazytext As String = "Unable to locate vocabulary file: """ & Keyword.Value & """"
+							Log.WriteError(Lazytext, New Exception(Lazytext), "PoundClean(String)")
+
 						End If
 
-						'Try
-						'lines = FilterList(lines)
-						'Dim PoundVal As Integer = ssh.randomizer.Next(0, lines.Count)
-						'StringClean = StringClean.Replace(keyword.Value, lines(PoundVal))
-						'Catch ex As Exception
-						'Log.WriteError("Error Processing vocabulary file:  " & filepath, ex,
-						' "Tease AI did not return a valid line while parsing vocabulary file.")
-						'StringClean = "ERROR: Tease AI did not return a valid line while parsing vocabulary file: " & keyword.Value
-						'End Try
+						Continue For ' Start next loop 
+					End If
+
+					' #################### Process vocab file #####################
+
+					Dim VocabLines As List(Of String) = Txt2List(Filepath)
+					VocabLines = FilterList(VocabLines)
+
+					If ControlCustom.Contains(Keyword.ToString) Then customVocabLines = VocabLines
+
+					If VocabLines.Count <= 0 Then
+						' ----------------- No Lines available ----------------
+						Replacement = ChatGetInlineWarning(Keyword.Value.Substring(1))
+						ChatAddWarning("No available lines in vocabulary file: """ & Keyword.Value & "")
+
+					ElseIf options.HasFlag(PoundOptions.CommaSepList) Then
+						' -------------- Get comma separated list --------------
+						Dim CleanLines As New List(Of String)
+
+						For Each Line As String In VocabLines
+							CleanLines.Add(PoundClean(Line, options, ActRecurrence))
+						Next
+
+						Replacement = String.Join(",", CleanLines)
 
 					Else
-						'StringClean = StringClean.Replace(keyword.Value, "<font color=""red"">" & keyword.Value & "</font>")
-
-						Dim wrong As String = keyword.Value
-
-						If UCase(wrong) = "#NULL" Then
-							StringClean = StringClean.Replace(keyword.Value, "")
-						Else
-							wrong = wrong.Remove(0, 1)
-							wrong = "Missing Vocab: " & wrong
-							StringClean = StringClean.Replace(keyword.Value, "<font color=""red"">" & wrong & "</font>")
-							ssh.KeywordError = "<font color=""red"">" & wrong & "</font>"
-							Dim lazytext As String = "Unable to locate vocabulary file: """ & keyword.Value & """"
-							Log.WriteError(lazytext, New Exception(lazytext), "PoundClean(String)")
-						End If
-
-
+						' -------------- Pick a single random line -------------
+						Replacement = VocabLines(ssh.randomizer.Next(0, VocabLines.Count))
 
 					End If
-				End If
-				alreadyChecked.Add(keyword.Value)
+
+				Catch ex As Exception
+					Log.WriteError("Error Processing vocabulary file:  " & Keyword.Value, ex,
+									"Tease AI did not return a valid line while parsing vocabulary file.")
+					Replacement = ChatGetInlineError(Keyword.Value.Substring(1))
+				Finally
+
+					stringClean = stringClean.Replace(Keyword.Value, Replacement)
+				End Try
+
 			Next
 
 #If TRACE Then
@@ -7141,23 +6888,23 @@ CensorConstant:
 #End If
 		Loop
 
-		If RegexKeyWords.IsMatch(StringClean) Then
+		If RegexKeyWords.IsMatch(stringClean) Then
 #If TRACE Then
 			If TS.TraceError Then
 				Trace.WriteLine("PoundClean(String): Stopping scan, maximum allowed scan depth reached.")
 				Trace.Indent()
 				Trace.WriteLine(String.Format("StartValue: ""{0}""", OrgString))
-				Trace.WriteLine(String.Format("EndValue:   ""{0}""", StringClean))
+				Trace.WriteLine(String.Format("EndValue:   ""{0}""", stringClean))
 				Trace.Unindent()
 			End If
 #End If
 			Log.WriteError("Maximum allowed Vocabulary depth reached for line:" & OrgString & vbCrLf &
-				  "Aborted Cleaning at: " & StringClean,
-				  New StackOverflowException("PoundClean infinite loop protection"), "PoundClean(String)")
+							  "Aborted Cleaning at: " & stringClean,
+							  New StackOverflowException("PoundClean infinite loop protection"), "PoundClean(String)")
 		Else
 #If TRACE Then
 			If TS.TraceVerbose Then
-				Trace.WriteLine(String.Format("EndValue: ""{0}""", StringClean))
+				Trace.WriteLine(String.Format("EndValue: ""{0}""", stringClean))
 				Trace.WriteLine(String.Format("Duration: {0}ms", (Now - StartTime).TotalMilliseconds.ToString))
 			End If
 #End If
@@ -7167,7 +6914,7 @@ CensorConstant:
 #If TRACE Then
 		Trace.Unindent()
 #End If
-		Return StringClean
+		Return stringClean
 	End Function
 
 	Public Function CommandClean(ByVal StringClean As String, Optional ByVal TaskClean As Boolean = False) As String
@@ -7580,7 +7327,10 @@ RinseLatherRepeat:
 		'===============================================================================
 		'								@ShowTaggedImage
 		'===============================================================================
-		If StringClean.Contains("@ShowTaggedImage") Then
+		If StringClean.Contains("@ShowTaggedImage") OrElse StringClean.Contains("@Tag") Then
+
+			ChatAddWarning("@ShowTaggedImage and all @Tag- instructions are marked as obsolete. Use @ImageTag() instead.")
+
 			Dim Tags As List(Of String) = StringClean.Split() _
 				  .Select(Function(s) s.Trim()) _
 				  .Where(Function(w) CType(w, String).StartsWith("@Tag")).ToList
@@ -8091,13 +7841,8 @@ TaskCleanSet:
 				Dim VarName As String = SCGotVarSplit(0)
 				Dim Val1 As Integer
 
-				Dim VarCheck As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName
-
-
-				'TODO: Remove unsecure IO.Access to file, for there is no DirectoryCheck.
-				If File.Exists(VarCheck) Then
-					' Read first line of the given file.
-					Val1 = CInt(TxtReadLine(VarCheck))
+				If VariableExists(VarName) Then
+					Integer.TryParse(GetVariable(VarName), Val1)
 
 					SCGotVarSplit(0) = ""
 
@@ -8110,7 +7855,7 @@ TaskCleanSet:
 
 					Val1 = VarValue * Math.Round(Val1 / VarValue)
 
-					My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName, Val1, False)
+					SetVariable(VarName, Val1)
 
 				End If
 				' StringClean = StringClean.Replace("@RoundVar[" & OriginalCheck & ")", "")
@@ -8135,68 +7880,27 @@ TaskCleanSet:
 					Dim ChangeFlag As String = ChangeArray(i)
 					Dim ChangeStart As Integer = ChangeFlag.IndexOf("@ChangeVar[") + 11
 
-					Dim ChangeVar As String
-					Dim ChangeVal1 As String
-					Dim ChangeVal2 As String
-					Dim ChangeOperator As String
-
-					Dim Val1 As Integer
-					Dim Val2 As Integer
-
 					ChangeFlag = ChangeArray(i).Substring(ChangeStart, ChangeArray(i).Length - ChangeStart)
-					ChangeVar = ChangeFlag.Split("]")(0)
-					ChangeVal1 = ChangeFlag.Split("]")(1)
-					ChangeVal2 = ChangeFlag.Split("]")(2)
-					ChangeOperator = ChangeFlag.Split("]")(2).Substring(0, 1)
+					Dim VarName As String = ChangeFlag.Split("]")(0)
+					Dim ArgVal1 As String = ChangeFlag.Split("]")(1)
+					Dim ArgVal2 As String = ChangeFlag.Split("]")(2)
+					Dim mathOperator As String = ChangeFlag.Split("]")(2).Substring(0, 1)
 
-					ChangeArray(i) = ChangeArray(i).Replace("@ChangeVar[" & ChangeVar & "]" & ChangeVal1 & "]" & ChangeVal2 & "]", "")
+					ChangeArray(i) = ChangeArray(i).Replace("@ChangeVar[" & VarName & "]" & ArgVal1 & "]" & ArgVal2 & "]", "")
 
-					ChangeVar = ChangeVar.Replace("@ChangeVar[", "")
-					ChangeVal1 = ChangeVal1.Replace("=[", "")
-					ChangeVal2 = ChangeVal2.Replace("+[", "")
-					ChangeVal2 = ChangeVal2.Replace("-[", "")
-					ChangeVal2 = ChangeVal2.Replace("*[", "")
-					ChangeVal2 = ChangeVal2.Replace("/[", "")
+					VarName = VarName.Replace("@ChangeVar[", "")
+					ArgVal1 = ArgVal1.Replace("=[", "")
+					ArgVal2 = ArgVal2.Replace("+[", "")
+					ArgVal2 = ArgVal2.Replace("-[", "")
+					ArgVal2 = ArgVal2.Replace("*[", "")
+					ArgVal2 = ArgVal2.Replace("/[", "")
 
-					'@ChangeVar[TB_EdgeHoldingOwed   ]    =[TB_EdgeHoldingOwed    ]     -[1       ]
+					ChangeVariable(VarName, ArgVal1, mathOperator, ArgVal2)
 
-					If IsNumeric(ChangeVal1) = False Then
-						'TODO: Remove unsecure IO.Access to file, for there is no DirectoryCheck.
-						If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal1) Then
-							Val1 = TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal1)
-						Else
-							Val1 = 0
-						End If
-					Else
-						Val1 = Val(ChangeVal1)
-					End If
-
-					If IsNumeric(ChangeVal2) = False Then
-						'TODO: Remove unsecure IO.Access To file, for there is no DirectoryCheck.
-						If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal2) Then
-							Val2 = TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal2)
-						Else
-							Val2 = 0
-						End If
-					Else
-						Val2 = Val(ChangeVal2)
-					End If
-
-					ssh.ScriptOperator = "Null"
-					If ChangeOperator.Contains("+") Then ssh.ScriptOperator = "Add"
-					If ChangeOperator.Contains("-") Then ssh.ScriptOperator = "Subtract"
-					If ChangeOperator.Contains("*") Then ssh.ScriptOperator = "Multiply"
-					If ChangeOperator.Contains("/") Then ssh.ScriptOperator = "Divide"
-
-					Dim ChangeVal As Integer = 0
-
-					If ssh.ScriptOperator = "Add" Then ChangeVal = Val1 + Val2
-					If ssh.ScriptOperator = "Subtract" Then ChangeVal = Val1 - Val2
-					If ssh.ScriptOperator = "Multiply" Then ChangeVal = Val1 * Val2
-					If ssh.ScriptOperator = "Divide" Then ChangeVal = Val1 / Val2
-					If Not ssh.ScriptOperator = "Null" Then My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVar, ChangeVal, False)
 				End If
 			Next
+
+			StringClean = Join(ChangeArray)
 		End If
 
 		' The @ShowVar[] Command is used to show the value of an existing Variable. The correct format is @ShowVar[VarName]
@@ -8252,17 +7956,17 @@ TaskCleanSet:
 
 					SCGotVar = SCGotVar.Replace("=[", "")
 					SCGotVar = SCGotVar.Replace(" ", "")
+
 					If IsNumeric(SCGotVar) = False Then
-						'TODO: Remove unsecure IO.Access to file, for there is no DirectoryCheck.
-						If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & SCGotVar) Then
-							SCGotVar = TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & SCGotVar)
+						If VariableExists(SCGotVar) Then
+							SCGotVar = GetVariable(SCGotVar)
 						Else
 							SCGotVar = 0
 						End If
 					Else
 						SCGotVar = Val(SCGotVar)
 					End If
-					My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName, SCGotVar, False)
+					SetVariable(VarName, SCGotVar)
 				End If
 			Next
 			StringClean = Join(VarArray)
@@ -8308,7 +8012,7 @@ TaskCleanSet:
 					 And Not UCase(FlagArray(1)).Contains(UCase("DAY")) And Not UCase(FlagArray(1)).Contains(UCase("WEEK")) And Not UCase(FlagArray(1)).Contains(UCase("MONTH")) _
 					 And Not UCase(FlagArray(1)).Contains(UCase("YEAR")) Then SetDate = DateAdd(DateInterval.Day, Val(FlagArray(1)), SetDate)
 
-					My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & FlagArray(0), FormatDateTime(SetDate, DateFormat.GeneralDate), False)
+					SetVariable(FlagArray(0), FormatDateTime(SetDate, DateFormat.GeneralDate))
 
 					Debug.Print("CheckArray(i) = " & CheckArray(i))
 
@@ -8561,7 +8265,7 @@ TaskCleanSet:
 				Dim SetDate As Date = FormatDateTime(Now, DateFormat.GeneralDate)
 
 				SetDate = DateAdd(DateInterval.Second, TotalSeconds, SetDate)
-				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_OrgasmRestricted", FormatDateTime(SetDate, DateFormat.GeneralDate), False)
+				SetVariable("SYS_OrgasmRestricted", FormatDateTime(SetDate, DateFormat.GeneralDate))
 
 			Else
 
@@ -8579,7 +8283,7 @@ TaskCleanSet:
 				 And Not UCase(CheckFlag).Contains(UCase("DAY")) And Not UCase(CheckFlag).Contains(UCase("WEEK")) And Not UCase(CheckFlag).Contains(UCase("MONTH")) _
 				 And Not UCase(CheckFlag).Contains(UCase("YEAR")) Then SetDate = DateAdd(DateInterval.Day, Val(CheckFlag), SetDate)
 
-				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_OrgasmRestricted", FormatDateTime(SetDate, DateFormat.GeneralDate), False)
+				SetVariable("SYS_OrgasmRestricted", FormatDateTime(SetDate, DateFormat.GeneralDate))
 
 			End If
 			ssh.OrgasmRestricted = True
@@ -8834,9 +8538,9 @@ TaskCleanSet:
 
 
 		If StringClean.Contains("@StartStroking") Then
-			If Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_FirstRun") Then
+			If Not VariableExists("SYS_FirstRun") Then
 				Dim SetDate As Date = FormatDateTime(Now, DateFormat.GeneralDate)
-				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_FirstRun", SetDate, False)
+				SetVariable("SYS_FirstRun", SetDate)
 			End If
 
 			SetVariable("SYS_StrokeRound", Val(GetVariable("SYS_StrokeRound")) + 1)
@@ -10956,7 +10660,7 @@ VTSkip:
 			End If
 			ssh.BronzeTokens += FrmCardList.TokensPaid
 			FrmCardList.LBLRiskTokens.Text = ssh.BronzeTokens
-			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\RP_Edges", FrmCardList.EdgesOwed, False)
+			SetVariable("RP_Edges", FrmCardList.EdgesOwed)
 			StringClean = StringClean.Replace("@RiskyPayout", "")
 		End If
 
@@ -11901,295 +11605,6 @@ VTSkip:
 
 #End Region ' Script-Flags
 
-#Region "------------------------------------- Script-Variables -----------------------------------------"
-
-	Public Function SetVariable(ByVal VarName As String, ByVal VarValue As String)
-
-		My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName, VarValue, False)
-
-	End Function
-
-	Public Function DeleteVariable(ByVal FlagDir As String)
-
-		If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & FlagDir) Then _
-		   My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & FlagDir)
-
-	End Function
-
-	Public Function ChangeVariable(ByVal ChangeVar As String, ByVal ChangeVal1 As String, ByVal ChangeOperator As String, ByVal ChangeVal2 As String)
-
-		Dim Val1 As Integer
-		Dim Val2 As Integer
-
-		If IsNumeric(ChangeVal1) = False Then
-			'TODO: Remove unsecure IO.Access To file, for there is no DirectoryCheck.
-			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal1) Then
-				Val1 = Val(TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal1))
-			Else
-				Val1 = 0
-			End If
-		Else
-			Val1 = Val(ChangeVal1)
-		End If
-
-		If IsNumeric(ChangeVal2) = False Then
-			'TODO: Remove unsecure IO.Access To file, for there is no DirectoryCheck.
-			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal2) Then
-				Val2 = Val(TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal2))
-			Else
-				Val2 = 0
-			End If
-		Else
-			Val2 = Val(ChangeVal2)
-		End If
-
-		ssh.ScriptOperator = "Null"
-		If ChangeOperator.Contains("+") Then ssh.ScriptOperator = "Add"
-		If ChangeOperator.Contains("-") Then ssh.ScriptOperator = "Subtract"
-		If ChangeOperator.Contains("*") Then ssh.ScriptOperator = "Multiply"
-		If ChangeOperator.Contains("/") Then ssh.ScriptOperator = "Divide"
-
-		Dim ChangeVal As Integer = 0
-
-		If ssh.ScriptOperator = "Add" Then ChangeVal = Val1 + Val2
-		If ssh.ScriptOperator = "Subtract" Then ChangeVal = Val1 - Val2
-		If ssh.ScriptOperator = "Multiply" Then ChangeVal = Val1 * Val2
-		If ssh.ScriptOperator = "Divide" Then ChangeVal = Val1 / Val2
-
-		My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVar, ChangeVal, False)
-
-	End Function
-
-	Public Function GetVariable(ByVal VarName As String) As String
-
-		Dim VarGet As String
-		'TODO: Remove unsecure IO.Access To file, for there is no DirectoryCheck.
-		If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName) Then
-			'### DEBUG
-
-			' VarGet = Val(VarReader.ReadLine())
-
-			VarGet = TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName)
-		Else
-			VarGet = 0
-		End If
-
-		Return VarGet
-
-
-	End Function
-
-	Public Function CheckVariable(ByVal StringCLean As String) As Boolean
-		If StringCLean.Contains("]AND[") Then StringCLean = StringCLean.Replace("]AND[", "]And[")
-		If StringCLean.Contains("]OR[") Then StringCLean = StringCLean.Replace("]OR[", "]Or[")
-		Do
-
-			Dim SCIfVar As String() = Split(StringCLean)
-			Dim SCGotVar As String = "Null"
-
-			For i As Integer = 0 To SCIfVar.Length - 1
-				If SCIfVar(i).Contains("@Variable[") Then
-					Dim IFJoin As Integer = 0
-					If Not SCIfVar(i).Contains("] ") Then
-						Do
-							IFJoin += 1
-							SCIfVar(i) = SCIfVar(i) & " " & SCIfVar(i + IFJoin)
-							SCIfVar(i + IFJoin) = ""
-						Loop Until SCIfVar(i).Contains("] ") Or SCIfVar(i).EndsWith("]")
-					End If
-					SCGotVar = SCIfVar(i).Trim
-					SCIfVar(i) = ""
-					StringCLean = Join(SCIfVar)
-					Do
-						StringCLean = StringCLean.Replace("  ", " ")
-					Loop Until Not StringCLean.Contains("  ")
-					Exit For
-				End If
-			Next
-
-			If SCGotVar.Contains("]And[") Then
-
-				Dim AndCheck As Boolean = True
-
-				For x As Integer = 0 To SCGotVar.Replace("]And[", "").Count - 1
-					If GetIf("[" & GetParentheses(SCGotVar, "@Variable[", 2) & "]") = False Then
-						AndCheck = False
-						Exit For
-					End If
-					SCGotVar = SCGotVar.Replace("[" & GetParentheses(SCGotVar, "@Variable[", 2) & "]And", "")
-				Next
-
-				Return AndCheck
-
-			ElseIf SCGotVar.Contains("]Or[") Then
-
-				Dim OrCheck As Boolean = False
-
-				For x As Integer = 0 To SCGotVar.Replace("]Or[", "").Count - 1
-					If GetIf("[" & GetParentheses(SCGotVar, "@Variable[", 2) & "]") = True Then
-						OrCheck = True
-						Exit For
-					End If
-					SCGotVar = SCGotVar.Replace("[" & GetParentheses(SCGotVar, "@Variable[", 2) & "]Or", "")
-				Next
-
-				Return OrCheck
-
-			Else
-
-				If GetIf("[" & GetParentheses(SCGotVar, "@Variable[", 2) & "]") = True Then
-
-					Return True
-
-				Else
-
-					Return False
-
-				End If
-
-			End If
-
-		Loop Until Not StringCLean.Contains("@Variable")
-
-
-	End Function
-
-#End Region ' Script-Variables
-
-#Region "---------------------------------------- Script-Dates ------------------------------------------"
-
-	Public Function GetDate(ByVal VarName As String) As Date
-
-		Dim VarGet As String
-		'TODO: Remove unsecure IO.Access To file, for there is no DirectoryCheck.
-		If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName) Then
-			VarGet = Date.Parse(TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName))
-		Else
-			VarGet = FormatDateTime(Now, DateFormat.GeneralDate)
-		End If
-
-		Return VarGet
-
-
-	End Function
-
-	Public Function GetTime(ByVal VarName As String) As Date
-
-		Dim VarGet As String
-		'TODO: Remove unsecure IO.Access To file, for there is no DirectoryCheck.
-		If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName) Then
-			VarGet = Date.Parse(TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName))
-		Else
-			VarGet = FormatDateTime(Now, DateFormat.LongTime)
-		End If
-
-		Return VarGet
-
-
-	End Function
-
-	Public Function CheckDateList(ByVal DateString As String, Optional ByVal Linear As Boolean = False) As Boolean
-
-		Dim DateFlag As String = GetParentheses(DateString, "@CheckDate(")
-
-		If DateFlag.Contains(",") Then
-
-			DateFlag = FixCommas(DateFlag)
-
-			Dim DateArray() As String = DateFlag.Split(",")
-			Dim DDiff As Long = 18855881
-			Dim DDiff2 As Long = 18855881
-
-			Dim DCompare As Long
-			Dim DCompare2 As Long
-
-			If Linear = False Then
-
-				If DateArray.Count = 2 Then
-					DDiff = GetDateDifference(DateArray(0), DateArray(1))
-					DCompare = GetDateCompare(DateArray(0), DateArray(1))
-					If DDiff >= DCompare Then Return True
-					Return False
-				End If
-
-				If DateArray.Count = 3 Then
-					DDiff = GetDateDifference(DateArray(0), DateArray(1))
-					DCompare = GetDateCompare(DateArray(0), DateArray(1))
-					DDiff2 = GetDateDifference(DateArray(0), DateArray(2))
-					DCompare2 = GetDateCompare(DateArray(0), DateArray(2))
-					If DDiff >= DCompare And DDiff2 <= DCompare2 Then Return True
-					Return False
-				End If
-
-			Else
-
-				If DateArray.Count = 2 Then
-					If CompareDatesWithTime(GetDate(DateArray(0))) <> 1 Then Return True
-					Return False
-				End If
-
-				If DateArray.Count = 3 Then
-					DDiff = GetDateDifference(DateArray(0), DateArray(1))
-					DCompare = GetDateCompare(DateArray(0), DateArray(1))
-					If DDiff >= DCompare Then Return True
-					Return False
-				End If
-
-				If DateArray.Count = 4 Then
-					DDiff = GetDateDifference(DateArray(0), DateArray(1))
-					DCompare = GetDateCompare(DateArray(0), DateArray(1))
-					DDiff2 = GetDateDifference(DateArray(0), DateArray(2))
-					DCompare2 = GetDateCompare(DateArray(0), DateArray(2))
-					If DDiff >= DCompare And DDiff2 <= DCompare2 Then Return True
-					Return False
-				End If
-
-			End If
-
-		Else
-			If CompareDatesWithTime(GetDate(DateFlag)) <> 1 Then Return True
-			Return False
-		End If
-
-		Return False
-
-	End Function
-
-	Public Function GetDateDifference(ByVal DateVar As String, ByVal DateString As String) As Long
-
-		Dim DDiff As Long = 0
-
-		If UCase(DateString).Contains("SECOND") Then DDiff = DateDiff(DateInterval.Second, GetDate(DateVar), Now)
-		If UCase(DateString).Contains("MINUTE") Then DDiff = DateDiff(DateInterval.Minute, GetDate(DateVar), Now) * 60
-		If UCase(DateString).Contains("HOUR") Then DDiff = DateDiff(DateInterval.Hour, GetDate(DateVar), Now) * 3600
-		If UCase(DateString).Contains("DAY") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateVar), Now) * 86400
-		If UCase(DateString).Contains("WEEK") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateVar), Now) * 604800
-		If UCase(DateString).Contains("MONTH") Then DDiff = DateDiff(DateInterval.Month, GetDate(DateVar), Now) * 2629746
-		If UCase(DateString).Contains("YEAR") Then DDiff = DateDiff(DateInterval.Year, GetDate(DateVar), Now) * 31536000
-
-		Return DDiff
-
-	End Function
-
-	Public Function GetDateCompare(ByVal DateVar As String, ByVal DateString As String) As Long
-
-		Dim DDiff As Long = 0
-		Dim Amount As Long = Val(DateString)
-
-		If UCase(DateString).Contains("SECOND") Then DDiff = Amount
-		If UCase(DateString).Contains("MINUTE") Then DDiff = Amount * 60
-		If UCase(DateString).Contains("HOUR") Then DDiff = Amount * 3600
-		If UCase(DateString).Contains("DAY") Then DDiff = Amount * 86400
-		If UCase(DateString).Contains("WEEK") Then DDiff = Amount * 604800
-		If UCase(DateString).Contains("MONTH") Then DDiff = Amount * 2629746
-		If UCase(DateString).Contains("YEAR") Then DDiff = Amount * 31536000
-
-		Return DDiff
-
-	End Function
-
-#End Region ' Script-Dates
-
 #End Region ' Flags/Dates/Variables
 
 
@@ -12693,7 +12108,7 @@ VTSkip:
 	  My.Settings.CBIBlowjob = False And My.Settings.CBIFemdom = False And My.Settings.CBILezdom = False And My.Settings.CBIHentai = False And
 	  My.Settings.CBIGay = False And My.Settings.CBIMaledom = False And My.Settings.CBICaptions = False And My.Settings.CBIGeneral = False Then Return False
 
-				If FilterString.Contains("@ShowTaggedImage") Then
+				If FilterString.Contains("@ShowTaggedImage") OrElse FilterString.Contains("@Tag") Then
 					Dim Tags As List(Of String) = FilterString.Split() _
 					 .Select(Function(s) s.Trim()) _
 					 .Where(Function(w) CType(w, String).StartsWith("@Tag")).ToList
@@ -13692,20 +13107,13 @@ NoPlaylistLinkFile:
 		ssh.ShowModule = True
 		ssh.isLink = False
 		ssh.FirstRound = False
-		'My.Settings.Sys_SubLeftEarly = 0
 
-		'My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\SYS_SubLeftEarly", "0", False)
 
 		SetVariable("SYS_SubLeftEarly", 0)
 
 		SetVariable("SYS_EndTotal", Val(GetVariable("SYS_EndTotal")) + 1)
 
 
-		'My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\SYS_EndTotal", Val(GetVariable("SYS_EndTotal")) + 1, False)
-
-
-
-		'Debug.Print("RunLastScript() Called")
 
 		If ssh.PlaylistFile.Count = 0 Then GoTo NoPlaylistEndFile
 
@@ -14596,18 +14004,22 @@ PoundLoop:
 
 	End Sub
 
-	Public Function ShellExecute(ByVal File As String) As Boolean
-		Dim myProcess As New Process
-		myProcess.StartInfo.FileName = File
-		myProcess.StartInfo.UseShellExecute = True
-		myProcess.StartInfo.RedirectStandardOutput = False
-		myProcess.Start()
-		myProcess.Dispose()
-	End Function
+	Public Sub ShellExecute(ByVal File As String)
+		Try
+			Dim myProcess As New Process
+			myProcess.StartInfo.FileName = File
+			myProcess.StartInfo.UseShellExecute = True
+			myProcess.StartInfo.RedirectStandardOutput = False
+			myProcess.Start()
+			myProcess.Dispose()
+		Catch ex As Exception
+			MessageBox.Show(ex.Message, "ShellExecute failed", MessageBoxButtons.OK, MessageBoxIcon.Error)
+		End Try
+	End Sub
 
 
 	Public Sub BTNFileTransferOpen_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNFileTransferOpen.Click
-
+		'BUG: Clicking this Button after the session has ended, will cause an exception
 		ShellExecute(ssh.TaskTextDir)
 
 		PNLFileTransfer.Visible = False
@@ -14784,7 +14196,6 @@ RestartFunction:
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			TnASlides.Stop()
 			Log.WriteError(ex.Message & vbCrLf & "TnA Slideshow will stop.", ex, "Exception in TnASlides.Tick occured")
-			If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " : Exception in TnASlides.Tick occured</font>", False)
 		End Try
 	End Sub
 
@@ -15809,21 +15220,11 @@ saveImage:
 
 	End Function
 
-	Public Function StripFormat(ByVal FormatClean As String) As String
-		FormatClean = FormatClean.Replace("<i>", "")
-		FormatClean = FormatClean.Replace("</i>", "")
-		FormatClean = FormatClean.Replace("<b>", "")
-		FormatClean = FormatClean.Replace("</b>", "")
-		FormatClean = FormatClean.Replace("<u>", "")
-		FormatClean = FormatClean.Replace("</u>", "")
-		FormatClean = FormatClean.Replace(FrmSettings.TBEmote.Text, "")
-		FormatClean = FormatClean.Replace(FrmSettings.TBEmoteEnd.Text, "")
-		If ssh.KeywordError <> "" Then
-			FormatClean = FormatClean.Replace(ssh.KeywordError, "")
-			ssh.KeywordError = ""
-		End If
+	Public Function StripFormat(ByVal formatClean As String) As String
 
-		Return FormatClean
+		formatClean = Regex.Replace(formatClean, "<(.|\n)*?>", "")
+		Return formatClean
+
 	End Function
 
 
@@ -16839,33 +16240,12 @@ restartInstantly:
 
 
 
-		'If WritingTaskFlag = False Then
-		'LBLTime.Text = Format(Now, "h:mm")
-		'LBLAMPM.Text = Format(Now, "tt")
-		'LBLDate.Text = Format(Now, "Long Date")
-		'Else
-		'If WritingTaskCurrentTime > 0 Then
-		'LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times" & vbCrLf & "You have " & ConvertSeconds(WritingTaskCurrentTime)
-		'LBLTime.Text = Convert.ToInt16(WritingTaskCurrentTime)
-		'Else
-		'LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times" & vbCrLf & "YOUR TIME IS UP"
-		'LBLTime.Text = "Time's Up"
-		'End If
-		'WritingTaskCurrentTime -= 1
-		'LBLAMPM.Text = ""
-		'End If
+		If VariableExists("SYS_WakeUp") Then
 
-
-		If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_WakeUp") Then
-
-			Dim Dates As String
-			'Dates = FormatDateTime(Now, DateFormat.ShortDate) & " " & GetTime("SYS_WakeUp")
-			Dates = FormatDateTime(Now, DateFormat.ShortDate) & " " & FormatDateTime(FrmSettings.TimeBoxWakeUp.Value, DateFormat.LongTime)
+			Dim DateFromFile As String = FormatDateTime(Now, DateFormat.ShortDate) & " " & GetDate("SYS_WakeUp").ToLongTimeString
 
 			Dim DDiff As Integer
-			DDiff = DateDiff(DateInterval.Hour, Date.Parse(Dates), Now)
-
-			Dim TimeCounter As Integer = -3
+			DDiff = DateDiff(DateInterval.Hour, Date.Parse(DateFromFile), Now)
 
 			ssh.GeneralTime = "Night"
 			If DDiff < -20 Then ssh.GeneralTime = "Morning"
@@ -16876,52 +16256,25 @@ restartInstantly:
 		Else
 
 			Dim SetDate As Date = FormatDateTime(FrmSettings.TimeBoxWakeUp.Value, DateFormat.LongTime)
-			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_WakeUp", FormatDateTime(SetDate, DateFormat.LongTime), False)
-			My.Settings.WakeUp = FormatDateTime(Now, DateFormat.ShortDate) & " " & GetTime("SYS_WakeUp")
-			'BUG: Ungültige Konvertierung von der Zeichenfolge 10.11.2017 10.11.2017 16:59:51 in Typ Date.
+			SetVariable("SYS_WakeUp", FormatDateTime(SetDate, DateFormat.LongTime))
+			My.Settings.WakeUp = FormatDateTime(Now, DateFormat.ShortDate) & " " & GetDate("SYS_WakeUp").ToLongTimeString
+
+			Debug.Assert(SetDate.ToLongTimeString = My.Settings.WakeUp.ToLongTimeString,
+						 "Value for SYS_WakeUp is different after loading.")
+
 		End If
 
 		If ssh.CountUpList.Count > 0 Then
-
 			For i As Integer = 0 To ssh.CountUpList.Count - 1
-				Dim Val1 As Integer
-
-				'TODO: Remove unsecure IO.Access to file, for there is no DirectoryCheck.
-				If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ssh.CountUpList(i)) Then
-					Val1 = Val(TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ssh.CountUpList(i)))
-				Else
-					Val1 = 0
-				End If
-
-				Val1 += 1
-
-				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ssh.CountUpList(i), Val1, False)
-
+				ChangeVariable(ssh.CountUpList(i), ssh.CountUpList(i), "+", 1)
 			Next
-
 		End If
 
 		If ssh.CountDownList.Count > 0 Then
-
 			For i As Integer = 0 To ssh.CountDownList.Count - 1
-				Dim Val1 As Integer
-
-				'TODO: Remove unsecure IO.Access to file, for there is no DirectoryCheck.
-				If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ssh.CountDownList(i)) Then
-					Val1 = Val(TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ssh.CountDownList(i)))
-				Else
-					Val1 = 0
-				End If
-
-				Val1 -= 1
-
-				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ssh.CountDownList(i), Val1, False)
-
+				ChangeVariable(ssh.CountDownList(i), ssh.CountDownList(i), "-", 1)
 			Next
-
 		End If
-
-		' #DEBUG
 
 	End Sub
 
@@ -19255,14 +18608,12 @@ playLoop:
 		Debug.Print("Val1 = " & Val1)
 		Debug.Print("Val2 = " & Val2)
 
-		If Not IsNumeric(Val1) Then
-			Dim VarCheck As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & Val1
-			If File.Exists(VarCheck) Then Val1 = TxtReadLine(VarCheck)
+		If Not IsNumeric(Val1) AndAlso VariableExists(Val1) Then
+			Val1 = GetVariable(Val1)
 		End If
 
-		If Not IsNumeric(Val2) Then
-			Dim VarCheck As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & Val2
-			If File.Exists(VarCheck) Then Val2 = TxtReadLine(VarCheck)
+		If Not IsNumeric(Val2) AndAlso VariableExists(Val2) Then
+			Val2 = GetVariable(Val2)
 		End If
 
 		If C_Operator = "=" Or C_Operator = "==" Then

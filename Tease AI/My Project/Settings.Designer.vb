@@ -15,7 +15,7 @@ Option Explicit On
 Namespace My
     
     <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "10.0.0.0"),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0"),  _
      Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
     Partial Friend NotInheritable Class MySettings
         Inherits Global.System.Configuration.ApplicationSettingsBase
@@ -2033,20 +2033,20 @@ Namespace My
                 Me("CBUseHonor") = value
             End Set
         End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CBUseName() As Boolean
-			Get
-				Return CType(Me("CBUseName"), Boolean)
-			End Get
-			Set
-				Me("CBUseName") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),  _
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBUseName() As Boolean
+            Get
+                Return CType(Me("CBUseName"),Boolean)
+            End Get
+            Set
+                Me("CBUseName") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
         Public Property CBCapHonor() As Boolean
@@ -5889,6 +5889,18 @@ Namespace My
             End Get
             Set
                 Me("AlwaysNewSlideshow") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property CbChatDisplayWarnings() As Boolean
+            Get
+                Return CType(Me("CbChatDisplayWarnings"),Boolean)
+            End Get
+            Set
+                Me("CbChatDisplayWarnings") = value
             End Set
         End Property
     End Class

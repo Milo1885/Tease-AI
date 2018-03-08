@@ -31,10 +31,18 @@ Imports System.Runtime.Serialization
 <Serializable>
 Public Class SessionState
 	Implements IDisposable
-	'TODO-Next: Clode Cleanup
 
 #Region "------------------------------------------- Data -----------------------------------------------"
 	Const EditorGenericStringList As String = "System.Windows.Forms.Design.ListControlStringCollectionEditor, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+
+	''' <summary> The oldest compatible version of a SessinState. </summary>
+	<NonSerialized> Const MINVERSION As String = "0.56.0.0"
+
+	''' <summary>Contains the Tease-AI Version of this session.</summary>
+	<Category("Program-Info")> <[ReadOnly](True)>
+	<Description("Contains the Tease-AI Version of this session.")>
+	Friend Property Version As String = My.Application.Info.Version.ToString
+
 
 	Public Property DomPersonality As String
 
@@ -69,11 +77,6 @@ Public Class SessionState
     ''' <summary>Gets or sets the length of a taunt group.</summary>
     <Category("Taunts")> <Description("Current line group size.")>
 	Public Property StrokeTauntCount As Integer
-
-    ''' <summary> Duplicate of <see cref="TauntLines"/>.Count </summary>
-    <Category("Taunts")> <Browsable(False)>
-	<Obsolete("Obsolete as of v0.54.5.1. Left for version tolerance.", True)>
-	Public Property TauntTextTotal As Integer
 
     ''' <summary>Gets or sets the current taunt lines. </summary>
     <Category("Taunts")> <Description("Current taunt lines.")>
@@ -263,28 +266,15 @@ Public Class SessionState
 	<Category("Glitter")> <Description("Chance of skipping Contact 3's post.")>
 	Public Property StatusChance3 As Integer
 
-	<Obsolete("Obsolete as of v0.54.4.0 Left for version tolerance.", True)>
-	<Category("Glitter")> <Browsable(False)> Public Property ContactNumber As Integer
-	<Obsolete("Obsolete as of v0.54.4.0 Left for version tolerance.", True)>
-	<Category("Glitter")> <Browsable(False)> Public Property UpdateStage As Integer
-	<Obsolete("Obsolete as of v0.54.4.0 Left for version tolerance.", True)>
-	<Category("Glitter")> <Browsable(False)> Public Property Update1 As Boolean
-	<Obsolete("Obsolete as of v0.54.4.0 Left for version tolerance.", True)>
-	<Category("Glitter")> <Browsable(False)> Public Property Update2 As Boolean
-	<Obsolete("Obsolete as of v0.54.4.0 Left for version tolerance.", True)>
-	<Category("Glitter")> <Browsable(False)> Public Property Update3 As Boolean
-
 #End Region ' GlitterFeeds - APP
 
 
 	<Editor(EditorGenericStringList, GetType(UITypeEditor))>
 	Public Property LocalTagImageList As New List(Of String)
 
+	<Obsolete("Proccessing values belong into the corresponding function.")>
 	Public Property PetName As String
-    ''' <summary>Stores the number of taunt files, to determine taunt size.</summary>
-    <Obsolete("Obsolete as of v0.54.5.1. Left for version tolerance.")>
-	<Category("Taunts")> <Browsable(False)>
-	Public Property ScriptCount As Integer
+
 	<Category("Taunts")> Public Property TempScriptCount As Integer
 
 	Public Property SlideshowTimerTick As Integer
@@ -323,8 +313,6 @@ Public Class SessionState
 
 	Public Property FirstRound As Boolean
 	Public Property StartStrokingCount As Integer = 0
-	<Obsolete("Not used anymore.")>
-	Public TeaseJOI As Boolean
 	Public Property TeaseVideo As Boolean
 
 	<Category("Games - TnA")> <Description("This list contains all boob-images of TNA game.")>
@@ -335,34 +323,6 @@ Public Class SessionState
 	Public Property AssList As New List(Of String)
 	<Category("Games - TnA")> Public Property AssImage As Boolean = False
 	<Category("Games - TnA")> Public Property BoobImage As Boolean = False
-
-#Region "Tags:  all deprecated"
-
-	<Category("Tags")> <Browsable(False)>
-	<Obsolete("Deprecated as of v0.54.5.1. Left for serialization version tolerance.", True)>
-	Public Property FoundTag As String = "Null"
-
-	<Category("Tags")> <Browsable(False)>
-	<Obsolete("Deprecated as of v0.54.5.1. Left for serialization version tolerance.", True)>
-	Public Property TagGarment As String = "NULL"
-
-	<Category("Tags")> <Browsable(False)>
-	<Obsolete("Deprecated as of v0.54.5.1. Left for serialization version tolerance.", True)>
-	Public Property TagUnderwear As String = "NULL"
-
-	<Category("Tags")> <Browsable(False)>
-	<Obsolete("Deprecated as of v0.54.5.1. Left for serialization version tolerance.", True)>
-	Public Property TagTattoo As String = "NULL"
-
-	<Category("Tags")> <Browsable(False)>
-	<Obsolete("Deprecated as of v0.54.5.1. Left for serialization version tolerance.", True)>
-	Public Property TagSexToy As String = "NULL"
-
-	<Category("Tags")> <Browsable(False)>
-	<Obsolete("Deprecated as of v0.54.5.1. Left for serialization version tolerance.", True)>
-	Public Property TagFurniture As String = "NULL"
-
-#End Region ' Tags
 
 	<Category("Bookmark")> Public Property BookmarkModule As Boolean = False
 	<Category("Bookmark")> Public Property BookmarkModuleFile As String
@@ -396,15 +356,11 @@ Public Class SessionState
 	Public Property CustomSlideEnabled As Boolean
 	<Category("Images")> <Description("Stores all images and genre informations for CustomSlideshow")>
 	Public Property CustomSlideshow As New CustomSlideshow
-	<Obsolete("Obsolete as of v0.54.5.1. Left for version tolerance.", True)>
-	<Category("Images")> <Browsable(False)> Public Property DommeImageFound As Boolean
 
 	<Category("Images")>
 	<Obsolete("DommeImageSTR is obsolete. Do not implement in new code.")>
 	Public Property DommeImageSTR As String
 
-	<Obsolete("Obsolete as of v0.54.5.1. Left for version tolerance.", True)>
-	<Category("Images")> <Browsable(False)> Public Property DomPic As String
 	<Obsolete("JustShowedBlogImage is obsolete. Do not implement in new code.")>
 	<Category("Images")> Public Property JustShowedBlogImage As Boolean = False
 	<Category("Images")> Public Property JustShowedSlideshowImage As Boolean = False
@@ -459,24 +415,11 @@ Public Class SessionState
 
 	''' <summary>Gets or sets current stack for @CallReturn( command.</summary>
 	<Category("@CallReturn(")> <Browsable(False)>
-	<OptionalField> Friend CallReturns As New Stack()
-
-	<Category("@CallReturn(")> <Browsable(False)>
-	<Obsolete("Obsololete as of 0.54.6.0. Use CallReturns-Stack instead.")>
-	Public Property ReturnFileText As String
-
-	<Category("@CallReturn(")> <Browsable(False)>
-	<Obsolete("Obsololete as of 0.54.6.0. Use CallReturns-Stack instead.")>
-	Public Property ReturnStrokeTauntVal As String
+	Friend CallReturns As New Stack()
 
 	<Category("@CallReturn(")>
 	<Description("Updated after returning to calling script.")>
 	Public Property ReturnSubState As String
-
-	<Category("@CallReturn(")> <Browsable(False)>
-	<Obsolete("Obsololete as of 0.54.6.0. Use CallReturns-Stack instead.")>
-	Public Property ReturnFlag As Boolean
-
 #End Region
 
 	Public Property SessionEdges As Integer
@@ -501,7 +444,7 @@ Public Class SessionState
 	<Description("True if Interrupts are disabled.")> Public Property DoNotDisturb As Boolean
 
 	Public Property EdgeHoldSeconds As Integer
-	Public EdgeHoldFlag As Boolean
+	Public Property EdgeHoldFlag As Boolean
 
 
 	Public Property InputIcon As Boolean
@@ -540,8 +483,8 @@ Public Class SessionState
 	Public Property HoldTaunts As Boolean = False
 	Public Property LongHold As Boolean = False
 	Public Property ExtremeHold As Boolean = False
-	Public LongTaunts As Boolean
-	Public ExtremeTaunts As Boolean
+	Public Property LongTaunts As Boolean
+	Public Property ExtremeTaunts As Boolean
 
 	<Category("Multiple Edges")> Public Property MultipleEdges As Boolean
 	<Category("Multiple Edges")> Public Property MultipleEdgesAmount As Integer
@@ -550,62 +493,17 @@ Public Class SessionState
 	<Category("Multiple Edges")> Public Property MultipleEdgesMetronome As String = ""
 
 #Region "Modes"
-	Public Property Modes As New Dictionary(Of String, Mode)(System.StringComparer.OrdinalIgnoreCase)
-	Public Property edgeMode As New Mode()
-	Public Property cameMode As New Mode()
-	Public Property ruinMode As New Mode()
-	Public Property yesMode As New Mode()
-	Public Property noMode As New Mode()
-
-	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
-	Public Property EdgeGoto As Boolean = False
-	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
-	Public Property EdgeMessage As Boolean = False
-	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
-	Public Property EdgeVideo As Boolean = False
-	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
-	Public Property EdgeMessageText As String
-	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
-	Public Property EdgeGotoLine As String
-	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
-	Public Property YesGoto As Boolean = False
-	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
-	Public Property YesVideo As Boolean = False
-	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
-	Public Property NoGoto As Boolean = False
-	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
-	Public Property NoVideo_Mode As Boolean = False
-	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
-	Public Property CameGoto As Boolean = False
-	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
-	Public Property CameVideo As Boolean = False
-	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
-	Public Property CameMessage As Boolean = False
-	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
-	Public Property CameMessageText As String
-	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
-	Public Property RuinedGoto As Boolean = False
-	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
-	Public Property RuinedVideo As Boolean = False
-	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
-	Public Property RuinedMessage As Boolean = False
-	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
-	Public Property RuinedMessageText As String
-	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
-	Public Property YesGotoLine As String
-	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
-	Public Property NoGotoLine As String
-	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
-	Public Property CameGotoLine As String
-	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
-	Public Property RuinedGotoLine As String
+	<Category("Modes")> Public Property Modes As New Dictionary(Of String, Mode)(System.StringComparer.OrdinalIgnoreCase)
+	<Category("Modes")> Public Property edgeMode As New Mode()
+	<Category("Modes")> Public Property cameMode As New Mode()
+	<Category("Modes")> Public Property ruinMode As New Mode()
+	<Category("Modes")> Public Property yesMode As New Mode()
+	<Category("Modes")> Public Property noMode As New Mode()
 #End Region
 
 	Public Property SecondSession As Boolean
 
 	Public Property checkAnswers As subAnswers
-	Public Property addAnswerList As Boolean
-	Public Property addResponseList As Boolean
 
     ''' <summary>
     ''' Set to true if the sub is on the edge and the domme had decided to not to stop stroking.
@@ -626,8 +524,6 @@ Public Class SessionState
 	Public Property EndSession As Boolean
 
 	Public Property VideoGenre As String
-
-	Public Property KeywordError As String
 
 
 #Region "----------------------------------- Only for Serialization -------------------------------------"
@@ -827,57 +723,6 @@ Public Class SessionState
 		If Files Is Nothing Then Files = New FileClass(Me)
 		If Folders Is Nothing Then Folders = New FoldersClass(Me)
 
-        ' ########## Load @CallReturn( from old structure. ############
-        ' DataStructure has changed in c1626a2e5ea4f85a642ec95cdcc2eb7160c1f148
-        If CallReturns Is Nothing Then CallReturns = New Stack()
-		If ReturnFlag Then
-			Dim oldReturn = New StackedCallReturn(Me)
-			oldReturn.FilePath = Me.ReturnFileText
-			oldReturn.ReturnState = Me.ReturnSubState
-			oldReturn.Line = CInt(Me.ReturnStrokeTauntVal)
-			CallReturns.Push(oldReturn)
-		End If
-
-		If edgeMode Is Nothing Then
-			edgeMode = New Mode()
-			edgeMode.GotoMode = EdgeGoto
-			edgeMode.GotoLine = EdgeGotoLine
-			edgeMode.VideoMode = EdgeVideo
-			edgeMode.MessageMode = EdgeMessage
-			edgeMode.MessageText = EdgeMessageText
-		End If
-
-		If cameMode Is Nothing Then
-			cameMode = New Mode()
-			cameMode.GotoMode = CameGoto
-			cameMode.GotoLine = CameGotoLine
-			cameMode.VideoMode = CameVideo
-			cameMode.MessageMode = CameMessage
-			cameMode.MessageText = CameMessageText
-		End If
-
-		If ruinMode Is Nothing Then
-			ruinMode = New Mode()
-			ruinMode.GotoMode = RuinedGoto
-			ruinMode.GotoLine = RuinedGotoLine
-			ruinMode.VideoMode = RuinedVideo
-			ruinMode.MessageMode = RuinedMessage
-			ruinMode.MessageText = RuinedMessageText
-		End If
-
-		If yesMode Is Nothing Then
-			yesMode = New Mode()
-			yesMode.GotoMode = YesGoto
-			yesMode.GotoLine = YesGotoLine
-			yesMode.VideoMode = YesVideo
-		End If
-
-		If noMode Is Nothing Then
-			noMode = New Mode()
-			noMode.GotoMode = NoGoto
-			noMode.GotoLine = NoGotoLine
-			noMode.VideoMode = NoVideo
-		End If
 		' Unsuppress obsolete warnings 
 		'#Enable Warning BC40000 - I can't compile this in VS2010. Changed to the three lines below as per Notay's advice - 1885
 
@@ -1040,9 +885,9 @@ Public Class SessionState
             Dim Act As Action(Of Form1) = Sub(s1) Activate(s1)
 			activateForm.Invoke(Act)
 		End If
-        ' Called from Controls UI-Thread -> Execute Code.
+		' Called from Controls UI-Thread -> Execute Code.
 
-        ActivationForm = activateForm
+		ActivationForm = activateForm
 
 		With activateForm
             '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
@@ -1290,6 +1135,15 @@ Public Class SessionState
 
 
 			Dim tmpState As SessionState = DirectCast(BinaryDeserialize(filepath), SessionState)
+
+
+			If tmpState.Version Is Nothing Then
+				Throw New SerializationException("The session you are trying to open has been created with an unknown version of Tease-AI.")
+			ElseIf New Version(tmpState.Version) < New Version(MINVERSION) Then
+				Throw New SerializationException("The session you are trying to open has been created with version " & Version.ToString &
+												 ". This version of Tease-AI is only capable to continue sessions from version " & MINVERSION & " or above.")
+			End If
+
 
 			If setActive Then tmpState.Activate(ActivationForm)
 		Catch ex As Exception
