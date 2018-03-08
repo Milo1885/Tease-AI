@@ -8,6 +8,7 @@ Public Enum ContactType
 	Contact1
 	Contact2
 	Contact3
+	Random
 End Enum
 
 <Serializable>
@@ -15,6 +16,7 @@ Public Class ContactData
 
 	Public Property Contact As ContactType = ContactType.Nothing
 
+	Private Property tempBaseFolder As String = ""
 	Public Property ImageFolder As String = ""
 
 	Public Property ImageList As New List(Of String)
@@ -31,12 +33,39 @@ Public Class ContactData
 				Return My.Settings.Glitter2
 			ElseIf Contact = ContactType.Contact3 Then
 				Return My.Settings.Glitter3
+			ElseIf Contact = ContactType.Random Then
+				Return ImageFolder.Substring(ImageFolder.LastIndexOf("\") + 1).Trim
 			Else
 				Return My.Settings.DomName
 			End If
 		End Get
 	End Property
 
+	Public ReadOnly Property TypeHonorific As String
+		Get
+			If Contact = ContactType.Contact1 Then
+				Return My.Settings.G1Honorific
+			ElseIf Contact = ContactType.Contact2 Then
+				Return My.Settings.G2Honorific
+			ElseIf Contact = ContactType.Contact3 Then
+				Return My.Settings.G3Honorific
+			ElseIf Contact = ContactType.Random Then
+				Return My.Settings.RandomHonorific
+			Else
+				Return My.Settings.SubHonorific
+			End If
+		End Get
+	End Property
+
+	Public ReadOnly Property ShortName As String
+		Get
+			If Contact = ContactType.Domme Then
+				Return My.Settings.GlitterSN
+			Else
+				Return TypeName
+			End If
+		End Get
+	End Property
 	Public ReadOnly Property TypeColorHtml As String
 		Get
 			If Contact = ContactType.Contact1 Then
@@ -51,13 +80,13 @@ Public Class ContactData
 		End Get
 	End Property
 
-	Public ReadOnly Property TypeFont As String  '= FrmSettings.FontComboBoxD.Text
+	Public ReadOnly Property TypeFont As String
 		Get
 			Return My.Settings.DomFont
 		End Get
 	End Property
 
-	Public ReadOnly Property TypeSize As Integer '= FrmSettings.NBFontSizeD.Value
+	Public ReadOnly Property TypeSize As Integer
 		Get
 			Return My.Settings.DomFontSize
 		End Get
@@ -110,6 +139,7 @@ Public Class ContactData
 		ElseIf tp = ContactType.Contact1 Then : text = "Contact 1"
 		ElseIf tp = ContactType.Contact2 Then : text = "Contact 2"
 		ElseIf tp = ContactType.Contact3 Then : text = "Contact 3"
+		ElseIf tp = ContactType.Random Then : text = "Random"
 		End If
 
 		val = FolderCheck(text, val, def)
@@ -216,20 +246,29 @@ checkFolder:
 		End Try
 	End Function
 
-	Friend Function GetRandom(tp As ContactType) As List(Of String)
+	Friend Function GetRandom(tp As ContactType, newFolder As Boolean) As List(Of String)
+		'no need to check again since you already checked when creating the contact
 		If Check_ImageDir(tp) Then
-			Return LoadRandom(getCurrentBaseFolder(tp))
+			Return LoadRandom(getCurrentBaseFolder(tp), newFolder)
 		Else
 			Return New List(Of String)
 		End If
 	End Function
 
-	Function LoadRandom(ByVal baseDirectory As String) As List(Of String)
+	Function LoadRandom(ByVal baseDirectory As String, newFolder As Boolean) As List(Of String)
 		If Directory.Exists(baseDirectory) = False Then _
 			Throw New DirectoryNotFoundException("The given slideshow base diretory """ & baseDirectory & """ was not found.")
+	Dim currPath As String
+
+		If Contact = ContactType.Random And Not newFolder Then
+			currPath = myDirectory.GetDirectories(baseDirectory).ElementAt(Form1.ssh.randomizer.Next(0, myDirectory.GetDirectories(baseDirectory).Count))
+			tempBaseFolder = currPath
+		Else
+			currPath = baseDirectory
+		End If
 
 		' Read all subdirectories in base folder.
-		Dim subDirs As List(Of String) = myDirectory.GetDirectories(baseDirectory).ToList
+		Dim subDirs As List(Of String) = myDirectory.GetDirectories(currPath).ToList
 		Dim exclude As New List(Of String)
 nextSubDir:
 		' Check if there are folders left.
@@ -239,11 +278,11 @@ nextSubDir:
 			exclude.Remove(first)
 			subDirs.Add(first)
 		ElseIf subDirs.Count <= 0 And exclude.Count = 0 Then
-			Throw New DirectoryNotFoundException("There are no subdirectories conataining images in """ & baseDirectory & """.")
+			Throw New DirectoryNotFoundException("There are no subdirectories conataining images in """ & currPath & """.")
 		End If
 
 		' Get a random folder in base directory.
-		Dim rndFolder As String = subDirs(New Random().Next(0, subDirs.Count))
+		Dim rndFolder As String = subDirs(Form1.ssh.randomizer.Next(0, subDirs.Count))
 
 		If RecentFolders.Contains(rndFolder) Then
 			exclude.Add(rndFolder)
@@ -267,6 +306,7 @@ nextSubDir:
 		Else
 			' Imagefiles found -> Everything fine and done
 			RecentFolders.Add(rndFolder)
+			ImageFolder = currPath
 			Return imageFiles
 		End If
 
@@ -284,6 +324,8 @@ nextSubDir:
 				Return "Contact2ImageDir"
 			Case ContactType.Contact3
 				Return "Contact3ImageDir"
+			Case ContactType.Random
+				Return "RandomImageDir"
 			Case Else
 				Throw New NotImplementedException
 		End Select
@@ -294,7 +336,11 @@ nextSubDir:
 	End Function
 
 	Function getCurrentBaseFolder(ByVal tp As ContactType) As String
-		Return My.Settings(getMySettingsMember(tp))
+		If tempBaseFolder <> "" Then
+			Return tempBaseFolder
+		Else
+			Return My.Settings(getMySettingsMember(tp))
+		End If
 	End Function
 
 	Sub SetBaseFolder(ByVal tp As ContactType, ByVal path As String)
@@ -304,16 +350,22 @@ nextSubDir:
 #End Region
 
 
-	Friend Sub LoadNew()
-		Me.ImageList = GetRandom(Me.Contact)
+	Friend Sub LoadNew(newFolder As Boolean)
+		Me.ImageList = GetRandom(Me.Contact, newFolder)
 		Me.Index = 0
+		ImageTagCache.Clear()
+		LastTaggedImage = ""
 	End Sub
 
 	Sub CheckInit()
-		If Me.Index = -1 And Me.Contact <> ContactType.Nothing Then Me.LoadNew()
+		If Me.Index = -1 And Me.Contact <> ContactType.Nothing Then Me.LoadNew(False)
+		LastTaggedImage = ""
 	End Sub
 
 #Region "Navigation"
+
+	<NonSerialized>
+	Dim LastTaggedImage As String
 
 	Friend Function CurrentImage() As String
 		If ImageList.Count > 0 And Index > -1 Then
@@ -342,7 +394,7 @@ nextSubDir:
 			Return String.Empty
 		ElseIf Index >= ImageList.Count - 1 AndAlso My.Settings.CBNewSlideshow Then
 			' End of Slideshow load new one
-			LoadNew()
+			LoadNew(False)
 		ElseIf Index >= ImageList.Count - 1 Then
 			' End of Slideshow return last image
 			Index = ImageList.Count - 1
@@ -359,14 +411,14 @@ nextSubDir:
 
 		If My.Settings.CBSlideshowRandom Then
 			' get Random Image
-			Index = New Random().Next(0, ImageList.Count)
-		ElseIf My.Settings.NextImageChance < New Random().Next(0, 101)
+			Index = Form1.ssh.randomizer.Next(0, ImageList.Count)
+		ElseIf My.Settings.NextImageChance < Form1.ssh.randomizer.Next(0, 101) Then
 			' Randomly backwards
 			Index -= 1
 			If Index < 0 Then Index = 0
 		ElseIf Index >= ImageList.Count - 1 AndAlso My.Settings.CBNewSlideshow Then
 			' End of Slideshow start new
-			LoadNew()
+			LoadNew(False)
 		ElseIf Index >= ImageList.Count - 1 Then
 			' End of Slideshow return last
 			Index = ImageList.Count - 1
@@ -408,9 +460,7 @@ nextSubDir:
 
 #Region "Tagged Image"
 
-	''' <summary>
-	''' Used for caching tagged image results.
-	''' </summary>
+	''' <summary>Used to cache tagged image results. </summary>
 	Private Class ImageTagCacheItem
 		Friend TagImageList As New List(Of String)
 		Friend LastPicked As String = ""
@@ -423,10 +473,11 @@ nextSubDir:
 	''' <summary>
 	''' Searches for a tagged with the given Tags.
 	''' </summary>
-	''' <param name="ImageTags">The Tags, to search for.</param>
+	''' <param name="imageTags">The Tags, to search for.</param>
+	''' <param name="rememberResult">If set to true the result is written to cache.</param>
 	''' <returns>Returns a String representing the ImageLocation for the found image. If none was found it will 
 	''' return an empty string.</returns>
-	Public Function GetTaggedImage(ByVal ImageTags As String, Optional ByVal RememberResult As Boolean = False) As String
+	Public Function GetTaggedImage(ByVal imageTags As String, Optional ByVal rememberResult As Boolean = False) As String
 		GetTaggedImage = ""
 #If TRACE Then
 		Dim Ts As New TraceSwitch("GetTaggedImage", "")
@@ -440,12 +491,12 @@ nextSubDir:
 			If Ts.TraceVerbose Then
 				Trace.WriteLine("================ GetTaggedImage ================")
 				Trace.Indent()
-				Trace.WriteLine(String.Format("Get image for Tag ""{0}""", ImageTags))
+				Trace.WriteLine(String.Format("Get image for Tag ""{0}""", imageTags))
 			ElseIf Ts.Level = TraceLevel.Info Then
-				Trace.Write(String.Format("Get image for Tag ""{0}""", ImageTags))
+				Trace.Write(String.Format("Get image for Tag ""{0}""", imageTags))
 			End If
 #End If
-			Dim ImagePaths As ImageTagCacheItem = GetImageListByTag(ImageTags)
+			Dim ImagePaths As ImageTagCacheItem = GetImageListByTag(imageTags)
 
 tryNextImage:
 			'===================================================================
@@ -453,29 +504,36 @@ tryNextImage:
 			Dim CurrImgIndex As Integer = ImageList.IndexOf(CurrentImage)
 			Dim rtnPath As String = ""
 			Dim CurrDist As Integer = 999999
+			'this function was constantly giving the same pic over and over to me
+			'i just changed to give a random image with the required tag.
+			'now it correctly changes the pic and avoid the repetition over and over
 
-			For Each str As String In ImagePaths.TagImageList
-				Dim IndexInList As Integer = ImageList.IndexOf(str)
-				' Calculate the distance of ListIndex from the FoundFile to CurrentImage
-				Dim FileDist As Integer = IndexInList - CurrImgIndex
-				' Convert negative values to positive by multipling (-) x (-) = (+) 
-				If FileDist < 0 Then FileDist *= -1
-				' Check if the distance is bigger than the previous one
-				If FileDist <= CurrDist Then
-					' Yes: We will set this file and save its distance
+			'For Each str As String In ImagePaths.TagImageList
+			'Dim IndexInList As Integer = ImageList.IndexOf(str)
+			' Calculate the distance of ListIndex from the FoundFile to CurrentImage
+			'Dim FileDist As Integer = IndexInList - CurrImgIndex
+			' Convert negative values to positive by multipling (-) x (-) = (+) 
+			'If FileDist < 0 Then FileDist *= -1
+			' Check if the distance is bigger than the previous one
+			'If FileDist <= CurrDist Then
+			' Yes: We will set this file and save its distance
 SetForwardImage:
-					rtnPath = str
-					CurrDist = FileDist
-				ElseIf ImagePaths.LastPicked = rtnPath AndAlso New Random().Next(0, 101) > 60 Then
-					' The last Picked image is the same as last time.
-					GoTo SetForwardImage
-				Else
-					' As the list is in the Same order as the Slideshow-List,
-					' we can stop searching, when the value is getting bigger.
-					Exit For
-				End If
-			Next
-
+			'		rtnPath = str
+			'CurrDist = FileDist
+			'ElseIf ImagePaths.LastPicked = rtnPath AndAlso New Random().Next(0, 101) > 60 Then
+			' The last Picked image is the same as last time.
+			'GoTo SetForwardImage
+			'Else
+			' As the list is in the Same order as the Slideshow-List,
+			' we can stop searching, when the value is getting bigger.
+			'Exit For
+			'End If
+			'Next
+			If ImagePaths.TagImageList.Count <> 0 Then
+				rtnPath = ImagePaths.TagImageList.ElementAt(Form1.ssh.randomizer.Next(0, ImagePaths.TagImageList.Count))
+			Else
+				rtnPath = ImagePaths.LastPicked
+			End If
 			'===================================================================
 			'								Check result
 			If String.IsNullOrWhiteSpace(rtnPath) Then
@@ -486,14 +544,15 @@ SetForwardImage:
 #If TRACE Then
 				If Ts.TraceVerbose Then Trace.WriteLine(String.Format("Image not found - remove from cache: ""{0}""", rtnPath))
 #End If
-				ImageTagCache(ImageTags).TagImageList.Remove(rtnPath)
+				ImageTagCache(imageTags).TagImageList.Remove(rtnPath)
 				GoTo tryNextImage
 			Else
 				' ################ image found ##################
 #If TRACE Then
 				If Ts.TraceVerbose Then Trace.WriteLine("Distance of image = " & CurrDist)
 #End If
-				If RememberResult Then ImagePaths.LastPicked = rtnPath
+				If rememberResult Then ImagePaths.LastPicked = rtnPath
+				LastTaggedImage = rtnPath
 				Return rtnPath
 
 			End If
@@ -517,12 +576,20 @@ SetForwardImage:
 		End Try
 	End Function
 
-	Private Function GetImageListByTag(ByVal ImageTags As String) As ImageTagCacheItem
+	''' <summary>Returns a list of filepaths for the given tags.</summary>
+	''' <param name="imageTags">The tags to retrieve the list.</param>
+	''' <return>Returns a list of files for the given tags.</return>
+	Private Function GetImageListByTag(ByVal imageTags As String) As ImageTagCacheItem
+		' Set default value to return.
+		GetImageListByTag = New ImageTagCacheItem()
+
 		Try
 #If TRACE Then
 			Dim Ts As New TraceSwitch("GetTaggedImage", "")
 			Ts.Level = TraceLevel.Verbose
 #End If
+
+			If String.IsNullOrWhiteSpace(CurrentImage) Then Exit Function
 
 			Dim TargetFolder As String = Path.GetDirectoryName(CurrentImage) & Path.DirectorySeparatorChar
 			Dim TagListFile As String = TargetFolder & "ImageTags.txt"
@@ -531,21 +598,23 @@ redo:
 			If Not File.Exists(TagListFile) Then
 				'===================================================================
 				'							No Tag File
-				Return New ImageTagCacheItem
-			ElseIf ImageTagCache.Keys.Contains(ImageTags) Then
+				Exit Function
+			ElseIf ImageTagCache.Keys.Contains(imageTags) Then
 				'===================================================================
 				'						Previous cached result
+
 #If TRACE Then
 				If Ts.TraceVerbose Then Trace.WriteLine("Loading DommeTags from Cache.")
 #End If
-				Dim rtnItem As ImageTagCacheItem = ImageTagCache(ImageTags)
+				Dim rtnItem As ImageTagCacheItem = ImageTagCache(imageTags)
 
 				If rtnItem.TagImageList.Count = 0 Then
 					' ´############## List was empty ################
-					Return New ImageTagCacheItem
+
+					Exit Function
 				ElseIf Not rtnItem.TagImageList(0).StartsWith(TargetFolder)
 					' ################ Wrong folder #################
-					ImageTagCache.Remove(ImageTags)
+					ImageTagCache.Remove(imageTags)
 					GoTo redo
 				Else
 					' ################# All fine ####################
@@ -563,10 +632,10 @@ redo:
 				Dim ValidExt As String() = Split(".jpg|.jpeg|.bmp|.png|.gif", "|")
 
 				' Replace case insensitive "not", to safely assign tags to their lists
-				ImageTags = Regex.Replace(ImageTags, "\b(not)", "--", RegexOptions.IgnoreCase)
+				imageTags = Regex.Replace(imageTags, "\b(not)", "--", RegexOptions.IgnoreCase)
 
 				' Seperate Tags in given string.
-				Dim S As String() = ImageTags.Split({",", " "}, StringSplitOptions.RemoveEmptyEntries)
+				Dim S As String() = imageTags.Split({",", " "}, StringSplitOptions.RemoveEmptyEntries)
 
 				' Assign tags to lists.
 				S.ToList.ForEach(Sub(x)
@@ -609,7 +678,7 @@ redo:
 
 				' Add new item to cache and exit.
 				GetImageListByTag = New ImageTagCacheItem() With {.TagImageList = PathList}
-				ImageTagCache.Add(ImageTags, GetImageListByTag)
+				ImageTagCache.Add(imageTags, GetImageListByTag)
 				Return GetImageListByTag
 			End If
 		Catch ex As Exception
@@ -617,8 +686,62 @@ redo:
 		End Try
 	End Function
 
-#End Region
+#End Region ' Tagged images
 
-#End Region
+#End Region ' Image navigation
+
+
+	Friend Function ApplyTextedTags(ByVal modifyString As String) As String
+		ApplyTextedTags = modifyString
+		Try
+			' ################### Get displayed Image #####################
+			Dim DisplayedImage As String
+
+			If String.IsNullOrWhiteSpace(LastTaggedImage) Then
+				DisplayedImage = CurrentImage()
+			Else
+				DisplayedImage = LastTaggedImage
+			End If
+
+			' #################### Get line for image #####################
+			Dim TagFilePath As String = Path.GetDirectoryName(DisplayedImage) & "\ImageTags.txt"
+			Dim FileName As String = Path.GetFileName(DisplayedImage)
+
+			If Not File.Exists(TagFilePath) Then Exit Function
+		
+			' Read tagfile and find line for displayed image.
+			Dim Line As String = Txt2List(TagFilePath).Find(Function(x) x.StartsWith(FileName, StringComparison.OrdinalIgnoreCase))
+			If Line Is Nothing Then Exit Function
+
+			' ################### Create Regex Pattern ####################
+			'
+			' Named Group <ident> is the identifier for replacement. Joined from StringArray.
+			'		TagGarment is used twice. Therefore it searches for "TagGarment" not followed by "Covering".
+			'
+			' Named group <value> is the value to replace the identifier with. 	Allows all chars except whitespaces.
+			Dim Pattern As String = String.Format("(?<ident>{0})(?<value>[^\s]+)",
+												  Join({"TagGarment(?!Covering)",
+														"TagUnderwear",
+														"TagTattoo",
+														"TagSexToy",
+														"TagFurniture"}, "|"))
+
+			' ################ Find and replace matches ###################
+			Dim re As Regex = New Regex(Pattern, RegexOptions.IgnoreCase)
+			Dim mc As MatchCollection = re.Matches(Line)
+
+			For Each Tag As Match In mc
+				ApplyTextedTags = ApplyTextedTags.Replace("#" & Tag.Groups("ident").Value,
+														  Tag.Groups("value").Value.Replace("-", " "))
+			Next
+
+			' Replace remaining tag-keywords to mask missing tags.
+			ApplyTextedTags = ApplyTextedTags.Replace("#Tag", "")
+
+		Catch ex As Exception
+			Log.WriteError("Exception on ApplyTextedTags(String)", ex, "ApplyTextedTags(String)")
+		End Try
+
+	End Function
 
 End Class

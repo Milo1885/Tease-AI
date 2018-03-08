@@ -1,20 +1,374 @@
-# Tease-AI
+﻿# Tease-AI
 Tease AI is adult-oriented software that aims to create an interactive tease and denial experience by emulating an online chat session with a domme. 
 
-# Todo:
-
-Stefaf: Integration of Class myDirectory: Status ongoing.
-	Testrun to sort Lists like Win-Explorer: initialized in v0.54.5.1
+# Changelog - Patch 56.0.0
 	
-# Changelog - Patch 54.5.1
+* Commands: 
+	* @SystemMessage: File and directory paths in SystemMessages are now links.
+	* @TagXXX Instructions are now executed if there is no @ShowTaggedImage present in the given Script Line. Since both are marked as obsolete, a warning will appear in the chat window.
+	
+* Command Filters:
+
+
+* Bugfixes:	
+	* @DayOfWeek: Fixed issue where @DayOfWeek was a day off. Added the possibility to use numbers as parameter, since localized day strings are useless for script exchange. The first day of week is Monday, if you use a number as parameter.
+	* Added MultipleEdges to StopEverything() since it caused a script freeze when @InterruptLongEdge was called. It was unresolvable using the "CBT-Trick".
+	* Opening the WebBrowser context menu during an update won't cause a script freeze any more. It will display a message and the script will continue as normal.
+	* Fixes an Argument Exception bug, if the Variable SYS_WakeUp is not present. 
+	* #DateDiffernce displays now the correct amount of weeks, if the interval is set to "Week".
+	* @ChangeVar will no longer throw an exception if you try to divide by zero. In that case it will divide by 1 and display a warning.
+	* If reading a date from a variable fails, it will no longer throw an exception.
+	* Fixes issue if TTS is activated and 2 or more vocab errors appeared within a single line. In that case TTS did ignore only the last error. Now all HTML-Tags within a line are ignored.
+	
+* Miscellaneous:
+
+	* Reworked Glitter app to use proper html and CSS. It is now possible to reference relative image paths. If a feed is running a script file given in @Glitter(ScriptName) is executed after the currently running script. The number of queued scripts is not limited. It is now possible to execute a specific script using the debug session window.
+	* Shrinked down ResponseClean(String) to avoid code redundancy. Response lines in the [All]-Section are now unavailable in start scripts and after the orgasm decision (!) if the last script is running. This feature was intended for Patch 48/49 (0b1ecab330188f5c8cecbe22e536f0827b4127bd) but never worked.
+	* Added MultipleEdges to StopEverything() since it caused a script freeze when @InterruptLongEdge was called. It was unresolvable using the "CBT-Trick".
+	* Simplified code and usage of custom Lazy Sub buttons.
+	* Reworked chat window html code:
+		* It uses now valid html and CSS. 
+		* Every available information is written to the chat-window (timestamps, names, exceptions). To hide or show specific elements (i.e.:Domme is typing...) the page style sheet is generated according to the user settings on every change. This allows us to alter color, style and visibility of previous messages. The webtease mode and Risky Pick are handled different. Here we get the last element in id "Chat" and display it.
+		* It is now possible to customize the style of the chat using a customized CSS-file. Hint: there will be changes in the future to enhance the chat functionality! So don't rush things and wait some time before customizing. ;-)
+		* TAI is able to display Warnings as well. The visibility of Warning and Error Messages can be turned off using the settings menu.
+		* All file paths in Exceptions, Warnings, SystemMessages and the "@" input messages are now links. If you click a link it will open it using your systems default program.
+	* Overhauled the fresh implemented "Write exceptions to chat"-feature. Now every exception written to log, is also written to the chat window. It is no longer depending on a running session and called without IllegalCrossThreadCalls. If an exception occurs it is written to the chat.
+	* All Variables related Code has been rewritten to use the same internal functions. 
+		* It includes a directory check, and the folder will be created if necessary. 
+		* If parsing a date failed it will no longer cause an exception. You will get a wrong result, but without an exception.
+	* Directories are now sorted logically.
+	* The splash screen is now set as Splash screen and updated thread safe.
+	* Redundant Code for PetName TextBoxes merged together.
+	* The Terms and Conditions Form is now used as dialog instead of opening it and waiting for an action to happen.
+	* TxtReadLine(string) is now internally using Txt2List(string) in order to use the TextFileChache. This should improve response time.
+	* The Function DomResponse() was checking for system response keyfiles and the vocabulary keyphrases more often as necessary.  This way it took forever to process if there was a task or CBT running and you entered a simple "Yes". The same slow process was going on, if you entered text that didn't trigger something. 
+	* Reworked PoundClean(String):
+		* Changed Signature to PoundClean(String, Option, Integer)
+		* Added a nesting restriction when processing vocabulary keyphrases. The maximum allowed nesting depth when processing vocabularies is 5. 
+		* Removed variables in the session state to control processing. 
+		* Functional Code is now within a Try-Catch-Block.
+		* The function will print errors and warnings to the chat window.
+	* Clean up of Class Session State. Stored Sessions from previous versions are no longer compatible. Now it has a Version Check included, to prevent  opening a session from a previous version. 
+	* Added the possibility to print CSS compliant inline errors and warnings to the chat.
+			
+	
+# Changelog - Patch 55.3.0
+
+	Not all Changes have been tracked.	
+
+* Added Features:
+
+    * Keywords (such as Vocabulary files and System Keywords) are now usable options in Multiple Choice Branch brackets (dariobrun)
+	
+	* Added "Clear" modifier for @CallReturn(). @CallReturn(Clear) will cancel any remaining CallReturns. Once the script containing @CallReturn(Clear) ends, the program will exit back to the first script that launched the stack (dariobrun)
+	
+* Commands: 
+
+    * @SetMood() - Sets the domme's mood to the specified relative or absolute value. (dariobrun)
+
+        * @SetMood(Best) - Sets the domme's mood to the maximum value
+        * @SetMood(Good) - Sets the domme's mood to a random value in her "good mood" range
+        * @SetMood(Neutral) - Sets the domme's mood to a random value in her "neutral mood" range
+        * @SetMood(Bad) - Sets the domme's mood to a random value in her "bad mood" range
+        * @SetMood(Worst) - Sets the domme's mood to the minimum value
+
+    You can also set the domme's mood to a number if you would like to use your own absolute mood system for your Personality. For example, @SetMood(1), @SetMood(5), @SetMood(10), etc.
+
+	* @DommeTagAny() - Will choose a domme image having at least one of the specified tags (dariobrun)
+
+* Command Filters:
+
+    * @ControlFlag() - If the Flag specified in @ControlFlag() exists, then ONLY those lines will be viable when filtering lines from scripts. Take this StrokeTaunts_1 script for example:
+	
+	Keep stroking
+	Keep going
+	I want you to suffer
+	@ControlFlag(Contact1Present) #Contact1 loves watching you stroke
+	@ControlFlag(ImageOnlyRound) @ShowBlogImage
+	
+	Compare to the following cases:
+	Only Contact1Present flag exists - The only viable line is "#Contact1 loves watching you stroke"
+	Only ImageOnlyRound flag exists - The only viable line is "@ShowBlogImage"
+    Contact1Present and ImageOnlyRound both exist - The only viable lines are "#Contact1 loves watching you stroke" and "@ShowBlogImage"
+    Neither Contact1Present or ImageOnlyRound exist - The only viable lines are "Keep stroking", "Keep going" and "I want you to suffer"   
+
+    * @Mood() - Will only display the line if the domme's mood matches the specified value (dariobrun)
+	 
+	    * @Mood(Best) - Will only display the line if the domme's mood is at the maximum value
+        * @Mood(Good) - Will only display the line if the domme's mood is within her "good mood" range
+        * @Mood(Neutral) - Will only display the line if the domme's mood is within her "neutral mood" range
+        * @Mood(Bad) - Will only display the line if the domme's mood is within her "bad mood" range
+        * @Mood(Worst) - Will only display the line if the domme's mood is at the minimum value
+		
+		You can also use numbers to check the domme's mood to create your own absolute mood system for your Personality. For example, @Mood(1), @Mood(4), @Mood(10), etc
+	
+	
+* Bugfixes:
+
+    * @DifferentAnswer lines were causing scripts to freeze\reset
+	* #Var[] should now work correctly no matter how it is used or how many times per line it is used. For example, @SetVar[C]=[#Random(#Var[A], #Var[B])]
+	* The session would end if a CallReturn ended after being called from an End script (dariobrun)
+    * Response Files weren't being read correctly if there were spaces after the brackets of the various section blocks (dariobrun)	
+	* The process that @Goto() Commands used to find similar Goto Labels when an exact match wasn't found didn't account for differences in case  
+	* WakeUp time was not saved until manually set by the user, causing @Morning, @Afternoon and @Night Command Filters to not work correctly
+    * @Wait() Commands will now be processed correctly on a @NullResponse line while RapidCode is active	
+	* Edge phrases weren't being recognized if they contained apostrophes
+	* @ChangeVar[] didn't process negative numbers correctly. @ChangeVar[a]=[a]+[#random(-1,3)] for example, will now correctly substract 1 if -1 is rolled in the random (previously it was adding it) (dariobrun)
+	* Videos were not stretched to fit the window in certain situations (dariobrun)
+	* #DomHairLength now outputs correctly
+	* Custom1 and Custom2 glitter settings now save correctly
+	
+* Miscellaneous:
+
+    * Improved the @Goto() safety net: If there are multiple CallReturns active and it doesn't find a valid goto line, instead of interrupting everything, the program will send you back to the previous CallReturn in the stack (dariobrun)
+    * Multiple #Random() and @Chance() instances can now be used in the same line (dariobrun)
+    * @PlayVideo[] can now use the length parameter too, as @PlayVideo(): @PlayVideo[location\*, 2 minutes) (dariobrun)
+	* Experimental: Changed WMP docking style to see if it would help those who reported the video displaying in a very small area on the side of the screen
+	* Removed Contact timers for entering and leaving the room to avoid issues when RapidCode is active (1885 & dariobrun)
+	* Returned Statistical information to the Sub Settings menu (dariobrun)
+   	
+	
+# Changelog - Patch 54.9.0
+
+* Added Features:
+
+	* @PlayVideo() can now be used to specify video genres. For example:
+
+    @PlayVideo(Lesbian) - Plays a lesbian video
+    @PlayVideo(Blowjob, 30) - Plays 30 seconds of a blowjob video
+    @PlayVideo(10, Softcore) - Plays 10 seconds of a softcore video
+
+    The following genres may be specified: (Case doesn't matter, but @PlayVideo() only supports 1 genre to be specified)
+
+    Hardcore
+	Softcore
+	Lesbian
+	Blowjob
+	Femdom
+	Femsub
+	JOI
+	CH
+	General
+	Hardcore Domme
+	Softcore Domme
+	Lesbian Domme
+	Blowjob Domme
+	Femdom Domme
+	Femsub Domme
+	JOI Domme
+	CH Domme
+	General Domme
+	
+* Bugfixes:
+
+    * Create URL Files was not working
+	* Multiple Choice Branch parsing issues fixed (dariobrun)
+	* Multiple Choice Branches were parsing @DifferentAnswer\@AcceptAnswer lines for keywords
+	* The program tried to process LikedImageURLs.txt and DislikedImageURLs.txt without first making sure they existed (dariobrun)	
+    * Keyword Error messages were causing the program to get temporarily stuck in a loop (dariobrun)
+	* Possible issues caused by duplicate #Keywords in a single line (dariobrun) 
+	* Recent Slideshows weren't being saved in the drop-down box after being manually entered
+    * TTS was speaking the html color codes for Keyword Error messages
+    * Fixed problems that would occur when @FollowUp() contained spaces at the end of a line (dariobrun)
+	
+* Miscellaneous:
+
+    * Filtering process optimized to work in one pass instead of three (dariobrun)	
+	
+	
+# Changelog - Patch 54.8.0
+
+* Added Features:
+
+	* Added "Change URL File Servers" function to Maintenance options in thhe Miscellaneous Settings tab. This will replace the specified "Replace" string with the specified "With" string in an URL Files, as well as Liked and Disliked Image URLs. You should only use numbers in these text fields, as Tease AI will automatically add ".media" to avoid changing file names instead of just the server. So if you enter 41 in the Replace box, and 40 in the With box, all URLS in all URL Files that start with "41.media.tumblr.com" will be replaced with "40.media.tumblr.com". After a little testing, I was able to get rid of every "Error Loading Image" error I was getting by changing 41 to 40, 67 to 68, 65 to 66 and 36 to 37.     
+	
+	* @Goto() Improvements: Previously, Tease AI would crash if it tried to find a Goto Label that did not exist in the current script. The two most common occurrences seemed to be when INterrupts were called while a Goto line was active, and typos in the @Goto() Command or Goto Label. Goto searches are now cleared when Interrupts, CallReturns or Miniscripts are used. Additionally, if Tease AI cannot find an exact match after parsing the entire script, it will begin checking labels for similar text found in the @Goto() Command, looking for any Labels that are 1 character off, then 2, then 3 and so on up to 5. This should help scripts flow correctly even when typos are present. If Tease AI still fails to find an exact or similar match, then the program will move on to a random Link script and begin the next cycle. This should prevent the widespread problem of crashes occurring when @Goto() can't find what it's looking for. 
+	
+	* Added "Output Error Message to Chat Window" option to Misc Settings. Whereever possible, Error messages that are sent to the Errorlogs will be displayed in the chat window as well. Certain error messages that were already displayed to the chat window now have adsditional details. 
+
+	* Honorifics are now checked for please, thanks and sorry, not only yes\no\hi. Words\Phrases for "sorry" can now be set in Sub Settings. (dariobrun)
+
+	* Changes to the punishment after failing too many times to use the honorific: now you will not get an automatic @CBT but you can decide what happens in the #SYS_HonorificPunish vocab. You can even use @CallReturn() to deal with it, for example. (dariobrun)
+	
+    * Contacts can now use their own honorifics. These can be set in Settings->Apps->Glitter. The starting values will be blank, so Contacts will not check for honorifics unless you add them (add Honorific Must be Included with Key Phrases" is checked) (dariobrun)
+
+	* CustomMode() can now use Vocabulary files. For example, @CustomMode(#Finished, Goto, Finished Task) would goto the line (Finished Task) if the user said any of the lines inside #Finished (dariobrun)
+
+    * When setting a Glitter Contact or Random Domme as the domme, the domme's name and picture will now change in the avatar window to reflect that. Tease AI will look for an image named "avatar.*" (avatar.jpg, avatar.png, etc) in the root of that Contact\Random Domme's directory and use that for the avatar picture if it is found. If it is not, it will use a random image from her picture set instead (dariobrun) 
+
+* Commands:
+
+	* @DommeTagOr(): Will check against tags in the order that they're listed (dariobrun)
+      @ImageTagOr(): Will check against tags in the order that they're listed (dariobrun)
+
+      So for example:
+      @DommeTagOr(Naked,FullyDressed) --> will show fullydressed images only if it doesn't find naked images
+      @DommeTagOr(Fully Dressed,Naked)--> will show naked images only if it doesn't find fullydressed images
+
+    * @DommeTagAny(): Will choose an image having at least one of the specified tags (dariobrun)
+    * @ImageTagAny(): Will choose an image having at least one of the specified tags (dariobrun)
+
+    So to recap for both @DommeTag() and @ImageTag():
+    @DommeTag(a,b)-->return images having both a and b (If an image with both a and b cannot be found, it will look for a, then b and try to return the closest match found)
+    @DommeTagOr(a,b)-->return images having a, if it doesn't find any, return images having b
+    @DommeTagAny(a,b,)-->return images having either a or b
+
+    * @RandomContact - Randomly assigns the line to one of the available Contacts in the room (dariobrun)
+
+	* @ContinueSession - Used during an End script to gaurantee that the session will continue. @ContinueSession will not activate if the user has "Denial Always Ends Tease" or "Orgasm Always Ends Tease" checked. (oxiklein)
+
+    * PlayAvoidTheEdge[] - Begins a game of Avoid The Edge with the specified video. For example, @PlayAvoidTheEdge[dir\video.mp4] (dariobrun)
+
+    * PlayCensorshipSucks[] - Begins a game of Censorship Sucks with the specified video. For example, @PlayCensorshipSucks[dir\video.mp4] (dariobrun)
+
+    * PlayRedLightGreenLight[] - Begins a game of Red Light, Green Light with the specified video. For example, @PlayRedLightGreenLight[dir\video.mp4] (dariobrun)
+
+* Command Filters:
+
+    * @HoldTaunt - Will only display the line if the user is edging, will hold the edge once he reaches it and has been called by using "HoldTaunts" in the @Edge() Command. For example, @Edge(Hold, HoldTaunts). This is to allow the domme to taunt the user about the edge he's about to hold.
+    * @LongTaunt - Will only display the line if the user is edging, will hold a long edge once he reaches it and has been called by using "HoldTaunts" in the @Edge() Command. For example, @Edge(LongHold, HoldTaunts)
+	* @ExtremeTaunt - Will only display the line if the user is edging, will hold an extreme edge once he reaches it and has been called by using "HoldTaunts" in the @Edge() Command. For example, @Edge(ExtremeHold, HoldTaunts)
+	
+* System Keywords:
+
+	* #Contact1Honorific - Will be replaced with the honorific set for Contact 1 (dariobrun)
+    * #Contact2Honorific - Will be replaced with the honorific set for Contact 2 (dariobrun)
+    * #Contact3Honorific - Will be replaced with the honorific set for Contact 3 (dariobrun)
+    * #MainDom - #DomName will refer to the current main domme in the session. So, for example if you are doing a randomcontact/glittercontact session, during that session it will refer to her. #MainDom, instead, will always refer to the main domme name no matter what kind of session you are doing (dariobrun)
+	
+* Bugfixes:
+
+    * When Tease AI parses a Vocabulary file with no valid lines, it will now highlight the Vocabularly filename in orange instead of causing a crash. This works similarly to how the program will currently highlight the Keyword in red if it does not exist at all. This only applies if Output Errors to Chat Window is selected, otherwise the #Keyword will just be removed from the line (dariobrun & 1885) 
+    * @EdgeHold() and similar Commands did not make the user hold the edge for the specified amount of time
+    * @ShowImage[dir\*] and @ShowImage[dir\*.*] will now only return a random image file as opposed to any file type (dariobrun)
+    * @FollowUp() would activate Commands inside follow up lines before the lines were displayed (dariobrun) 
+    * Contacts will only be removed from the room if someone else is present, preventing crashes arising from a session with 0 particpants left (dariobrun)
+    * @Group() Command Filter showed lines incorrectly. For instance, @Group(1) was being read in any situation in which 1 was present (so also D1,D123,12 etc etc). @Group() can now use multiple groups. For example, @Group(1,D1,123) will read this line both in case of group1, group D1 and group123 (dariobrun)
+	* Tag Commands can now search for an indefinite number of tags instead of just 3 (dariobrun)
+	* @ImageTag(a,b,c,d,e) previously would return an image even if it just had a,b,c (and wouldn't check for d and e). Now it shows an image only it has all a,b,c,d,e (dariobrun)
+    * Prevent endless loop in statuses (pepsifreak)
+    * Refined the "Always Start With Random Domme" option
+    * Random Domme option wasn't able to find the last folder in the selected directory (dariobrun)
+	* Response Files were still being parsed when @InputVar[] was active
+	* Fixed bug that prevented [After Tease] Response File sections from being called
+    * @ChangeVar[] improvement: Previously, using @ChangeVar[] wrong (such as @ChangeVar[VarName]=[15]) would have reset the variable to 0. Now it just gets ignored since it's the wrong syntax (dariobrun) 
+	* Contact\Random dommes are now remembered when resuming or resetting a session (dariobrun)
+	* The System Keyword #RandomSlideshowCategory should now work as intended
+	* Giving up during the first round did not display [First Round] Responses
+	* @ContactX lines will no longer display in Video scripts if that Contact is not present in the room
+    * Fixed a bug where the domme was giving you another cbt/task command after granting a GiveUp (dariobrun)
+    * Domme Responses were sometimes triggered during Writing Tasks (dariobrun)
+    * Fixed bug that would occur when identical #Keywords were used in the same phrase (dariobrun) 
+    * ")" sometimes got left behind after using @FollowUp() Commands (dariobrun)
+	
+* Miscellaneous:
+
+    * The picture will no longer change in the middle of StrokeTaunts that are more than one line 
+    * The background timer for the length of the tease session will now pause when the Settings window is open and the "Pause Program When Settings Menu is Visible" option is checked (pepsifreak)
+	* The timer for edge taunts now resets after each edge during Multiple Edges
+	* Lines containing Commands that show Blog\Genre\Boobs\Butt\Liked\Disliked images will now be filtered out if the picture window is not visible (such as when a video is playing)
+	* End of tease and @EndTease no longer clear the chat window or display that Tease AI has been reset
+    * Increased Tease Length Minimum and Maximum upper ranges to accommodate longer runtimes when using Spicy
+    * Program will automatically start a stroke/tauntcycle if it reaches the end of a link script or the beforetease script even if the user forgot to use @End and @StartStroking/Taunts, to prevent session from blocking (dariobrun) 
+    * @CallReturn() can now call a random file using wildcards. For example, @CallReturn(dir\*) or @CallReturn(dir\*.txt)
+    * @PlayAudio[], @PlayVideo[] and @ShowImage[] can now use files outside the relative Tease AI directory by using the full path name. For example, @PlayAudio[C:\dir\subdir\name.extension]. This is not recommended for scripts that you wish to share. You can also use wildcards with these Commands to show random media files. For example, @PlayVideo[c:\dir\subdir\*]. This also works with @PlayAvoidTheEdge[], @PlayCensorshipSucks[] and @PlayRedLightGreenLight[] (dariobrun)
+    * Audit Scripts on Startup is now off by default
+    * Commas are no longer affected when auditing scripts
+	* Blank lines are now only removed from URL Files when auditing scripts
+    * #DomHonorific will be replaced with the appropriate Contact\Random honorific if a different domme has been set for the session (dariobrun)
+    * Honorifics for Random Dommes can be set in Settings->Apps->Glitter. #Vocabulary files can be used for either further randomization (dariobrun)
+    * All modes are now stored when using a callreturn and resumed when going back (dariobrun)
+    * @TimeOut() can now be used with Vocabulary files to determine the time needed to trigger it (dariobrun)
+	* Streamlined the TTS commands and the fonttype/fontcolor/fontsze to use so that they are now tied to the contact currently speaking (dariobrun)
+	* ")" can now be used as a character inside @RT()\@RandomText() and @FollowUp() (dariobrun)
+	* CBT\Custom Task were missing from StopEverything() sub-routine (dariobrun)  
+	* Added dialog to select certain url files, when refreshing or rebuilding url files
+	* Added possibilty to jump to a certain image, when browsing an url file. Simply double click the bottom left label and a prompt will appear. 
+	
+	
+# Changelog - Patch 54.7.0
+
+* Added Features:
+    * Added "Validate All System Files" button to the General settings panel. Rather than updating the Personality Framework with any new System Files, and expecting people to update each Personality
+	  one at a time manually if they missed any updates, the Personality Framework will now be stored in root\System\System Files\.
+
+	  By clicking "Validate All System Files", Tease AI automatically searches all installed Personalities and copies over any System files that are missing. I'll need to include the Personality Framework in every patch, but this
+      turns the problem of updating/validating these files across multiple Personalities into a one-click solution for the user.
+	  
+    * Tease AI now tries to determine an appropriate "DomName is typing..." delay length for lines containing one or more @RT()/@RandomText() Commands.
+	* Commas can now be used in @RT() by typing ",,". When parsing @RT() collections, Tease AI will treat any double comma as a single comma in the domme's output.
+	  * For example, @RT(Look,, I don't want to talk about it, Listen,, we're not discussing this right now, Sorry,, not going there right now)
+    * Can now set a directory for Random Dommes in General Settings. This should point to location containing folders named after individual models, and each of those folders should contain folders with imagesets of that model. Tease AI will then chose a folder at random for the pictures, and the name of the model's folder for the domme's name. (dariobrun)
+	* Added checkbox in General Settings to begin any new session with a Random Domme.
+	* Added Change Current Domme buttons in Settings->Apps->Glitter. This allows to set the currently active domme at any time the session is active.
+	* Domme Personality settings now include a checkbox for CFNM (Clothed Female Nude Male). This is meant to allow taunts where the domme points out that the user will never see her naked, eg. This should be checked when using models with non-nude picture sets for the domme.
+	* Added "Continue Current Script After Giving Up" option in Domme Settings. When you "give up" in Tease AI, the program normally moves on to a random Link script. When this option is checked, the script you're on will continue to play out instead. (dariobrun)
+	* If options are set to use and/or capitalize the Domm'es honorific and the user fails to do so enough times, the domme will administer a CBT punishment (dariobrun)
+	  * Requires the following System Vocabulary files:
+	  * #SYS_HonorificPunish - The domme admonishes you for not addressing her correctly (immediately precedes the punishment)
+	  * #SYS_CapitalizeHonorific - The domme points out that she was not addressed correctly (immediately after failing to capitalize the honorific)
+	  * #SYS_MissingHonorific - The domme points out that you did not use the honorific in such a way to get you to immediately correct yourself. This file replaces the hardcoded "what?" response that Tease AI used before. 
+	
+* Added Commands:
+	* @CountVar[] - Allows you to connect a timer to a specified Variable that will change its value by 1 every second.
+	  * Usage:
+	  * @CountVar[VarName] - Begins a timer that adds 1 to VarName every second
+      * @CountVar[VarName, down] - Begins a timer that subtracts 1 from VarName every second
+      * @CountVar[VarName, stop] - Stops any timer associated with VarName (up or down)
+	  
+	* @SetDomme() - Changes the active domme (name and slideshow) to the specified option. (dariobrun)
+      * Usage:
+      * @SetDomme(1) - Changes the domme to Contact 1 (Can also use @SetDomme(Contact1), @SetDomme(Glitter 1), etc. All that matters is the number)
+      * @SetDomme(2) - Changes the domme to Contact 2
+      * @SetDomme(3) - Changes the domme to Contact 3
+      * @SetDomme(Domme) - Changes back to the original domme specified in Domme Images Directory	 
+      * @SetDomme(Random) - Changes to a Random Domme as specified in the Random Domme Images Directory
+	  
+	  * If @SetDomme() does not contain a valid value, the original domme will be used.
+
+      * @SetDomme() replaces @GlitterTease1, @GlitterTease2, @GlitterTease3, @DommeTease and @RandomTease. These Commands will be left in the code for compatibility purposes.
+
+    * @RandomModule - Run a random Module (dariobrun)
+
+    * @RandomLink - Run a random Link (dariobrun)	
+	
+*Added Command Filters:	
+    * @DayOfWeek() - Will only show lines if the current day of the week is specified.
+      * Usage:
+      * @DayOfWeek(Friday) - Will only show the line if the current day is Friday
+      * @DayOfWeek(Monday, Tuesday) - Will only show the line if the current day is Monday or Tuesday
+      * @DayOfWeek(Monday, Not) - Will only show the line if the current day is NOT Monday
+      * @DayOfWeek(Saturday, Sunday, Not) - Will only show the line if the current day is neither Saturday or Sunday	  
+
+	* @FlagOr() - Check multiple flags and will read the line if any of them are present. For example, @FlagOr(Flag1, Flag2) - If Flag1 or Flag 2 exists, then Tease AI will read the line. (dariobrun) 
+    
+	* @CFNM - When used, will only show lines with this Command Filter if the CFNM box is checked in the Domme Personality settings.
+	
+* Bugfixes:
+    * @CallReturn() would cause the program to crash if used when Tease AI last parsed a line containing @Goto(). Use of @CallReturn should be much more stable. (dariobrun)
+	* @MiniScript() Command re-written to utilize @CallReturn()'s stability improvements
+    * @RT() and @RandomText() were not working correctly (Stefaf)
+	* @NotFlag() was only checking for any flags not to be present when parsing multiple flags instead of all flags not to be present. (dariobrun)
+    * Certain local genre images were not using their subdirectories correctly. (dariobrun)
+    * Local Boob images were not using their subdirectories correctly. (dariobrun) 
+    * @RemoveContactX on a Contact that was not present would add them, Commands that add and remove Contacts now check to see if they are present (dariobrun)	
+	
+* Miscellaneous:
+    * Tweaked values of stroking speed changes instructed by the domme to make them slightly more profound (dariobrun)
+    * Minor edits to State.vb so I could compile it using VS 2010 (Notay)
+	* Cleaned up code for saving chatlogs (pepsifreak)
+	* Changed the message displayed after unpacking an AI Box 
+	
+# Changelog - Patch 54.6.0
 
 * Added Features:
 	* Added new sorting method to sort file lists like the Windows file Explorer does.
-	* PoundClean reworked to support system keywords as parameters inside of vocabulary files. In order to prevent infinite loops, the maximum allowed depth is limited to 5 times. Tip: take a look at the logfile to see how it's working.
-	* All Contacts and Domme are able to use @DommeTag(). 
+	* PoundClean reworked to support system keywords as parameters inside vocabulary files. In order to prevent infinite loops, the maximum allowed depth is limited to 5 times. Tip: take a look at the logfile to see how it's working.
+	* All Contacts and Domme are able to use @DommeTag(). Usage: @Contact2 Your text to display @DommeTag(Face, NotFeet)
+	* Added nested @CallReturn()-support.
 
 * Removed Features:
-	* @DommeTag() doesn't alternate the given tags to return a result. (stefaf) The idea was worth to try. 
+	* @DommeTag() doesn't alternate the given tags to return a result. (stefaf) The idea was worth a try. 
 		
 * Bugfixes:
 	* After using an ImageCommand the slideshow was locked.
@@ -23,15 +377,22 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 	* Vitalsub didn't read calorie items from file at startup.
 	* MouseOver LblDomImagedir caused an unhandled exception.
 	* RiskyPick Images haven't been updated.
+	* Custom text tags (#TagGarment, #TagUnderwear etc.) for images fixed. Note: The new code will set data for the current displayed image and not leftover data from filtering, as in the old code. Make sure to set that data for your Images!
+	* Multiple choice gotos inside MiniScripts caused the calling script to resume at the goto position of the MiniScript.
 
 * Miscellaneous:
 	* GUI-Rework Settings Glitter-Tab -> Databindings Complete.
 	* Optimized performance of @ShowTaggedImage code.
 	* Enhanced logging: It is now possible to customize the logging without the need to recompile. Simply open up Tease-AI.exe.config using a text editor and edit the switch values as described in the file - keep in mind to backup the file before. ;-) Added rollover function, if the log file is bigger as 2 MB. Instead of deleting the complete file, now only the top entries are deleted.
+	* Chastity, Glitter and Taunt-files reworked to increase fault tolerance and correct line grouping. 2c588ffed4f03f17813d3e5bd290a3351b9bb8b2. It tries with a 45% chance to pick a 1-line-taunt. Otherwise it picks randomly from all available taunt sizes.
 
 ### Known Issues:
-* DommeTag alternation is causing nonsense most of the time.
-* Texted imagetags are not working.
+* Using a background image slows down GDI+ a lot.
+* @BookmarkModule 
+	* causes a script freeze at EOF, when taunts are interrupted. (Occured in Debug->Run Script)
+	* seem to break if a miniscript (and maybe others) is called during the taunt.
+	* Modes are not restored on returning.
+* @CallReturn doesn't restore any of the modes. (@YesMode, @NoMode etc.)
 
 	
 # Changelog - Patch 54.5.0	

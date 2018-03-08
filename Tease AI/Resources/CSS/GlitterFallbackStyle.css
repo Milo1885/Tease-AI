@@ -1,0 +1,25 @@
+/* Glitter-App fallback style */
+/* This stylesheet is used, if there was no custom stylesheet found at: [Tease-AI-Root]\System\CSS\GlitterApp.css */
+
+body {font: Cambria; color: /*ChatTextColor*/; background-color: /*ChatWindowColor*/;  padding: 5px; margin: 0;}
+.post {
+	width: 100%; 
+	margin-bottom: 0.8em;
+}
+
+.avImg {float: left;width: 48px; height: 48px;}
+.timestamp {font-size: 0.8em; color: DarkGray; display:block;}
+
+.avName_0, .avName_1, .avName_2, .avName_3 {font-size: 1.2em; font-weight: bold;}
+.avName_0 {color: /*DommeNameColor*/; font-family: /*DommeFontName*/;}
+.avName_1 {color: /*Contact1NameColor*/; font-family: /*DommeFontName*/;}
+.avName_2 {color: /*Contact2NameColor*/; font-family: /*DommeFontName*/;}
+.avName_3 {color: /*Contact3NameColor*/; font-family: /*DommeFontName*/;}
+
+.content {
+	color: /*ChatTextColor*/;
+	font-size: 0.9em;
+	margin: 9, 1,3,1;
+	PADDING: 2;
+	display: block;  
+}

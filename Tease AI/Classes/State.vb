@@ -31,10 +31,18 @@ Imports System.Runtime.Serialization
 <Serializable>
 Public Class SessionState
 	Implements IDisposable
-	'TODO-Next: Clode Cleanup
 
 #Region "------------------------------------------- Data -----------------------------------------------"
 	Const EditorGenericStringList As String = "System.Windows.Forms.Design.ListControlStringCollectionEditor, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+
+	''' <summary> The oldest compatible version of a SessinState. </summary>
+	<NonSerialized> Const MINVERSION As String = "0.56.0.0"
+
+	''' <summary>Contains the Tease-AI Version of this session.</summary>
+	<Category("Program-Info")> <[ReadOnly](True)>
+	<Description("Contains the Tease-AI Version of this session.")>
+	Friend Property Version As String = My.Application.Info.Version.ToString
+
 
 	Public Property DomPersonality As String
 
@@ -57,17 +65,31 @@ Public Class SessionState
 	Public Property TeaseTick As Integer
 	Public Property Responding As Boolean
 
-	<Category("Taunts")> Public Property StrokeTauntVal As Integer = -1
-	<Category("Taunts")> Public Property TempStrokeTauntVal As Integer
-	<Category("Taunts")> Public Property TempFileText As String
-	<Category("Taunts")> Public Property TauntText As String
-	<Category("Taunts")> Public Property StrokeTauntCount As Integer
-	<Category("Taunts")> Public Property TauntTextTotal As Integer
-	<Category("Taunts")>
+	Public Property StrokeTauntVal As Integer = -1
+	Public Property newSlideshow As Boolean = False
+	<Category("Video")> Public Property TempStrokeTauntVal As Integer
+	<Category("Video")> Public Property TempFileText As String
+
+    ''' <summary>Gets or sets the current TauntFile path.</summary>
+    <Category("Taunts")> <Description("Path of current Taunt-file")>
+	Public Property TauntText As String
+
+    ''' <summary>Gets or sets the length of a taunt group.</summary>
+    <Category("Taunts")> <Description("Current line group size.")>
+	Public Property StrokeTauntCount As Integer
+
+    ''' <summary>Gets or sets the current taunt lines. </summary>
+    <Category("Taunts")> <Description("Current taunt lines.")>
 	<Editor(EditorGenericStringList, GetType(UITypeEditor))>
 	Public Property TauntLines As New List(Of String)
-	<Category("Taunts")> Public Property StrokeFilter As Boolean
-	<Category("Taunts")> Public Property TauntTextCount As Integer
+
+	<Category("Taunts")> <[ReadOnly](True)>
+	<Description("Indicates if taunt filtering is active")>
+	Public Property StrokeFilter As Boolean
+
+    ''' <summary> Gets or Sets the current taunt line index. </summary>
+    <Category("Taunts")> <Description("The current taunt line index.")>
+	Public Property TauntTextCount As Integer
 
 
 	<Category("Script")> Public Property FileText As String
@@ -89,6 +111,9 @@ Public Class SessionState
 	Public Property TaskText As String
 	Public Property TaskTextDir As String
 
+	Public Property tempResponseLine As Integer
+	Public Property nameErrors As Integer = 0
+	Public Property wrongAttempt As Boolean
 
 	Public Property ResponseFile As String
 	Public Property ResponseLine As Integer
@@ -119,11 +144,14 @@ Public Class SessionState
 	Public Property AFK As Boolean
 
 
+	Public Property glitterDommeNumber As Integer = 0
 	Public Property HypnoGen As Boolean
 	Public Property Induction As Boolean
 	Public Property TempHypno As String
 
 	Public Property StrokeTick As Integer
+    ''' <summary> Gets or sets time until next taunt.</summary>
+    <Category("Taunts")> <Description("Time until next taunt")>
 	Public Property StrokeTauntTick As Integer
 
 
@@ -142,6 +170,8 @@ Public Class SessionState
 	Public Property YesOrNo As Boolean = False
 	Public Property GotoFlag As Boolean
 
+    ''' <summary>Gets or Sets if a taunt demanded CBT.</summary>
+    <Category("Taunts")> <Description("Indicates if a taunt demanded CBT. CBT-Tasks are taken from ""[Personality Path]\CBT\CBT.txt"". The calling line in Taunt-file is completly replaced.")>
 	Public Property CBT As Boolean
 
 	Public Property RunningScript As Boolean
@@ -155,6 +185,9 @@ Public Class SessionState
 	Public Property ShowModule As Boolean = False
 	Public Property ModuleEnd As Boolean
 
+	Public Property giveUpReturn As Boolean
+	Public Property contactToUse As ContactData
+	Public Property currentlyPresentContacts As List(Of String) = New List(Of String)
 	Public Property DivideText As Boolean
 
 	Public Property HoldEdgeTick As Integer
@@ -203,36 +236,46 @@ Public Class SessionState
 	<Category("Video - Red light green light")> Public Property RLGLTick As Integer
 	<Category("Video")> <Obsolete("Never set to TRUE")> Public Property NoVideo As Boolean
 
-	<Category("Glitter")> <Editor(EditorGenericStringList, GetType(UITypeEditor))>
+#Region "GlitterFeeds - APP"
+
+	<Category("Glitter")> <Description("File paths in this list are executed next. If empty a random script will appear.")>
+	<Editor(EditorGenericStringList, GetType(UITypeEditor))>
 	Public Property UpdateList As New List(Of String)
 
-	<Category("Glitter")> Public Property UpdatesTick As Integer = 120
-	<Category("Glitter")> Public Property UpdatingPost As Boolean
-	<Category("Glitter")> Public Property UpdateStage As Integer
-	<Category("Glitter")> Public Property UpdateStageTick As Integer
-	<Category("Glitter")> Public Property StatusText As String
-	<Category("Glitter")> Public Property ContactNumber As Integer
+	<Category("Glitter")> <Description("Time until the next glitter script is exceuted.")>
+	Public Property UpdatesTick As Integer = 120
+	<Category("Glitter")> <Description("Set to True while a glitter script is running.")>
+	Public Property UpdatingPost As Boolean
 
-	<Category("Glitter")> Public Property StatusText1 As String
-	<Category("Glitter")> Public Property StatusText2 As String
-	<Category("Glitter")> Public Property StatusText3 As String
+	<Category("Glitter")> <Description("Time until next status post.")>
+	Public Property UpdateStageTick As Integer
 
-	<Category("Glitter")> Public Property StatusChance1 As Integer
-	<Category("Glitter")> Public Property StatusChance2 As Integer
-	<Category("Glitter")> Public Property StatusChance3 As Integer
+	<Category("Glitter")> <Description("Domme's post text.")>
+	Public Property StatusText As String
+	<Category("Glitter")> <Description("Contact1 post text. If the line starts with "">"" it has been already sent or skipped.")>
+	Public Property StatusText1 As String
+	<Category("Glitter")> <Description("Contact2 post text. If the line starts with "">"" it has been already sent or skipped.")>
+	Public Property StatusText2 As String
+	<Category("Glitter")> <Description("Contact3 post text. If the line starts with "">"" it has been already sent or skipped.")>
+	Public Property StatusText3 As String
 
-	<Category("Glitter")> Public Property Update1 As Boolean
-	<Category("Glitter")> Public Property Update2 As Boolean
-	<Category("Glitter")> Public Property Update3 As Boolean
+	<Category("Glitter")> <Description("Chance of skipping Contact 1's post.")>
+	Public Property StatusChance1 As Integer
+	<Category("Glitter")> <Description("Chance of skipping Contact 2's post.")>
+	Public Property StatusChance2 As Integer
+	<Category("Glitter")> <Description("Chance of skipping Contact 3's post.")>
+	Public Property StatusChance3 As Integer
+
+#End Region ' GlitterFeeds - APP
 
 
 	<Editor(EditorGenericStringList, GetType(UITypeEditor))>
 	Public Property LocalTagImageList As New List(Of String)
 
+	<Obsolete("Proccessing values belong into the corresponding function.")>
 	Public Property PetName As String
 
-	Public Property ScriptCount As Integer
-	Public Property TempScriptCount As Integer
+	<Category("Taunts")> Public Property TempScriptCount As Integer
 
 	Public Property SlideshowTimerTick As Integer
 
@@ -244,6 +287,7 @@ Public Class SessionState
 	Public Property LastScript As Boolean
 
 	Public Property SaidHello As Boolean = False
+	Public Property justStarted As Boolean = False
 
 
 	Public Property AvgEdgeStroking As Integer
@@ -255,6 +299,7 @@ Public Class SessionState
 	Public Property EdgeTickCheck As Integer
 
 	Public Property EdgeNOT As Boolean
+	Public Property isLink As Boolean
 
 	Public Property AlreadyStrokingEdge As Boolean
 
@@ -268,8 +313,6 @@ Public Class SessionState
 
 	Public Property FirstRound As Boolean
 	Public Property StartStrokingCount As Integer = 0
-	<Obsolete("Not used anymore.")>
-	Public TeaseJOI As Boolean
 	Public Property TeaseVideo As Boolean
 
 	<Category("Games - TnA")> <Description("This list contains all boob-images of TNA game.")>
@@ -281,13 +324,6 @@ Public Class SessionState
 	<Category("Games - TnA")> Public Property AssImage As Boolean = False
 	<Category("Games - TnA")> Public Property BoobImage As Boolean = False
 
-	<Category("Tags")> Public Property FoundTag As String = "Null"
-	<Category("Tags")> Public Property TagGarment As String = "NULL"
-	<Category("Tags")> Public Property TagUnderwear As String = "NULL"
-	<Category("Tags")> Public Property TagTattoo As String = "NULL"
-	<Category("Tags")> Public Property TagSexToy As String = "NULL"
-	<Category("Tags")> Public Property TagFurniture As String = "NULL"
-
 	<Category("Bookmark")> Public Property BookmarkModule As Boolean = False
 	<Category("Bookmark")> Public Property BookmarkModuleFile As String
 	<Category("Bookmark")> Public Property BookmarkModuleLine As Integer
@@ -295,8 +331,7 @@ Public Class SessionState
 	<Category("Bookmark")> Public Property BookmarkLinkFile As String
 	<Category("Bookmark")> Public Property BookmarkLinkLine As Integer
 
-	Public Property WaitTick As Integer
-
+	Public Property WaitTick As Integer = -1
 
 
 
@@ -321,11 +356,12 @@ Public Class SessionState
 	Public Property CustomSlideEnabled As Boolean
 	<Category("Images")> <Description("Stores all images and genre informations for CustomSlideshow")>
 	Public Property CustomSlideshow As New CustomSlideshow
-	<Obsolete("Obsolete as of v0.54.5.1. Left for version tolerance.", True)>
-	<Category("Images")> <Browsable(False)> Public Property DommeImageFound As Boolean
-	<Category("Images")> Public Property DommeImageSTR As String
-	<Obsolete("Obsolete as of v0.54.5.1. Left for version tolerance.", True)>
-	<Category("Images")> <Browsable(False)> Public Property DomPic As String
+
+	<Category("Images")>
+	<Obsolete("DommeImageSTR is obsolete. Do not implement in new code.")>
+	Public Property DommeImageSTR As String
+
+	<Obsolete("JustShowedBlogImage is obsolete. Do not implement in new code.")>
 	<Category("Images")> Public Property JustShowedBlogImage As Boolean = False
 	<Category("Images")> Public Property JustShowedSlideshowImage As Boolean = False
 	<Category("Images")> Public Property LockImage As Boolean
@@ -336,7 +372,7 @@ Public Class SessionState
 	<Category("Images")> Public Property SlideshowContact1 As ContactData
 	<Category("Images")> Public Property SlideshowContact2 As ContactData
 	<Category("Images")> Public Property SlideshowContact3 As ContactData
-
+	<Category("Images")> Public Property SlideshowContactRandom As ContactData
 	<Category("Custom Task")> Public Property CustomTask As Boolean
 	<Category("Custom Task")> Public Property CustomTaskFirst As Boolean = True
 	<Category("Custom Task")> Public Property CustomTaskText As String
@@ -354,7 +390,10 @@ Public Class SessionState
 	Public Property Group As String = "D"
 	Public Property GlitterTease As Boolean
 	Public Property AddContactTick As Integer
-
+	Public Property contact1Present As Boolean
+	Public Property contact2Present As Boolean
+	Public Property contact3Present As Boolean
+	Public Property dommePresent As Boolean = True
 	Public Property Contact1Edge As Boolean
 	Public Property Contact2Edge As Boolean
 	Public Property Contact3Edge As Boolean
@@ -363,10 +402,25 @@ Public Class SessionState
 	Public Property Contact2Stroke As Boolean
 	Public Property Contact3Stroke As Boolean
 
-	Public Property ReturnFileText As String
-	Public Property ReturnStrokeTauntVal As String
+	Public Property tempDomName As String = ""
+	Public Property tempHonorific As String
+	Public Property tempDomHonorific As String
+	Public Property shortName As String
+	Public Property domAvatarImage As Image
+	Public Property currentWriteTask As String
+	Public Property randomWriteTask As Boolean
+	Public Property dontCheck As Boolean
+
+#Region "@CallReturn("
+
+	''' <summary>Gets or sets current stack for @CallReturn( command.</summary>
+	<Category("@CallReturn(")> <Browsable(False)>
+	Friend CallReturns As New Stack()
+
+	<Category("@CallReturn(")>
+	<Description("Updated after returning to calling script.")>
 	Public Property ReturnSubState As String
-	Public Property ReturnFlag As Boolean
+#End Region
 
 	Public Property SessionEdges As Integer
 
@@ -390,8 +444,7 @@ Public Class SessionState
 	<Description("True if Interrupts are disabled.")> Public Property DoNotDisturb As Boolean
 
 	Public Property EdgeHoldSeconds As Integer
-	<Obsolete("Never set to true")>
-	Public EdgeHoldFlag As Boolean
+	Public Property EdgeHoldFlag As Boolean
 
 
 	Public Property InputIcon As Boolean
@@ -405,11 +458,11 @@ Public Class SessionState
 
 	Public Property TimeoutTick As Integer
 
-	''' <summary>
-	''' This Variable contains the Path of origin of the displayed Image. CheckDommeTag() uses 
-	''' this string to get the curremt ImageData for the DommeTagApp.
-	''' </summary>
-	<Category("Images")> Public Property ImageLocation As String = ""
+    ''' <summary>
+    ''' This Variable contains the Path of origin of the displayed Image. CheckDommeTag() uses 
+    ''' this string to get the curremt ImageData for the DommeTagApp.
+    ''' </summary>
+    <Category("Images")> Public Property ImageLocation As String = ""
 
 	Public Property ResponseYes As String
 	Public Property ResponseNo As String
@@ -427,25 +480,11 @@ Public Class SessionState
 	Public Property WorshipMode As Boolean = False
 	Public Property WorshipTarget As String = ""
 
+	Public Property HoldTaunts As Boolean = False
 	Public Property LongHold As Boolean = False
 	Public Property ExtremeHold As Boolean = False
-	<Obsolete("LongTaunts-Member is not used right now.")>
-	Public LongTaunts As Boolean
-
-
-
-	<Category("MiniScript")> Public Property MiniScript As Boolean = False
-	<Category("MiniScript")> Public Property MiniScriptText As String
-	<Category("MiniScript")> Public Property MiniTauntVal As Integer
-	<Category("MiniScript")> Public Property MiniTimerCheck As Boolean
-
-
-	Public Property EdgeGoto As Boolean = False
-	Public Property EdgeMessage As Boolean = False
-	Public Property EdgeVideo As Boolean = False
-
-	Public Property EdgeMessageText As String
-	Public Property EdgeGotoLine As String
+	Public Property LongTaunts As Boolean
+	Public Property ExtremeTaunts As Boolean
 
 	<Category("Multiple Edges")> Public Property MultipleEdges As Boolean
 	<Category("Multiple Edges")> Public Property MultipleEdgesAmount As Integer
@@ -453,35 +492,39 @@ Public Class SessionState
 	<Category("Multiple Edges")> Public Property MultipleEdgesTick As Integer
 	<Category("Multiple Edges")> Public Property MultipleEdgesMetronome As String = ""
 
-	Public Property YesGoto As Boolean = False
-	Public Property YesVideo As Boolean = False
-	Public Property NoGoto As Boolean = False
-	Public Property NoVideo_Mode As Boolean = False
-	Public Property CameGoto As Boolean = False
-	Public Property CameVideo As Boolean = False
-	Public Property CameMessage As Boolean = False
-	Public Property CameMessageText As String
-	Public Property RuinedGoto As Boolean = False
-	Public Property RuinedVideo As Boolean = False
-	Public Property RuinedMessage As Boolean = False
-	Public Property RuinedMessageText As String
-	Public Property YesGotoLine As String
-	Public Property NoGotoLine As String
-	Public Property CameGotoLine As String
-	Public Property RuinedGotoLine As String
+#Region "Modes"
+	<Category("Modes")> Public Property Modes As New Dictionary(Of String, Mode)(System.StringComparer.OrdinalIgnoreCase)
+	<Category("Modes")> Public Property edgeMode As New Mode()
+	<Category("Modes")> Public Property cameMode As New Mode()
+	<Category("Modes")> Public Property ruinMode As New Mode()
+	<Category("Modes")> Public Property yesMode As New Mode()
+	<Category("Modes")> Public Property noMode As New Mode()
+#End Region
 
-	''' <summary>
-	''' Set to true if the sub is on the edge and the domme had decided to not to stop stroking.
-	''' </summary>
-	''' <remarks>
-	''' Uses following vocabulary Files:
-	''' #SYS_TauntEdging.txt when the taunting begins.
-	''' #SYS_TauntEdgingAsked.txt if the sub continues to tell he's on the edge.
-	''' </remarks>
-	<Description("If True stroking continues when sub is on edge.")>
+	Public Property SecondSession As Boolean
+
+	Public Property checkAnswers As subAnswers
+
+    ''' <summary>
+    ''' Set to true if the sub is on the edge and the domme had decided to not to stop stroking.
+    ''' </summary>
+    ''' <remarks>
+    ''' Uses following vocabulary Files:
+    ''' #SYS_TauntEdging.txt when the taunting begins.
+    ''' #SYS_TauntEdgingAsked.txt if the sub continues to tell he's on the edge.
+    ''' </remarks>
+    <Description("If True stroking continues when sub is on edge.")>
 	Public Property TauntEdging As Boolean = False
 
-	Public Property Modes As New Dictionary(Of String, Mode)(System.StringComparer.OrdinalIgnoreCase)
+	Public Property CountDownList As New List(Of String)
+	Public Property CountUpList As New List(Of String)
+
+	Public Property MultiTauntPictureHold As Boolean
+
+	Public Property EndSession As Boolean
+
+	Public Property VideoGenre As String
+
 
 #Region "----------------------------------- Only for Serialization -------------------------------------"
 
@@ -532,10 +575,10 @@ Public Class SessionState
 	Public WaitTimer_enabled As Boolean = False
 	Public WMPTimer_enabled As Boolean = True
 
-	'===============================================================================
-	'							Timer intervals
-	'===============================================================================
-	Public AudibleMetronome_Interval As Integer = 30
+    '===============================================================================
+    '							Timer intervals
+    '===============================================================================
+    Public AudibleMetronome_Interval As Integer = 30
 	Public AvoidTheEdge_Interval As Integer = 1000
 	Public AvoidTheEdgeResume_Interval As Integer = 1000
 	Public AvoidTheEdgeTaunts_Interval As Integer = 1000
@@ -584,7 +627,6 @@ Public Class SessionState
 
 	<NonSerialized> <OptionalField> Friend Files As New FileClass(Me)
 	<NonSerialized> <OptionalField> Friend Folders As New FoldersClass(Me)
-
 	<NonSerialized> Dim ActivationForm As Form1
 
 #Region "------------------------------------- Constructors----------------------------------------------"
@@ -595,11 +637,11 @@ Public Class SessionState
 	Sub New()
 		InitializeComponent()
 	End Sub
-	''' <summary>
-	''' Creates a new instance and activates it on the given Form.
-	''' </summary>
-	''' <param name="ActivationForm">The Form on which to apply the session.</param>
-	Sub New(ByVal ActivationForm As Form1)
+    ''' <summary>
+    ''' Creates a new instance and activates it on the given Form.
+    ''' </summary>
+    ''' <param name="ActivationForm">The Form on which to apply the session.</param>
+    Sub New(ByVal ActivationForm As Form1)
 		InitializeComponent()
 		Activate(ActivationForm)
 	End Sub
@@ -622,15 +664,19 @@ Public Class SessionState
 		AvgEdgeCount = My.Settings.AvgEdgeCount
 		AvgEdgeCountRest = My.Settings.AvgEdgeCountRest
 
+		giveUpReturn = My.Settings.GiveUpReturn
 		DommeMood = randomizer.Next(My.Settings.DomMoodMin, My.Settings.DomMoodMax + 1)
 
-		SlideshowMain = New ContactData(ContactType.Domme)
-		SlideshowContact1 = New ContactData(ContactType.Contact1)
-		SlideshowContact2 = New ContactData(ContactType.Contact2)
-		SlideshowContact3 = New ContactData(ContactType.Contact3)
+		'SlideshowMain = New ContactData(ContactType.Domme)
+		'SlideshowContact1 = New ContactData(ContactType.Contact1)
+		'SlideshowContact2 = New ContactData(ContactType.Contact2)
+		'SlideshowContact3 = New ContactData(ContactType.Contact3)
+		'SlideshowContactRandom = New ContactData(ContactType.Random)
+		'currentlyPresentContacts = New List(Of String)
+		'currentlyPresentContacts.Add(SlideshowMain.TypeName)
 
 		CaloriesConsumed = My.Settings.CaloriesConsumed
-
+		checkAnswers = New subAnswers(Me)
 	End Sub
 
 #End Region ' Constructors
@@ -665,9 +711,24 @@ Public Class SessionState
 	''' <param name="sc"></param>
 	<OnDeserialized>
 	Sub onDeserialized_FixFields(sc As StreamingContext)
+		' Suppress obsolete warnings.
+
+		'#Disable Warning BC40000 - I can't compile this in VS2010. Changed to the three lines below as per Notay's advice - 1885
+
+#If _MSC_VER > 1600 Then
+#Disable Warning BC40000
+#End If
+
 		' Marked as <NonSerialized> <OptionalField> have to be initialized on every deserialization.
 		If Files Is Nothing Then Files = New FileClass(Me)
 		If Folders Is Nothing Then Folders = New FoldersClass(Me)
+
+		' Unsuppress obsolete warnings 
+		'#Enable Warning BC40000 - I can't compile this in VS2010. Changed to the three lines below as per Notay's advice - 1885
+
+#If _MSC_VER > 1600 Then
+#Enable Warning BC40000
+#End If
 
 	End Sub
 
@@ -683,28 +744,25 @@ Public Class SessionState
 	''' <remarks>This function is invoked on the given Form's UI-Thread.</remarks>
 	Sub FetchFormData(ByVal serializeForm As Form1)
 		If serializeForm IsNot Nothing _
-		AndAlso serializeForm.InvokeRequired Then
-			' Calling from another Thread -> Invoke on controls UI-Thread
-			Dim Act As Action(Of Form1) = Sub(s1) FetchFormData(s1)
+	AndAlso serializeForm.InvokeRequired Then
+            ' Calling from another Thread -> Invoke on controls UI-Thread
+            Dim Act As Action(Of Form1) = Sub(s1) FetchFormData(s1)
 			serializeForm.Invoke(Act)
 			Exit Sub
 		End If
-		' Called from Controls UI-Thread -> Execute Code.
+        ' Called from Controls UI-Thread -> Execute Code.
 
 
-		With serializeForm
+        With serializeForm
 			DomPersonality = .dompersonalitycombobox.SelectedItem.ToString
 
-			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			'							Get Timer EnableStates
-			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			AvoidTheEdge_enabled = .AvoidTheEdge.Enabled
+            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+            '							Get Timer EnableStates
+            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+            AvoidTheEdge_enabled = .AvoidTheEdge.Enabled
 			AvoidTheEdgeResume_enabled = .AvoidTheEdgeResume.Enabled
 			AvoidTheEdgeTaunts_enabled = .AvoidTheEdgeTaunts.Enabled
 			CensorshipTimer_enabled = .CensorshipTimer.Enabled
-			Contact1Timer_enabled = .Contact1Timer.Enabled
-			Contact2Timer_enabled = .Contact2Timer.Enabled
-			Contact3Timer_enabled = .Contact3Timer.Enabled
 			CustomSlideshowTimer_enabled = .CustomSlideshowTimer.Enabled
 			EdgeCountTimer_enabled = .EdgeCountTimer.Enabled
 			EdgeTauntTimer_enabled = .EdgeTauntTimer.Enabled
@@ -727,16 +785,13 @@ Public Class SessionState
 			VideoTauntTimer_enabled = .VideoTauntTimer.Enabled
 			WaitTimer_enabled = .WaitTimer.Enabled
 			WMPTimer_enabled = .WMPTimer.Enabled
-			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			'								Get Timer Intervals
-			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			AvoidTheEdge_Interval = .AvoidTheEdge.Interval
+            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+            '								Get Timer Intervals
+            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+            AvoidTheEdge_Interval = .AvoidTheEdge.Interval
 			AvoidTheEdgeResume_Interval = .AvoidTheEdgeResume.Interval
 			AvoidTheEdgeTaunts_Interval = .AvoidTheEdgeTaunts.Interval
 			CensorshipTimer_Interval = .CensorshipTimer.Interval
-			Contact1Timer_Interval = .Contact1Timer.Interval
-			Contact2Timer_Interval = .Contact2Timer.Interval
-			Contact3Timer_Interval = .Contact3Timer.Interval
 			CustomSlideshowTimer_Interval = .CustomSlideshowTimer.Interval
 			EdgeCountTimer_Interval = .EdgeCountTimer.Interval
 			EdgeTauntTimer_Interval = .EdgeTauntTimer.Interval
@@ -760,19 +815,19 @@ Public Class SessionState
 			WaitTimer_Interval = .WaitTimer.Interval
 			WMPTimer_Interval = .WMPTimer.Interval
 
-			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			'								Get WMP-Data
-			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			serialized_WMP_Visible = .DomWMP.Visible
+            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+            '								Get WMP-Data
+            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+            serialized_WMP_Visible = .DomWMP.Visible
 			serialized_WMP_URL = .DomWMP.URL
 			serialized_WMP_Playstate = .DomWMP.playState
 			serialized_WMP_Position = .DomWMP.Ctlcontrols.currentPosition
 
-			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			'								Get Flags
-			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			If serialized_Flags Is Nothing Then _
-							serialized_Flags = New List(Of String)
+            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+            '								Get Flags
+            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+            If serialized_Flags Is Nothing Then _
+						serialized_Flags = New List(Of String)
 
 			serialized_Flags.Clear()
 
@@ -782,9 +837,9 @@ Public Class SessionState
 				Next
 			End If
 
-			' Get temporary Flags
-			If serialized_FlagsTemp Is Nothing Then _
-							serialized_FlagsTemp = New List(Of String)
+            ' Get temporary Flags
+            If serialized_FlagsTemp Is Nothing Then _
+						serialized_FlagsTemp = New List(Of String)
 			serialized_FlagsTemp.Clear()
 
 			If Directory.Exists(Folders.TempFlags) Then
@@ -796,8 +851,12 @@ Public Class SessionState
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 			'								Get Variables
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+
+
+
 			If serialized_Variables Is Nothing Then _
-							serialized_Variables = New Dictionary(Of String, String)
+						serialized_Variables = New Dictionary(Of String, String)
+
 
 			serialized_Variables.Clear()
 
@@ -814,16 +873,16 @@ Public Class SessionState
 
 	End Sub
 
-	''' <summary>
-	''' Activates the current SessionState.
-	''' </summary>
-	''' <param name="activateForm">The Form to start the session on.</param>
-	Friend Sub Activate(ByVal activateForm As Form1)
-		' Check if InvokeIsRequired
-		If activateForm IsNot Nothing _
-		AndAlso activateForm.InvokeRequired Then
-			' Calling from another Thread -> Invoke on controls UI-Thread
-			Dim Act As Action(Of Form1) = Sub(s1) Activate(s1)
+    ''' <summary>
+    ''' Activates the current SessionState.
+    ''' </summary>
+    ''' <param name="activateForm">The Form to start the session on.</param>
+    Friend Sub Activate(ByVal activateForm As Form1)
+        ' Check if InvokeIsRequired
+        If activateForm IsNot Nothing _
+	AndAlso activateForm.InvokeRequired Then
+            ' Calling from another Thread -> Invoke on controls UI-Thread
+            Dim Act As Action(Of Form1) = Sub(s1) Activate(s1)
 			activateForm.Invoke(Act)
 		End If
 		' Called from Controls UI-Thread -> Execute Code.
@@ -831,16 +890,13 @@ Public Class SessionState
 		ActivationForm = activateForm
 
 		With activateForm
-			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			'							Disable Timers to avoid Exceptions
-			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			.AvoidTheEdge.Enabled = False
+            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+            '							Disable Timers to avoid Exceptions
+            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+            .AvoidTheEdge.Enabled = False
 			.AvoidTheEdgeResume.Enabled = False
 			.AvoidTheEdgeTaunts.Enabled = False
 			.CensorshipTimer.Enabled = False
-			.Contact1Timer.Enabled = False
-			.Contact2Timer.Enabled = False
-			.Contact3Timer.Enabled = False
 			.CustomSlideshowTimer.Enabled = False
 			.EdgeCountTimer.Enabled = False
 			.EdgeTauntTimer.Enabled = False
@@ -867,10 +923,10 @@ Public Class SessionState
 			If .ssh IsNot Nothing Then .ssh.Dispose()
 			.ssh = Me
 
-			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			'							Set Domme Personality
-			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			If DomPersonality = String.Empty Then
+            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+            '							Set Domme Personality
+            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+            If DomPersonality = String.Empty Then
 				DomPersonality = My.Settings.DomPersonality
 			End If
 
@@ -880,10 +936,10 @@ Public Class SessionState
 				.dompersonalitycombobox.SelectedItem = DomPersonality
 			End If
 
-			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			'							Restore Variables 
-			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			If serialized_Variables.Count > 0 Then
+            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+            '							Restore Variables 
+            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+            If serialized_Variables.Count > 0 Then
 				If Directory.Exists(Folders.Variables) = False Then
 					Directory.CreateDirectory(Folders.Variables)
 				Else
@@ -894,14 +950,14 @@ Public Class SessionState
 
 				For Each fn As String In serialized_Variables.Keys
 					My.Computer.FileSystem.WriteAllText(Folders.Variables & fn,
-													serialized_Variables(fn), False)
+												serialized_Variables(fn), False)
 				Next
 			End If
 
-			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			'							Restore flags 
-			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			If serialized_Flags.Count > 0 Then
+            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+            '							Restore flags 
+            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+            If serialized_Flags.Count > 0 Then
 				If Directory.Exists(Folders.Flags) = False Then
 					Directory.CreateDirectory(Folders.Flags)
 				Else
@@ -912,13 +968,13 @@ Public Class SessionState
 
 				For Each fn As String In serialized_Flags
 					Using fs As New FileStream(Folders.Flags & fn,
-											   FileMode.Create) : End Using
+											FileMode.Create) : End Using
 				Next
 			End If
-			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			'						Restore temporary flags 
-			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			If Directory.Exists(Folders.TempFlags) = False Then
+            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+            '						Restore temporary flags 
+            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+            If Directory.Exists(Folders.TempFlags) = False Then
 				Directory.CreateDirectory(Folders.TempFlags)
 			Else
 				For Each fn As String In Directory.GetFiles(Folders.TempFlags)
@@ -929,21 +985,22 @@ Public Class SessionState
 			If serialized_FlagsTemp.Count > 0 Then
 				For Each fn As String In serialized_FlagsTemp
 					Using fs As New FileStream(Folders.TempFlags & fn,
-											   FileMode.Create) : End Using
+											FileMode.Create) : End Using
 				Next
 			End If
-			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			'								Set Slideshows
-			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			If SlideshowMain Is Nothing Then SlideshowMain = New ContactData(ContactType.Domme)
+            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+            '								Set Slideshows
+            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+            If SlideshowMain Is Nothing Then SlideshowMain = New ContactData(ContactType.Domme)
 			If SlideshowContact1 Is Nothing Then SlideshowContact1 = New ContactData(ContactType.Contact1)
 			If SlideshowContact2 Is Nothing Then SlideshowContact2 = New ContactData(ContactType.Contact2)
 			If SlideshowContact3 Is Nothing Then SlideshowContact3 = New ContactData(ContactType.Contact3)
+			If currentlyPresentContacts.Count = 0 Then currentlyPresentContacts.Add(SlideshowMain.TypeName)
 
-			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			'							Set Picturebox & WMP
-			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			If isURL(ImageLocation) Then
+            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+            '							Set Picturebox & WMP
+            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+            If isURL(ImageLocation) Then
 				.ShowImage(ImageLocation, True)
 			ElseIf File.Exists(ImageLocation) Then
 				.ShowImage(ImageLocation, True)
@@ -973,31 +1030,26 @@ Public Class SessionState
 				.DomWMP.Ctlcontrols.play()
 			End If
 
-			' Hide Cencorshipbar , if no game is running 
-			If CensorshipGame = True Or CensorshipTimer_enabled = False Then .CensorshipBar.Visible = False
+            ' Hide Cencorshipbar , if no game is running 
+            If CensorshipGame = True Or CensorshipTimer_enabled = False Then .CensorshipBar.Visible = False
 
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 			'							Set Chat and StrokePace
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 
-			.ChatText.DocumentText = Chat
-			.ChatText2.DocumentText = Chat
-			.ChatReadyState()
+			activateForm.ChatUpdate()
 
 			' To update the threadsafe Metronome StrokePace 
 			' Only needs to be done on activation
 			.StrokePace = StrokePace
 
-			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			'								Set Timer Intervals
-			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			.AvoidTheEdge.Interval = AvoidTheEdge_Interval
+            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+            '								Set Timer Intervals
+            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+            .AvoidTheEdge.Interval = AvoidTheEdge_Interval
 			.AvoidTheEdgeResume.Interval = AvoidTheEdgeResume_Interval
 			.AvoidTheEdgeTaunts.Interval = AvoidTheEdgeTaunts_Interval
 			.CensorshipTimer.Interval = CensorshipTimer_Interval
-			.Contact1Timer.Interval = Contact1Timer_Interval
-			.Contact2Timer.Interval = Contact2Timer_Interval
-			.Contact3Timer.Interval = Contact3Timer_Interval
 			.CustomSlideshowTimer.Interval = CustomSlideshowTimer_Interval
 			.EdgeCountTimer.Interval = EdgeCountTimer_Interval
 			.EdgeTauntTimer.Interval = EdgeTauntTimer_Interval
@@ -1021,16 +1073,13 @@ Public Class SessionState
 			.WaitTimer.Interval = WaitTimer_Interval
 			.WMPTimer.Interval = WMPTimer_Interval
 
-			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			'							Set Timer EnableStates
-			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			.AvoidTheEdge.Enabled = AvoidTheEdge_enabled
+            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+            '							Set Timer EnableStates
+            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+            .AvoidTheEdge.Enabled = AvoidTheEdge_enabled
 			.AvoidTheEdgeResume.Enabled = AvoidTheEdgeResume_enabled
 			.AvoidTheEdgeTaunts.Enabled = AvoidTheEdgeTaunts_enabled
 			.CensorshipTimer.Enabled = CensorshipTimer_enabled
-			.Contact1Timer.Enabled = Contact1Timer_enabled
-			.Contact2Timer.Enabled = Contact2Timer_enabled
-			.Contact3Timer.Enabled = Contact3Timer_enabled
 			.CustomSlideshowTimer.Enabled = CustomSlideshowTimer_enabled
 			.EdgeCountTimer.Enabled = EdgeCountTimer_enabled
 			.EdgeTauntTimer.Enabled = EdgeTauntTimer_enabled
@@ -1070,22 +1119,31 @@ Public Class SessionState
 	''' <remarks>This function is invoked on the <see cref="ActivationForm"/>'s UI-Thread.</remarks>
 	Friend Sub Load(ByVal filepath As String, ByVal setActive As Boolean)
 		Try
-			' Check if InvokeIsRequired
-			If setActive = True _
-			AndAlso ActivationForm IsNot Nothing _
-			AndAlso ActivationForm.InvokeRequired Then
-				' Calling from another Thread -> Invoke on controls UI-Thread
-				Dim Act As Action(Of String, Boolean) = Sub(s1, s2) Load(s1, s2)
+            ' Check if InvokeIsRequired
+            If setActive = True _
+		AndAlso ActivationForm IsNot Nothing _
+		AndAlso ActivationForm.InvokeRequired Then
+                ' Calling from another Thread -> Invoke on controls UI-Thread
+                Dim Act As Action(Of String, Boolean) = Sub(s1, s2) Load(s1, s2)
 				ActivationForm.Invoke(Act)
 				Exit Sub
 			End If
-			' Called from Controls UI-Thread -> Execute Code.
+            ' Called from Controls UI-Thread -> Execute Code.
 
-			If setActive AndAlso ActivationForm Is Nothing Then _
-			Throw New InvalidOperationException("It is impossible to reactivate a not activated session.")
+            If setActive AndAlso ActivationForm Is Nothing Then _
+		Throw New InvalidOperationException("It is impossible to reactivate a not activated session.")
 
 
 			Dim tmpState As SessionState = DirectCast(BinaryDeserialize(filepath), SessionState)
+
+
+			If tmpState.Version Is Nothing Then
+				Throw New SerializationException("The session you are trying to open has been created with an unknown version of Tease-AI.")
+			ElseIf New Version(tmpState.Version) < New Version(MINVERSION) Then
+				Throw New SerializationException("The session you are trying to open has been created with version " & Version.ToString &
+												 ". This version of Tease-AI is only capable to continue sessions from version " & MINVERSION & " or above.")
+			End If
+
 
 			If setActive Then tmpState.Activate(ActivationForm)
 		Catch ex As Exception
@@ -1093,11 +1151,11 @@ Public Class SessionState
 		End Try
 	End Sub
 
-	''' <summary>
-	''' Stores the SessionState to disk.
-	''' </summary>
-	''' <param name="filePath">The filepath to store the object to.</param>
-	Friend Sub Save(ByVal filePath As String)
+    ''' <summary>
+    ''' Stores the SessionState to disk.
+    ''' </summary>
+    ''' <param name="filePath">The filepath to store the object to.</param>
+    Friend Sub Save(ByVal filePath As String)
 		Try
 			If ActivationForm IsNot Nothing Then FetchFormData(ActivationForm)
 
@@ -1107,24 +1165,26 @@ Public Class SessionState
 		End Try
 	End Sub
 
-	''' <summary>
-	''' Resets the current session. Basically it disposes the current <see cref="SessionState"/>-instance
-	''' and applies a new <see cref="SessionState"/>-instance to <see cref="Form1.ssh"/>.
-	''' <para></para>
-	''' After calling this method you have to update your object references.
-	''' </summary>
-	''' <returns>True if the sesstion state has been activated.</returns>
-	''' <remarks>
-	''' If the current session is activated, the function is invoked on <see cref="ActivationForm"/>'s 
-	''' UI-Thread.</remarks>
-	Public Function Reset() As Boolean
-		' Check if InvokeIsRequired
-		If ActivationForm IsNot Nothing _
-		AndAlso ActivationForm.InvokeRequired Then
-			' Calling from another Thread -> Invoke on controls UI-Thread
-			Return CType(ActivationForm.UIThread(AddressOf Reset), Boolean)
+    ''' <summary>
+    ''' Resets the current session. Basically it disposes the current <see cref="SessionState"/>-instance
+    ''' and applies a new <see cref="SessionState"/>-instance to <see cref="Form1.ssh"/>.
+    ''' <para></para>
+    ''' After calling this method you have to update your object references.
+    ''' </summary>
+    ''' <returns>True if the sesstion state has been activated.</returns>
+    ''' <remarks>
+    ''' If the current session is activated, the function is invoked on <see cref="ActivationForm"/>'s 
+    ''' UI-Thread.</remarks>
+    Public Function Reset() As Boolean
+        ' Check if InvokeIsRequired
+        If ActivationForm IsNot Nothing _
+	AndAlso ActivationForm.InvokeRequired Then
+            ' Calling from another Thread -> Invoke on controls UI-Thread
+            Return CType(ActivationForm.UIThread(AddressOf Reset), Boolean)
 		End If
-		' Called from Controls UI-Thread -> Execute Code.
+        ' Called from Controls UI-Thread -> Execute Code.
+
+		FrmSettings.TBHonorific.Text = My.Settings.SubHonorific
 
 		Dispose()
 
@@ -1136,5 +1196,22 @@ Public Class SessionState
 		End If
 	End Function
 
+	Public Function obtainSplitParts(splitMe As String, isChat As Boolean) As String()
+		splitMe = "[" & splitMe & "] Null"
+		Dim Splits As String() = splitMe.Split(New Char() {"]"c})
+		Splits(0) = Splits(0).Replace("[", "")
+		Do
+			Splits(0) = Splits(0).Replace("  ", " ")
+			Splits(0) = Splits(0).Replace(" ,", ",")
+			Splits(0) = Splits(0).Replace(", ", ",")
+			Splits(0) = Splits(0).Replace("'", "")
+		Loop Until Not Splits(0).Contains("  ") And Not Splits(0).Contains(", ") And Not Splits(0).Contains(" ,") And Not Splits(0).Contains("'")
+		If isChat Then
+            'che(32) is the code for empty space
+            Return Splits(0).Split(New Char() {Chr(32), ","c})
+		Else
+			Return Splits(0).Split(New Char() {","c})
+		End If
+	End Function
 End Class
 

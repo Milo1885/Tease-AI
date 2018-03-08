@@ -68,7 +68,7 @@ Partial Class Form1
 			Set(value As String)
 				If value Is Nothing Then
 					_URLFile = ""
-				ElseIf value.ToLower.EndsWith(".txt") = False
+				ElseIf value.ToLower.EndsWith(".txt") = False Then
 					_URLFile = ""
 				Else
 					_URLFile = value
@@ -132,7 +132,7 @@ Partial Class Form1
 				'                                            All Errors
 				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 				Log.WriteError("Failed to fetch ImageList for genre." & Name.ToString & " : " & ex.Message, ex,
-							   "Excetion at: " & Name.ToString & ".ToList()")
+					  "Exception at: " & Name.ToString & ".ToList()")
 				Return New List(Of String)
 			End Try
 			Return rtnList
@@ -185,19 +185,21 @@ Partial Class Form1
 					'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 					' Blog Images - End
 					'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-				ElseIf Name = ImageGenre.Liked
+				ElseIf Name = ImageGenre.Liked Then
 					'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 					'                                  Liked Images
 					'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 					Try
-						Dim addlist As List(Of String) = Txt2List(pathLikeList)
+						If File.Exists(Application.StartupPath & "\Images\System\LikedImageURLs.txt") Then
+							Dim addlist As List(Of String) = Txt2List(pathLikeList)
 
-						' Remove all URLs if Offline-Mode is activated
-						If OfflineMode Or Type = ImageSourceType.Local Then
-							addlist.RemoveAll(Function(x) isURL(x))
+							' Remove all URLs if Offline-Mode is activated
+							If OfflineMode Or Type = ImageSourceType.Local Then
+								addlist.RemoveAll(Function(x) isURL(x))
+							End If
+
+							rtnList.AddRange(addlist)
 						End If
-
-						rtnList.AddRange(addlist)
 					Catch ex As Exception
 						Log.WriteError(ex.Message, ex, "Error occured while loading Likelist")
 						GoTo exitEmpty
@@ -205,19 +207,21 @@ Partial Class Form1
 					'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 					' Liked Images - End
 					'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-				ElseIf Name = ImageGenre.Disliked
+				ElseIf Name = ImageGenre.Disliked Then
 					'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 					'                                Disliked Images
 					'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 					Try
-						Dim addlist As List(Of String) = Txt2List(Application.StartupPath & "\Images\System\DislikedImageURLs.txt")
+						If File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt") Then
+							Dim addlist As List(Of String) = Txt2List(Application.StartupPath & "\Images\System\DislikedImageURLs.txt")
 
-						' Remove all URLs if Offline-Mode is activated
-						If OfflineMode Or Type = ImageSourceType.Local Then
-							addlist.RemoveAll(Function(x) isURL(x))
+							' Remove all URLs if Offline-Mode is activated
+							If OfflineMode Or Type = ImageSourceType.Local Then
+								addlist.RemoveAll(Function(x) isURL(x))
+							End If
+
+							rtnList.AddRange(addlist)
 						End If
-
-						rtnList.AddRange(addlist)
 					Catch ex As Exception
 						Log.WriteError(ex.Message, ex, "Error occured while loading Dislikelist")
 						GoTo exitEmpty
@@ -273,7 +277,7 @@ Partial Class Form1
 				'                                            All Errors
 				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 				Log.WriteError("Failed to fetch ImageList for genre." & Name.ToString & " and Source." & Type.ToString & " : " & ex.Message, ex,
-							   "Excetion at: " & Name.ToString & ".ToList(" & Type.ToString & ")")
+				  "Exception at: " & Name.ToString & ".ToList(" & Type.ToString & ")")
 				Return New List(Of String)
 			End Try
 exitEmpty:
@@ -394,58 +398,58 @@ NoneFound:
 				})
 
 			.Add(ImageGenre.Boobs, New ImageDataContainer With
-				 {
-					.Name = ImageGenre.Boobs,
-					.LocalDirectory = If(My.Settings.CBIBoobs, My.Settings.LBLBoobPath, ""),
-					.LocalSubDirectories = My.Settings.CBButtSubDir,
-					.UrlFile = If(My.Settings.UrlFileBoobsEnabled, My.Settings.UrlFileBoobs, ""),
-					.SYS_NoPornAllowed = SysNoPornAllowed
-				})
+			  {
+			  .Name = ImageGenre.Boobs,
+			  .LocalDirectory = If(My.Settings.CBIBoobs, My.Settings.LBLBoobPath, ""),
+			  .LocalSubDirectories = My.Settings.CBBoobSubDir,
+			  .UrlFile = If(My.Settings.UrlFileBoobsEnabled, My.Settings.UrlFileBoobs, ""),
+			  .SYS_NoPornAllowed = SysNoPornAllowed
+			 })
 
 			.Add(ImageGenre.Hardcore, New ImageDataContainer With
-				 {
-					.Name = ImageGenre.Hardcore,
-					.LocalDirectory = If(My.Settings.CBIHardcore, My.Settings.IHardcore, ""),
-					.LocalSubDirectories = My.Settings.CBHardcore,
-					.UrlFile = If(My.Settings.UrlFileHardcoreEnabled, My.Settings.UrlFileHardcore, ""),
-					.SYS_NoPornAllowed = SysNoPornAllowed
-				})
+			  {
+			  .Name = ImageGenre.Hardcore,
+			  .LocalDirectory = If(My.Settings.CBIHardcore, My.Settings.IHardcore, ""),
+			  .LocalSubDirectories = My.Settings.IHardcoreSD,
+			  .UrlFile = If(My.Settings.UrlFileHardcoreEnabled, My.Settings.UrlFileHardcore, ""),
+			  .SYS_NoPornAllowed = SysNoPornAllowed
+			 })
 
 			.Add(ImageGenre.Softcore, New ImageDataContainer With
-				 {
-					.Name = ImageGenre.Softcore,
-					.LocalDirectory = If(My.Settings.CBISoftcore, My.Settings.ISoftcore, ""),
-					.LocalSubDirectories = My.Settings.CBSoftcore,
-					.UrlFile = If(My.Settings.UrlFileSoftcoreEnabled, My.Settings.UrlFileSoftcore, ""),
-					.SYS_NoPornAllowed = SysNoPornAllowed
-				})
+			  {
+			  .Name = ImageGenre.Softcore,
+			  .LocalDirectory = If(My.Settings.CBISoftcore, My.Settings.ISoftcore, ""),
+			  .LocalSubDirectories = My.Settings.ISoftcoreSD,
+			  .UrlFile = If(My.Settings.UrlFileSoftcoreEnabled, My.Settings.UrlFileSoftcore, ""),
+			  .SYS_NoPornAllowed = SysNoPornAllowed
+			 })
 
 			.Add(ImageGenre.Lesbian, New ImageDataContainer With
-				 {
-					.Name = ImageGenre.Lesbian,
-					.LocalDirectory = If(My.Settings.CBILesbian, My.Settings.ILesbian, ""),
-					.LocalSubDirectories = My.Settings.CBLesbian,
-					.UrlFile = If(My.Settings.UrlFileLesbianEnabled, My.Settings.UrlFileLesbian, ""),
-					.SYS_NoPornAllowed = SysNoPornAllowed
-				})
+			  {
+			  .Name = ImageGenre.Lesbian,
+			  .LocalDirectory = If(My.Settings.CBILesbian, My.Settings.ILesbian, ""),
+			  .LocalSubDirectories = My.Settings.ILesbianSD,
+			  .UrlFile = If(My.Settings.UrlFileLesbianEnabled, My.Settings.UrlFileLesbian, ""),
+			  .SYS_NoPornAllowed = SysNoPornAllowed
+			 })
 
 			.Add(ImageGenre.Blowjob, New ImageDataContainer With
-				 {
-					.Name = ImageGenre.Blowjob,
-					.LocalDirectory = If(My.Settings.CBIBlowjob, My.Settings.IBlowjob, ""),
-					.LocalSubDirectories = My.Settings.CBBlowjob,
-					.UrlFile = If(My.Settings.UrlFileBlowjobEnabled, My.Settings.UrlFileBlowjob, ""),
-					.SYS_NoPornAllowed = SysNoPornAllowed
-				})
+			  {
+			  .Name = ImageGenre.Blowjob,
+			  .LocalDirectory = If(My.Settings.CBIBlowjob, My.Settings.IBlowjob, ""),
+			  .LocalSubDirectories = My.Settings.IBlowjobSD,
+			  .UrlFile = If(My.Settings.UrlFileBlowjobEnabled, My.Settings.UrlFileBlowjob, ""),
+			  .SYS_NoPornAllowed = SysNoPornAllowed
+			 })
 
 			.Add(ImageGenre.Femdom, New ImageDataContainer With
-				 {
-					.Name = ImageGenre.Femdom,
-					.LocalDirectory = If(My.Settings.CBIFemdom, My.Settings.IFemdom, ""),
-					.LocalSubDirectories = My.Settings.CBFemdom,
-					.UrlFile = If(My.Settings.UrlFileFemdomEnabled, My.Settings.UrlFileFemdom, ""),
-					.SYS_NoPornAllowed = SysNoPornAllowed
-				})
+			  {
+			  .Name = ImageGenre.Femdom,
+			  .LocalDirectory = If(My.Settings.CBIFemdom, My.Settings.IFemdom, ""),
+			  .LocalSubDirectories = My.Settings.IFemdomSD,
+			  .UrlFile = If(My.Settings.UrlFileFemdomEnabled, My.Settings.UrlFileFemdom, ""),
+			  .SYS_NoPornAllowed = SysNoPornAllowed
+			 })
 
 			.Add(ImageGenre.Lezdom, New ImageDataContainer With
 				 {
@@ -644,7 +648,7 @@ NoNeFound:
 			If WaitToFinish Then BWimageFetcher.WaitToFinish()
 		Catch ex As Exception
 			Log.WriteError("Error occurred while displaying image. Fallback Failed.",
-							 ex, "ShowImage(String, Boolean)")
+				 ex, "ShowImage(String, Boolean)")
 		End Try
 
 	End Sub
@@ -750,8 +754,7 @@ retryLocal: ' If an exception occures the function is restarted and the Errorima
 				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 				Debug.Print("ImageFetch - DoWork - 1st Exception perfomaing fallback")
 				Log.WriteError("Error loading Image: """ & .ImageLocation & """", ex,
-						"Error loading image. Performing fallback to errorimage.")
-				.ImageLocation = errorimagepath
+				  "Error loading image. Performing fallback to errorimage.")
 				GoTo retryLocal
 			Catch ex As Exception
 				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
@@ -759,7 +762,7 @@ retryLocal: ' If an exception occures the function is restarted and the Errorima
 				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 				Debug.Print("ImageFetch - DoWork - 2nd Exception - fallback failed.")
 				Log.WriteError("Fallback to errorimage """ & .ImageLocation & """ failed ",
-						ex, "Error loading image")
+				  ex, "Error loading image")
 			End Try
 		End With
 
@@ -804,8 +807,6 @@ retryLocal: ' If an exception occures the function is restarted and the Errorima
 			If TypeOf e.Error Is TimeoutException Then Debug.Print(e.Error.Message)
 			If e.Error IsNot Nothing Then Exit Sub
 
-			ssh.JustShowedBlogImage = True
-
 			If e.Cancelled Then
 				MainPictureboxSetImage(New Bitmap(Image.FromFile(pathImageErrorOnLoading)), "")
 				Exit Sub
@@ -830,7 +831,7 @@ retryLocal: ' If an exception occures the function is restarted and the Errorima
 			'                                     All Errors
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			Log.WriteError("An Exception occurred while displaying image: " & vbCrLf & ex.Message,
-					 ex, "Error Displaying image.")
+			   ex, "Error Displaying image.")
 		End Try
 	End Sub
 
@@ -911,7 +912,7 @@ retryLocal: ' If an exception occures the function is restarted and the Errorima
 			'                                            All Errors
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			Log.WriteError("Unable to set image in MainPictureBox: " & ex.Message,
-								ex, "MainPictureboxSetImage")
+				 ex, "MainPictureboxSetImage")
 		End Try
 	End Sub
 

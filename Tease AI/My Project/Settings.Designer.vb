@@ -665,3662 +665,3674 @@ Namespace My
                 Me("Glitter3") = value
             End Set
         End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("0, 128, 255")>
-		Public Property GlitterNCDommeColor() As Global.System.Drawing.Color
-			Get
-				Return CType(Me("GlitterNCDommeColor"), Global.System.Drawing.Color)
-			End Get
-			Set
-				Me("GlitterNCDommeColor") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("255, 0, 128")>
-		Public Property GlitterNC1Color() As Global.System.Drawing.Color
-			Get
-				Return CType(Me("GlitterNC1Color"), Global.System.Drawing.Color)
-			End Get
-			Set
-				Me("GlitterNC1Color") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("128, 128, 192")>
-		Public Property GlitterNC2Color() As Global.System.Drawing.Color
-			Get
-				Return CType(Me("GlitterNC2Color"), Global.System.Drawing.Color)
-			End Get
-			Set
-				Me("GlitterNC2Color") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("255, 128, 255")>
-		Public Property GlitterNC3Color() As Global.System.Drawing.Color
-			Get
-				Return CType(Me("GlitterNC3Color"), Global.System.Drawing.Color)
-			End Get
-			Set
-				Me("GlitterNC3Color") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("5")>
-		Public Property GlitterDSlider() As Integer
-			Get
-				Return CType(Me("GlitterDSlider"), Integer)
-			End Get
-			Set
-				Me("GlitterDSlider") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("5")>
-		Public Property Glitter1Slider() As Integer
-			Get
-				Return CType(Me("Glitter1Slider"), Integer)
-			End Get
-			Set
-				Me("Glitter1Slider") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("5")>
-		Public Property Glitter2Slider() As Integer
-			Get
-				Return CType(Me("Glitter2Slider"), Integer)
-			End Get
-			Set
-				Me("Glitter2Slider") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("5")>
-		Public Property Glitter3Slider() As Integer
-			Get
-				Return CType(Me("Glitter3Slider"), Integer)
-			End Get
-			Set
-				Me("Glitter3Slider") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CBGlitterFeed() As Boolean
-			Get
-				Return CType(Me("CBGlitterFeed"), Boolean)
-			End Get
-			Set
-				Me("CBGlitterFeed") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property CBGlitter1() As Boolean
-			Get
-				Return CType(Me("CBGlitter1"), Boolean)
-			End Get
-			Set
-				Me("CBGlitter1") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property CBGlitter2() As Boolean
-			Get
-				Return CType(Me("CBGlitter2"), Boolean)
-			End Get
-			Set
-				Me("CBGlitter2") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property CBGlitter3() As Boolean
-			Get
-				Return CType(Me("CBGlitter3"), Boolean)
-			End Get
-			Set
-				Me("CBGlitter3") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CBTease() As Boolean
-			Get
-				Return CType(Me("CBTease"), Boolean)
-			End Get
-			Set
-				Me("CBTease") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CBEgotist() As Boolean
-			Get
-				Return CType(Me("CBEgotist"), Boolean)
-			End Get
-			Set
-				Me("CBEgotist") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property CBTrivia() As Boolean
-			Get
-				Return CType(Me("CBTrivia"), Boolean)
-			End Get
-			Set
-				Me("CBTrivia") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CBDaily() As Boolean
-			Get
-				Return CType(Me("CBDaily"), Boolean)
-			End Get
-			Set
-				Me("CBDaily") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CBCustom1() As Boolean
-			Get
-				Return CType(Me("CBCustom1"), Boolean)
-			End Get
-			Set
-				Me("CBCustom1") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CBCustom2() As Boolean
-			Get
-				Return CType(Me("CBCustom2"), Boolean)
-			End Get
-			Set
-				Me("CBCustom2") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property CB1Bratty() As Boolean
-			Get
-				Return CType(Me("CB1Bratty"), Boolean)
-			End Get
-			Set
-				Me("CB1Bratty") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CB1Cruel() As Boolean
-			Get
-				Return CType(Me("CB1Cruel"), Boolean)
-			End Get
-			Set
-				Me("CB1Cruel") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CB1Caring() As Boolean
-			Get
-				Return CType(Me("CB1Caring"), Boolean)
-			End Get
-			Set
-				Me("CB1Caring") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CB1Angry() As Boolean
-			Get
-				Return CType(Me("CB1Angry"), Boolean)
-			End Get
-			Set
-				Me("CB1Angry") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CB1Custom1() As Boolean
-			Get
-				Return CType(Me("CB1Custom1"), Boolean)
-			End Get
-			Set
-				Me("CB1Custom1") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CB1Custom2() As Boolean
-			Get
-				Return CType(Me("CB1Custom2"), Boolean)
-			End Get
-			Set
-				Me("CB1Custom2") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CB2Bratty() As Boolean
-			Get
-				Return CType(Me("CB2Bratty"), Boolean)
-			End Get
-			Set
-				Me("CB2Bratty") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property CB2Cruel() As Boolean
-			Get
-				Return CType(Me("CB2Cruel"), Boolean)
-			End Get
-			Set
-				Me("CB2Cruel") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CB2Caring() As Boolean
-			Get
-				Return CType(Me("CB2Caring"), Boolean)
-			End Get
-			Set
-				Me("CB2Caring") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CB2Angry() As Boolean
-			Get
-				Return CType(Me("CB2Angry"), Boolean)
-			End Get
-			Set
-				Me("CB2Angry") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CB2Custom1() As Boolean
-			Get
-				Return CType(Me("CB2Custom1"), Boolean)
-			End Get
-			Set
-				Me("CB2Custom1") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CB2Custom2() As Boolean
-			Get
-				Return CType(Me("CB2Custom2"), Boolean)
-			End Get
-			Set
-				Me("CB2Custom2") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CB3Bratty() As Boolean
-			Get
-				Return CType(Me("CB3Bratty"), Boolean)
-			End Get
-			Set
-				Me("CB3Bratty") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CB3Cruel() As Boolean
-			Get
-				Return CType(Me("CB3Cruel"), Boolean)
-			End Get
-			Set
-				Me("CB3Cruel") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property CB3Caring() As Boolean
-			Get
-				Return CType(Me("CB3Caring"), Boolean)
-			End Get
-			Set
-				Me("CB3Caring") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CB3Angry() As Boolean
-			Get
-				Return CType(Me("CB3Angry"), Boolean)
-			End Get
-			Set
-				Me("CB3Angry") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CB3Custom1() As Boolean
-			Get
-				Return CType(Me("CB3Custom1"), Boolean)
-			End Get
-			Set
-				Me("CB3Custom1") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CB3Custom2() As Boolean
-			Get
-				Return CType(Me("CB3Custom2"), Boolean)
-			End Get
-			Set
-				Me("CB3Custom2") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("Domme Name")>
-		Public Property DomName() As String
-			Get
-				Return CType(Me("DomName"), String)
-			End Get
-			Set
-				Me("DomName") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("Sub Name")>
-		Public Property SubName() As String
-			Get
-				Return CType(Me("SubName"), String)
-			End Get
-			Set
-				Me("SubName") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("stroker")>
-		Public Property pnSetting1() As String
-			Get
-				Return CType(Me("pnSetting1"), String)
-			End Get
-			Set
-				Me("pnSetting1") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("stroker")>
-		Public Property pnSetting2() As String
-			Get
-				Return CType(Me("pnSetting2"), String)
-			End Get
-			Set
-				Me("pnSetting2") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("stroker")>
-		Public Property pnSetting3() As String
-			Get
-				Return CType(Me("pnSetting3"), String)
-			End Get
-			Set
-				Me("pnSetting3") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("stroker")>
-		Public Property pnSetting4() As String
-			Get
-				Return CType(Me("pnSetting4"), String)
-			End Get
-			Set
-				Me("pnSetting4") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("stroker")>
-		Public Property pnSetting5() As String
-			Get
-				Return CType(Me("pnSetting5"), String)
-			End Get
-			Set
-				Me("pnSetting5") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("stroker")>
-		Public Property pnSetting6() As String
-			Get
-				Return CType(Me("pnSetting6"), String)
-			End Get
-			Set
-				Me("pnSetting6") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("stroker")>
-		Public Property pnSetting7() As String
-			Get
-				Return CType(Me("pnSetting7"), String)
-			End Get
-			Set
-				Me("pnSetting7") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("stroker")>
-		Public Property pnSetting8() As String
-			Get
-				Return CType(Me("pnSetting8"), String)
-			End Get
-			Set
-				Me("pnSetting8") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("#0000FF")>
-		Public Property DomColor() As String
-			Get
-				Return CType(Me("DomColor"), String)
-			End Get
-			Set
-				Me("DomColor") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("#FF0000")>
-		Public Property SubColor() As String
-			Get
-				Return CType(Me("SubColor"), String)
-			End Get
-			Set
-				Me("SubColor") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("Blue")>
-		Public Property DomColorColor() As Global.System.Drawing.Color
-			Get
-				Return CType(Me("DomColorColor"), Global.System.Drawing.Color)
-			End Get
-			Set
-				Me("DomColorColor") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("Red")>
-		Public Property SubColorColor() As Global.System.Drawing.Color
-			Get
-				Return CType(Me("SubColorColor"), Global.System.Drawing.Color)
-			End Get
-			Set
-				Me("SubColorColor") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property CBTimeStamps() As Boolean
-			Get
-				Return CType(Me("CBTimeStamps"), Boolean)
-			End Get
-			Set
-				Me("CBTimeStamps") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property CBShowNames() As Boolean
-			Get
-				Return CType(Me("CBShowNames"), Boolean)
-			End Get
-			Set
-				Me("CBShowNames") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CBInstantType() As Boolean
-			Get
-				Return CType(Me("CBInstantType"), Boolean)
-			End Get
-			Set
-				Me("CBInstantType") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property CBBlogImageMain() As Boolean
-			Get
-				Return CType(Me("CBBlogImageMain"), Boolean)
-			End Get
-			Set
-				Me("CBBlogImageMain") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CBStretchLandscape() As Boolean
-			Get
-				Return CType(Me("CBStretchLandscape"), Boolean)
-			End Get
-			Set
-				Me("CBStretchLandscape") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property CBMetronome() As Boolean
-			Get
-				Return CType(Me("CBMetronome"), Boolean)
-			End Get
-			Set
-				Me("CBMetronome") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property CBSettingsPause() As Boolean
-			Get
-				Return CType(Me("CBSettingsPause"), Boolean)
-			End Get
-			Set
-				Me("CBSettingsPause") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("3")>
-		Public Property DomLevel() As Integer
-			Get
-				Return CType(Me("DomLevel"), Integer)
-			End Get
-			Set
-				Me("DomLevel") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("Sometimes Allows")>
-		Public Property OrgasmAllow() As String
-			Get
-				Return CType(Me("OrgasmAllow"), String)
-			End Get
-			Set
-				Me("OrgasmAllow") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("Sometimes Ruins")>
-		Public Property OrgasmRuin() As String
-			Get
-				Return CType(Me("OrgasmRuin"), String)
-			End Get
-			Set
-				Me("OrgasmRuin") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property CBAutosaveChatlog() As Boolean
-			Get
-				Return CType(Me("CBAutosaveChatlog"), Boolean)
-			End Get
-			Set
-				Me("CBAutosaveChatlog") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property CBExitSaveChatlog() As Boolean
-			Get
-				Return CType(Me("CBExitSaveChatlog"), Boolean)
-			End Get
-			Set
-				Me("CBExitSaveChatlog") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("0")>
-		Public Property AvgEdgeStroking() As Integer
-			Get
-				Return CType(Me("AvgEdgeStroking"), Integer)
-			End Get
-			Set
-				Me("AvgEdgeStroking") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("0")>
-		Public Property AvgEdgeNoTouch() As Integer
-			Get
-				Return CType(Me("AvgEdgeNoTouch"), Integer)
-			End Get
-			Set
-				Me("AvgEdgeNoTouch") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("0")>
-		Public Property AvgEdgeCount() As Integer
-			Get
-				Return CType(Me("AvgEdgeCount"), Integer)
-			End Get
-			Set
-				Me("AvgEdgeCount") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("0")>
-		Public Property StrokeTimeTotal() As Integer
-			Get
-				Return CType(Me("StrokeTimeTotal"), Integer)
-			End Get
-			Set
-				Me("StrokeTimeTotal") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("10")>
-		Public Property NBWritingTaskMin() As Integer
-			Get
-				Return CType(Me("NBWritingTaskMin"), Integer)
-			End Get
-			Set
-				Me("NBWritingTaskMin") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("20")>
-		Public Property NBWritingTaskMax() As Integer
-			Get
-				Return CType(Me("NBWritingTaskMax"), Integer)
-			End Get
-			Set
-				Me("NBWritingTaskMax") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>
-		Public Property LBLBoobPath() As String
-			Get
-				Return CType(Me("LBLBoobPath"), String)
-			End Get
-			Set
-				Me("LBLBoobPath") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("No URL File selected")>
-		Public Property UrlFileBoobs() As String
-			Get
-				Return CType(Me("UrlFileBoobs"), String)
-			End Get
-			Set
-				Me("UrlFileBoobs") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>
-		Public Property LBLButtPath() As String
-			Get
-				Return CType(Me("LBLButtPath"), String)
-			End Get
-			Set
-				Me("LBLButtPath") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("No URL File selected")>
-		Public Property UrlFileButt() As String
-			Get
-				Return CType(Me("UrlFileButt"), String)
-			End Get
-			Set
-				Me("UrlFileButt") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property CBBnBLocal() As Boolean
-			Get
-				Return CType(Me("CBBnBLocal"), Boolean)
-			End Get
-			Set
-				Me("CBBnBLocal") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CBBnBURL() As Boolean
-			Get
-				Return CType(Me("CBBnBURL"), Boolean)
-			End Get
-			Set
-				Me("CBBnBURL") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property CBBoobSubDir() As Boolean
-			Get
-				Return CType(Me("CBBoobSubDir"), Boolean)
-			End Get
-			Set
-				Me("CBBoobSubDir") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property CBButtSubDir() As Boolean
-			Get
-				Return CType(Me("CBButtSubDir"), Boolean)
-			End Get
-			Set
-				Me("CBButtSubDir") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CBEnableBnB() As Boolean
-			Get
-				Return CType(Me("CBEnableBnB"), Boolean)
-			End Get
-			Set
-				Me("CBEnableBnB") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property CBSlideshowSubDir() As Boolean
-			Get
-				Return CType(Me("CBSlideshowSubDir"), Boolean)
-			End Get
-			Set
-				Me("CBSlideshowSubDir") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CBSlideshowRandom() As Boolean
-			Get
-				Return CType(Me("CBSlideshowRandom"), Boolean)
-			End Get
-			Set
-				Me("CBSlideshowRandom") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("21")>
-		Public Property DomAge() As Integer
-			Get
-				Return CType(Me("DomAge"), Integer)
-			End Get
-			Set
-				Me("DomAge") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("blonde")>
-		Public Property DomHair() As String
-			Get
-				Return CType(Me("DomHair"), String)
-			End Get
-			Set
-				Me("DomHair") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("green")>
-		Public Property DomEyes() As String
-			Get
-				Return CType(Me("DomEyes"), String)
-			End Get
-			Set
-				Me("DomEyes") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("C")>
-		Public Property DomCup() As String
-			Get
-				Return CType(Me("DomCup"), String)
-			End Get
-			Set
-				Me("DomCup") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("Wicked Tease")>
-		Public Property DomPersonality() As String
-			Get
-				Return CType(Me("DomPersonality"), String)
-			End Get
-			Set
-				Me("DomPersonality") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property DomCrazy() As Boolean
-			Get
-				Return CType(Me("DomCrazy"), Boolean)
-			End Get
-			Set
-				Me("DomCrazy") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property DomVulgar() As Boolean
-			Get
-				Return CType(Me("DomVulgar"), Boolean)
-			End Get
-			Set
-				Me("DomVulgar") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property DomSupremacist() As Boolean
-			Get
-				Return CType(Me("DomSupremacist"), Boolean)
-			End Get
-			Set
-				Me("DomSupremacist") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property DomLowercase() As Boolean
-			Get
-				Return CType(Me("DomLowercase"), Boolean)
-			End Get
-			Set
-				Me("DomLowercase") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property DomNoApostrophes() As Boolean
-			Get
-				Return CType(Me("DomNoApostrophes"), Boolean)
-			End Get
-			Set
-				Me("DomNoApostrophes") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property DomNoCommas() As Boolean
-			Get
-				Return CType(Me("DomNoCommas"), Boolean)
-			End Get
-			Set
-				Me("DomNoCommas") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property DomNoPeriods() As Boolean
-			Get
-				Return CType(Me("DomNoPeriods"), Boolean)
-			End Get
-			Set
-				Me("DomNoPeriods") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property DomMeMyMine() As Boolean
-			Get
-				Return CType(Me("DomMeMyMine"), Boolean)
-			End Get
-			Set
-				Me("DomMeMyMine") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("*emotes like this*")>
-		Public Property DomEmotes() As String
-			Get
-				Return CType(Me("DomEmotes"), String)
-			End Get
-			Set
-				Me("DomEmotes") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property DomDenialEnd() As Boolean
-			Get
-				Return CType(Me("DomDenialEnd"), Boolean)
-			End Get
-			Set
-				Me("DomDenialEnd") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property DomOrgasmEnd() As Boolean
-			Get
-				Return CType(Me("DomOrgasmEnd"), Boolean)
-			End Get
-			Set
-				Me("DomOrgasmEnd") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property DomPOT() As Boolean
-			Get
-				Return CType(Me("DomPOT"), Boolean)
-			End Get
-			Set
-				Me("DomPOT") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property DomLimit() As Boolean
-			Get
-				Return CType(Me("DomLimit"), Boolean)
-			End Get
-			Set
-				Me("DomLimit") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("3")>
-		Public Property DomOrgasmPer() As Integer
-			Get
-				Return CType(Me("DomOrgasmPer"), Integer)
-			End Get
-			Set
-				Me("DomOrgasmPer") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("6 months")>
-		Public Property DomPerMonth() As String
-			Get
-				Return CType(Me("DomPerMonth"), String)
-			End Get
-			Set
-				Me("DomPerMonth") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property DomLock() As Boolean
-			Get
-				Return CType(Me("DomLock"), Boolean)
-			End Get
-			Set
-				Me("DomLock") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("3")>
-		Public Property DomMoodMin() As Integer
-			Get
-				Return CType(Me("DomMoodMin"), Integer)
-			End Get
-			Set
-				Me("DomMoodMin") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("8")>
-		Public Property DomMoodMax() As Integer
-			Get
-				Return CType(Me("DomMoodMax"), Integer)
-			End Get
-			Set
-				Me("DomMoodMax") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("6")>
-		Public Property AvgCockMin() As Integer
-			Get
-				Return CType(Me("AvgCockMin"), Integer)
-			End Get
-			Set
-				Me("AvgCockMin") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("8")>
-		Public Property AvgCockMax() As Integer
-			Get
-				Return CType(Me("AvgCockMax"), Integer)
-			End Get
-			Set
-				Me("AvgCockMax") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("28")>
-		Public Property SelfAgeMin() As Integer
-			Get
-				Return CType(Me("SelfAgeMin"), Integer)
-			End Get
-			Set
-				Me("SelfAgeMin") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("49")>
-		Public Property SelfAgeMax() As Integer
-			Get
-				Return CType(Me("SelfAgeMax"), Integer)
-			End Get
-			Set
-				Me("SelfAgeMax") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("28")>
-		Public Property SubAgeMin() As Integer
-			Get
-				Return CType(Me("SubAgeMin"), Integer)
-			End Get
-			Set
-				Me("SubAgeMin") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("49")>
-		Public Property SubAgeMax() As String
-			Get
-				Return CType(Me("SubAgeMax"), String)
-			End Get
-			Set
-				Me("SubAgeMax") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CBLockWindow() As Boolean
-			Get
-				Return CType(Me("CBLockWindow"), Boolean)
-			End Get
-			Set
-				Me("CBLockWindow") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("hello, hi, hey, heya, good morning, good afternoon, good evening")>
-		Public Property SubGreeting() As String
-			Get
-				Return CType(Me("SubGreeting"), String)
-			End Get
-			Set
-				Me("SubGreeting") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("yes, yeah, yep, yup, sure, of course, absolutely, you know it, definitely")>
-		Public Property SubYes() As String
-			Get
-				Return CType(Me("SubYes"), String)
-			End Get
-			Set
-				Me("SubYes") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("no, nah, nope, not")>
-		Public Property SubNo() As String
-			Get
-				Return CType(Me("SubNo"), String)
-			End Get
-			Set
-				Me("SubNo") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("Mistress")>
-		Public Property SubHonorific() As String
-			Get
-				Return CType(Me("SubHonorific"), String)
-			End Get
-			Set
-				Me("SubHonorific") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CBUseHonor() As Boolean
-			Get
-				Return CType(Me("CBUseHonor"), Boolean)
-			End Get
-			Set
-				Me("CBUseHonor") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CBCapHonor() As Boolean
-			Get
-				Return CType(Me("CBCapHonor"), Boolean)
-			End Get
-			Set
-				Me("CBCapHonor") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("6")>
-		Public Property SubCockSize() As Integer
-			Get
-				Return CType(Me("SubCockSize"), Integer)
-			End Get
-			Set
-				Me("SubCockSize") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("28")>
-		Public Property SubAge() As Integer
-			Get
-				Return CType(Me("SubAge"), Integer)
-			End Get
-			Set
-				Me("SubAge") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property TCAgreed() As Boolean
-			Get
-				Return CType(Me("TCAgreed"), Boolean)
-			End Get
-			Set
-				Me("TCAgreed") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("3")>
-		Public Property TimerSTF() As Integer
-			Get
-				Return CType(Me("TimerSTF"), Integer)
-			End Get
-			Set
-				Me("TimerSTF") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("1")>
-		Public Property SubBirthMonth() As Integer
-			Get
-				Return CType(Me("SubBirthMonth"), Integer)
-			End Get
-			Set
-				Me("SubBirthMonth") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("1")>
-		Public Property SubBirthDay() As Integer
-			Get
-				Return CType(Me("SubBirthDay"), Integer)
-			End Get
-			Set
-				Me("SubBirthDay") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("brown")>
-		Public Property SubHair() As String
-			Get
-				Return CType(Me("SubHair"), String)
-			End Get
-			Set
-				Me("SubHair") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("green")>
-		Public Property SubEyes() As String
-			Get
-				Return CType(Me("SubEyes"), String)
-			End Get
-			Set
-				Me("SubEyes") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("3")>
-		Public Property DomFontSize() As Integer
-			Get
-				Return CType(Me("DomFontSize"), Integer)
-			End Get
-			Set
-				Me("DomFontSize") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("Cambria")>
-		Public Property DomFont() As String
-			Get
-				Return CType(Me("DomFont"), String)
-			End Get
-			Set
-				Me("DomFont") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("Cambria")>
-		Public Property SubFont() As String
-			Get
-				Return CType(Me("SubFont"), String)
-			End Get
-			Set
-				Me("SubFont") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("3")>
-		Public Property SubFontSize() As Integer
-			Get
-				Return CType(Me("SubFontSize"), Integer)
-			End Get
-			Set
-				Me("SubFontSize") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("1")>
-		Public Property DomBirthMonth() As Integer
-			Get
-				Return CType(Me("DomBirthMonth"), Integer)
-			End Get
-			Set
-				Me("DomBirthMonth") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("1")>
-		Public Property DomBirthDay() As Integer
-			Get
-				Return CType(Me("DomBirthDay"), Integer)
-			End Get
-			Set
-				Me("DomBirthDay") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("Long")>
-		Public Property DomHairLength() As String
-			Get
-				Return CType(Me("DomHairLength"), String)
-			End Get
-			Set
-				Me("DomHairLength") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("Shaved")>
-		Public Property DomPubicHair() As String
-			Get
-				Return CType(Me("DomPubicHair"), String)
-			End Get
-			Set
-				Me("DomPubicHair") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property DomTattoos() As Boolean
-			Get
-				Return CType(Me("DomTattoos"), Boolean)
-			End Get
-			Set
-				Me("DomTattoos") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property DomFreckles() As Boolean
-			Get
-				Return CType(Me("DomFreckles"), Boolean)
-			End Get
-			Set
-				Me("DomFreckles") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CBImageInfo() As Boolean
-			Get
-				Return CType(Me("CBImageInfo"), Boolean)
-			End Get
-			Set
-				Me("CBImageInfo") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property DomAVStretch() As Boolean
-			Get
-				Return CType(Me("DomAVStretch"), Boolean)
-			End Get
-			Set
-				Me("DomAVStretch") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property SubAvStretch() As Boolean
-			Get
-				Return CType(Me("SubAvStretch"), Boolean)
-			End Get
-			Set
-				Me("SubAvStretch") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>
-		Public Property IHardcore() As String
-			Get
-				Return CType(Me("IHardcore"), String)
-			End Get
-			Set
-				Me("IHardcore") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>
-		Public Property ISoftcore() As String
-			Get
-				Return CType(Me("ISoftcore"), String)
-			End Get
-			Set
-				Me("ISoftcore") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>
-		Public Property ILesbian() As String
-			Get
-				Return CType(Me("ILesbian"), String)
-			End Get
-			Set
-				Me("ILesbian") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>
-		Public Property IBlowjob() As String
-			Get
-				Return CType(Me("IBlowjob"), String)
-			End Get
-			Set
-				Me("IBlowjob") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>
-		Public Property IFemdom() As String
-			Get
-				Return CType(Me("IFemdom"), String)
-			End Get
-			Set
-				Me("IFemdom") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>
-		Public Property ILezdom() As String
-			Get
-				Return CType(Me("ILezdom"), String)
-			End Get
-			Set
-				Me("ILezdom") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>
-		Public Property IHentai() As String
-			Get
-				Return CType(Me("IHentai"), String)
-			End Get
-			Set
-				Me("IHentai") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>
-		Public Property IGay() As String
-			Get
-				Return CType(Me("IGay"), String)
-			End Get
-			Set
-				Me("IGay") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>
-		Public Property IMaledom() As String
-			Get
-				Return CType(Me("IMaledom"), String)
-			End Get
-			Set
-				Me("IMaledom") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>
-		Public Property IGeneral() As String
-			Get
-				Return CType(Me("IGeneral"), String)
-			End Get
-			Set
-				Me("IGeneral") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property IHardcoreSD() As Boolean
-			Get
-				Return CType(Me("IHardcoreSD"), Boolean)
-			End Get
-			Set
-				Me("IHardcoreSD") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property ISoftcoreSD() As Boolean
-			Get
-				Return CType(Me("ISoftcoreSD"), Boolean)
-			End Get
-			Set
-				Me("ISoftcoreSD") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property ILesbianSD() As Boolean
-			Get
-				Return CType(Me("ILesbianSD"), Boolean)
-			End Get
-			Set
-				Me("ILesbianSD") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property IBlowjobSD() As Boolean
-			Get
-				Return CType(Me("IBlowjobSD"), Boolean)
-			End Get
-			Set
-				Me("IBlowjobSD") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property IFemdomSD() As Boolean
-			Get
-				Return CType(Me("IFemdomSD"), Boolean)
-			End Get
-			Set
-				Me("IFemdomSD") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property ILezdomSD() As Boolean
-			Get
-				Return CType(Me("ILezdomSD"), Boolean)
-			End Get
-			Set
-				Me("ILezdomSD") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property IHentaiSD() As Boolean
-			Get
-				Return CType(Me("IHentaiSD"), Boolean)
-			End Get
-			Set
-				Me("IHentaiSD") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property IGaySD() As Boolean
-			Get
-				Return CType(Me("IGaySD"), Boolean)
-			End Get
-			Set
-				Me("IGaySD") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property IMaledomSD() As Boolean
-			Get
-				Return CType(Me("IMaledomSD"), Boolean)
-			End Get
-			Set
-				Me("IMaledomSD") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property IGeneralSD() As Boolean
-			Get
-				Return CType(Me("IGeneralSD"), Boolean)
-			End Get
-			Set
-				Me("IGeneralSD") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property ICaptionsSD() As Boolean
-			Get
-				Return CType(Me("ICaptionsSD"), Boolean)
-			End Get
-			Set
-				Me("ICaptionsSD") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CBIHardcore() As Boolean
-			Get
-				Return CType(Me("CBIHardcore"), Boolean)
-			End Get
-			Set
-				Me("CBIHardcore") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CBISoftcore() As Boolean
-			Get
-				Return CType(Me("CBISoftcore"), Boolean)
-			End Get
-			Set
-				Me("CBISoftcore") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CBILesbian() As Boolean
-			Get
-				Return CType(Me("CBILesbian"), Boolean)
-			End Get
-			Set
-				Me("CBILesbian") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CBIBlowjob() As Boolean
-			Get
-				Return CType(Me("CBIBlowjob"), Boolean)
-			End Get
-			Set
-				Me("CBIBlowjob") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CBIFemdom() As Boolean
-			Get
-				Return CType(Me("CBIFemdom"), Boolean)
-			End Get
-			Set
-				Me("CBIFemdom") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CBILezdom() As Boolean
-			Get
-				Return CType(Me("CBILezdom"), Boolean)
-			End Get
-			Set
-				Me("CBILezdom") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CBIHentai() As Boolean
-			Get
-				Return CType(Me("CBIHentai"), Boolean)
-			End Get
-			Set
-				Me("CBIHentai") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CBIGay() As Boolean
-			Get
-				Return CType(Me("CBIGay"), Boolean)
-			End Get
-			Set
-				Me("CBIGay") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CBIMaledom() As Boolean
-			Get
-				Return CType(Me("CBIMaledom"), Boolean)
-			End Get
-			Set
-				Me("CBIMaledom") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CBIGeneral() As Boolean
-			Get
-				Return CType(Me("CBIGeneral"), Boolean)
-			End Get
-			Set
-				Me("CBIGeneral") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CBICaptions() As Boolean
-			Get
-				Return CType(Me("CBICaptions"), Boolean)
-			End Get
-			Set
-				Me("CBICaptions") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>
-		Public Property ICaptions() As String
-			Get
-				Return CType(Me("ICaptions"), String)
-			End Get
-			Set
-				Me("ICaptions") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>
-		Public Property DomImageDir() As String
-			Get
-				Return CType(Me("DomImageDir"), String)
-			End Get
-			Set
-				Me("DomImageDir") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property CBTCock() As Boolean
-			Get
-				Return CType(Me("CBTCock"), Boolean)
-			End Get
-			Set
-				Me("CBTCock") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property CBTBalls() As Boolean
-			Get
-				Return CType(Me("CBTBalls"), Boolean)
-			End Get
-			Set
-				Me("CBTBalls") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property ChastityPA() As Boolean
-			Get
-				Return CType(Me("ChastityPA"), Boolean)
-			End Get
-			Set
-				Me("ChastityPA") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property ChastitySpikes() As Boolean
-			Get
-				Return CType(Me("ChastitySpikes"), Boolean)
-			End Get
-			Set
-				Me("ChastitySpikes") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property SubInChastity() As Boolean
-			Get
-				Return CType(Me("SubInChastity"), Boolean)
-			End Get
-			Set
-				Me("SubInChastity") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("2")>
-		Public Property LongEdge() As Integer
-			Get
-				Return CType(Me("LongEdge"), Integer)
-			End Get
-			Set
-				Me("LongEdge") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property CBLongEdgeInterrupt() As Boolean
-			Get
-				Return CType(Me("CBLongEdgeInterrupt"), Boolean)
-			End Get
-			Set
-				Me("CBLongEdgeInterrupt") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("1")>
-		Public Property HoldTheEdgeMax() As Integer
-			Get
-				Return CType(Me("HoldTheEdgeMax"), Integer)
-			End Get
-			Set
-				Me("HoldTheEdgeMax") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("0")>
-		Public Property HoldEdgeTimeTotal() As Integer
-			Get
-				Return CType(Me("HoldEdgeTimeTotal"), Integer)
-			End Get
-			Set
-				Me("HoldEdgeTimeTotal") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("3")>
-		Public Property CBTSlider() As Integer
-			Get
-				Return CType(Me("CBTSlider"), Integer)
-			End Get
-			Set
-				Me("CBTSlider") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property SubCircumcised() As Boolean
-			Get
-				Return CType(Me("SubCircumcised"), Boolean)
-			End Get
-			Set
-				Me("SubCircumcised") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property SubPierced() As Boolean
-			Get
-				Return CType(Me("SubPierced"), Boolean)
-			End Get
-			Set
-				Me("SubPierced") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("3")>
-		Public Property DomEmpathy() As Integer
-			Get
-				Return CType(Me("DomEmpathy"), Integer)
-			End Get
-			Set
-				Me("DomEmpathy") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property RangeOrgasm() As Boolean
-			Get
-				Return CType(Me("RangeOrgasm"), Boolean)
-			End Get
-			Set
-				Me("RangeOrgasm") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property RangeRuin() As Boolean
-			Get
-				Return CType(Me("RangeRuin"), Boolean)
-			End Get
-			Set
-				Me("RangeRuin") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("75")>
-		Public Property AllowOften() As Integer
-			Get
-				Return CType(Me("AllowOften"), Integer)
-			End Get
-			Set
-				Me("AllowOften") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("50")>
-		Public Property AllowSometimes() As Integer
-			Get
-				Return CType(Me("AllowSometimes"), Integer)
-			End Get
-			Set
-				Me("AllowSometimes") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("20")>
-		Public Property AllowRarely() As Integer
-			Get
-				Return CType(Me("AllowRarely"), Integer)
-			End Get
-			Set
-				Me("AllowRarely") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("75")>
-		Public Property RuinOften() As Integer
-			Get
-				Return CType(Me("RuinOften"), Integer)
-			End Get
-			Set
-				Me("RuinOften") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("50")>
-		Public Property RuinSometimes() As Integer
-			Get
-				Return CType(Me("RuinSometimes"), Integer)
-			End Get
-			Set
-				Me("RuinSometimes") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("20")>
-		Public Property RuinRarely() As Integer
-			Get
-				Return CType(Me("RuinRarely"), Integer)
-			End Get
-			Set
-				Me("RuinRarely") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property Chastity() As Boolean
-			Get
-				Return CType(Me("Chastity"), Boolean)
-			End Get
-			Set
-				Me("Chastity") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("red")>
-		Public Property Safeword() As String
-			Get
-				Return CType(Me("Safeword"), String)
-			End Get
-			Set
-				Me("Safeword") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("0")>
-		Public Property CaloriesConsumed() As Integer
-			Get
-				Return CType(Me("CaloriesConsumed"), Integer)
-			End Get
-			Set
-				Me("CaloriesConsumed") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("2000")>
-		Public Property CaloriesGoal() As Integer
-			Get
-				Return CType(Me("CaloriesGoal"), Integer)
-			End Get
-			Set
-				Me("CaloriesGoal") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property VitalSubDisclaimer() As Boolean
-			Get
-				Return CType(Me("VitalSubDisclaimer"), Boolean)
-			End Get
-			Set
-				Me("VitalSubDisclaimer") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property VitalSub() As Boolean
-			Get
-				Return CType(Me("VitalSub"), Boolean)
-			End Get
-			Set
-				Me("VitalSub") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property VitalSubAssignments() As Boolean
-			Get
-				Return CType(Me("VitalSubAssignments"), Boolean)
-			End Get
-			Set
-				Me("VitalSubAssignments") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("")>
-		Public Property BP1() As String
-			Get
-				Return CType(Me("BP1"), String)
-			End Get
-			Set
-				Me("BP1") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("")>
-		Public Property BP2() As String
-			Get
-				Return CType(Me("BP2"), String)
-			End Get
-			Set
-				Me("BP2") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("")>
-		Public Property BP3() As String
-			Get
-				Return CType(Me("BP3"), String)
-			End Get
-			Set
-				Me("BP3") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("")>
-		Public Property BP4() As String
-			Get
-				Return CType(Me("BP4"), String)
-			End Get
-			Set
-				Me("BP4") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("")>
-		Public Property BP5() As String
-			Get
-				Return CType(Me("BP5"), String)
-			End Get
-			Set
-				Me("BP5") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("")>
-		Public Property BP6() As String
-			Get
-				Return CType(Me("BP6"), String)
-			End Get
-			Set
-				Me("BP6") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("Bronze 1")>
-		Public Property BN1() As String
-			Get
-				Return CType(Me("BN1"), String)
-			End Get
-			Set
-				Me("BN1") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("Bronze 2")>
-		Public Property BN2() As String
-			Get
-				Return CType(Me("BN2"), String)
-			End Get
-			Set
-				Me("BN2") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("Bronze 3")>
-		Public Property BN3() As String
-			Get
-				Return CType(Me("BN3"), String)
-			End Get
-			Set
-				Me("BN3") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("Bronze 4")>
-		Public Property BN4() As String
-			Get
-				Return CType(Me("BN4"), String)
-			End Get
-			Set
-				Me("BN4") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("Bronze 5")>
-		Public Property BN5() As String
-			Get
-				Return CType(Me("BN5"), String)
-			End Get
-			Set
-				Me("BN5") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("Bronze 6")>
-		Public Property BN6() As String
-			Get
-				Return CType(Me("BN6"), String)
-			End Get
-			Set
-				Me("BN6") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("")>
-		Public Property SP1() As String
-			Get
-				Return CType(Me("SP1"), String)
-			End Get
-			Set
-				Me("SP1") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("")>
-		Public Property SP2() As String
-			Get
-				Return CType(Me("SP2"), String)
-			End Get
-			Set
-				Me("SP2") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("")>
-		Public Property SP3() As String
-			Get
-				Return CType(Me("SP3"), String)
-			End Get
-			Set
-				Me("SP3") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("")>
-		Public Property SP4() As String
-			Get
-				Return CType(Me("SP4"), String)
-			End Get
-			Set
-				Me("SP4") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("")>
-		Public Property SP5() As String
-			Get
-				Return CType(Me("SP5"), String)
-			End Get
-			Set
-				Me("SP5") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("")>
-		Public Property SP6() As String
-			Get
-				Return CType(Me("SP6"), String)
-			End Get
-			Set
-				Me("SP6") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("Silver 1")>
-		Public Property SN1() As String
-			Get
-				Return CType(Me("SN1"), String)
-			End Get
-			Set
-				Me("SN1") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("Silver 2")>
-		Public Property SN2() As String
-			Get
-				Return CType(Me("SN2"), String)
-			End Get
-			Set
-				Me("SN2") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("Silver 3")>
-		Public Property SN3() As String
-			Get
-				Return CType(Me("SN3"), String)
-			End Get
-			Set
-				Me("SN3") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("Silver 4")>
-		Public Property SN4() As String
-			Get
-				Return CType(Me("SN4"), String)
-			End Get
-			Set
-				Me("SN4") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("Silver 5")>
-		Public Property SN5() As String
-			Get
-				Return CType(Me("SN5"), String)
-			End Get
-			Set
-				Me("SN5") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("Silver 6")>
-		Public Property SN6() As String
-			Get
-				Return CType(Me("SN6"), String)
-			End Get
-			Set
-				Me("SN6") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("")>
-		Public Property GP1() As String
-			Get
-				Return CType(Me("GP1"), String)
-			End Get
-			Set
-				Me("GP1") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("")>
-		Public Property GP2() As String
-			Get
-				Return CType(Me("GP2"), String)
-			End Get
-			Set
-				Me("GP2") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("")>
-		Public Property GP3() As String
-			Get
-				Return CType(Me("GP3"), String)
-			End Get
-			Set
-				Me("GP3") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("")>
-		Public Property GP4() As String
-			Get
-				Return CType(Me("GP4"), String)
-			End Get
-			Set
-				Me("GP4") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("")>
-		Public Property GP5() As String
-			Get
-				Return CType(Me("GP5"), String)
-			End Get
-			Set
-				Me("GP5") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("")>
-		Public Property GP6() As String
-			Get
-				Return CType(Me("GP6"), String)
-			End Get
-			Set
-				Me("GP6") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("Gold 1")>
-		Public Property GN1() As String
-			Get
-				Return CType(Me("GN1"), String)
-			End Get
-			Set
-				Me("GN1") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("Gold 2")>
-		Public Property GN2() As String
-			Get
-				Return CType(Me("GN2"), String)
-			End Get
-			Set
-				Me("GN2") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("Gold 3")>
-		Public Property GN3() As String
-			Get
-				Return CType(Me("GN3"), String)
-			End Get
-			Set
-				Me("GN3") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("Gold 4")>
-		Public Property GN4() As String
-			Get
-				Return CType(Me("GN4"), String)
-			End Get
-			Set
-				Me("GN4") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("Gold 5")>
-		Public Property GN5() As String
-			Get
-				Return CType(Me("GN5"), String)
-			End Get
-			Set
-				Me("GN5") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("Gold 6")>
-		Public Property GN6() As String
-			Get
-				Return CType(Me("GN6"), String)
-			End Get
-			Set
-				Me("GN6") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("")>
-		Public Property CardBack() As String
-			Get
-				Return CType(Me("CardBack"), String)
-			End Get
-			Set
-				Me("CardBack") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("0")>
-		Public Property GoldTokens() As Integer
-			Get
-				Return CType(Me("GoldTokens"), Integer)
-			End Get
-			Set
-				Me("GoldTokens") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("0")>
-		Public Property SilverTokens() As Integer
-			Get
-				Return CType(Me("SilverTokens"), Integer)
-			End Get
-			Set
-				Me("SilverTokens") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("20")>
-		Public Property BronzeTokens() As Integer
-			Get
-				Return CType(Me("BronzeTokens"), Integer)
-			End Get
-			Set
-				Me("BronzeTokens") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("0")>
-		Public Property B1() As Integer
-			Get
-				Return CType(Me("B1"), Integer)
-			End Get
-			Set
-				Me("B1") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("0")>
-		Public Property B2() As Integer
-			Get
-				Return CType(Me("B2"), Integer)
-			End Get
-			Set
-				Me("B2") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("0")>
-		Public Property B3() As Integer
-			Get
-				Return CType(Me("B3"), Integer)
-			End Get
-			Set
-				Me("B3") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("0")>
-		Public Property B4() As Integer
-			Get
-				Return CType(Me("B4"), Integer)
-			End Get
-			Set
-				Me("B4") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("0")>
-		Public Property B5() As Integer
-			Get
-				Return CType(Me("B5"), Integer)
-			End Get
-			Set
-				Me("B5") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("0")>
-		Public Property B6() As Integer
-			Get
-				Return CType(Me("B6"), Integer)
-			End Get
-			Set
-				Me("B6") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("0")>
-		Public Property S1() As Integer
-			Get
-				Return CType(Me("S1"), Integer)
-			End Get
-			Set
-				Me("S1") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("0")>
-		Public Property S2() As Integer
-			Get
-				Return CType(Me("S2"), Integer)
-			End Get
-			Set
-				Me("S2") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("0")>
-		Public Property S3() As Integer
-			Get
-				Return CType(Me("S3"), Integer)
-			End Get
-			Set
-				Me("S3") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("0")>
-		Public Property S4() As Integer
-			Get
-				Return CType(Me("S4"), Integer)
-			End Get
-			Set
-				Me("S4") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("0")>
-		Public Property S5() As Integer
-			Get
-				Return CType(Me("S5"), Integer)
-			End Get
-			Set
-				Me("S5") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("0")>
-		Public Property S6() As Integer
-			Get
-				Return CType(Me("S6"), Integer)
-			End Get
-			Set
-				Me("S6") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("0")>
-		Public Property G1() As Integer
-			Get
-				Return CType(Me("G1"), Integer)
-			End Get
-			Set
-				Me("G1") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("0")>
-		Public Property G2() As Integer
-			Get
-				Return CType(Me("G2"), Integer)
-			End Get
-			Set
-				Me("G2") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("0")>
-		Public Property G3() As Integer
-			Get
-				Return CType(Me("G3"), Integer)
-			End Get
-			Set
-				Me("G3") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("0")>
-		Public Property G4() As Integer
-			Get
-				Return CType(Me("G4"), Integer)
-			End Get
-			Set
-				Me("G4") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("0")>
-		Public Property G5() As Integer
-			Get
-				Return CType(Me("G5"), Integer)
-			End Get
-			Set
-				Me("G5") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("0")>
-		Public Property G6() As Integer
-			Get
-				Return CType(Me("G6"), Integer)
-			End Get
-			Set
-				Me("G6") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property ClearWishlist() As Boolean
-			Get
-				Return CType(Me("ClearWishlist"), Boolean)
-			End Get
-			Set
-				Me("ClearWishlist") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("")>
-		Public Property WishlistName() As String
-			Get
-				Return CType(Me("WishlistName"), String)
-			End Get
-			Set
-				Me("WishlistName") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("")>
-		Public Property WishlistPreview() As String
-			Get
-				Return CType(Me("WishlistPreview"), String)
-			End Get
-			Set
-				Me("WishlistPreview") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("")>
-		Public Property WishlistTokenType() As String
-			Get
-				Return CType(Me("WishlistTokenType"), String)
-			End Get
-			Set
-				Me("WishlistTokenType") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("0")>
-		Public Property WishlistCost() As Integer
-			Get
-				Return CType(Me("WishlistCost"), Integer)
-			End Get
-			Set
-				Me("WishlistCost") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("")>
-		Public Property WishlistNote() As String
-			Get
-				Return CType(Me("WishlistNote"), String)
-			End Get
-			Set
-				Me("WishlistNote") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("0")>
-		Public Property AvgEdgeCountRest() As Integer
-			Get
-				Return CType(Me("AvgEdgeCountRest"), Integer)
-			End Get
-			Set
-				Me("AvgEdgeCountRest") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("0")>
-		Public Property PersonalityIndex() As Integer
-			Get
-				Return CType(Me("PersonalityIndex"), Integer)
-			End Get
-			Set
-				Me("PersonalityIndex") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property LargeUI() As Boolean
-			Get
-				Return CType(Me("LargeUI"), Boolean)
-			End Get
-			Set
-				Me("LargeUI") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CBJackintheBox() As Boolean
-			Get
-				Return CType(Me("CBJackintheBox"), Boolean)
-			End Get
-			Set
-				Me("CBJackintheBox") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("60")>
-		Public Property NextImageChance() As Integer
-			Get
-				Return CType(Me("NextImageChance"), Integer)
-			End Get
-			Set
-				Me("NextImageChance") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CBEdgeUseAvg() As Boolean
-			Get
-				Return CType(Me("CBEdgeUseAvg"), Boolean)
-			End Get
-			Set
-				Me("CBEdgeUseAvg") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CBLongEdgeTaunts() As Boolean
-			Get
-				Return CType(Me("CBLongEdgeTaunts"), Boolean)
-			End Get
-			Set
-				Me("CBLongEdgeTaunts") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CBLongEdgeInterrupts() As Boolean
-			Get
-				Return CType(Me("CBLongEdgeInterrupts"), Boolean)
-			End Get
-			Set
-				Me("CBLongEdgeInterrupts") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("0")>
-		Public Property OrgasmsRemaining() As Integer
-			Get
-				Return CType(Me("OrgasmsRemaining"), Integer)
-			End Get
-			Set
-				Me("OrgasmsRemaining") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property OrgasmsLocked() As Boolean
-			Get
-				Return CType(Me("OrgasmsLocked"), Boolean)
-			End Get
-			Set
-				Me("OrgasmsLocked") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("4")>
-		Public Property TimerVTF() As Integer
-			Get
-				Return CType(Me("TimerVTF"), Integer)
-			End Get
-			Set
-				Me("TimerVTF") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CBTeaseLengthDD() As Boolean
-			Get
-				Return CType(Me("CBTeaseLengthDD"), Boolean)
-			End Get
-			Set
-				Me("CBTeaseLengthDD") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CBTauntCycleDD() As Boolean
-			Get
-				Return CType(Me("CBTauntCycleDD"), Boolean)
-			End Get
-			Set
-				Me("CBTauntCycleDD") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CBOwnChastity() As Boolean
-			Get
-				Return CType(Me("CBOwnChastity"), Boolean)
-			End Get
-			Set
-				Me("CBOwnChastity") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property SmallUI() As Boolean
-			Get
-				Return CType(Me("SmallUI"), Boolean)
-			End Get
-			Set
-				Me("SmallUI") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property UI768() As Boolean
-			Get
-				Return CType(Me("UI768"), Boolean)
-			End Get
-			Set
-				Me("UI768") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property CBIncludeGifs() As Boolean
-			Get
-				Return CType(Me("CBIncludeGifs"), Boolean)
-			End Get
-			Set
-				Me("CBIncludeGifs") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CBHimHer() As Boolean
-			Get
-				Return CType(Me("CBHimHer"), Boolean)
-			End Get
-			Set
-				Me("CBHimHer") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property DomDeleteMedia() As Boolean
-			Get
-				Return CType(Me("DomDeleteMedia"), Boolean)
-			End Get
-			Set
-				Me("DomDeleteMedia") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("15")>
-		Public Property TeaseLengthMin() As Integer
-			Get
-				Return CType(Me("TeaseLengthMin"), Integer)
-			End Get
-			Set
-				Me("TeaseLengthMin") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("60")>
-		Public Property TeaseLengthMax() As Integer
-			Get
-				Return CType(Me("TeaseLengthMax"), Integer)
-			End Get
-			Set
-				Me("TeaseLengthMax") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("1")>
-		Public Property TauntCycleMin() As Integer
-			Get
-				Return CType(Me("TauntCycleMin"), Integer)
-			End Get
-			Set
-				Me("TauntCycleMin") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("5")>
-		Public Property TauntCycleMax() As Integer
-			Get
-				Return CType(Me("TauntCycleMax"), Integer)
-			End Get
-			Set
-				Me("TauntCycleMax") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("5")>
-		Public Property RedLightMin() As Integer
-			Get
-				Return CType(Me("RedLightMin"), Integer)
-			End Get
-			Set
-				Me("RedLightMin") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("30")>
-		Public Property RedLightMax() As Integer
-			Get
-				Return CType(Me("RedLightMax"), Integer)
-			End Get
-			Set
-				Me("RedLightMax") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("10")>
-		Public Property GreenLightMin() As Integer
-			Get
-				Return CType(Me("GreenLightMin"), Integer)
-			End Get
-			Set
-				Me("GreenLightMin") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("60")>
-		Public Property GreenLightMax() As Integer
-			Get
-				Return CType(Me("GreenLightMax"), Integer)
-			End Get
-			Set
-				Me("GreenLightMax") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("Tease")>
-		Public Property SlideshowMode() As String
-			Get
-				Return CType(Me("SlideshowMode"), String)
-			End Get
-			Set
-				Me("SlideshowMode") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>
-		Public Property OrgasmLockDate() As Date
-			Get
-				Return CType(Me("OrgasmLockDate"), Date)
-			End Get
-			Set
-				Me("OrgasmLockDate") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property AuditStartup() As Boolean
-			Get
-				Return CType(Me("AuditStartup"), Boolean)
-			End Get
-			Set
-				Me("AuditStartup") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>
-		Public Property WishlistDate() As Date
-			Get
-				Return CType(Me("WishlistDate"), Date)
-			End Get
-			Set
-				Me("WishlistDate") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>
-		Public Property LastOrgasm() As Date
-			Get
-				Return CType(Me("LastOrgasm"), Date)
-			End Get
-			Set
-				Me("LastOrgasm") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>
-		Public Property LastRuined() As Date
-			Get
-				Return CType(Me("LastRuined"), Date)
-			End Get
-			Set
-				Me("LastRuined") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>
-		Public Property DateStamp() As Date
-			Get
-				Return CType(Me("DateStamp"), Date)
-			End Get
-			Set
-				Me("DateStamp") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>
-		Public Property TokenTasks() As Date
-			Get
-				Return CType(Me("TokenTasks"), Date)
-			End Get
-			Set
-				Me("TokenTasks") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("")>
-		Public Property WebToyStart() As String
-			Get
-				Return CType(Me("WebToyStart"), String)
-			End Get
-			Set
-				Me("WebToyStart") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("")>
-		Public Property WebToyStop() As String
-			Get
-				Return CType(Me("WebToyStop"), String)
-			End Get
-			Set
-				Me("WebToyStop") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property CockToClit() As Boolean
-			Get
-				Return CType(Me("CockToClit"), Boolean)
-			End Get
-			Set
-				Me("CockToClit") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property BallsToPussy() As Boolean
-			Get
-				Return CType(Me("BallsToPussy"), Boolean)
-			End Get
-			Set
-				Me("BallsToPussy") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("No Path Selected")>
-		Public Property Contact1ImageDir() As String
-			Get
-				Return CType(Me("Contact1ImageDir"), String)
-			End Get
-			Set
-				Me("Contact1ImageDir") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("No Path Selected")>
-		Public Property Contact2ImageDir() As String
-			Get
-				Return CType(Me("Contact2ImageDir"), String)
-			End Get
-			Set
-				Me("Contact2ImageDir") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("No Path Selected")>
-		Public Property Contact3ImageDir() As String
-			Get
-				Return CType(Me("Contact3ImageDir"), String)
-			End Get
-			Set
-				Me("Contact3ImageDir") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property CBGlitterFeedOff() As Boolean
-			Get
-				Return CType(Me("CBGlitterFeedOff"), Boolean)
-			End Get
-			Set
-				Me("CBGlitterFeedOff") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),  _
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0, 128, 255")>  _
+        Public Property GlitterNCDommeColor() As Global.System.Drawing.Color
+            Get
+                Return CType(Me("GlitterNCDommeColor"),Global.System.Drawing.Color)
+            End Get
+            Set
+                Me("GlitterNCDommeColor") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("255, 0, 128")>  _
+        Public Property GlitterNC1Color() As Global.System.Drawing.Color
+            Get
+                Return CType(Me("GlitterNC1Color"),Global.System.Drawing.Color)
+            End Get
+            Set
+                Me("GlitterNC1Color") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("128, 128, 192")>  _
+        Public Property GlitterNC2Color() As Global.System.Drawing.Color
+            Get
+                Return CType(Me("GlitterNC2Color"),Global.System.Drawing.Color)
+            End Get
+            Set
+                Me("GlitterNC2Color") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("255, 128, 255")>  _
+        Public Property GlitterNC3Color() As Global.System.Drawing.Color
+            Get
+                Return CType(Me("GlitterNC3Color"),Global.System.Drawing.Color)
+            End Get
+            Set
+                Me("GlitterNC3Color") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("5")>  _
+        Public Property GlitterDSlider() As Integer
+            Get
+                Return CType(Me("GlitterDSlider"),Integer)
+            End Get
+            Set
+                Me("GlitterDSlider") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("5")>  _
+        Public Property Glitter1Slider() As Integer
+            Get
+                Return CType(Me("Glitter1Slider"),Integer)
+            End Get
+            Set
+                Me("Glitter1Slider") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("5")>  _
+        Public Property Glitter2Slider() As Integer
+            Get
+                Return CType(Me("Glitter2Slider"),Integer)
+            End Get
+            Set
+                Me("Glitter2Slider") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("5")>  _
+        Public Property Glitter3Slider() As Integer
+            Get
+                Return CType(Me("Glitter3Slider"),Integer)
+            End Get
+            Set
+                Me("Glitter3Slider") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBGlitterFeed() As Boolean
+            Get
+                Return CType(Me("CBGlitterFeed"),Boolean)
+            End Get
+            Set
+                Me("CBGlitterFeed") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property CBGlitter1() As Boolean
+            Get
+                Return CType(Me("CBGlitter1"),Boolean)
+            End Get
+            Set
+                Me("CBGlitter1") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property CBGlitter2() As Boolean
+            Get
+                Return CType(Me("CBGlitter2"),Boolean)
+            End Get
+            Set
+                Me("CBGlitter2") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property CBGlitter3() As Boolean
+            Get
+                Return CType(Me("CBGlitter3"),Boolean)
+            End Get
+            Set
+                Me("CBGlitter3") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBTease() As Boolean
+            Get
+                Return CType(Me("CBTease"),Boolean)
+            End Get
+            Set
+                Me("CBTease") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBEgotist() As Boolean
+            Get
+                Return CType(Me("CBEgotist"),Boolean)
+            End Get
+            Set
+                Me("CBEgotist") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property CBTrivia() As Boolean
+            Get
+                Return CType(Me("CBTrivia"),Boolean)
+            End Get
+            Set
+                Me("CBTrivia") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBDaily() As Boolean
+            Get
+                Return CType(Me("CBDaily"),Boolean)
+            End Get
+            Set
+                Me("CBDaily") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBCustom1() As Boolean
+            Get
+                Return CType(Me("CBCustom1"),Boolean)
+            End Get
+            Set
+                Me("CBCustom1") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBCustom2() As Boolean
+            Get
+                Return CType(Me("CBCustom2"),Boolean)
+            End Get
+            Set
+                Me("CBCustom2") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property CB1Bratty() As Boolean
+            Get
+                Return CType(Me("CB1Bratty"),Boolean)
+            End Get
+            Set
+                Me("CB1Bratty") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CB1Cruel() As Boolean
+            Get
+                Return CType(Me("CB1Cruel"),Boolean)
+            End Get
+            Set
+                Me("CB1Cruel") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CB1Caring() As Boolean
+            Get
+                Return CType(Me("CB1Caring"),Boolean)
+            End Get
+            Set
+                Me("CB1Caring") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CB1Angry() As Boolean
+            Get
+                Return CType(Me("CB1Angry"),Boolean)
+            End Get
+            Set
+                Me("CB1Angry") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CB1Custom1() As Boolean
+            Get
+                Return CType(Me("CB1Custom1"),Boolean)
+            End Get
+            Set
+                Me("CB1Custom1") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CB1Custom2() As Boolean
+            Get
+                Return CType(Me("CB1Custom2"),Boolean)
+            End Get
+            Set
+                Me("CB1Custom2") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CB2Bratty() As Boolean
+            Get
+                Return CType(Me("CB2Bratty"),Boolean)
+            End Get
+            Set
+                Me("CB2Bratty") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property CB2Cruel() As Boolean
+            Get
+                Return CType(Me("CB2Cruel"),Boolean)
+            End Get
+            Set
+                Me("CB2Cruel") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CB2Caring() As Boolean
+            Get
+                Return CType(Me("CB2Caring"),Boolean)
+            End Get
+            Set
+                Me("CB2Caring") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CB2Angry() As Boolean
+            Get
+                Return CType(Me("CB2Angry"),Boolean)
+            End Get
+            Set
+                Me("CB2Angry") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CB2Custom1() As Boolean
+            Get
+                Return CType(Me("CB2Custom1"),Boolean)
+            End Get
+            Set
+                Me("CB2Custom1") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CB2Custom2() As Boolean
+            Get
+                Return CType(Me("CB2Custom2"),Boolean)
+            End Get
+            Set
+                Me("CB2Custom2") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CB3Bratty() As Boolean
+            Get
+                Return CType(Me("CB3Bratty"),Boolean)
+            End Get
+            Set
+                Me("CB3Bratty") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CB3Cruel() As Boolean
+            Get
+                Return CType(Me("CB3Cruel"),Boolean)
+            End Get
+            Set
+                Me("CB3Cruel") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property CB3Caring() As Boolean
+            Get
+                Return CType(Me("CB3Caring"),Boolean)
+            End Get
+            Set
+                Me("CB3Caring") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CB3Angry() As Boolean
+            Get
+                Return CType(Me("CB3Angry"),Boolean)
+            End Get
+            Set
+                Me("CB3Angry") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CB3Custom1() As Boolean
+            Get
+                Return CType(Me("CB3Custom1"),Boolean)
+            End Get
+            Set
+                Me("CB3Custom1") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CB3Custom2() As Boolean
+            Get
+                Return CType(Me("CB3Custom2"),Boolean)
+            End Get
+            Set
+                Me("CB3Custom2") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Domme Name")>  _
+        Public Property DomName() As String
+            Get
+                Return CType(Me("DomName"),String)
+            End Get
+            Set
+                Me("DomName") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Sub Name")>  _
+        Public Property SubName() As String
+            Get
+                Return CType(Me("SubName"),String)
+            End Get
+            Set
+                Me("SubName") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("stroker")>  _
+        Public Property pnSetting1() As String
+            Get
+                Return CType(Me("pnSetting1"),String)
+            End Get
+            Set
+                Me("pnSetting1") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("stroker")>  _
+        Public Property pnSetting2() As String
+            Get
+                Return CType(Me("pnSetting2"),String)
+            End Get
+            Set
+                Me("pnSetting2") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("stroker")>  _
+        Public Property pnSetting3() As String
+            Get
+                Return CType(Me("pnSetting3"),String)
+            End Get
+            Set
+                Me("pnSetting3") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("stroker")>  _
+        Public Property pnSetting4() As String
+            Get
+                Return CType(Me("pnSetting4"),String)
+            End Get
+            Set
+                Me("pnSetting4") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("stroker")>  _
+        Public Property pnSetting5() As String
+            Get
+                Return CType(Me("pnSetting5"),String)
+            End Get
+            Set
+                Me("pnSetting5") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("stroker")>  _
+        Public Property pnSetting6() As String
+            Get
+                Return CType(Me("pnSetting6"),String)
+            End Get
+            Set
+                Me("pnSetting6") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("stroker")>  _
+        Public Property pnSetting7() As String
+            Get
+                Return CType(Me("pnSetting7"),String)
+            End Get
+            Set
+                Me("pnSetting7") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("stroker")>  _
+        Public Property pnSetting8() As String
+            Get
+                Return CType(Me("pnSetting8"),String)
+            End Get
+            Set
+                Me("pnSetting8") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("#0000FF")>  _
+        Public Property DomColor() As String
+            Get
+                Return CType(Me("DomColor"),String)
+            End Get
+            Set
+                Me("DomColor") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("#FF0000")>  _
+        Public Property SubColor() As String
+            Get
+                Return CType(Me("SubColor"),String)
+            End Get
+            Set
+                Me("SubColor") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Blue")>  _
+        Public Property DomColorColor() As Global.System.Drawing.Color
+            Get
+                Return CType(Me("DomColorColor"),Global.System.Drawing.Color)
+            End Get
+            Set
+                Me("DomColorColor") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Red")>  _
+        Public Property SubColorColor() As Global.System.Drawing.Color
+            Get
+                Return CType(Me("SubColorColor"),Global.System.Drawing.Color)
+            End Get
+            Set
+                Me("SubColorColor") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property CBTimeStamps() As Boolean
+            Get
+                Return CType(Me("CBTimeStamps"),Boolean)
+            End Get
+            Set
+                Me("CBTimeStamps") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property CBShowNames() As Boolean
+            Get
+                Return CType(Me("CBShowNames"),Boolean)
+            End Get
+            Set
+                Me("CBShowNames") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBInstantType() As Boolean
+            Get
+                Return CType(Me("CBInstantType"),Boolean)
+            End Get
+            Set
+                Me("CBInstantType") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property CBBlogImageMain() As Boolean
+            Get
+                Return CType(Me("CBBlogImageMain"),Boolean)
+            End Get
+            Set
+                Me("CBBlogImageMain") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBStretchLandscape() As Boolean
+            Get
+                Return CType(Me("CBStretchLandscape"),Boolean)
+            End Get
+            Set
+                Me("CBStretchLandscape") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property CBMetronome() As Boolean
+            Get
+                Return CType(Me("CBMetronome"),Boolean)
+            End Get
+            Set
+                Me("CBMetronome") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property CBSettingsPause() As Boolean
+            Get
+                Return CType(Me("CBSettingsPause"),Boolean)
+            End Get
+            Set
+                Me("CBSettingsPause") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("3")>  _
+        Public Property DomLevel() As Integer
+            Get
+                Return CType(Me("DomLevel"),Integer)
+            End Get
+            Set
+                Me("DomLevel") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Sometimes Allows")>  _
+        Public Property OrgasmAllow() As String
+            Get
+                Return CType(Me("OrgasmAllow"),String)
+            End Get
+            Set
+                Me("OrgasmAllow") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Sometimes Ruins")>  _
+        Public Property OrgasmRuin() As String
+            Get
+                Return CType(Me("OrgasmRuin"),String)
+            End Get
+            Set
+                Me("OrgasmRuin") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property CBAutosaveChatlog() As Boolean
+            Get
+                Return CType(Me("CBAutosaveChatlog"),Boolean)
+            End Get
+            Set
+                Me("CBAutosaveChatlog") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property CBExitSaveChatlog() As Boolean
+            Get
+                Return CType(Me("CBExitSaveChatlog"),Boolean)
+            End Get
+            Set
+                Me("CBExitSaveChatlog") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property AvgEdgeStroking() As Integer
+            Get
+                Return CType(Me("AvgEdgeStroking"),Integer)
+            End Get
+            Set
+                Me("AvgEdgeStroking") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property AvgEdgeNoTouch() As Integer
+            Get
+                Return CType(Me("AvgEdgeNoTouch"),Integer)
+            End Get
+            Set
+                Me("AvgEdgeNoTouch") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property AvgEdgeCount() As Integer
+            Get
+                Return CType(Me("AvgEdgeCount"),Integer)
+            End Get
+            Set
+                Me("AvgEdgeCount") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property StrokeTimeTotal() As Integer
+            Get
+                Return CType(Me("StrokeTimeTotal"),Integer)
+            End Get
+            Set
+                Me("StrokeTimeTotal") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("10")>  _
+        Public Property NBWritingTaskMin() As Integer
+            Get
+                Return CType(Me("NBWritingTaskMin"),Integer)
+            End Get
+            Set
+                Me("NBWritingTaskMin") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("20")>  _
+        Public Property NBWritingTaskMax() As Integer
+            Get
+                Return CType(Me("NBWritingTaskMax"),Integer)
+            End Get
+            Set
+                Me("NBWritingTaskMax") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>  _
+        Public Property LBLBoobPath() As String
+            Get
+                Return CType(Me("LBLBoobPath"),String)
+            End Get
+            Set
+                Me("LBLBoobPath") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No URL File selected")>  _
+        Public Property UrlFileBoobs() As String
+            Get
+                Return CType(Me("UrlFileBoobs"),String)
+            End Get
+            Set
+                Me("UrlFileBoobs") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>  _
+        Public Property LBLButtPath() As String
+            Get
+                Return CType(Me("LBLButtPath"),String)
+            End Get
+            Set
+                Me("LBLButtPath") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No URL File selected")>  _
+        Public Property UrlFileButt() As String
+            Get
+                Return CType(Me("UrlFileButt"),String)
+            End Get
+            Set
+                Me("UrlFileButt") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property CBBnBLocal() As Boolean
+            Get
+                Return CType(Me("CBBnBLocal"),Boolean)
+            End Get
+            Set
+                Me("CBBnBLocal") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBBnBURL() As Boolean
+            Get
+                Return CType(Me("CBBnBURL"),Boolean)
+            End Get
+            Set
+                Me("CBBnBURL") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property CBBoobSubDir() As Boolean
+            Get
+                Return CType(Me("CBBoobSubDir"),Boolean)
+            End Get
+            Set
+                Me("CBBoobSubDir") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property CBButtSubDir() As Boolean
+            Get
+                Return CType(Me("CBButtSubDir"),Boolean)
+            End Get
+            Set
+                Me("CBButtSubDir") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBEnableBnB() As Boolean
+            Get
+                Return CType(Me("CBEnableBnB"),Boolean)
+            End Get
+            Set
+                Me("CBEnableBnB") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property CBSlideshowSubDir() As Boolean
+            Get
+                Return CType(Me("CBSlideshowSubDir"),Boolean)
+            End Get
+            Set
+                Me("CBSlideshowSubDir") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBSlideshowRandom() As Boolean
+            Get
+                Return CType(Me("CBSlideshowRandom"),Boolean)
+            End Get
+            Set
+                Me("CBSlideshowRandom") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("21")>  _
+        Public Property DomAge() As Integer
+            Get
+                Return CType(Me("DomAge"),Integer)
+            End Get
+            Set
+                Me("DomAge") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("blonde")>  _
+        Public Property DomHair() As String
+            Get
+                Return CType(Me("DomHair"),String)
+            End Get
+            Set
+                Me("DomHair") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("green")>  _
+        Public Property DomEyes() As String
+            Get
+                Return CType(Me("DomEyes"),String)
+            End Get
+            Set
+                Me("DomEyes") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("C")>  _
+        Public Property DomCup() As String
+            Get
+                Return CType(Me("DomCup"),String)
+            End Get
+            Set
+                Me("DomCup") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Wicked Tease")>  _
+        Public Property DomPersonality() As String
+            Get
+                Return CType(Me("DomPersonality"),String)
+            End Get
+            Set
+                Me("DomPersonality") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property DomCrazy() As Boolean
+            Get
+                Return CType(Me("DomCrazy"),Boolean)
+            End Get
+            Set
+                Me("DomCrazy") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property DomVulgar() As Boolean
+            Get
+                Return CType(Me("DomVulgar"),Boolean)
+            End Get
+            Set
+                Me("DomVulgar") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property DomSupremacist() As Boolean
+            Get
+                Return CType(Me("DomSupremacist"),Boolean)
+            End Get
+            Set
+                Me("DomSupremacist") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property DomLowercase() As Boolean
+            Get
+                Return CType(Me("DomLowercase"),Boolean)
+            End Get
+            Set
+                Me("DomLowercase") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property DomNoApostrophes() As Boolean
+            Get
+                Return CType(Me("DomNoApostrophes"),Boolean)
+            End Get
+            Set
+                Me("DomNoApostrophes") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property DomNoCommas() As Boolean
+            Get
+                Return CType(Me("DomNoCommas"),Boolean)
+            End Get
+            Set
+                Me("DomNoCommas") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property DomNoPeriods() As Boolean
+            Get
+                Return CType(Me("DomNoPeriods"),Boolean)
+            End Get
+            Set
+                Me("DomNoPeriods") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property DomMeMyMine() As Boolean
+            Get
+                Return CType(Me("DomMeMyMine"),Boolean)
+            End Get
+            Set
+                Me("DomMeMyMine") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("*emotes like this*")>  _
+        Public Property DomEmotes() As String
+            Get
+                Return CType(Me("DomEmotes"),String)
+            End Get
+            Set
+                Me("DomEmotes") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property DomDenialEnd() As Boolean
+            Get
+                Return CType(Me("DomDenialEnd"),Boolean)
+            End Get
+            Set
+                Me("DomDenialEnd") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property DomOrgasmEnd() As Boolean
+            Get
+                Return CType(Me("DomOrgasmEnd"),Boolean)
+            End Get
+            Set
+                Me("DomOrgasmEnd") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property DomPOT() As Boolean
+            Get
+                Return CType(Me("DomPOT"),Boolean)
+            End Get
+            Set
+                Me("DomPOT") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property DomLimit() As Boolean
+            Get
+                Return CType(Me("DomLimit"),Boolean)
+            End Get
+            Set
+                Me("DomLimit") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("3")>  _
+        Public Property DomOrgasmPer() As Integer
+            Get
+                Return CType(Me("DomOrgasmPer"),Integer)
+            End Get
+            Set
+                Me("DomOrgasmPer") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("6 months")>  _
+        Public Property DomPerMonth() As String
+            Get
+                Return CType(Me("DomPerMonth"),String)
+            End Get
+            Set
+                Me("DomPerMonth") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property DomLock() As Boolean
+            Get
+                Return CType(Me("DomLock"),Boolean)
+            End Get
+            Set
+                Me("DomLock") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("3")>  _
+        Public Property DomMoodMin() As Integer
+            Get
+                Return CType(Me("DomMoodMin"),Integer)
+            End Get
+            Set
+                Me("DomMoodMin") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("8")>  _
+        Public Property DomMoodMax() As Integer
+            Get
+                Return CType(Me("DomMoodMax"),Integer)
+            End Get
+            Set
+                Me("DomMoodMax") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("6")>  _
+        Public Property AvgCockMin() As Integer
+            Get
+                Return CType(Me("AvgCockMin"),Integer)
+            End Get
+            Set
+                Me("AvgCockMin") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("8")>  _
+        Public Property AvgCockMax() As Integer
+            Get
+                Return CType(Me("AvgCockMax"),Integer)
+            End Get
+            Set
+                Me("AvgCockMax") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("28")>  _
+        Public Property SelfAgeMin() As Integer
+            Get
+                Return CType(Me("SelfAgeMin"),Integer)
+            End Get
+            Set
+                Me("SelfAgeMin") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("49")>  _
+        Public Property SelfAgeMax() As Integer
+            Get
+                Return CType(Me("SelfAgeMax"),Integer)
+            End Get
+            Set
+                Me("SelfAgeMax") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("28")>  _
+        Public Property SubAgeMin() As Integer
+            Get
+                Return CType(Me("SubAgeMin"),Integer)
+            End Get
+            Set
+                Me("SubAgeMin") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("49")>  _
+        Public Property SubAgeMax() As String
+            Get
+                Return CType(Me("SubAgeMax"),String)
+            End Get
+            Set
+                Me("SubAgeMax") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBLockWindow() As Boolean
+            Get
+                Return CType(Me("CBLockWindow"),Boolean)
+            End Get
+            Set
+                Me("CBLockWindow") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("hello, hi, hey, heya, good morning, good afternoon, good evening")>  _
+        Public Property SubGreeting() As String
+            Get
+                Return CType(Me("SubGreeting"),String)
+            End Get
+            Set
+                Me("SubGreeting") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("yes, yeah, yep, yup, sure, of course, absolutely, you know it, definitely")>  _
+        Public Property SubYes() As String
+            Get
+                Return CType(Me("SubYes"),String)
+            End Get
+            Set
+                Me("SubYes") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("no, nah, nope, not")>  _
+        Public Property SubNo() As String
+            Get
+                Return CType(Me("SubNo"),String)
+            End Get
+            Set
+                Me("SubNo") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Mistress")>  _
+        Public Property SubHonorific() As String
+            Get
+                Return CType(Me("SubHonorific"),String)
+            End Get
+            Set
+                Me("SubHonorific") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBUseHonor() As Boolean
+            Get
+                Return CType(Me("CBUseHonor"),Boolean)
+            End Get
+            Set
+                Me("CBUseHonor") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBUseName() As Boolean
+            Get
+                Return CType(Me("CBUseName"),Boolean)
+            End Get
+            Set
+                Me("CBUseName") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBCapHonor() As Boolean
+            Get
+                Return CType(Me("CBCapHonor"),Boolean)
+            End Get
+            Set
+                Me("CBCapHonor") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("6")>  _
+        Public Property SubCockSize() As Integer
+            Get
+                Return CType(Me("SubCockSize"),Integer)
+            End Get
+            Set
+                Me("SubCockSize") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("28")>  _
+        Public Property SubAge() As Integer
+            Get
+                Return CType(Me("SubAge"),Integer)
+            End Get
+            Set
+                Me("SubAge") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property TCAgreed() As Boolean
+            Get
+                Return CType(Me("TCAgreed"),Boolean)
+            End Get
+            Set
+                Me("TCAgreed") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("3")>  _
+        Public Property TimerSTF() As Integer
+            Get
+                Return CType(Me("TimerSTF"),Integer)
+            End Get
+            Set
+                Me("TimerSTF") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("1")>  _
+        Public Property SubBirthMonth() As Integer
+            Get
+                Return CType(Me("SubBirthMonth"),Integer)
+            End Get
+            Set
+                Me("SubBirthMonth") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("1")>  _
+        Public Property SubBirthDay() As Integer
+            Get
+                Return CType(Me("SubBirthDay"),Integer)
+            End Get
+            Set
+                Me("SubBirthDay") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("brown")>  _
+        Public Property SubHair() As String
+            Get
+                Return CType(Me("SubHair"),String)
+            End Get
+            Set
+                Me("SubHair") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("green")>  _
+        Public Property SubEyes() As String
+            Get
+                Return CType(Me("SubEyes"),String)
+            End Get
+            Set
+                Me("SubEyes") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("3")>  _
+        Public Property DomFontSize() As Integer
+            Get
+                Return CType(Me("DomFontSize"),Integer)
+            End Get
+            Set
+                Me("DomFontSize") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Cambria")>  _
+        Public Property DomFont() As String
+            Get
+                Return CType(Me("DomFont"),String)
+            End Get
+            Set
+                Me("DomFont") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Cambria")>  _
+        Public Property SubFont() As String
+            Get
+                Return CType(Me("SubFont"),String)
+            End Get
+            Set
+                Me("SubFont") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("3")>  _
+        Public Property SubFontSize() As Integer
+            Get
+                Return CType(Me("SubFontSize"),Integer)
+            End Get
+            Set
+                Me("SubFontSize") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("1")>  _
+        Public Property DomBirthMonth() As Integer
+            Get
+                Return CType(Me("DomBirthMonth"),Integer)
+            End Get
+            Set
+                Me("DomBirthMonth") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("1")>  _
+        Public Property DomBirthDay() As Integer
+            Get
+                Return CType(Me("DomBirthDay"),Integer)
+            End Get
+            Set
+                Me("DomBirthDay") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Long")>  _
+        Public Property DomHairLength() As String
+            Get
+                Return CType(Me("DomHairLength"),String)
+            End Get
+            Set
+                Me("DomHairLength") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Shaved")>  _
+        Public Property DomPubicHair() As String
+            Get
+                Return CType(Me("DomPubicHair"),String)
+            End Get
+            Set
+                Me("DomPubicHair") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property DomTattoos() As Boolean
+            Get
+                Return CType(Me("DomTattoos"),Boolean)
+            End Get
+            Set
+                Me("DomTattoos") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property DomFreckles() As Boolean
+            Get
+                Return CType(Me("DomFreckles"),Boolean)
+            End Get
+            Set
+                Me("DomFreckles") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBImageInfo() As Boolean
+            Get
+                Return CType(Me("CBImageInfo"),Boolean)
+            End Get
+            Set
+                Me("CBImageInfo") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property DomAVStretch() As Boolean
+            Get
+                Return CType(Me("DomAVStretch"),Boolean)
+            End Get
+            Set
+                Me("DomAVStretch") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property SubAvStretch() As Boolean
+            Get
+                Return CType(Me("SubAvStretch"),Boolean)
+            End Get
+            Set
+                Me("SubAvStretch") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>  _
+        Public Property IHardcore() As String
+            Get
+                Return CType(Me("IHardcore"),String)
+            End Get
+            Set
+                Me("IHardcore") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>  _
+        Public Property ISoftcore() As String
+            Get
+                Return CType(Me("ISoftcore"),String)
+            End Get
+            Set
+                Me("ISoftcore") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>  _
+        Public Property ILesbian() As String
+            Get
+                Return CType(Me("ILesbian"),String)
+            End Get
+            Set
+                Me("ILesbian") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>  _
+        Public Property IBlowjob() As String
+            Get
+                Return CType(Me("IBlowjob"),String)
+            End Get
+            Set
+                Me("IBlowjob") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>  _
+        Public Property IFemdom() As String
+            Get
+                Return CType(Me("IFemdom"),String)
+            End Get
+            Set
+                Me("IFemdom") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>  _
+        Public Property ILezdom() As String
+            Get
+                Return CType(Me("ILezdom"),String)
+            End Get
+            Set
+                Me("ILezdom") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>  _
+        Public Property IHentai() As String
+            Get
+                Return CType(Me("IHentai"),String)
+            End Get
+            Set
+                Me("IHentai") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>  _
+        Public Property IGay() As String
+            Get
+                Return CType(Me("IGay"),String)
+            End Get
+            Set
+                Me("IGay") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>  _
+        Public Property IMaledom() As String
+            Get
+                Return CType(Me("IMaledom"),String)
+            End Get
+            Set
+                Me("IMaledom") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>  _
+        Public Property IGeneral() As String
+            Get
+                Return CType(Me("IGeneral"),String)
+            End Get
+            Set
+                Me("IGeneral") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property IHardcoreSD() As Boolean
+            Get
+                Return CType(Me("IHardcoreSD"),Boolean)
+            End Get
+            Set
+                Me("IHardcoreSD") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property ISoftcoreSD() As Boolean
+            Get
+                Return CType(Me("ISoftcoreSD"),Boolean)
+            End Get
+            Set
+                Me("ISoftcoreSD") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property ILesbianSD() As Boolean
+            Get
+                Return CType(Me("ILesbianSD"),Boolean)
+            End Get
+            Set
+                Me("ILesbianSD") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property IBlowjobSD() As Boolean
+            Get
+                Return CType(Me("IBlowjobSD"),Boolean)
+            End Get
+            Set
+                Me("IBlowjobSD") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property IFemdomSD() As Boolean
+            Get
+                Return CType(Me("IFemdomSD"),Boolean)
+            End Get
+            Set
+                Me("IFemdomSD") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property ILezdomSD() As Boolean
+            Get
+                Return CType(Me("ILezdomSD"),Boolean)
+            End Get
+            Set
+                Me("ILezdomSD") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property IHentaiSD() As Boolean
+            Get
+                Return CType(Me("IHentaiSD"),Boolean)
+            End Get
+            Set
+                Me("IHentaiSD") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property IGaySD() As Boolean
+            Get
+                Return CType(Me("IGaySD"),Boolean)
+            End Get
+            Set
+                Me("IGaySD") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property IMaledomSD() As Boolean
+            Get
+                Return CType(Me("IMaledomSD"),Boolean)
+            End Get
+            Set
+                Me("IMaledomSD") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property IGeneralSD() As Boolean
+            Get
+                Return CType(Me("IGeneralSD"),Boolean)
+            End Get
+            Set
+                Me("IGeneralSD") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property ICaptionsSD() As Boolean
+            Get
+                Return CType(Me("ICaptionsSD"),Boolean)
+            End Get
+            Set
+                Me("ICaptionsSD") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBIHardcore() As Boolean
+            Get
+                Return CType(Me("CBIHardcore"),Boolean)
+            End Get
+            Set
+                Me("CBIHardcore") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBISoftcore() As Boolean
+            Get
+                Return CType(Me("CBISoftcore"),Boolean)
+            End Get
+            Set
+                Me("CBISoftcore") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBILesbian() As Boolean
+            Get
+                Return CType(Me("CBILesbian"),Boolean)
+            End Get
+            Set
+                Me("CBILesbian") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBIBlowjob() As Boolean
+            Get
+                Return CType(Me("CBIBlowjob"),Boolean)
+            End Get
+            Set
+                Me("CBIBlowjob") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBIFemdom() As Boolean
+            Get
+                Return CType(Me("CBIFemdom"),Boolean)
+            End Get
+            Set
+                Me("CBIFemdom") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBILezdom() As Boolean
+            Get
+                Return CType(Me("CBILezdom"),Boolean)
+            End Get
+            Set
+                Me("CBILezdom") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBIHentai() As Boolean
+            Get
+                Return CType(Me("CBIHentai"),Boolean)
+            End Get
+            Set
+                Me("CBIHentai") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBIGay() As Boolean
+            Get
+                Return CType(Me("CBIGay"),Boolean)
+            End Get
+            Set
+                Me("CBIGay") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBIMaledom() As Boolean
+            Get
+                Return CType(Me("CBIMaledom"),Boolean)
+            End Get
+            Set
+                Me("CBIMaledom") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBIGeneral() As Boolean
+            Get
+                Return CType(Me("CBIGeneral"),Boolean)
+            End Get
+            Set
+                Me("CBIGeneral") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBICaptions() As Boolean
+            Get
+                Return CType(Me("CBICaptions"),Boolean)
+            End Get
+            Set
+                Me("CBICaptions") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>  _
+        Public Property ICaptions() As String
+            Get
+                Return CType(Me("ICaptions"),String)
+            End Get
+            Set
+                Me("ICaptions") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>  _
+        Public Property DomImageDir() As String
+            Get
+                Return CType(Me("DomImageDir"),String)
+            End Get
+            Set
+                Me("DomImageDir") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property CBTCock() As Boolean
+            Get
+                Return CType(Me("CBTCock"),Boolean)
+            End Get
+            Set
+                Me("CBTCock") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property CBTBalls() As Boolean
+            Get
+                Return CType(Me("CBTBalls"),Boolean)
+            End Get
+            Set
+                Me("CBTBalls") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property ChastityPA() As Boolean
+            Get
+                Return CType(Me("ChastityPA"),Boolean)
+            End Get
+            Set
+                Me("ChastityPA") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property ChastitySpikes() As Boolean
+            Get
+                Return CType(Me("ChastitySpikes"),Boolean)
+            End Get
+            Set
+                Me("ChastitySpikes") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property SubInChastity() As Boolean
+            Get
+                Return CType(Me("SubInChastity"),Boolean)
+            End Get
+            Set
+                Me("SubInChastity") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("2")>  _
+        Public Property LongEdge() As Integer
+            Get
+                Return CType(Me("LongEdge"),Integer)
+            End Get
+            Set
+                Me("LongEdge") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property CBLongEdgeInterrupt() As Boolean
+            Get
+                Return CType(Me("CBLongEdgeInterrupt"),Boolean)
+            End Get
+            Set
+                Me("CBLongEdgeInterrupt") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("1")>  _
+        Public Property HoldTheEdgeMax() As Integer
+            Get
+                Return CType(Me("HoldTheEdgeMax"),Integer)
+            End Get
+            Set
+                Me("HoldTheEdgeMax") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property HoldEdgeTimeTotal() As Integer
+            Get
+                Return CType(Me("HoldEdgeTimeTotal"),Integer)
+            End Get
+            Set
+                Me("HoldEdgeTimeTotal") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("3")>  _
+        Public Property CBTSlider() As Integer
+            Get
+                Return CType(Me("CBTSlider"),Integer)
+            End Get
+            Set
+                Me("CBTSlider") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property SubCircumcised() As Boolean
+            Get
+                Return CType(Me("SubCircumcised"),Boolean)
+            End Get
+            Set
+                Me("SubCircumcised") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property SubPierced() As Boolean
+            Get
+                Return CType(Me("SubPierced"),Boolean)
+            End Get
+            Set
+                Me("SubPierced") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("3")>  _
+        Public Property DomEmpathy() As Integer
+            Get
+                Return CType(Me("DomEmpathy"),Integer)
+            End Get
+            Set
+                Me("DomEmpathy") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property RangeOrgasm() As Boolean
+            Get
+                Return CType(Me("RangeOrgasm"),Boolean)
+            End Get
+            Set
+                Me("RangeOrgasm") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property RangeRuin() As Boolean
+            Get
+                Return CType(Me("RangeRuin"),Boolean)
+            End Get
+            Set
+                Me("RangeRuin") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("75")>  _
+        Public Property AllowOften() As Integer
+            Get
+                Return CType(Me("AllowOften"),Integer)
+            End Get
+            Set
+                Me("AllowOften") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("50")>  _
+        Public Property AllowSometimes() As Integer
+            Get
+                Return CType(Me("AllowSometimes"),Integer)
+            End Get
+            Set
+                Me("AllowSometimes") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("20")>  _
+        Public Property AllowRarely() As Integer
+            Get
+                Return CType(Me("AllowRarely"),Integer)
+            End Get
+            Set
+                Me("AllowRarely") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("75")>  _
+        Public Property RuinOften() As Integer
+            Get
+                Return CType(Me("RuinOften"),Integer)
+            End Get
+            Set
+                Me("RuinOften") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("50")>  _
+        Public Property RuinSometimes() As Integer
+            Get
+                Return CType(Me("RuinSometimes"),Integer)
+            End Get
+            Set
+                Me("RuinSometimes") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("20")>  _
+        Public Property RuinRarely() As Integer
+            Get
+                Return CType(Me("RuinRarely"),Integer)
+            End Get
+            Set
+                Me("RuinRarely") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property Chastity() As Boolean
+            Get
+                Return CType(Me("Chastity"),Boolean)
+            End Get
+            Set
+                Me("Chastity") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("red")>  _
+        Public Property Safeword() As String
+            Get
+                Return CType(Me("Safeword"),String)
+            End Get
+            Set
+                Me("Safeword") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property CaloriesConsumed() As Integer
+            Get
+                Return CType(Me("CaloriesConsumed"),Integer)
+            End Get
+            Set
+                Me("CaloriesConsumed") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("2000")>  _
+        Public Property CaloriesGoal() As Integer
+            Get
+                Return CType(Me("CaloriesGoal"),Integer)
+            End Get
+            Set
+                Me("CaloriesGoal") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property VitalSubDisclaimer() As Boolean
+            Get
+                Return CType(Me("VitalSubDisclaimer"),Boolean)
+            End Get
+            Set
+                Me("VitalSubDisclaimer") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property VitalSub() As Boolean
+            Get
+                Return CType(Me("VitalSub"),Boolean)
+            End Get
+            Set
+                Me("VitalSub") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property VitalSubAssignments() As Boolean
+            Get
+                Return CType(Me("VitalSubAssignments"),Boolean)
+            End Get
+            Set
+                Me("VitalSubAssignments") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property BP1() As String
+            Get
+                Return CType(Me("BP1"),String)
+            End Get
+            Set
+                Me("BP1") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property BP2() As String
+            Get
+                Return CType(Me("BP2"),String)
+            End Get
+            Set
+                Me("BP2") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property BP3() As String
+            Get
+                Return CType(Me("BP3"),String)
+            End Get
+            Set
+                Me("BP3") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property BP4() As String
+            Get
+                Return CType(Me("BP4"),String)
+            End Get
+            Set
+                Me("BP4") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property BP5() As String
+            Get
+                Return CType(Me("BP5"),String)
+            End Get
+            Set
+                Me("BP5") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property BP6() As String
+            Get
+                Return CType(Me("BP6"),String)
+            End Get
+            Set
+                Me("BP6") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Bronze 1")>  _
+        Public Property BN1() As String
+            Get
+                Return CType(Me("BN1"),String)
+            End Get
+            Set
+                Me("BN1") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Bronze 2")>  _
+        Public Property BN2() As String
+            Get
+                Return CType(Me("BN2"),String)
+            End Get
+            Set
+                Me("BN2") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Bronze 3")>  _
+        Public Property BN3() As String
+            Get
+                Return CType(Me("BN3"),String)
+            End Get
+            Set
+                Me("BN3") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Bronze 4")>  _
+        Public Property BN4() As String
+            Get
+                Return CType(Me("BN4"),String)
+            End Get
+            Set
+                Me("BN4") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Bronze 5")>  _
+        Public Property BN5() As String
+            Get
+                Return CType(Me("BN5"),String)
+            End Get
+            Set
+                Me("BN5") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Bronze 6")>  _
+        Public Property BN6() As String
+            Get
+                Return CType(Me("BN6"),String)
+            End Get
+            Set
+                Me("BN6") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property SP1() As String
+            Get
+                Return CType(Me("SP1"),String)
+            End Get
+            Set
+                Me("SP1") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property SP2() As String
+            Get
+                Return CType(Me("SP2"),String)
+            End Get
+            Set
+                Me("SP2") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property SP3() As String
+            Get
+                Return CType(Me("SP3"),String)
+            End Get
+            Set
+                Me("SP3") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property SP4() As String
+            Get
+                Return CType(Me("SP4"),String)
+            End Get
+            Set
+                Me("SP4") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property SP5() As String
+            Get
+                Return CType(Me("SP5"),String)
+            End Get
+            Set
+                Me("SP5") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property SP6() As String
+            Get
+                Return CType(Me("SP6"),String)
+            End Get
+            Set
+                Me("SP6") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Silver 1")>  _
+        Public Property SN1() As String
+            Get
+                Return CType(Me("SN1"),String)
+            End Get
+            Set
+                Me("SN1") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Silver 2")>  _
+        Public Property SN2() As String
+            Get
+                Return CType(Me("SN2"),String)
+            End Get
+            Set
+                Me("SN2") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Silver 3")>  _
+        Public Property SN3() As String
+            Get
+                Return CType(Me("SN3"),String)
+            End Get
+            Set
+                Me("SN3") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Silver 4")>  _
+        Public Property SN4() As String
+            Get
+                Return CType(Me("SN4"),String)
+            End Get
+            Set
+                Me("SN4") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Silver 5")>  _
+        Public Property SN5() As String
+            Get
+                Return CType(Me("SN5"),String)
+            End Get
+            Set
+                Me("SN5") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Silver 6")>  _
+        Public Property SN6() As String
+            Get
+                Return CType(Me("SN6"),String)
+            End Get
+            Set
+                Me("SN6") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property GP1() As String
+            Get
+                Return CType(Me("GP1"),String)
+            End Get
+            Set
+                Me("GP1") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property GP2() As String
+            Get
+                Return CType(Me("GP2"),String)
+            End Get
+            Set
+                Me("GP2") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property GP3() As String
+            Get
+                Return CType(Me("GP3"),String)
+            End Get
+            Set
+                Me("GP3") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property GP4() As String
+            Get
+                Return CType(Me("GP4"),String)
+            End Get
+            Set
+                Me("GP4") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property GP5() As String
+            Get
+                Return CType(Me("GP5"),String)
+            End Get
+            Set
+                Me("GP5") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property GP6() As String
+            Get
+                Return CType(Me("GP6"),String)
+            End Get
+            Set
+                Me("GP6") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Gold 1")>  _
+        Public Property GN1() As String
+            Get
+                Return CType(Me("GN1"),String)
+            End Get
+            Set
+                Me("GN1") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Gold 2")>  _
+        Public Property GN2() As String
+            Get
+                Return CType(Me("GN2"),String)
+            End Get
+            Set
+                Me("GN2") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Gold 3")>  _
+        Public Property GN3() As String
+            Get
+                Return CType(Me("GN3"),String)
+            End Get
+            Set
+                Me("GN3") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Gold 4")>  _
+        Public Property GN4() As String
+            Get
+                Return CType(Me("GN4"),String)
+            End Get
+            Set
+                Me("GN4") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Gold 5")>  _
+        Public Property GN5() As String
+            Get
+                Return CType(Me("GN5"),String)
+            End Get
+            Set
+                Me("GN5") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Gold 6")>  _
+        Public Property GN6() As String
+            Get
+                Return CType(Me("GN6"),String)
+            End Get
+            Set
+                Me("GN6") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property CardBack() As String
+            Get
+                Return CType(Me("CardBack"),String)
+            End Get
+            Set
+                Me("CardBack") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property GoldTokens() As Integer
+            Get
+                Return CType(Me("GoldTokens"),Integer)
+            End Get
+            Set
+                Me("GoldTokens") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property SilverTokens() As Integer
+            Get
+                Return CType(Me("SilverTokens"),Integer)
+            End Get
+            Set
+                Me("SilverTokens") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("20")>  _
+        Public Property BronzeTokens() As Integer
+            Get
+                Return CType(Me("BronzeTokens"),Integer)
+            End Get
+            Set
+                Me("BronzeTokens") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property B1() As Integer
+            Get
+                Return CType(Me("B1"),Integer)
+            End Get
+            Set
+                Me("B1") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property B2() As Integer
+            Get
+                Return CType(Me("B2"),Integer)
+            End Get
+            Set
+                Me("B2") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property B3() As Integer
+            Get
+                Return CType(Me("B3"),Integer)
+            End Get
+            Set
+                Me("B3") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property B4() As Integer
+            Get
+                Return CType(Me("B4"),Integer)
+            End Get
+            Set
+                Me("B4") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property B5() As Integer
+            Get
+                Return CType(Me("B5"),Integer)
+            End Get
+            Set
+                Me("B5") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property B6() As Integer
+            Get
+                Return CType(Me("B6"),Integer)
+            End Get
+            Set
+                Me("B6") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property S1() As Integer
+            Get
+                Return CType(Me("S1"),Integer)
+            End Get
+            Set
+                Me("S1") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property S2() As Integer
+            Get
+                Return CType(Me("S2"),Integer)
+            End Get
+            Set
+                Me("S2") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property S3() As Integer
+            Get
+                Return CType(Me("S3"),Integer)
+            End Get
+            Set
+                Me("S3") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property S4() As Integer
+            Get
+                Return CType(Me("S4"),Integer)
+            End Get
+            Set
+                Me("S4") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property S5() As Integer
+            Get
+                Return CType(Me("S5"),Integer)
+            End Get
+            Set
+                Me("S5") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property S6() As Integer
+            Get
+                Return CType(Me("S6"),Integer)
+            End Get
+            Set
+                Me("S6") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property G1() As Integer
+            Get
+                Return CType(Me("G1"),Integer)
+            End Get
+            Set
+                Me("G1") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property G2() As Integer
+            Get
+                Return CType(Me("G2"),Integer)
+            End Get
+            Set
+                Me("G2") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property G3() As Integer
+            Get
+                Return CType(Me("G3"),Integer)
+            End Get
+            Set
+                Me("G3") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property G4() As Integer
+            Get
+                Return CType(Me("G4"),Integer)
+            End Get
+            Set
+                Me("G4") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property G5() As Integer
+            Get
+                Return CType(Me("G5"),Integer)
+            End Get
+            Set
+                Me("G5") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property G6() As Integer
+            Get
+                Return CType(Me("G6"),Integer)
+            End Get
+            Set
+                Me("G6") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property ClearWishlist() As Boolean
+            Get
+                Return CType(Me("ClearWishlist"),Boolean)
+            End Get
+            Set
+                Me("ClearWishlist") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property WishlistName() As String
+            Get
+                Return CType(Me("WishlistName"),String)
+            End Get
+            Set
+                Me("WishlistName") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property WishlistPreview() As String
+            Get
+                Return CType(Me("WishlistPreview"),String)
+            End Get
+            Set
+                Me("WishlistPreview") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property WishlistTokenType() As String
+            Get
+                Return CType(Me("WishlistTokenType"),String)
+            End Get
+            Set
+                Me("WishlistTokenType") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property WishlistCost() As Integer
+            Get
+                Return CType(Me("WishlistCost"),Integer)
+            End Get
+            Set
+                Me("WishlistCost") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property WishlistNote() As String
+            Get
+                Return CType(Me("WishlistNote"),String)
+            End Get
+            Set
+                Me("WishlistNote") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property AvgEdgeCountRest() As Integer
+            Get
+                Return CType(Me("AvgEdgeCountRest"),Integer)
+            End Get
+            Set
+                Me("AvgEdgeCountRest") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property PersonalityIndex() As Integer
+            Get
+                Return CType(Me("PersonalityIndex"),Integer)
+            End Get
+            Set
+                Me("PersonalityIndex") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property LargeUI() As Boolean
+            Get
+                Return CType(Me("LargeUI"),Boolean)
+            End Get
+            Set
+                Me("LargeUI") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBJackintheBox() As Boolean
+            Get
+                Return CType(Me("CBJackintheBox"),Boolean)
+            End Get
+            Set
+                Me("CBJackintheBox") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("60")>  _
+        Public Property NextImageChance() As Integer
+            Get
+                Return CType(Me("NextImageChance"),Integer)
+            End Get
+            Set
+                Me("NextImageChance") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBEdgeUseAvg() As Boolean
+            Get
+                Return CType(Me("CBEdgeUseAvg"),Boolean)
+            End Get
+            Set
+                Me("CBEdgeUseAvg") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBLongEdgeTaunts() As Boolean
+            Get
+                Return CType(Me("CBLongEdgeTaunts"),Boolean)
+            End Get
+            Set
+                Me("CBLongEdgeTaunts") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBLongEdgeInterrupts() As Boolean
+            Get
+                Return CType(Me("CBLongEdgeInterrupts"),Boolean)
+            End Get
+            Set
+                Me("CBLongEdgeInterrupts") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property OrgasmsRemaining() As Integer
+            Get
+                Return CType(Me("OrgasmsRemaining"),Integer)
+            End Get
+            Set
+                Me("OrgasmsRemaining") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property OrgasmsLocked() As Boolean
+            Get
+                Return CType(Me("OrgasmsLocked"),Boolean)
+            End Get
+            Set
+                Me("OrgasmsLocked") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("4")>  _
+        Public Property TimerVTF() As Integer
+            Get
+                Return CType(Me("TimerVTF"),Integer)
+            End Get
+            Set
+                Me("TimerVTF") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBTeaseLengthDD() As Boolean
+            Get
+                Return CType(Me("CBTeaseLengthDD"),Boolean)
+            End Get
+            Set
+                Me("CBTeaseLengthDD") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBTauntCycleDD() As Boolean
+            Get
+                Return CType(Me("CBTauntCycleDD"),Boolean)
+            End Get
+            Set
+                Me("CBTauntCycleDD") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBOwnChastity() As Boolean
+            Get
+                Return CType(Me("CBOwnChastity"),Boolean)
+            End Get
+            Set
+                Me("CBOwnChastity") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property SmallUI() As Boolean
+            Get
+                Return CType(Me("SmallUI"),Boolean)
+            End Get
+            Set
+                Me("SmallUI") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property UI768() As Boolean
+            Get
+                Return CType(Me("UI768"),Boolean)
+            End Get
+            Set
+                Me("UI768") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property CBIncludeGifs() As Boolean
+            Get
+                Return CType(Me("CBIncludeGifs"),Boolean)
+            End Get
+            Set
+                Me("CBIncludeGifs") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBHimHer() As Boolean
+            Get
+                Return CType(Me("CBHimHer"),Boolean)
+            End Get
+            Set
+                Me("CBHimHer") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property DomDeleteMedia() As Boolean
+            Get
+                Return CType(Me("DomDeleteMedia"),Boolean)
+            End Get
+            Set
+                Me("DomDeleteMedia") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("15")>  _
+        Public Property TeaseLengthMin() As Integer
+            Get
+                Return CType(Me("TeaseLengthMin"),Integer)
+            End Get
+            Set
+                Me("TeaseLengthMin") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("60")>  _
+        Public Property TeaseLengthMax() As Integer
+            Get
+                Return CType(Me("TeaseLengthMax"),Integer)
+            End Get
+            Set
+                Me("TeaseLengthMax") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("1")>  _
+        Public Property TauntCycleMin() As Integer
+            Get
+                Return CType(Me("TauntCycleMin"),Integer)
+            End Get
+            Set
+                Me("TauntCycleMin") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("5")>  _
+        Public Property TauntCycleMax() As Integer
+            Get
+                Return CType(Me("TauntCycleMax"),Integer)
+            End Get
+            Set
+                Me("TauntCycleMax") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("5")>  _
+        Public Property RedLightMin() As Integer
+            Get
+                Return CType(Me("RedLightMin"),Integer)
+            End Get
+            Set
+                Me("RedLightMin") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("30")>  _
+        Public Property RedLightMax() As Integer
+            Get
+                Return CType(Me("RedLightMax"),Integer)
+            End Get
+            Set
+                Me("RedLightMax") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("10")>  _
+        Public Property GreenLightMin() As Integer
+            Get
+                Return CType(Me("GreenLightMin"),Integer)
+            End Get
+            Set
+                Me("GreenLightMin") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("60")>  _
+        Public Property GreenLightMax() As Integer
+            Get
+                Return CType(Me("GreenLightMax"),Integer)
+            End Get
+            Set
+                Me("GreenLightMax") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Tease")>  _
+        Public Property SlideshowMode() As String
+            Get
+                Return CType(Me("SlideshowMode"),String)
+            End Get
+            Set
+                Me("SlideshowMode") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property OrgasmLockDate() As Date
+            Get
+                Return CType(Me("OrgasmLockDate"),Date)
+            End Get
+            Set
+                Me("OrgasmLockDate") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property AuditStartup() As Boolean
+            Get
+                Return CType(Me("AuditStartup"),Boolean)
+            End Get
+            Set
+                Me("AuditStartup") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property WishlistDate() As Date
+            Get
+                Return CType(Me("WishlistDate"),Date)
+            End Get
+            Set
+                Me("WishlistDate") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property LastOrgasm() As Date
+            Get
+                Return CType(Me("LastOrgasm"),Date)
+            End Get
+            Set
+                Me("LastOrgasm") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property LastRuined() As Date
+            Get
+                Return CType(Me("LastRuined"),Date)
+            End Get
+            Set
+                Me("LastRuined") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property DateStamp() As Date
+            Get
+                Return CType(Me("DateStamp"),Date)
+            End Get
+            Set
+                Me("DateStamp") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property TokenTasks() As Date
+            Get
+                Return CType(Me("TokenTasks"),Date)
+            End Get
+            Set
+                Me("TokenTasks") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property WebToyStart() As String
+            Get
+                Return CType(Me("WebToyStart"),String)
+            End Get
+            Set
+                Me("WebToyStart") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property WebToyStop() As String
+            Get
+                Return CType(Me("WebToyStop"),String)
+            End Get
+            Set
+                Me("WebToyStop") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CockToClit() As Boolean
+            Get
+                Return CType(Me("CockToClit"),Boolean)
+            End Get
+            Set
+                Me("CockToClit") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property BallsToPussy() As Boolean
+            Get
+                Return CType(Me("BallsToPussy"),Boolean)
+            End Get
+            Set
+                Me("BallsToPussy") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No Path Selected")>  _
+        Public Property Contact1ImageDir() As String
+            Get
+                Return CType(Me("Contact1ImageDir"),String)
+            End Get
+            Set
+                Me("Contact1ImageDir") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No Path Selected")>  _
+        Public Property Contact2ImageDir() As String
+            Get
+                Return CType(Me("Contact2ImageDir"),String)
+            End Get
+            Set
+                Me("Contact2ImageDir") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No Path Selected")>  _
+        Public Property Contact3ImageDir() As String
+            Get
+                Return CType(Me("Contact3ImageDir"),String)
+            End Get
+            Set
+                Me("Contact3ImageDir") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property CBGlitterFeedOff() As Boolean
+            Get
+                Return CType(Me("CBGlitterFeedOff"),Boolean)
+            End Get
+            Set
+                Me("CBGlitterFeedOff") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
         Public Property CBGlitterFeedScripts() As Boolean
@@ -4742,7 +4754,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("706")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("498")>  _
         Public Property SplitterPosition() As Integer
             Get
                 Return CType(Me("SplitterPosition"),Integer)
@@ -5745,6 +5757,150 @@ Namespace My
             End Get
             Set
                 Me("DisplaySidePanel") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property DomCFNM() As Boolean
+            Get
+                Return CType(Me("DomCFNM"),Boolean)
+            End Get
+            Set
+                Me("DomCFNM") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property GiveUpReturn() As Boolean
+            Get
+                Return CType(Me("GiveUpReturn"),Boolean)
+            End Get
+            Set
+                Me("GiveUpReturn") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property RandomImageDir() As String
+            Get
+                Return CType(Me("RandomImageDir"),String)
+            End Get
+            Set
+                Me("RandomImageDir") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBRandomDomme() As Boolean
+            Get
+                Return CType(Me("CBRandomDomme"),Boolean)
+            End Get
+            Set
+                Me("CBRandomDomme") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property CBOutputErrors() As Boolean
+            Get
+                Return CType(Me("CBOutputErrors"),Boolean)
+            End Get
+            Set
+                Me("CBOutputErrors") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property G1Honorific() As String
+            Get
+                Return CType(Me("G1Honorific"),String)
+            End Get
+            Set
+                Me("G1Honorific") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property G2Honorific() As String
+            Get
+                Return CType(Me("G2Honorific"),String)
+            End Get
+            Set
+                Me("G2Honorific") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property G3Honorific() As String
+            Get
+                Return CType(Me("G3Honorific"),String)
+            End Get
+            Set
+                Me("G3Honorific") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property RandomHonorific() As String
+            Get
+                Return CType(Me("RandomHonorific"),String)
+            End Get
+            Set
+                Me("RandomHonorific") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("sorry, apologize, excuse")>  _
+        Public Property SubSorry() As String
+            Get
+                Return CType(Me("SubSorry"),String)
+            End Get
+            Set
+                Me("SubSorry") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property AlwaysNewSlideshow() As Boolean
+            Get
+                Return CType(Me("AlwaysNewSlideshow"),Boolean)
+            End Get
+            Set
+                Me("AlwaysNewSlideshow") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property CbChatDisplayWarnings() As Boolean
+            Get
+                Return CType(Me("CbChatDisplayWarnings"),Boolean)
+            End Get
+            Set
+                Me("CbChatDisplayWarnings") = value
             End Set
         End Property
     End Class

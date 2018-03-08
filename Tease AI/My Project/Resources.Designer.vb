@@ -129,6 +129,24 @@ Namespace My.Resources
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
+
+		'''<summary>
+		''' Represents the fallback stylesheet of the main and side chat.
+		'''</summary>
+		Friend ReadOnly Property ChatFallbackStyle() As String
+            Get
+                Return ResourceManager.GetString("ChatFallbackStyle", resourceCulture)
+            End Get
+        End Property
+
+		'''<summary>
+		''' Represents the fallback stylesheet of the glitter app.
+		'''</summary>
+		Friend ReadOnly Property GlitterFallbackStyle() As String
+            Get
+                Return ResourceManager.GetString("GlitterFallbackStyle", resourceCulture)
+            End Get
+        End Property
         
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.

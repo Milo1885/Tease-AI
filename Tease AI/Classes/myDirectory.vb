@@ -263,7 +263,7 @@ Public NotInheritable Class myDirectory
 		' IF directory-check has failed return an empty String.Array
 		If DirectoryCheck(path) = False Then Return New List(Of String)().ToArray
 
-		Return System.IO.Directory.GetDirectories(path)
+		Return Sort(System.IO.Directory.GetDirectories(path))
 	End Function
 
 	''' <summary>
@@ -286,7 +286,7 @@ Public NotInheritable Class myDirectory
 		' IF directory-check has failed return an empty String.Array
 		If DirectoryCheck(path) = False Then Return New List(Of String)().ToArray
 
-		Return System.IO.Directory.GetDirectories(path, searchPattern)
+		Return Sort(System.IO.Directory.GetDirectories(path, searchPattern))
 	End Function
 
 
@@ -314,7 +314,7 @@ Public NotInheritable Class myDirectory
 		' IF directory-check has failed return an empty String.Array
 		If DirectoryCheck(path) = False Then Return New List(Of String)().ToArray
 
-		Return System.IO.Directory.GetDirectories(path, searchPattern, searchOption)
+		Return Sort(System.IO.Directory.GetDirectories(path, searchPattern, searchOption))
 	End Function
 
 #End Region
